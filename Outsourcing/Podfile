@@ -1,0 +1,17 @@
+platform :ios, '7.0'
+
+target 'Outsourcing'do
+
+pod 'AFNetworking'
+pod 'SDWebImage'
+pod 'SDCycleScrollView'
+pod 'Reachability'
+
+pod 'Masonry'
+pod 'MJExtension'
+pod 'MJRefresh'
+
+pod 'MBProgressHUD'
+
+
+end
