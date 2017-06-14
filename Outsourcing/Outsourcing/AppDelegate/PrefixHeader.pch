@@ -9,6 +9,11 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+//Masonry--约束
+#define MAS_SHORTHAND
+#define MAS_SHORTHAND_GLOBALS
+
+
 #import "macros.h"
 
 
