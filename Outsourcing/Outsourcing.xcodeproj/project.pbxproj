@@ -14,6 +14,17 @@
 		8BFB157F1EEFC3A300725244 /* OutsourcingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB157E1EEFC3A300725244 /* OutsourcingTests.m */; };
 		8BFB158A1EEFC3A300725244 /* OutsourcingUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15891EEFC3A300725244 /* OutsourcingUITests.m */; };
 		8BFB15A01EEFEC6F00725244 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB159F1EEFEC6F00725244 /* MainTabBarController.m */; };
+		8BFB15A61EF0CD8600725244 /* OrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15A51EF0CD8600725244 /* OrdersViewController.m */; };
+		8BFB15A91EF0CDD100725244 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15A81EF0CDD100725244 /* BaseViewController.m */; };
+		8BFB15AC1EF0CDFA00725244 /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15AB1EF0CDFA00725244 /* NavigationViewController.m */; };
+		8BFB15AF1EF0CE3A00725244 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15AE1EF0CE3A00725244 /* HomeViewController.m */; };
+		8BFB15B21EF0CE8F00725244 /* WaterTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15B11EF0CE8F00725244 /* WaterTicketViewController.m */; };
+		8BFB15B51EF0CEBA00725244 /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15B41EF0CEBA00725244 /* MyViewController.m */; };
+		8BFB15C71EF0D0A500725244 /* UIButton+myButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15B81EF0D0A500725244 /* UIButton+myButton.m */; };
+		8BFB15C81EF0D0A500725244 /* AFNetWorkManagerConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15BD1EF0D0A500725244 /* AFNetWorkManagerConfig.m */; };
+		8BFB15C91EF0D0A500725244 /* EliveApplication+requestMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15BF1EF0D0A500725244 /* EliveApplication+requestMethod.m */; };
+		8BFB15CA1EF0D0A500725244 /* EliveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15C11EF0D0A500725244 /* EliveApplication.m */; };
+		8BFB15CB1EF0D0A500725244 /* EliveHttpApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15C31EF0D0A500725244 /* EliveHttpApi.m */; };
 		D531F341D718CD82617539FD /* libPods-Outsourcing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C50945F5B73A5D1E42B8A442 /* libPods-Outsourcing.a */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +62,30 @@
 		8BFB158B1EEFC3A300725244 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BFB159E1EEFEC6F00725244 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		8BFB159F1EEFEC6F00725244 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
+		8BFB15A41EF0CD8600725244 /* OrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdersViewController.h; sourceTree = "<group>"; };
+		8BFB15A51EF0CD8600725244 /* OrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdersViewController.m; sourceTree = "<group>"; };
+		8BFB15A71EF0CDD100725244 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		8BFB15A81EF0CDD100725244 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		8BFB15AA1EF0CDFA00725244 /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
+		8BFB15AB1EF0CDFA00725244 /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
+		8BFB15AD1EF0CE3A00725244 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		8BFB15AE1EF0CE3A00725244 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		8BFB15B01EF0CE8F00725244 /* WaterTicketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterTicketViewController.h; sourceTree = "<group>"; };
+		8BFB15B11EF0CE8F00725244 /* WaterTicketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaterTicketViewController.m; sourceTree = "<group>"; };
+		8BFB15B31EF0CEBA00725244 /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
+		8BFB15B41EF0CEBA00725244 /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
+		8BFB15B71EF0D0A500725244 /* UIButton+myButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+myButton.h"; sourceTree = "<group>"; };
+		8BFB15B81EF0D0A500725244 /* UIButton+myButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+myButton.m"; sourceTree = "<group>"; };
+		8BFB15BA1EF0D0A500725244 /* macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = macros.h; sourceTree = "<group>"; };
+		8BFB15BC1EF0D0A500725244 /* AFNetWorkManagerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetWorkManagerConfig.h; sourceTree = "<group>"; };
+		8BFB15BD1EF0D0A500725244 /* AFNetWorkManagerConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetWorkManagerConfig.m; sourceTree = "<group>"; };
+		8BFB15BE1EF0D0A500725244 /* EliveApplication+requestMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EliveApplication+requestMethod.h"; sourceTree = "<group>"; };
+		8BFB15BF1EF0D0A500725244 /* EliveApplication+requestMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EliveApplication+requestMethod.m"; sourceTree = "<group>"; };
+		8BFB15C01EF0D0A500725244 /* EliveApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EliveApplication.h; sourceTree = "<group>"; };
+		8BFB15C11EF0D0A500725244 /* EliveApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EliveApplication.m; sourceTree = "<group>"; };
+		8BFB15C21EF0D0A500725244 /* EliveHttpApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EliveHttpApi.h; sourceTree = "<group>"; };
+		8BFB15C31EF0D0A500725244 /* EliveHttpApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EliveHttpApi.m; sourceTree = "<group>"; };
+		8BFB15CE1EF0D30300725244 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		C50945F5B73A5D1E42B8A442 /* libPods-Outsourcing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Outsourcing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C9C30CB2E71FFDC835D2BA /* Pods-Outsourcing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outsourcing.release.xcconfig"; path = "Pods/Target Support Files/Pods-Outsourcing/Pods-Outsourcing.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				8BFB159B1EEFEB9D00725244 /* AppDelegate */,
+				8BFB15CD1EF0D15600725244 /* libs */,
 				8BFB159C1EEFEBEA00725244 /* Base */,
 				8BFB159D1EEFEBEA00725244 /* Main */,
 				8BFB15971EEFEB8200725244 /* controllers */,
@@ -154,6 +190,14 @@
 		8BFB15971EEFEB8200725244 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8BFB15AD1EF0CE3A00725244 /* HomeViewController.h */,
+				8BFB15AE1EF0CE3A00725244 /* HomeViewController.m */,
+				8BFB15A41EF0CD8600725244 /* OrdersViewController.h */,
+				8BFB15A51EF0CD8600725244 /* OrdersViewController.m */,
+				8BFB15B01EF0CE8F00725244 /* WaterTicketViewController.h */,
+				8BFB15B11EF0CE8F00725244 /* WaterTicketViewController.m */,
+				8BFB15B31EF0CEBA00725244 /* MyViewController.h */,
+				8BFB15B41EF0CEBA00725244 /* MyViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -189,6 +233,7 @@
 				8BFB15701EEFC3A200725244 /* Assets.xcassets */,
 				8BFB15721EEFC3A200725244 /* LaunchScreen.storyboard */,
 				8BFB15751EEFC3A200725244 /* Info.plist */,
+				8BFB15CE1EF0D30300725244 /* PrefixHeader.pch */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -196,6 +241,9 @@
 		8BFB159C1EEFEBEA00725244 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				8BFB15B61EF0D0A500725244 /* cocoa+extension */,
+				8BFB15B91EF0D0A500725244 /* macros */,
+				8BFB15BB1EF0D0A500725244 /* network */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -205,8 +253,51 @@
 			children = (
 				8BFB159E1EEFEC6F00725244 /* MainTabBarController.h */,
 				8BFB159F1EEFEC6F00725244 /* MainTabBarController.m */,
+				8BFB15A71EF0CDD100725244 /* BaseViewController.h */,
+				8BFB15A81EF0CDD100725244 /* BaseViewController.m */,
+				8BFB15AA1EF0CDFA00725244 /* NavigationViewController.h */,
+				8BFB15AB1EF0CDFA00725244 /* NavigationViewController.m */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		8BFB15B61EF0D0A500725244 /* cocoa+extension */ = {
+			isa = PBXGroup;
+			children = (
+				8BFB15B71EF0D0A500725244 /* UIButton+myButton.h */,
+				8BFB15B81EF0D0A500725244 /* UIButton+myButton.m */,
+			);
+			path = "cocoa+extension";
+			sourceTree = "<group>";
+		};
+		8BFB15B91EF0D0A500725244 /* macros */ = {
+			isa = PBXGroup;
+			children = (
+				8BFB15BA1EF0D0A500725244 /* macros.h */,
+			);
+			path = macros;
+			sourceTree = "<group>";
+		};
+		8BFB15BB1EF0D0A500725244 /* network */ = {
+			isa = PBXGroup;
+			children = (
+				8BFB15BC1EF0D0A500725244 /* AFNetWorkManagerConfig.h */,
+				8BFB15BD1EF0D0A500725244 /* AFNetWorkManagerConfig.m */,
+				8BFB15BE1EF0D0A500725244 /* EliveApplication+requestMethod.h */,
+				8BFB15BF1EF0D0A500725244 /* EliveApplication+requestMethod.m */,
+				8BFB15C01EF0D0A500725244 /* EliveApplication.h */,
+				8BFB15C11EF0D0A500725244 /* EliveApplication.m */,
+				8BFB15C21EF0D0A500725244 /* EliveHttpApi.h */,
+				8BFB15C31EF0D0A500725244 /* EliveHttpApi.m */,
+			);
+			path = network;
+			sourceTree = "<group>";
+		};
+		8BFB15CD1EF0D15600725244 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = libs;
 			sourceTree = "<group>";
 		};
 		EA6FEC93760C496E81BCE7C4 /* Pods */ = {
@@ -405,7 +496,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BFB15691EEFC3A200725244 /* AppDelegate.m in Sources */,
+				8BFB15C71EF0D0A500725244 /* UIButton+myButton.m in Sources */,
+				8BFB15CB1EF0D0A500725244 /* EliveHttpApi.m in Sources */,
+				8BFB15A91EF0CDD100725244 /* BaseViewController.m in Sources */,
+				8BFB15AC1EF0CDFA00725244 /* NavigationViewController.m in Sources */,
+				8BFB15CA1EF0D0A500725244 /* EliveApplication.m in Sources */,
+				8BFB15B51EF0CEBA00725244 /* MyViewController.m in Sources */,
 				8BFB15661EEFC3A200725244 /* main.m in Sources */,
+				8BFB15B21EF0CE8F00725244 /* WaterTicketViewController.m in Sources */,
+				8BFB15A61EF0CD8600725244 /* OrdersViewController.m in Sources */,
+				8BFB15AF1EF0CE3A00725244 /* HomeViewController.m in Sources */,
+				8BFB15C81EF0D0A500725244 /* AFNetWorkManagerConfig.m in Sources */,
+				8BFB15C91EF0D0A500725244 /* EliveApplication+requestMethod.m in Sources */,
 				8BFB15A01EEFEC6F00725244 /* MainTabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,11 +652,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 55VDPW57K7;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Outsourcing/AppDelegate/PrefixHeader.pch";
 				INFOPLIST_FILE = Outsourcing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.liwenhua.public.Outsourcing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 			};
 			name = Debug;
 		};
@@ -564,11 +668,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 55VDPW57K7;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Outsourcing/AppDelegate/PrefixHeader.pch";
 				INFOPLIST_FILE = Outsourcing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.liwenhua.public.Outsourcing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 			};
 			name = Release;
 		};
