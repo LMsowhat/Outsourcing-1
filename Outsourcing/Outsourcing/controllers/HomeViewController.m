@@ -112,6 +112,14 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
 }
 
 #pragma mark - Target Mehtods
+-(void)addShoppingCart:(UIButton *)btn{
+
+    
+    NSLog(@"%ld",btn.tag);
+
+}
+
+
 
 #pragma mark - Notification Method
 
@@ -168,6 +176,10 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
 //    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:self.dataSource[indexPath.row][@"course"][@"data"]];
 //    
 //    CourseModel *model = [CourseModel mj_objectWithKeyValues:dict];
+//    cell.tag = @"production_id";
+    cell.pShoppingCart.tag = indexPath.row;
+    [cell.pShoppingCart addTarget:self action:@selector(addShoppingCart:) forControlEvents:UIControlEventTouchUpInside];
+    
     
     [cell fitDataWith:nil];
     

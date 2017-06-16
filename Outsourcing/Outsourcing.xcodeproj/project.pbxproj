@@ -169,6 +169,7 @@
 		8BFB16EC1EF1137800725244 /* 5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BFB16E81EF1137800725244 /* 5.jpg */; };
 		8BFB16F71EF1155500725244 /* ProductionCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB16F61EF1155500725244 /* ProductionCollectionViewCell.m */; };
 		8BFB16FA1EF11AC000725244 /* ProductionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB16F91EF11AC000725244 /* ProductionModel.m */; };
+		8BFB16FE1EF223C900725244 /* ProductionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB16FD1EF223C900725244 /* ProductionDetailViewController.m */; };
 		D531F341D718CD82617539FD /* libPods-Outsourcing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C50945F5B73A5D1E42B8A442 /* libPods-Outsourcing.a */; };
 /* End PBXBuildFile section */
 
@@ -377,6 +378,8 @@
 		8BFB16F61EF1155500725244 /* ProductionCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductionCollectionViewCell.m; sourceTree = "<group>"; };
 		8BFB16F81EF11AC000725244 /* ProductionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductionModel.h; sourceTree = "<group>"; };
 		8BFB16F91EF11AC000725244 /* ProductionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductionModel.m; sourceTree = "<group>"; };
+		8BFB16FC1EF223C900725244 /* ProductionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductionDetailViewController.h; sourceTree = "<group>"; };
+		8BFB16FD1EF223C900725244 /* ProductionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductionDetailViewController.m; sourceTree = "<group>"; };
 		C50945F5B73A5D1E42B8A442 /* libPods-Outsourcing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Outsourcing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5C9C30CB2E71FFDC835D2BA /* Pods-Outsourcing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outsourcing.release.xcconfig"; path = "Pods/Target Support Files/Pods-Outsourcing/Pods-Outsourcing.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -484,6 +487,8 @@
 			children = (
 				8BFB15AD1EF0CE3A00725244 /* HomeViewController.h */,
 				8BFB15AE1EF0CE3A00725244 /* HomeViewController.m */,
+				8BFB16FC1EF223C900725244 /* ProductionDetailViewController.h */,
+				8BFB16FD1EF223C900725244 /* ProductionDetailViewController.m */,
 				8BFB15A41EF0CD8600725244 /* OrdersViewController.h */,
 				8BFB15A51EF0CD8600725244 /* OrdersViewController.m */,
 				8BFB15B01EF0CE8F00725244 /* WaterTicketViewController.h */,
@@ -1148,6 +1153,7 @@
 				8BFB16F71EF1155500725244 /* ProductionCollectionViewCell.m in Sources */,
 				8BFB15B51EF0CEBA00725244 /* MyViewController.m in Sources */,
 				8BFB15661EEFC3A200725244 /* main.m in Sources */,
+				8BFB16FE1EF223C900725244 /* ProductionDetailViewController.m in Sources */,
 				8BFB15B21EF0CE8F00725244 /* WaterTicketViewController.m in Sources */,
 				8BFB15A61EF0CD8600725244 /* OrdersViewController.m in Sources */,
 				8BFB15AF1EF0CE3A00725244 /* HomeViewController.m in Sources */,

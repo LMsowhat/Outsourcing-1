@@ -17,6 +17,9 @@
 
     if (self) {
         
+        self.layer.borderWidth = 1;
+        self.layer.borderColor = kGrayColor.CGColor;
+        
         self.icon = [UIImageView new];
         self.icon.image = [UIImage imageNamed:@"5.jpg"];
         
@@ -31,7 +34,7 @@
         
         
         self.dottedLine = [UIView new];
-        
+//        self.dottedLine.backgroundColor = kBlackColor;
         
         self.pPrice = [UILabel new];
         self.pPrice.font = kFont(14);
@@ -101,6 +104,7 @@
         
     }
 
+    [self layoutIfNeeded];
     return self;
 }
 
@@ -110,10 +114,20 @@
     self.pStandard.text = @"规格： 19L*1/桶";
     self.pPrice.text = @"￥20.00";
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-    [shapeLayer setBounds:self.bounds];
-    [shapeLayer setPosition:self.center];
-    [shapeLayer setFillColor:[[UIColor blueColor] CGColor]];
+    shapeLayer.frame = CGRectMake(0, -5, kWidth, 1);
+    [shapeLayer setFillColor:[[UIColor clearColor] CGColor]];
     [shapeLayer setStrokeColor:[[UIColor blackColor] CGColor]];
+    
+    [shapeLayer setLineWidth:CGRectGetHeight(self.dottedLine.frame)];
+    [shapeLayer setLineJoin:kCALineJoinRound];
+    
+    [shapeLayer setLineDashPattern:[NSArray arrayWithObjects:[NSNumber numberWithInt:3], [NSNumber numberWithInt:1], nil]];
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, 0, 0);
+    CGPathAddLineToPoint(path, NULL,CGRectGetWidth(self.dottedLine.frame), 0);
+    [shapeLayer setPath:path];
+    CGPathRelease(path);
+    
     [self.dottedLine.layer addSublayer:shapeLayer];
     
 }
