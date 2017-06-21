@@ -7,8 +7,15 @@
 //
 
 #import "NavigationViewController.h"
+#import "HomeViewController.h"
+#import "OrdersViewController.h"
+#import "WaterTicketViewController.h"
+#import "MyViewController.h"
 
-@interface NavigationViewController ()
+
+
+
+@interface NavigationViewController ()<UINavigationControllerDelegate>
 
 @end
 
@@ -16,22 +23,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.delegate = self;
+
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+    
+    BOOL isFirstController = [viewController isKindOfClass:[HomeViewController class]] || [viewController isKindOfClass:[OrdersViewController class]] || [viewController isKindOfClass:[WaterTicketViewController class]] || [viewController isKindOfClass:[MyViewController class]];
+   
+    if (!isFirstController) {
+        
+        self.tabBarController.tabBar.hidden = YES;
+    }else{
+        
+        self.tabBarController.tabBar.hidden = NO;
+    }
+    
+    
+    
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -16,8 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+    self.view.backgroundColor = kWhiteColor;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+
     // Do any additional setup after loading the view.
 }
 

@@ -17,7 +17,7 @@
 
 
 
-@interface MainTabBarController ()
+@interface MainTabBarController ()<UITabBarControllerDelegate>
 
 @end
 
@@ -50,7 +50,7 @@
 
     self.viewControllers = @[navi1,navi2,navi3,navi4];
     
-    
+    self.tabBarController.delegate = self;
     
     // Do any additional setup after loading the view.
 }

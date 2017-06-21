@@ -11,6 +11,7 @@
 #import "ProductionCollectionViewCell.h"
 #import "ProductionModel.h"
 
+#import "ProductionDetailViewController.h"
 
 #define headerWidth 150
 @interface HomeViewController ()
@@ -234,6 +235,10 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    
+    ProductionDetailViewController *detail = [ProductionDetailViewController new];
+    
+    [self.navigationController pushViewController:detail animated:YES];
     
 }
 //取消选择了某个cell
