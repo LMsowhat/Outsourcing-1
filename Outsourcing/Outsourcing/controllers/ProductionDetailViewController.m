@@ -13,7 +13,7 @@
 
 #import "ShoppingCart.h"
 
-
+#import "OrderCreateController.h"
 
 @interface ProductionDetailViewController ()<UIScrollViewDelegate>
 
@@ -63,6 +63,9 @@
     [self.shoppingCart addGestureRecognizer:tap];
     //展示购物车
     [self.shoppingCart.shoppingBtn addTarget:self action:@selector(showShoppingCart:) forControlEvents:UIControlEventTouchUpInside];
+    //submit
+    [self.shoppingCart.submitBtn addTarget:self action:@selector(submitClick) forControlEvents:UIControlEventTouchUpInside];
+    
     
     
     [self.view addSubview:self.shoppingCart];
@@ -294,6 +297,8 @@
 
 - (void)submitClick{
 
+    OrderCreateController *create = [OrderCreateController new];
+    [self.navigationController pushViewController:create animated:YES];
 
 }
 
