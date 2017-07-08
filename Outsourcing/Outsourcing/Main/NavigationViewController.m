@@ -21,6 +21,15 @@
 
 @implementation NavigationViewController
 
+-(void)viewWillAppear:(BOOL)animated{
+
+    [super viewWillAppear:animated];
+
+    self.navigationBar.barTintColor = UIColorFromRGBA(0xFFFFFF, 1.0);
+    self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:UIColorFromRGBA(0x1C1F2D, 1.0)};
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.delegate = self;
@@ -39,7 +48,6 @@
         
         self.tabBarController.tabBar.hidden = NO;
     }
-    
     
     
 }

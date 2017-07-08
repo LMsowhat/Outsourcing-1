@@ -10,10 +10,11 @@
 #import "SDCycleScrollView.h"
 #import "ProductionCollectionViewCell.h"
 #import "ProductionModel.h"
+#import "HeaderCycleScrollView.h"
 
 #import "ProductionDetailViewController.h"
 
-#define headerWidth 150
+#define headerHeight 180
 @interface HomeViewController ()
 <UIScrollViewDelegate,
 UICollectionViewDelegate,
@@ -33,7 +34,6 @@ UIGestureRecognizerDelegate
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.automaticallyAdjustsScrollViewInsets = NO;
     // Do any additional setup after loading the view.
     [self setupUI];
     [self sendHttpRequest];
@@ -42,8 +42,7 @@ UIGestureRecognizerDelegate
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.navigationController.navigationBarHidden = YES;
-    
+    self.navigationItem.title = @"首页";
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -81,7 +80,7 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
         layout.minimumInteritemSpacing = 5;
         layout.minimumLineSpacing = 5;
         
-        _mainCollection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, headerWidth, kWidth, kHeight - headerWidth) collectionViewLayout:layout];
+        _mainCollection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kNavigationBarHeight, kWidth, kHeight - kTabBarHeight - kNavigationBarHeight) collectionViewLayout:layout];
         _mainCollection.backgroundColor = kWhiteColor;
         _mainCollection.delegate = self;
         _mainCollection.dataSource = self;
@@ -91,7 +90,7 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
         //注册Cell
         [_mainCollection registerClass:[ProductionCollectionViewCell class] forCellWithReuseIdentifier:kcellIdentifier];
         //注册Header
-        [_mainCollection registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kheaderIdentifier];
+        [_mainCollection registerClass:[HeaderCycleScrollView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kheaderIdentifier];
         
     }
 
@@ -102,7 +101,7 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
 
     if (!_headerSDCycle) {
         
-        _headerSDCycle = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kWidth, headerWidth) imageNamesGroup:@[@"3.jpg",@"4.jpg",@"5.jpg"]];
+        _headerSDCycle = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kWidth, headerHeight) imageNamesGroup:@[@"3.jpg",@"4.jpg",@"5.jpg"]];
         _headerSDCycle.delegate = self;
         _headerSDCycle.autoScrollTimeInterval = 2;
         _headerSDCycle.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
@@ -113,13 +112,6 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
 }
 
 #pragma mark - Target Mehtods
--(void)addShoppingCart:(UIButton *)btn{
-
-    
-    NSLog(@"%ld",btn.tag);
-
-}
-
 
 
 #pragma mark - Notification Method
@@ -157,15 +149,8 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
 //item个数
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    //    if (section == 1) {
-    //
-    //        return self.dataSource.count;
-    //    }else{
-    //
-    //        return 4;
-    //    }
-//    return self.dataSource.count;
-    return 4;
+    
+    return 6;
 }
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
@@ -178,9 +163,6 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
 //    
 //    CourseModel *model = [CourseModel mj_objectWithKeyValues:dict];
 //    cell.tag = @"production_id";
-    cell.pShoppingCart.tag = indexPath.row;
-    [cell.pShoppingCart addTarget:self action:@selector(addShoppingCart:) forControlEvents:UIControlEventTouchUpInside];
-    
     
     [cell fitDataWith:nil];
     
@@ -189,48 +171,52 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
 }
 
 // The view that is returned must be retrieved from a call to -dequeueReusableSupplementaryViewOfKind:withReuseIdentifier:forIndexPath:
-//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-//    
-//    return (UICollectionReusableView *)self.headerSDCycle;
-//}
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    
+    HeaderCycleScrollView *cycleScrollView = nil;
+    if ([kind isEqualToString: UICollectionElementKindSectionHeader]){
+        
+        cycleScrollView = [collectionView dequeueReusableSupplementaryViewOfKind :kind   withReuseIdentifier:kheaderIdentifier   forIndexPath:indexPath];
+    
+        [collectionView addSubview:self.headerSDCycle];
+        
+        
+    }
+    return cycleScrollView;
+
+}
 
 //定义每个UICollectionViewCell 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake((kWidth - 25)/2, 200);
+    return CGSizeMake((kWidth - 50)/2, 250);
 }
 //定义每个Section 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(0, 10, 20, 10);//分别为上、左、下、右
-}
-//返回头headerView的大小
-//-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-//    if (section == 0) {
-//        return CGSizeMake(kWidth, 285);
-//    }
-//    CGSize size=CGSizeMake(kWidth, 65);
-//    return size;
-//}
-//返回头footerView的大小
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
-//{
-//    CGSize size=CGSizeMake(kWidth, 15);
-//
-//    return size;
-//}
-//每个section中不同的行之间的行间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
+    NSLog(@"section ==== %ld",section);
     
-    return 20;
+    return UIEdgeInsetsMake(20, 20, 0, 20);//分别为上、左、下、右
 }
 
-//每个item之间的间距
-//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+//返回头headerView的大小
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    
+    return CGSizeMake(kWidth, 180);
+}
+
+//每个section中不同的行之间的行间距
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 //{
-//    return 5;
+//    
+//    return 20;
 //}
+
+//两个cell之间的间距（同一行的cell的间距）
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 10;
+}
 //选择了某个cell
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {

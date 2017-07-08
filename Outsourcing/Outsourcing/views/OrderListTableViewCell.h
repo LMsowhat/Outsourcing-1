@@ -7,24 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderModel.h"
+
 
 @interface OrderListTableViewCell : UITableViewCell
 
-@property (nonatomic,strong) UILabel *        createTime;
-@property (nonatomic,strong) UILabel *        sendTime;
-@property (nonatomic,strong) UIView *        line1;
-@property (nonatomic,strong) UILabel *        orderNum;
-@property (nonatomic,strong) UILabel *        oStatus;
-@property (nonatomic,strong) UIImageView *        oIcon;
-@property (nonatomic,strong) UILabel *        oName;
-@property (nonatomic,strong) UILabel *        oNum;
-@property (nonatomic,strong) UILabel *        oPrice;
-@property (nonatomic,strong) UILabel *        bucket;
-@property (nonatomic,strong) UILabel *        bucketMoney;
-@property (nonatomic,strong) UIView *        line2;
-@property (nonatomic,strong) UILabel *        realMoney;
+@property (nonatomic,strong) UILabel *        createTime;//下单时间
+@property (nonatomic,strong) UILabel *        sendTime;//配送时间
+@property (nonatomic,strong) UIView *        line1;//上面横线
+@property (nonatomic,strong) UILabel *        orderNum;//订单号
+@property (nonatomic,strong) UILabel *        oStatus;//订单状态
+@property (nonatomic,strong) UIImageView *        oIcon;//产品图片
+@property (nonatomic,strong) UILabel *        oName;//产品名称
+@property (nonatomic,strong) UILabel *        oNum;//订单产品数量
+@property (nonatomic,strong) UILabel *        oPrice;//订单原来价格
+@property (nonatomic,strong) UILabel *        bucketMoney;//桶押金
+@property (nonatomic,strong) UIView *        line2;//下面横线
+@property (nonatomic,strong) UILabel *        realMoney;//实际价格
 
-@property (nonatomic,strong) UIButton *        deleteOrderBtn;
-@property (nonatomic,strong) UIButton *        toPayBtn;
+@property (nonatomic,strong) UIButton *        deleteOrderBtn;//删除订单
+@property (nonatomic,strong) UIButton *        toPayBtn;//立即支付
+
+- (void)fitDataWithModel:(OrderModel *)model;
+
 
 @end

@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B20286E1F10CF7A007F39AD /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B20286D1F10CF7A007F39AD /* OrderModel.m */; };
 		8B8533F41F00F41C00D061E4 /* OrderDetailListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8533F31F00F41C00D061E4 /* OrderDetailListCell.m */; };
 		8B8533FD1F0359BE00D061E4 /* ProductionShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8533FC1F0359BE00D061E4 /* ProductionShowView.m */; };
 		8B8534001F03A20B00D061E4 /* OrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8533FF1F03A20B00D061E4 /* OrderListTableViewCell.m */; };
 		8BB4E5D31F00B126006851CF /* OrderCreateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4E5D21F00B126006851CF /* OrderCreateController.m */; };
+		8BD193751F0F363B00A39605 /* HeaderCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD193741F0F363B00A39605 /* HeaderCycleScrollView.m */; };
 		8BFB15661EEFC3A200725244 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15651EEFC3A200725244 /* main.m */; };
 		8BFB15691EEFC3A200725244 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15681EEFC3A200725244 /* AppDelegate.m */; };
 		8BFB15711EEFC3A200725244 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BFB15701EEFC3A200725244 /* Assets.xcassets */; };
@@ -199,6 +201,8 @@
 
 /* Begin PBXFileReference section */
 		048B0B41E714DF07C522C264 /* Pods-Outsourcing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outsourcing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Outsourcing/Pods-Outsourcing.debug.xcconfig"; sourceTree = "<group>"; };
+		8B20286C1F10CF7A007F39AD /* OrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderModel.h; sourceTree = "<group>"; };
+		8B20286D1F10CF7A007F39AD /* OrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderModel.m; sourceTree = "<group>"; };
 		8B8533F21F00F41C00D061E4 /* OrderDetailListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailListCell.h; sourceTree = "<group>"; };
 		8B8533F31F00F41C00D061E4 /* OrderDetailListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailListCell.m; sourceTree = "<group>"; };
 		8B8533FB1F0359BE00D061E4 /* ProductionShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductionShowView.h; sourceTree = "<group>"; };
@@ -207,6 +211,8 @@
 		8B8533FF1F03A20B00D061E4 /* OrderListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListTableViewCell.m; sourceTree = "<group>"; };
 		8BB4E5D11F00B126006851CF /* OrderCreateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCreateController.h; sourceTree = "<group>"; };
 		8BB4E5D21F00B126006851CF /* OrderCreateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCreateController.m; sourceTree = "<group>"; };
+		8BD193731F0F363B00A39605 /* HeaderCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCycleScrollView.h; sourceTree = "<group>"; };
+		8BD193741F0F363B00A39605 /* HeaderCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderCycleScrollView.m; sourceTree = "<group>"; };
 		8BFB15611EEFC3A200725244 /* Outsourcing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outsourcing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFB15651EEFC3A200725244 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8BFB15671EEFC3A200725244 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Outsourcing/AppDelegate.h; sourceTree = SOURCE_ROOT; };
@@ -775,6 +781,8 @@
 			children = (
 				8BFB16F51EF1155500725244 /* ProductionCollectionViewCell.h */,
 				8BFB16F61EF1155500725244 /* ProductionCollectionViewCell.m */,
+				8BD193731F0F363B00A39605 /* HeaderCycleScrollView.h */,
+				8BD193741F0F363B00A39605 /* HeaderCycleScrollView.m */,
 				8BFB16FF1EF776CC00725244 /* ProductionDetail.h */,
 				8BFB17001EF776CC00725244 /* ProductionDetail.m */,
 				8BFB17021EF8C9CE00725244 /* ShoppingCart.h */,
@@ -829,6 +837,8 @@
 		8BFB16F31EF114E000725244 /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				8B20286C1F10CF7A007F39AD /* OrderModel.h */,
+				8B20286D1F10CF7A007F39AD /* OrderModel.m */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -1183,6 +1193,7 @@
 				8B8533FD1F0359BE00D061E4 /* ProductionShowView.m in Sources */,
 				8BFB15CB1EF0D0A500725244 /* EliveHttpApi.m in Sources */,
 				8B8533F41F00F41C00D061E4 /* OrderDetailListCell.m in Sources */,
+				8B20286E1F10CF7A007F39AD /* OrderModel.m in Sources */,
 				8BFB15A91EF0CDD100725244 /* BaseViewController.m in Sources */,
 				8BB4E5D31F00B126006851CF /* OrderCreateController.m in Sources */,
 				8BFB15AC1EF0CDFA00725244 /* NavigationViewController.m in Sources */,
@@ -1199,6 +1210,7 @@
 				8BFB15AF1EF0CE3A00725244 /* HomeViewController.m in Sources */,
 				8BFB15C81EF0D0A500725244 /* AFNetWorkManagerConfig.m in Sources */,
 				8BFB15C91EF0D0A500725244 /* EliveApplication+requestMethod.m in Sources */,
+				8BD193751F0F363B00A39605 /* HeaderCycleScrollView.m in Sources */,
 				8BFB16FA1EF11AC000725244 /* ProductionModel.m in Sources */,
 				8BFB15A01EEFEC6F00725244 /* MainTabBarController.m in Sources */,
 				8BFB17011EF776CC00725244 /* ProductionDetail.m in Sources */,

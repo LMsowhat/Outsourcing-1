@@ -18,11 +18,9 @@
 
 @property (nonatomic,strong) UILabel *        pStandard;
 
-@property (nonatomic,strong) UIView *        dottedLine;
-
 @property (nonatomic,strong) UILabel *        pPrice;
 
-@property (nonatomic,strong) UIButton *        pShoppingCart;
+@property (nonatomic,strong) UILabel *        pSales;
 
 
 -(void)fitDataWith:(ProductionModel *)model;
