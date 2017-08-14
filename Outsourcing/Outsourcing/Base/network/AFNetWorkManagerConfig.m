@@ -10,17 +10,10 @@
 
 @implementation AFNetWorkManagerConfig
 
-+(void)GET:(NSString *)url token:(NSString *)token params:(NSDictionary *)params
++(void)GET:(NSString *)url params:(NSDictionary *)params
    success:(LHResponseSuccess)success fail:(LHResponseFail)fail{
     
     AFHTTPSessionManager *manager = [AFNetWorkManagerConfig managerWithBaseURL:nil sessionConfiguration:NO];
-    
-    if (token) {
-        
-//        [manager.requestSerializer setValue:@"application/vnd.dapengapi.v1+json" forHTTPHeaderField:@"Accept"];
-        [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",token] forHTTPHeaderField:@"Authorization"];
-        
-    }
     
     [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -42,26 +35,20 @@
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         
-        id dic = [AFNetWorkManagerConfig responseConfiguration:responseObject];
+//        id dic = [AFNetWorkManagerConfig responseConfiguration:responseObject];
         
-        success(task,dic);
+        success(task,responseObject);
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         fail(task,error);
     }];
     
 }
 
-+(void)POST:(NSString *)url token:(NSString *)token params:(NSDictionary *)params
++(void)POST:(NSString *)url params:(NSDictionary *)params
     success:(LHResponseSuccess)success fail:(LHResponseFail)fail{
     
     AFHTTPSessionManager *manager = [AFNetWorkManagerConfig managerWithBaseURL:nil sessionConfiguration:NO];
-    
-    if (token) {
-        
-        [manager.requestSerializer setValue:@"application/vnd.dapengapi.v1+json" forHTTPHeaderField:@"Accept"];
-        [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",token] forHTTPHeaderField:@"Authorization"];
-
-    }
     
     [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -75,15 +62,14 @@
 
 +(void)POST:(NSString *)url baseURL:(NSString *)baseUrl params:(NSDictionary *)params
     success:(LHResponseSuccess)success fail:(LHResponseFail)fail{
-    
+
     AFHTTPSessionManager *manager = [AFNetWorkManagerConfig managerWithBaseURL:baseUrl sessionConfiguration:NO];
     [manager POST:url parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        id dic = [AFNetWorkManagerConfig responseConfiguration:responseObject];
+        success(task,responseObject);
         
-        success(task,dic);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         fail(task,error);
     }];
@@ -109,19 +95,12 @@
 }
 
 +(void)DELE:(NSString *)url
-      token:(NSString *)token
      params:(NSDictionary *)params
     success:(LHResponseSuccess)success
        fail:(LHResponseFail)fail{
 
     AFHTTPSessionManager *manager = [AFNetWorkManagerConfig managerWithBaseURL:nil sessionConfiguration:NO];
 
-    if (token) {
-        
-        [manager.requestSerializer setValue:@"application/vnd.dapengapi.v1+json" forHTTPHeaderField:@"Accept"];
-        [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",token] forHTTPHeaderField:@"Authorization"];
-        
-    }
     [manager DELETE:url parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         id dic = [AFNetWorkManagerConfig responseConfiguration:responseObject];
@@ -137,20 +116,12 @@
 
 
 +(void)PUT:(NSString *)url
-     token:(NSString *)token
     params:(NSDictionary *)params
    success:(LHResponseSuccess)success
       fail:(LHResponseFail)fail{
 
     AFHTTPSessionManager *manager = [AFNetWorkManagerConfig managerWithBaseURL:nil sessionConfiguration:NO];
 
-    if (token) {
-        
-        [manager.requestSerializer setValue:@"application/vnd.dapengapi.v1+json" forHTTPHeaderField:@"Accept"];
-        [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",token] forHTTPHeaderField:@"Authorization"];
-        
-    }
-    
     [manager PUT:url parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         id dic = [AFNetWorkManagerConfig responseConfiguration:responseObject];
@@ -170,12 +141,6 @@
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
   
-    if (params[@"token"]) {
-        
-        [manager.requestSerializer setValue:@"application/vnd.dapengapi.v1+json" forHTTPHeaderField:@"Accept"];
-        [manager.requestSerializer setValue:[NSString stringWithFormat:@"bearer %@",params[@"token"]] forHTTPHeaderField:@"Authorization"];
-        
-    }
     [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
         [formData appendPartWithFileData:filedata name:name fileName:filename mimeType:mimeType];
@@ -272,13 +237,12 @@
     }
     
     manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+//    manager.requestSerializer = [AFJSONRequestSerializer serializer];
 
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];;
-    
     
     return manager;
 }

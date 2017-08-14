@@ -80,7 +80,7 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
         layout.minimumInteritemSpacing = 5;
         layout.minimumLineSpacing = 5;
         
-        _mainCollection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kNavigationBarHeight, kWidth, kHeight - kTabBarHeight - kNavigationBarHeight) collectionViewLayout:layout];
+        _mainCollection = [[UICollectionView alloc] initWithFrame:CGRectMake(0, kTopBarHeight, kWidth, kHeight - kTabBarHeight - kTopBarHeight) collectionViewLayout:layout];
         _mainCollection.backgroundColor = kWhiteColor;
         _mainCollection.delegate = self;
         _mainCollection.dataSource = self;

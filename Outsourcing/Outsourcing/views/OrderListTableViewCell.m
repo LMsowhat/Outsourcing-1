@@ -29,13 +29,20 @@
     
     if (self) {
         
+        self.backgroundColor = UIColorFromRGBA(0xF7F7F7, 1.0);
+//        self.backgroundColor = kRedColor;
+
+        self.bgView = [UIView new];
+        self.bgView.backgroundColor = UIColorFromRGBA(0xFFFFFF, 1.0);
+//        self.bgView.backgroundColor = kRedColor;
+        
         self.createTime = [UILabel new];
-        self.createTime.font = kFont(11);
+        self.createTime.font = kFont(5.5);
         self.createTime.textColor = UIColorFromRGBA(0x8F9095, 1.0);
         self.createTime.textAlignment = NSTextAlignmentCenter;
         
         self.sendTime = [UILabel new];
-        self.sendTime.font = kFont(11);
+        self.sendTime.font = kFont(5.5);
         self.sendTime.textColor = UIColorFromRGBA(0x8F9095, 1.0);
         self.sendTime.textAlignment = NSTextAlignmentCenter;
         
@@ -43,26 +50,47 @@
         self.line1.backgroundColor = UIColorFromRGBA(0xDDDDDD, 1.0);
         
         self.orderNum = [UILabel new];
-        self.orderNum.font = kFont(11);
+        self.orderNum.font = kFont(5.5);
         self.orderNum.textColor = UIColorFromRGBA(0x333338, 1.0);
         self.orderNum.textAlignment = NSTextAlignmentLeft;
         
         self.oStatus = [UILabel new];
-        
-        
+        self.oStatus.font = kFont(5.5);
+        self.oStatus.textColor = UIColorFromRGBA(0xFA6650, 1.0);
+        self.oStatus.textAlignment = NSTextAlignmentCenter;
         
         self.oIcon = [UIImageView new];
         
         self.oName = [UILabel new];
+        self.oName.font = kFont(7);
+        self.oName.textColor = UIColorFromRGBA(0x333338, 1.0);
+        self.oName.textAlignment = NSTextAlignmentLeft;
+        
         self.oNum = [UILabel new];
+        self.oNum.font = kFont(7);
+        self.oNum.textColor = UIColorFromRGBA(0x8F9095, 1.0);
+        self.oNum.textAlignment = NSTextAlignmentRight;
+        
         self.oPrice = [UILabel new];
+        self.oPrice.font = kFont(7);
+        self.oPrice.textColor = UIColorFromRGBA(0x333338, 1.0);
+        self.oPrice.textAlignment = NSTextAlignmentRight;
+        
         self.bucketMoney = [UILabel new];
+        self.bucketMoney.font = kFont(6);
+        self.bucketMoney.textColor = UIColorFromRGBA(0x8F9095, 1.0);
+        self.bucketMoney.textAlignment = NSTextAlignmentLeft;
         
         self.line2 = [UIView new];
-        
+        self.line2.backgroundColor = UIColorFromRGBA(0xDDDDDD, 1.0);
+
         self.realMoney = [UILabel new];
+        self.realMoney.font = kFont(7);
+        self.realMoney.textColor = UIColorFromRGBA(0x333338, 1.0);
+        self.realMoney.textAlignment = NSTextAlignmentLeft;
         
         self.deleteOrderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.deleteOrderBtn.titleLabel setFont:kFont(7)];
         [self.deleteOrderBtn setTitle:@"删除订单" forState:UIControlStateNormal];
         [self.deleteOrderBtn setTitleColor:UIColorFromRGBA(0x8F9095, 1.0) forState:UIControlStateNormal];
         self.deleteOrderBtn.layer.borderWidth = 1;
@@ -71,6 +99,7 @@
         self.deleteOrderBtn.hidden = YES;
         
         self.toPayBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.toPayBtn.titleLabel setFont:kFont(7)];
         [self.toPayBtn setTitle:@"立即支付" forState:UIControlStateNormal];
         [self.toPayBtn setTitleColor:UIColorFromRGBA(0xFA6650, 1.0) forState:UIControlStateNormal];
         self.toPayBtn.layer.borderWidth = 1;
@@ -78,53 +107,62 @@
         self.toPayBtn.layer.cornerRadius = 3;
         self.toPayBtn.hidden = YES;
         
+        [self addSubview:self.bgView];
+        [self.bgView addSubview:self.createTime];
+        [self.bgView addSubview:self.sendTime];
+        [self.bgView addSubview:self.line1];
+        [self.bgView addSubview:self.orderNum];
+        [self.bgView addSubview:self.oStatus];
+        [self.bgView addSubview:self.oIcon];
+        [self.bgView addSubview:self.oName];
+        [self.bgView addSubview:self.oNum];
+        [self.bgView addSubview:self.oPrice];
+        [self.bgView addSubview:self.bucketMoney];
+        [self.bgView addSubview:self.line2];
+        [self.bgView addSubview:self.realMoney];
+        [self.bgView addSubview:self.deleteOrderBtn];
+        [self.bgView addSubview:self.toPayBtn];
         
-        [self addSubview:self.createTime];
-        [self addSubview:self.sendTime];
-        [self addSubview:self.line1];
-        [self addSubview:self.orderNum];
-        [self addSubview:self.oStatus];
-        [self addSubview:self.oIcon];
-        [self addSubview:self.oName];
-        [self addSubview:self.oNum];
-        [self addSubview:self.oPrice];
-        [self addSubview:self.bucketMoney];
-        [self addSubview:self.line2];
-        [self addSubview:self.realMoney];
-        [self addSubview:self.deleteOrderBtn];
-        [self addSubview:self.toPayBtn];
+        [self.bgView makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.width.equalTo(kWidth);
+            make.centerX.equalTo(self);
+            make.top.equalTo(self).offset(10);
+            make.bottom.equalTo(self).offset(-10);
+            
+        }];
         
         [self.createTime makeConstraints:^(MASConstraintMaker *make) {
             
-            make.centerX.equalTo(self).offset(-kWidth/3);
-            make.top.equalTo(self).offset(10);
+            make.centerX.equalTo(self.bgView).offset(-kWidth/4);
+            make.top.equalTo(self.bgView).offset(10);
             
         }];
         
         [self.sendTime makeConstraints:^(MASConstraintMaker *make) {
             
-            make.centerX.equalTo(self).offset(kWidth/3);
-            make.top.equalTo(self).offset(10);
+            make.centerX.equalTo(self.bgView).offset(kWidth/4);
+            make.top.equalTo(self.bgView).offset(10);
         }];
         
         [self.line1 makeConstraints:^(MASConstraintMaker *make) {
             
             make.size.equalTo(CGSizeMake(kWidth - 40, 1));
-            make.centerX.equalTo(self);
+            make.centerX.equalTo(self.bgView);
             make.top.equalTo(self.createTime.mas_bottom).offset(10);
         }];
         
         [self.orderNum makeConstraints:^(MASConstraintMaker *make) {
             
             make.top.equalTo(self.line1.mas_bottom).offset(10);
-            make.left.equalTo(self).offset(20);
+            make.left.equalTo(self.bgView).offset(20);
             
         }];
         
         [self.oStatus makeConstraints:^(MASConstraintMaker *make) {
             
             make.top.equalTo(self.line1.mas_bottom).offset(10);
-            make.right.equalTo(self).offset(-20);
+            make.right.equalTo(self.bgView).offset(-20);
             
         }];
         
@@ -132,7 +170,7 @@
             
             make.size.equalTo(CGSizeMake(90, 90));
             make.top.equalTo(self.orderNum.mas_bottom).offset(20);
-            make.left.equalTo(self).offset(20);
+            make.left.equalTo(self.bgView).offset(20);
             
         }];
         
@@ -160,14 +198,14 @@
         [self.oNum makeConstraints:^(MASConstraintMaker *make) {
             
             make.centerY.equalTo(self.bucketMoney);
-            make.right.equalTo(self).offset(-20);
+            make.right.equalTo(self.bgView).offset(-20);
             
         }];
         
         [self.line2 makeConstraints:^(MASConstraintMaker *make) {
             
             make.size.equalTo(CGSizeMake(kWidth - 40, 1));
-            make.centerX.equalTo(self);
+            make.centerX.equalTo(self.bgView);
             make.top.equalTo(self.oIcon.mas_bottom).offset(20);
             
         }];
@@ -175,19 +213,21 @@
         [self.realMoney makeConstraints:^(MASConstraintMaker *make) {
             
             make.top.equalTo(self.line2.mas_bottom).offset(25);
-            make.left.equalTo(self).offset(20);
+            make.left.equalTo(self.bgView).offset(20);
             
         }];
         
         
         [self.toPayBtn makeConstraints:^(MASConstraintMaker *make) {
             
+            make.size.equalTo(CGSizeMake(80, 28));
             make.centerY.equalTo(self.realMoney);
-            make.right.equalTo(self).offset(-20);
+            make.right.equalTo(self.bgView).offset(-20);
         }];
     
         [self.deleteOrderBtn makeConstraints:^(MASConstraintMaker *make) {
             
+            make.size.equalTo(CGSizeMake(80, 28));
             make.centerY.equalTo(self.realMoney);
             make.right.equalTo(self.toPayBtn.mas_left).offset(-20);
             
@@ -202,9 +242,19 @@
 
 - (void)fitDataWithModel:(OrderModel *)model{
 
-
-
-
+    self.oIcon.image = [UIImage imageNamed:@"2.jpg"];
+    self.createTime.text = @"下单时间：20017-09-22 15：30";
+    self.sendTime.text = @"配送时间：20017-09-22 15：30";
+    self.orderNum.text = @"订单号：38223943284302";
+    self.oStatus.text = @"未支付";
+    self.oName.text = @"卓玛泉桶装水 1.8L";
+    self.oPrice.text = @"￥49";
+    self.bucketMoney.text = @"桶押金¥0.00";
+    self.oNum.text = @"x 1";
+    self.realMoney.text = @"实付款：¥ 49";
+    
+    self.deleteOrderBtn.hidden = NO;
+    self.toPayBtn.hidden = NO;
 }
 
 

@@ -31,20 +31,20 @@
         self.shoppingBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.shoppingBtn setImage:[UIImage imageNamed:@"home_selected@3x"] forState:UIControlStateNormal];
         [self.shoppingBtn setBadgeValue:@"0"];
-        [self.shoppingBtn setBadgeFont:kFont(10)];
+        [self.shoppingBtn setBadgeFont:kFont(5)];
         [self.shoppingBtn setBadgeBGColor:kRedColor];
         [self.shoppingBtn setBadgeTextColor:kWhiteColor];
         [self.shoppingBtn setBadgeOriginX:25];
         
         self.label1 = [UILabel new];
-        self.label1.font = kFont(14);
+        self.label1.font = kFont(7);
         self.label1.textColor = kBlackColor;
         self.label1.textAlignment = NSTextAlignmentRight;
         self.label1.text = @"共";
         
         self.totalMoney = [UILabel new];
         self.totalMoney.text = @"￥0.00";
-        self.totalMoney.font = kFont(14);
+        self.totalMoney.font = kFont(7);
         self.totalMoney.textColor = kRedColor;
         self.totalMoney.textAlignment = NSTextAlignmentLeft;
         
@@ -54,7 +54,7 @@
         [self.submitBtn setTitleColor:kWhiteColor forState:UIControlStateNormal];
         
         self.cartTitle = [UILabel new];
-        self.cartTitle.font = kFont(14);
+        self.cartTitle.font = kFont(7);
         self.cartTitle.textColor = kBlackColor;
         self.cartTitle.textAlignment = NSTextAlignmentLeft;
         self.cartTitle.text = @"购物车";
@@ -63,7 +63,7 @@
         [self.cleanCart setTitle:@"清空购物车" forState:UIControlStateNormal];
         [self.cleanCart setTitleColor:kBlackColor forState:UIControlStateNormal];
         self.cleanCart.backgroundColor = UIColorFromRGBA(0xf1f1f1, 1.0);
-        [self.cleanCart.titleLabel setFont:kFont(14)];
+        [self.cleanCart.titleLabel setFont:kFont(7)];
         
         self.productionList = [UITableView new];
         self.productionList.delegate = self;

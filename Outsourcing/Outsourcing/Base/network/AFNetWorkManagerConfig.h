@@ -45,7 +45,7 @@ typedef void (^LHProgress)(NSProgress *progress);
  *  @param success 成功回调
  *  @param fail    失败回调
  */
-+(void)GET:(NSString *)url token:(NSString *)token params:(NSDictionary *)params
++(void)GET:(NSString *)url params:(NSDictionary *)params
    success:(LHResponseSuccess)success fail:(LHResponseFail)fail;
 /**
  *  含有baseURL的get方法
@@ -67,7 +67,7 @@ typedef void (^LHProgress)(NSProgress *progress);
  *  @param success 成功回调
  *  @param fail    失败回调
  */
-+(void)POST:(NSString *)url token:(NSString *)token params:(NSDictionary *)params
++(void)POST:(NSString *)url params:(NSDictionary *)params
     success:(LHResponseSuccess)success fail:(LHResponseFail)fail;
 
 /**
@@ -107,7 +107,6 @@ typedef void (^LHProgress)(NSProgress *progress);
  *  @param fail    失败回调
  */
 +(void)DELE:(NSString *)url
-      token:(NSString *)token
       params:(NSDictionary *)params
      success:(LHResponseSuccess)success
         fail:(LHResponseFail)fail;
@@ -122,7 +121,6 @@ typedef void (^LHProgress)(NSProgress *progress);
  *  @param fail    失败回调
  */
 +(void)PUT:(NSString *)url
-     token:(NSString *)token
       params:(NSDictionary *)params
      success:(LHResponseSuccess)success
         fail:(LHResponseFail)fail;

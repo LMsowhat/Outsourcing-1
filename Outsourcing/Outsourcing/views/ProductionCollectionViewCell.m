@@ -21,23 +21,23 @@
         self.icon.image = [UIImage imageNamed:@"5.jpg"];
         
         self.pName = [UILabel new];
-        self.pName.font = kFont(14);
+        self.pName.font = kFont(7);
         self.pName.textColor = UIColorFromRGBA(0x333338, 1.0);
         self.pName.textAlignment = NSTextAlignmentLeft;
         
         
         self.pStandard = [UILabel new];
-        self.pStandard.font = kFont(12);
+        self.pStandard.font = kFont(6);
         self.pStandard.textColor = UIColorFromRGBA(0x8F9095, 1.0);
         self.pStandard.textAlignment = NSTextAlignmentLeft;
         
         self.pPrice = [UILabel new];
-        self.pPrice.font = kFont(14);
+        self.pPrice.font = kFont(7);
         self.pPrice.textColor = UIColorFromRGBA(0xFA6650, 1.0);
         self.pPrice.textAlignment = NSTextAlignmentLeft;
         
         self.pSales = [UILabel new];
-        self.pSales.font = kFont(11);
+        self.pSales.font = kFont(5.5);
         self.pSales.textColor = UIColorFromRGBA(0x8F9095, 1.0);
         self.pSales.textAlignment = NSTextAlignmentRight;
         

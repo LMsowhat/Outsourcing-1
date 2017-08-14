@@ -14,7 +14,7 @@
 #import "OrdersViewController.h"
 #import "WaterTicketViewController.h"
 #import "MyViewController.h"
-
+#import "LoginViewController.h"
 
 
 @interface MainTabBarController ()<UITabBarControllerDelegate>
@@ -23,6 +23,12 @@
 
 @implementation MainTabBarController
 
+-(void)viewWillAppear:(BOOL)animated{
+
+    [super viewWillAppear:animated];
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -30,17 +36,16 @@
     NavigationViewController *navi1 = [[NavigationViewController alloc] initWithRootViewController:home];
     home.tabBarItem = [[UITabBarItem  alloc] initWithTitle:@"首页" image:[[UIImage imageNamed:@"home"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"home_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [home.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:UIColorFromRGBA(0xFA6650, 1.0),NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
-
     
     OrdersViewController *order = [OrdersViewController new];
     NavigationViewController *navi2 = [[NavigationViewController alloc] initWithRootViewController:order];
-    order.tabBarItem = [[UITabBarItem  alloc] initWithTitle:@"订单" image:[[UIImage imageNamed:@"course"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"course_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    order.tabBarItem = [[UITabBarItem  alloc] initWithTitle:@"订单" image:[[UIImage imageNamed:@"order"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"order_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [order.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:UIColorFromRGBA(0xFA6650, 1.0),NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
 
     
     WaterTicketViewController *water = [WaterTicketViewController new];
     NavigationViewController *navi3 = [[NavigationViewController alloc] initWithRootViewController:water];
-    water.tabBarItem = [[UITabBarItem  alloc] initWithTitle:@"水票" image:[[UIImage imageNamed:@"community"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"community_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    water.tabBarItem = [[UITabBarItem  alloc] initWithTitle:@"水票" image:[[UIImage imageNamed:@"ticket"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"ticket_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [water.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:UIColorFromRGBA(0xFA6650, 1.0),NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
 
     MyViewController *set = [MyViewController new];
@@ -52,12 +57,38 @@
     
     self.tabBarController.delegate = self;
     
+    [self addNotification];
+    [self checkLogin];
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)checkLogin{
+
+
+//    if (![UserTools userId]) {
+//        
+//        [self toLogin];
+//        
+//    }
+//    
 }
+
+- (void)addNotification{
+    
+    //注册登录通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(toLogin) name:NEEDLOGIN object:nil];
+    
+}
+
+- (void)toLogin{
+    
+    LoginViewController *login = [LoginViewController new];
+    
+    NavigationViewController *loginNavi = [[NavigationViewController alloc] initWithRootViewController:login];
+    
+    [self presentViewController:loginNavi animated:YES completion:nil];
+    
+}
+
 
 @end

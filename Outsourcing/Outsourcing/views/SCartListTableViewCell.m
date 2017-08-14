@@ -31,17 +31,17 @@
     if (self) {
         
         self.pTitle = [UILabel new];
-        self.pTitle.font = kFont(14);
+        self.pTitle.font = kFont(7);
         self.pTitle.textColor = kBlackColor;
         self.pTitle.textAlignment = NSTextAlignmentCenter;
         
         self.pPrice = [UILabel new];
-        self.pPrice.font = kFont(14);
+        self.pPrice.font = kFont(7);
         self.pPrice.textColor = kRedColor;
         self.pPrice.textAlignment = NSTextAlignmentCenter;
         
         self.pNum = [UILabel new];
-        self.pNum.font = kFont(13);
+        self.pNum.font = kFont(6.5);
         self.pNum.textColor = kBlackColor;
         self.pNum.textAlignment = NSTextAlignmentCenter;
         

@@ -15,10 +15,17 @@
 
 #define WeakSelf(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 
+#pragma mark - 头文件
+#import "UserTools.h"
+
+
+
+
 #pragma mark - 系统UI尺寸
 
 #define kWidth [[UIScreen mainScreen] bounds].size.width
 #define kHeight [[UIScreen mainScreen] bounds].size.height
+#define kScale [UIScreen mainScreen].scale
 #define kNavigationBarHeight 44
 #define kStatusBarHeight 20
 #define kTopBarHeight 64
@@ -52,19 +59,19 @@
 #define kClearColor [UIColor clearColor]
 
 /***  普通字体 */
-#define kFont(size) [UIFont systemFontOfSize:size]
+#define kFont(size) [UIFont systemFontOfSize:size * kScale]
 /***  粗体 */
-#define kBoldFont(size) [UIFont boldSystemFontOfSize:size]
+#define kBoldFont(size) [UIFont boldSystemFontOfSize:size * kScale]
 
 
 /****网络API****/
 
-#define URLHOST @"http://zaixian.zhijin.com/api"
+#define URLHOST @"http://59.110.235.32/api/app/"
 //#define URLHOST @"http://dapeng.dev.zhijin.com/api"
 
 
 /***常用****/
-#define eLiveToLogin @"eLiveToLoginViewController"
+#define NEEDLOGIN @"appneedtologin"
 #define aliPaySuccess @"aliPaySuccessCallBack"
 #define DownloadSuccess @"downloadsuccess"
 #define WIFIDOWNLOAD @"wifi_download"

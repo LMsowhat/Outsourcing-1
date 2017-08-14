@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
+#import "LoginViewController.h"
+#import "NavigationViewController.h"
 
 @interface AppDelegate ()
 
@@ -27,6 +29,12 @@
     self.window.rootViewController = root;
     
     [self.window makeKeyAndVisible];
+    
+//    LoginViewController *login = [LoginViewController new];
+//    
+//    NavigationViewController *loginNavi = [[NavigationViewController alloc] initWithRootViewController:login];
+//    
+//    [self.window.rootViewController presentViewController:loginNavi animated:YES completion:nil];
     
     return YES;
 }

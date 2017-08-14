@@ -10,7 +10,7 @@
 #import "OrderDetailListCell.h"
 #import "Masonry.h"
 #import "ProductionShowView.h"
-
+#import "PaymentViewController.h"
 
 @interface OrderCreateController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -40,12 +40,22 @@
     [super viewWillAppear:animated];
 
     self.navigationItem.title = @"提交订单";
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, 0, 22, 17);
+    [btn setImage:[UIImage imageNamed:@"naviBack"] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(foreAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    [self.navigationItem setLeftBarButtonItem:leftItem];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.view addSubview:self.mainTableView];
+    [self.view addSubview:self.oSettlementBtn];
     // Do any additional setup after loading the view.
 }
 
@@ -81,6 +91,8 @@
     if (!_oWTicket) {
         
         _oWTicket = [UILabel new];
+        _oWTicket.font = kFont(7);
+        _oWTicket.textColor = UIColorFromRGBA(0x8F9095, 1.0);
         _oWTicket.text = @"本次使用水票0张";
     }
 
@@ -92,13 +104,13 @@
     if (!_oSettlementBtn) {
         
         _oSettlementBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _oSettlementBtn.frame = CGRectMake(0, 0, 100, 30);
+        _oSettlementBtn.frame = CGRectMake(0, kHeight - 24.5*kScale, kWidth, 24.5*kScale);
+        [_oSettlementBtn.titleLabel setFont:kFont(7)];
         [_oSettlementBtn setTitle:@"去结算" forState:UIControlStateNormal];
-        [_oSettlementBtn setTitleColor:kWhiteColor forState:UIControlStateNormal];
-        _oSettlementBtn.backgroundColor = kRedColor;
+        [_oSettlementBtn setTitleColor:UIColorFromRGBA(0xFFFFFF, 1.0) forState:UIControlStateNormal];
+        _oSettlementBtn.backgroundColor = UIColorFromRGBA(0xFA6650, 1.0);
         [_oSettlementBtn addTarget:self action:@selector(settlementClick) forControlEvents:UIControlEventTouchUpInside];
     }
-
     return _oSettlementBtn;
 }
 
@@ -111,7 +123,15 @@
 
 - (void)settlementClick{
 
+    PaymentViewController *payMent = [PaymentViewController new];
 
+    [self.navigationController pushViewController:payMent animated:YES];
+}
+
+- (void)foreAction{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 #pragma mark TableViewDelegate
@@ -142,7 +162,7 @@
     switch (indexPath.row) {
         case 0:
             
-            cell.left_label.text = @"收获地址";
+            cell.left_label.text = @"收获信息:";
             
             break;
         case 1:
@@ -170,7 +190,7 @@
         {
             NSString *testStr = @"优惠（-￥5.00）";
             NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:testStr];
-            [str addAttribute:NSForegroundColorAttributeName value:kRedColor range:NSMakeRange(3,testStr.length - 4)];
+            [str addAttribute:NSForegroundColorAttributeName value:UIColorFromRGBA(0xFA6650, 1.0) range:NSMakeRange(3,testStr.length - 4)];
             cell.left_label.attributedText = str;
         }
 
@@ -180,9 +200,9 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             NSString *testStr = @"共￥888.00";
             NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:testStr];
-            [str addAttribute:NSForegroundColorAttributeName value:kRedColor range:NSMakeRange(1,testStr.length - 1)];
+            [str addAttributes:@{NSForegroundColorAttributeName:UIColorFromRGBA(0xFA6650, 1.0),NSFontAttributeName:kFont(9)} range:NSMakeRange(1,testStr.length - 1)];
             cell.left_label.attributedText = str;
-            [cell setLeftView:nil RightView:self.oSettlementBtn others:nil];
+            [cell setLeftView:nil RightView:[UILabel new] others:nil];
         }
             
             break;
@@ -190,7 +210,6 @@
         default:
             break;
     }
-      
     return cell;
 }
 
@@ -205,10 +224,9 @@
 {
     if (indexPath.row == 1) {
         
-        return 150;
+        return 110*kScale;
     }
-    
-    return 40;
+    return 20*kScale;
 }
 
 

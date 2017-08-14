@@ -30,9 +30,11 @@
     if (self) {
         
         self.left_label = [UILabel new];
+        self.left_label.font = kFont(7);
+        self.left_label.textColor = UIColorFromRGBA(0x333338, 1.0);
         
         self.right_icon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
-        self.right_icon.image = [UIImage imageNamed:@"rightArrow"];
+        self.right_icon.image = [UIImage imageNamed:@"more"];
         
         [self addSubview:self.left_label];
         [self addSubview:self.right_icon];
@@ -40,14 +42,14 @@
         [self.left_label makeConstraints:^(MASConstraintMaker *make) {
             
             make.centerY.equalTo(self);
-            make.left.equalTo(self).offset(10);
+            make.left.equalTo(self).offset(10*kScale);
             
         }];
         
         [self.right_icon makeConstraints:^(MASConstraintMaker *make) {
             
             make.centerY.equalTo(self);
-            make.right.equalTo(self).offset(-15);
+            make.right.equalTo(self).offset(-10*kScale);
             
         }];
         
