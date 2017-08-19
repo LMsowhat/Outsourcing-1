@@ -10,10 +10,11 @@
 #import "MBProgressHUDManager.h"
 #import "AFNetWorkManagerConfig.h"
 #import "EliveApplication.h"
-#import "RegisterViewController.h"
-#import "AFNetWorkManagerConfig.h"
-#import "RetrievePasswordViewController.h"
 #import "Masonry.h"
+
+
+#import "RegisterViewController.h"
+#import "RetrievePasswordViewController.h"
 
 
 
@@ -173,21 +174,13 @@
     if (pass) {
         
         NSMutableDictionary *parameters = [NSMutableDictionary new];
+        parameters[kCurrentController] = self;
         parameters[@"strMobile"] = self.uNameTextField.text;
         parameters[@"strPassword"] = self.psdTextField.text;
         
-        [AFNetWorkManagerConfig POST:@"buyer/login" baseURL:URLHOST params:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-            
-            NSLog(@"%@",responseObject);
-            
-        } fail:^(NSURLSessionDataTask *task, NSError *error) {
-            
-            NSLog(@"%@",error);
-            
-        }];
+        [OutsourceNetWork onHttpCode:kUserLoginNetWork WithParameters:parameters];
         
     }
-    
     NSLog(@"loginBtn Click！！！！");
 }
 
@@ -305,6 +298,20 @@
  
 }
 
+- (void)loginGetData:(NSDictionary *)data{
+    
+    if ([data[@"resCode"] isEqualToString:@"0"]) {
+
+        [self loginSuccess:data[@"result"]];
+
+    }else{
+        
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:data[@"result"] afterDelay:1.0f];
+    }
+    
+}
+
+
 - (void)countDown{
 
     //
@@ -355,19 +362,6 @@
     });
     
     dispatch_resume(_timer);
-
-}
-
-
-- (void)loginGetData:(NSDictionary *)data{
-
-    if (data[@"data"][@"token"]) {
-        
-        [self loginSuccess:data[@"data"]];
-    }else{
-        
-        [self editResultBy:data[@"data"]];
-    }
 
 }
 
@@ -440,8 +434,7 @@
 
 - (void)loginSuccess:(id)responseObject{
     
-    [UserTools setToken:responseObject[@"token"]];
-    [UserTools setUserId:responseObject[@"id"]];
+    [UserTools setUserId:responseObject[@"lId"]];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 
 //    for (UIViewController *controller in self.navigationController.viewControllers) {

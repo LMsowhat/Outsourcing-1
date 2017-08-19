@@ -65,19 +65,11 @@ static EliveApplication *elive;
         }
             
             break;
-
-        case kUserGetInfoNetWork:
+            
+        case kUserAddressNetWork:
             
         {
-            [self requestUserInfo:parms];
-        }
-            
-            break;
-
-        case kUserUploadNetWork:
-            
-        {
-            [self requestUploadUserIcon:parms];
+            [self requestGetUserAddress:parms];
         }
             
             break;
@@ -89,176 +81,29 @@ static EliveApplication *elive;
         }
             break;
 
-        case kHomePageEliveFourthNetWork:
-            
-            
-            break;
-            
-        case kHomePageHotNetWork:
+        case kHomePageProductionListNetWork:
+        {
         
-        {
-            [self requestHomeRecommendations:parms];
+            [self requestHomeProducitonList:parms];
         }
             break;
- 
-        case kHomeCoursesCategoriesNetWork:
-            
+        case kProductionDetailNetWork:
         {
-            [self requestCourseCategories:parms];
-        }
             
+            [self requestProducitonDetail:parms];
+        }
             break;
-            
-        case kHomeCourseListNetWork:
-            
+        case kSubmitOrderNetWork:
         {
-            [self requestCourseList:parms];
-        }
             
+            [self requestSubmitOrder:parms];
+        }
             break;
-            
-        case kHomeCourseDetailNetWork:
-            
+        case kOrderDetailNetWork:
         {
-            [self requestCourseDetail:parms];
+            
+            [self requestGetOrderDetail:parms];
         }
-            
-            break;
-            
-        case kUserSearchNetWork:
-            
-        {
-            [self requestUserSearchAction:parms];
-        }
-            
-            break;
-            
-        case kHomeSearchShowNetWork:
-            
-        {
-            [self requestSearchSearchShowAction:parms];
-        }
-            
-            break;
-        
-        case kSettingUserOrderListNetWork:
-            
-        {
-            [self requestSettingUserOrder:parms];
-        }
-            
-            break;
-
-        case kCourseCreateOrderNetWork:
-            
-        {
-            [self requestCreateOrder:parms];
-        }
-            
-            break;
-
-        case kGetTheOrderDetailNetWork:
-            
-        {
-            [self requestGetTheOrderDetail:parms];
-        }
-            
-            break;
-            
-        case kSettingUpdateUserInfoNetWork:
-            
-        {
-            [self requestSettingUpdateUserInfo:parms];
-        }
-            
-            break;
-            
-        case kAliPayNetWork:
-            
-        {
-            [self requestAliPay:parms];
-        }
-            
-            break;
-            
-        case kWechatPayNetWork:
-            
-        {
-            [self requestAliPay:parms];
-        }
-            
-            break;
-
-        case kCourseAddCollectionNetWork:
-            
-        {
-            [self requestCourseAddCollection:parms];
-        }
-            
-            break;
-
-        case kUserCollectionsListNetWork:
-            
-        {
-            [self requestUserCollectionsList:parms];
-        }
-            
-            break;
-            
-        case kCourseHasCollectNetWork:
-            
-        {
-            [self requestCourseHasCollect:parms];
-        }
-            
-            break;
-            
-        case kCourseHasPayForNetWork:
-            
-        {
-            [self requestCourseHasPayFor:parms];
-        }
-            
-            break;
-
-        case kMyCourseListNetWork:
-            
-        {
-            [self requestGetMyCourseList:parms];
-        }
-            
-            break;
-            
-        case kUserMessageNetWork:
-            
-        {
-            [self requestGetMyMessageList:parms];
-        }
-            
-            break;
-            
-        case kUserTheMessageDetailNetWork:
-            
-        {
-            [self requestGetTheMessageDetail:parms];
-        }
-            
-            break;
-            
-        case kDeleteTheOrderDetailNetWork:
-            
-        {
-            [self requestDeleteTheOrder:parms];
-        }
-            
-            break;
-            
-        case kDeleteTheMessageNetWork:
-            
-        {
-            [self requestDeleteTheMessage:parms];
-        }
-            
             break;
             
         default:

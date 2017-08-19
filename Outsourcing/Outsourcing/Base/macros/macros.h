@@ -66,7 +66,7 @@
 
 /****网络API****/
 
-#define URLHOST @"http://59.110.235.32/api/app/"
+#define URLHOST @"http://59.110.235.32:8080/api/app"
 //#define URLHOST @"http://dapeng.dev.zhijin.com/api"
 
 
@@ -80,7 +80,7 @@
 
 
 #define  kCurrentController                             @"viewController"
-#define  EliveApp                                       [EliveApplication shareStance]
+#define  OutsourceNetWork                               [EliveApplication shareStance]
 //下载列表文件
 #define DWDownloadingItemPlistFilename @"downloadingItems.plist"
 #define DWDownloadFinishItemPlistFilename @"downloadFinishItems.plist"
@@ -105,61 +105,20 @@
 #define kUserGetInfoNetWork                             2000
 //  修改用户信息
 #define kUserUploadNetWork                              2001
-//  上传用户图像
-#define kUserUploadIconNetWork                          2002
+//  获取用户地址列表
+#define kUserAddressNetWork                             2002
 
 
 //  获取轮播图信息
 #define kHomePageCirclesNetWork                         3000
-//  获取首页直播课信息
-#define kHomePageEliveFourthNetWork                     3001
-//  获取首页热门课信息
-#define kHomePageHotNetWork                             3002
-//  获取课程分类信息
-#define kHomeCoursesCategoriesNetWork                   3003
-//  获取课程列表信息
-#define kHomeCourseListNetWork                          3004
-//  获取课程详情信息
-#define kHomeCourseDetailNetWork                        3005
-//  用户搜索
-#define kUserSearchNetWork                              3006
-//  点击搜索按钮
-#define kHomeSearchShowNetWork                          3007
+//  获取首页产品列表
+#define kHomePageProductionListNetWork                  3001
+//  获取产品详情页面数据
+#define kProductionDetailNetWork                        3002
 
-
-//  订单
-#define kSettingUserOrderListNetWork                    3008
-//  设置个人信息
-#define kSettingUpdateUserInfoNetWork                   3009
-//  创建订单
-#define kCourseCreateOrderNetWork                       3012
-//  获取一个订单
-#define kGetTheOrderDetailNetWork                       3013
-//  支付宝支付
-#define kAliPayNetWork                                  3014
-//  微信支付
-#define kWechatPayNetWork                               3015
-//  获取课程详情信息
-#define kCourseAddCollectionNetWork                     3016
-//  获取用户所有收藏信息
-#define kUserCollectionsListNetWork                     3017
-//  判断是否收藏
-#define kCourseHasCollectNetWork                        3018
-
-//  我的课程
-#define kMyCourseListNetWork                            3019
-//  判断是否购买
-#define kCourseHasPayForNetWork                         3020
-//  用户消息
-#define kUserMessageNetWork                             3021
-//  一条详细信息
-#define kUserTheMessageDetailNetWork                    3022
-//  删除一条订单
-#define kDeleteTheOrderDetailNetWork                    3023
-//  删除一条信息
-#define kDeleteTheMessageNetWork                        3024
-
-
+//  提交订单
+#define kSubmitOrderNetWork                             4000
+#define kOrderDetailNetWork                             4001
 
 
 

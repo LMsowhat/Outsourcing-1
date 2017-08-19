@@ -58,13 +58,6 @@
 //    WeakSelf(weakSelf);
 //
 //    self.mainView = [[LoginViews alloc] initWithFrame:CGRectMake(0, kTopBarHeight, kWidth, kHeight/2) Name:@"注册" CodeBlock:^{
-//        //获取验证码
-//        NSMutableDictionary *parameters = [NSMutableDictionary new];
-//        parameters[kCurrentController] = self;
-//        parameters[@"phone"] = self.mainView.phoneTextField.text;
-//        parameters[@"sms_template_code"] = @"register_message";
-//
-//        [EliveApp onHttpCode:kUserSendCodeNetWork WithParameters:parameters];
 //        //倒计时
 //        [self countDown];
 //        
@@ -229,13 +222,20 @@
     
     [self countDown];
 
+//    //获取验证码
+//    NSMutableDictionary *parameters = [NSMutableDictionary new];
+//    parameters[kCurrentController] = self;
+//    parameters[@"phone"] = self.psdTextField.text;
+//    parameters[@"sms_template_code"] = @"register_message";
+//    
+//    [EliveApp onHttpCode:kUserSendCodeNetWork WithParameters:parameters];
+
     NSLog(@"getCodeClick !!!!");
 }
 
 
 - (void)registerBtnClick{
 
-    
     BOOL checkInput = [self checkTheTextFieldInput];
 
     if (checkInput) {
@@ -243,18 +243,10 @@
         NSMutableDictionary *parameters = [NSMutableDictionary new];
         parameters[kCurrentController] = self;
         parameters[@"strMobile"] = self.userNameTextField.text;
-        parameters[@"strPassword"] = @"123456";
+        parameters[@"strPassword"] = self.psdTextField.text;
         parameters[@"strUserSmsCode"] = @"4444";
         
-        [AFNetWorkManagerConfig POST:@"buyer/register" baseURL:URLHOST params:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
-            
-            NSLog(@"%@",responseObject);
-            
-        } fail:^(NSURLSessionDataTask *task, NSError *error) {
-            
-            NSLog(@"%@",error);
-            
-        }];
+        [OutsourceNetWork onHttpCode:kUserRegisterNetWork WithParameters:parameters];
     }
 
     NSLog(@"registerBtnClick!!!!");
@@ -437,6 +429,24 @@
  
 }
 
+- (void)registerGetData:(NSDictionary *)data{
+    
+    if ([data[@"resCode"] isEqualToString:@"0"]) {
+        
+        [self loginSuccess:data[@"result"][@"lId"]];
+
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        
+    }else{
+        
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:data[@"result"] afterDelay:1.0f];
+    }
+    
+    
+}
+
+
+
 - (void)countDown{
     
     //
@@ -492,21 +502,6 @@
     dispatch_resume(_timer);
     
 }
-
-
-- (void)registerGetData:(NSDictionary *)data{
-
-    if (data[@"data"][@"token"]) {
-        
-        [self loginSuccess:data[@"data"]];
-    }else{
-        
-        [self editResultBy:data[@"data"]];
-    }
-
-}
-
-
 
 - (void)editResultBy:(id)responseObject{
     
@@ -573,10 +568,9 @@
 
 }
 
-- (void)loginSuccess:(id)responseObject{
+- (void)loginSuccess:(NSString *)userId{
     
-    [UserTools setToken:responseObject[@"token"]];
-    [UserTools setUserId:responseObject[@"id"]];
+    [UserTools setUserId:userId];
     
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 

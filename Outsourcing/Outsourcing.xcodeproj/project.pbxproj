@@ -30,6 +30,13 @@
 		8B8533F41F00F41C00D061E4 /* OrderDetailListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8533F31F00F41C00D061E4 /* OrderDetailListCell.m */; };
 		8B8533FD1F0359BE00D061E4 /* ProductionShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8533FC1F0359BE00D061E4 /* ProductionShowView.m */; };
 		8B8534001F03A20B00D061E4 /* OrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8533FF1F03A20B00D061E4 /* OrderListTableViewCell.m */; };
+		8B9B84F41F43ECC3009AE5EE /* MyInvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B84F31F43ECC3009AE5EE /* MyInvitationViewController.m */; };
+		8B9B84F71F43F761009AE5EE /* AddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B84F61F43F761009AE5EE /* AddressViewController.m */; };
+		8B9B84FA1F441829009AE5EE /* AddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B84F91F441829009AE5EE /* AddressTableViewCell.m */; };
+		8B9B84FD1F4534B3009AE5EE /* MyBarrelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B84FC1F4534B3009AE5EE /* MyBarrelViewController.m */; };
+		8B9B85001F4571D9009AE5EE /* MyTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B84FF1F4571D9009AE5EE /* MyTicketViewController.m */; };
+		8B9B85031F4571F9009AE5EE /* MyTicketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B85021F4571F9009AE5EE /* MyTicketTableViewCell.m */; };
+		8B9B85061F457707009AE5EE /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B85051F457707009AE5EE /* MoreViewController.m */; };
 		8BB4E5D31F00B126006851CF /* OrderCreateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4E5D21F00B126006851CF /* OrderCreateController.m */; };
 		8BD193751F0F363B00A39605 /* HeaderCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD193741F0F363B00A39605 /* HeaderCycleScrollView.m */; };
 		8BE025C21F3862D800B63F5C /* naviBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE025BF1F3862D800B63F5C /* naviBack.png */; };
@@ -155,7 +162,6 @@
 		8BFB16DF1EF0E21A00725244 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BFB16C71EF0E21A00725244 /* setting.png */; };
 		8BFB16E01EF0E21A00725244 /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BFB16C81EF0E21A00725244 /* setting@2x.png */; };
 		8BFB16E11EF0E21A00725244 /* setting@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BFB16C91EF0E21A00725244 /* setting@3x.png */; };
-		8BFB16E41EF0E28A00725244 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB16E31EF0E28A00725244 /* test.m */; };
 		8BFB16E91EF1137800725244 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BFB16E51EF1137800725244 /* 2.jpg */; };
 		8BFB16EA1EF1137800725244 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BFB16E61EF1137800725244 /* 3.jpg */; };
 		8BFB16EB1EF1137800725244 /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8BFB16E71EF1137800725244 /* 4.jpg */; };
@@ -222,6 +228,20 @@
 		8B8533FC1F0359BE00D061E4 /* ProductionShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductionShowView.m; sourceTree = "<group>"; };
 		8B8533FE1F03A20B00D061E4 /* OrderListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListTableViewCell.h; sourceTree = "<group>"; };
 		8B8533FF1F03A20B00D061E4 /* OrderListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListTableViewCell.m; sourceTree = "<group>"; };
+		8B9B84F21F43ECC3009AE5EE /* MyInvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInvitationViewController.h; sourceTree = "<group>"; };
+		8B9B84F31F43ECC3009AE5EE /* MyInvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInvitationViewController.m; sourceTree = "<group>"; };
+		8B9B84F51F43F761009AE5EE /* AddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressViewController.h; sourceTree = "<group>"; };
+		8B9B84F61F43F761009AE5EE /* AddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressViewController.m; sourceTree = "<group>"; };
+		8B9B84F81F441829009AE5EE /* AddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressTableViewCell.h; sourceTree = "<group>"; };
+		8B9B84F91F441829009AE5EE /* AddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressTableViewCell.m; sourceTree = "<group>"; };
+		8B9B84FB1F4534B3009AE5EE /* MyBarrelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBarrelViewController.h; sourceTree = "<group>"; };
+		8B9B84FC1F4534B3009AE5EE /* MyBarrelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBarrelViewController.m; sourceTree = "<group>"; };
+		8B9B84FE1F4571D9009AE5EE /* MyTicketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTicketViewController.h; sourceTree = "<group>"; };
+		8B9B84FF1F4571D9009AE5EE /* MyTicketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTicketViewController.m; sourceTree = "<group>"; };
+		8B9B85011F4571F9009AE5EE /* MyTicketTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTicketTableViewCell.h; sourceTree = "<group>"; };
+		8B9B85021F4571F9009AE5EE /* MyTicketTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTicketTableViewCell.m; sourceTree = "<group>"; };
+		8B9B85041F457707009AE5EE /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
+		8B9B85051F457707009AE5EE /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		8BB4E5D11F00B126006851CF /* OrderCreateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCreateController.h; sourceTree = "<group>"; };
 		8BB4E5D21F00B126006851CF /* OrderCreateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCreateController.m; sourceTree = "<group>"; };
 		8BD193731F0F363B00A39605 /* HeaderCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCycleScrollView.h; sourceTree = "<group>"; };
@@ -375,8 +395,6 @@
 		8BFB16C71EF0E21A00725244 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
 		8BFB16C81EF0E21A00725244 /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
 		8BFB16C91EF0E21A00725244 /* setting@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@3x.png"; sourceTree = "<group>"; };
-		8BFB16E21EF0E28A00725244 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
-		8BFB16E31EF0E28A00725244 /* test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
 		8BFB16E51EF1137800725244 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
 		8BFB16E61EF1137800725244 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
 		8BFB16E71EF1137800725244 /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpg; sourceTree = "<group>"; };
@@ -488,6 +506,16 @@
 				8BFB15B41EF0CEBA00725244 /* MyViewController.m */,
 				8BE0260A1F3BFEA200B63F5C /* CouponsViewController.h */,
 				8BE0260B1F3BFEA200B63F5C /* CouponsViewController.m */,
+				8B9B84F21F43ECC3009AE5EE /* MyInvitationViewController.h */,
+				8B9B84F31F43ECC3009AE5EE /* MyInvitationViewController.m */,
+				8B9B84F51F43F761009AE5EE /* AddressViewController.h */,
+				8B9B84F61F43F761009AE5EE /* AddressViewController.m */,
+				8B9B84FB1F4534B3009AE5EE /* MyBarrelViewController.h */,
+				8B9B84FC1F4534B3009AE5EE /* MyBarrelViewController.m */,
+				8B9B84FE1F4571D9009AE5EE /* MyTicketViewController.h */,
+				8B9B84FF1F4571D9009AE5EE /* MyTicketViewController.m */,
+				8B9B85041F457707009AE5EE /* MoreViewController.h */,
+				8B9B85051F457707009AE5EE /* MoreViewController.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -650,8 +678,6 @@
 				8BFB15A81EF0CDD100725244 /* BaseViewController.m */,
 				8BFB15AA1EF0CDFA00725244 /* NavigationViewController.h */,
 				8BFB15AB1EF0CDFA00725244 /* NavigationViewController.m */,
-				8BFB16E21EF0E28A00725244 /* test.h */,
-				8BFB16E31EF0E28A00725244 /* test.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -857,6 +883,10 @@
 			children = (
 				8BE0260D1F3C035E00B63F5C /* CouponsTableViewCell.h */,
 				8BE0260E1F3C035E00B63F5C /* CouponsTableViewCell.m */,
+				8B9B84F81F441829009AE5EE /* AddressTableViewCell.h */,
+				8B9B84F91F441829009AE5EE /* AddressTableViewCell.m */,
+				8B9B85011F4571F9009AE5EE /* MyTicketTableViewCell.h */,
+				8B9B85021F4571F9009AE5EE /* MyTicketTableViewCell.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -1208,8 +1238,11 @@
 				8BFB15C71EF0D0A500725244 /* UIButton+myButton.m in Sources */,
 				8B2028A31F170E9C007F39AD /* UserTools.m in Sources */,
 				8B8533FD1F0359BE00D061E4 /* ProductionShowView.m in Sources */,
+				8B9B85061F457707009AE5EE /* MoreViewController.m in Sources */,
+				8B9B84F41F43ECC3009AE5EE /* MyInvitationViewController.m in Sources */,
 				8BFB15CB1EF0D0A500725244 /* EliveHttpApi.m in Sources */,
 				8B8533F41F00F41C00D061E4 /* OrderDetailListCell.m in Sources */,
+				8B9B84F71F43F761009AE5EE /* AddressViewController.m in Sources */,
 				8B20286E1F10CF7A007F39AD /* OrderModel.m in Sources */,
 				8BFB15A91EF0CDD100725244 /* BaseViewController.m in Sources */,
 				8B2028891F13569E007F39AD /* TicketListTableViewCell.m in Sources */,
@@ -1219,7 +1252,6 @@
 				8B8534001F03A20B00D061E4 /* OrderListTableViewCell.m in Sources */,
 				8B2028981F160015007F39AD /* ProtocolViews.m in Sources */,
 				8BE0260F1F3C035E00B63F5C /* CouponsTableViewCell.m in Sources */,
-				8BFB16E41EF0E28A00725244 /* test.m in Sources */,
 				8B2028921F160008007F39AD /* RegisterViewController.m in Sources */,
 				8B2028A61F170FC9007F39AD /* MBProgressHUDManager.m in Sources */,
 				8BFB15CA1EF0D0A500725244 /* EliveApplication.m in Sources */,
@@ -1230,11 +1262,15 @@
 				8BFB15661EEFC3A200725244 /* main.m in Sources */,
 				8BE025C71F386C2600B63F5C /* RetrievePasswordViewController.m in Sources */,
 				8BFB16FE1EF223C900725244 /* ProductionDetailViewController.m in Sources */,
+				8B9B84FA1F441829009AE5EE /* AddressTableViewCell.m in Sources */,
 				8BE0260C1F3BFEA200B63F5C /* CouponsViewController.m in Sources */,
 				8BFB15B21EF0CE8F00725244 /* WaterTicketViewController.m in Sources */,
 				8BFB15A61EF0CD8600725244 /* OrdersViewController.m in Sources */,
 				8BFB15AF1EF0CE3A00725244 /* HomeViewController.m in Sources */,
+				8B9B84FD1F4534B3009AE5EE /* MyBarrelViewController.m in Sources */,
 				8BE026301F3D4CE000B63F5C /* PaymentViewController.m in Sources */,
+				8B9B85001F4571D9009AE5EE /* MyTicketViewController.m in Sources */,
+				8B9B85031F4571F9009AE5EE /* MyTicketTableViewCell.m in Sources */,
 				8B2028901F160008007F39AD /* AgreementTextViewController.m in Sources */,
 				8BFB15C81EF0D0A500725244 /* AFNetWorkManagerConfig.m in Sources */,
 				8BFB15C91EF0D0A500725244 /* EliveApplication+requestMethod.m in Sources */,

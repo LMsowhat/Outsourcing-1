@@ -11,7 +11,11 @@
 #import "Masonry.h"
 
 #import "CouponsViewController.h"
-
+#import "MyInvitationViewController.h"
+#import "AddressViewController.h"
+#import "MyBarrelViewController.h"
+#import "MyTicketViewController.h"
+#import "MoreViewController.h"
 
 @interface MyViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -376,13 +380,19 @@
                     break;
                     
                 case 1:
+                {
+                    MyInvitationViewController *invitate = [MyInvitationViewController new];
                     
-                    
+                    [self.navigationController pushViewController:invitate animated:YES];
+                }
                     break;
                     
                 case 2:
+                {
+                    AddressViewController *address = [AddressViewController new];
                     
-                    
+                    [self.navigationController pushViewController:address animated:YES];
+                }
                     break;
                     
                 default:
@@ -395,18 +405,27 @@
             
             switch (indexPath.row) {
                 case 0:
+                {
+                    MyBarrelViewController *barrel = [MyBarrelViewController new];
                     
-                    
+                    [self.navigationController pushViewController:barrel animated:YES];
+                }
                     break;
                     
                 case 1:
+                {
+                    MyTicketViewController *ticket = [MyTicketViewController new];
                     
-                    
+                    [self.navigationController pushViewController:ticket animated:YES];
+                }
                     break;
                     
                 case 2:
+                {
+                    MoreViewController *more = [MoreViewController new];
                     
-                    
+                    [self.navigationController pushViewController:more animated:YES];
+                }
                     break;
                     
                 default:

@@ -17,9 +17,7 @@
     
     [manager GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        id dic = [AFNetWorkManagerConfig responseConfiguration:responseObject];
-        
-        success(task,dic);
+        success(task,responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 
         fail(task,error);
@@ -33,9 +31,6 @@
     [manager GET:url parameters:params progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        
-//        id dic = [AFNetWorkManagerConfig responseConfiguration:responseObject];
         
         success(task,responseObject);
         
@@ -52,18 +47,25 @@
     
     [manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        id dic = [AFNetWorkManagerConfig responseConfiguration:responseObject];
+//        id dic = [AFNetWorkManagerConfig responseConfiguration:responseObject];
         
-        success(task,dic);
+        success(task,responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         fail(task,error);
     }];
 }
 
-+(void)POST:(NSString *)url baseURL:(NSString *)baseUrl params:(NSDictionary *)params
++(void)POST:(NSString *)url baseURL:(NSString *)baseUrl params:(id)params
     success:(LHResponseSuccess)success fail:(LHResponseFail)fail{
 
     AFHTTPSessionManager *manager = [AFNetWorkManagerConfig managerWithBaseURL:baseUrl sessionConfiguration:NO];
+
+    if ([url containsString:@"order/add"]) {
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+
+    }
+
     [manager POST:url parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -138,9 +140,7 @@
 +(void)uploadWithURL:(NSString *)url params:(NSDictionary *)params fileData:(NSData *)filedata name:(NSString *)name fileName:(NSString *)filename mimeType:(NSString *) mimeType progress:(LHProgress)progress success:(LHResponseSuccess)success fail:(LHResponseFail)fail{
     
     AFHTTPSessionManager *manager = [AFNetWorkManagerConfig managerWithBaseURL:nil sessionConfiguration:NO];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
-  
+   
     [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
         [formData appendPartWithFileData:filedata name:name fileName:filename mimeType:mimeType];
@@ -241,8 +241,9 @@
 
 //    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    //
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/json", @"text/javascript",@"text/html", nil];;
     
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];;
     
     return manager;
 }

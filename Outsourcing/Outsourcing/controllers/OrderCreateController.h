@@ -10,5 +10,9 @@
 
 @interface OrderCreateController : BaseViewController
 
+@property (nonatomic,strong) NSString *        orderId;
+
+
+- (void)orderGetDetail:(id)responseObj;
 
 @end

@@ -8,11 +8,14 @@
 
 #import "HomeViewController.h"
 #import "SDCycleScrollView.h"
+#import "EliveApplication.h"
+#import "MJExtension.h"
+
 #import "ProductionCollectionViewCell.h"
 #import "ProductionModel.h"
 #import "HeaderCycleScrollView.h"
-
 #import "ProductionDetailViewController.h"
+
 
 #define headerHeight 180
 @interface HomeViewController ()
@@ -45,15 +48,6 @@ UIGestureRecognizerDelegate
     self.navigationItem.title = @"首页";
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 #pragma mark - Initial Methods
 
 /** 视图初始化 */
@@ -67,6 +61,13 @@ UIGestureRecognizerDelegate
 /** 加载数据 */
 - (void)sendHttpRequest {
     
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    
+    parameters[kCurrentController] = self;
+    parameters[@"nPage"] = @"1";
+    parameters[@"nMaxNum"] = @"6";
+    
+    [OutsourceNetWork onHttpCode:kHomePageProductionListNetWork WithParameters:parameters];
     
 }
 #pragma mark - Setter & Getter
@@ -111,16 +112,24 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
     return _headerSDCycle;
 }
 
+#pragma mark - NetWork Responses
+
+- (void)circlesGetData:(id)responseObject{
+
+
+}
+
+- (void)productionListGetData:(id)responseObject{
+
+    self.dataSource = [NSMutableArray arrayWithArray:responseObject];
+    
+    [self.mainCollection reloadData];
+    NSLog(@"%@",responseObject);
+
+}
+
+
 #pragma mark - Target Mehtods
-
-
-#pragma mark - Notification Method
-
-#pragma mark - Private Method
-
-#pragma mark - Public Method
-
-#pragma mark - Other Delegate
 
 #pragma mark - UICollectionView Delegate &Datasource
 /** 点击图片回调 */
@@ -150,7 +159,7 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     
-    return 6;
+    return self.dataSource.count;
 }
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
@@ -159,12 +168,11 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
     //重用cell
     ProductionCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kcellIdentifier forIndexPath:indexPath];
     
-//    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:self.dataSource[indexPath.row][@"course"][@"data"]];
-//    
-//    CourseModel *model = [CourseModel mj_objectWithKeyValues:dict];
-//    cell.tag = @"production_id";
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:self.dataSource[indexPath.row]];
     
-    [cell fitDataWith:nil];
+    ProductionModel *model = [ProductionModel mj_objectWithKeyValues:dict];
+    
+    [cell fitDataWith:model];
     
     return cell;
     
@@ -223,6 +231,7 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
     ProductionDetailViewController *detail = [ProductionDetailViewController new];
+    detail.goodsLid = self.dataSource[indexPath.row][@"lId"];
     
     [self.navigationController pushViewController:detail animated:YES];
     

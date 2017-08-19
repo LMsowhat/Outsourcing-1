@@ -58,19 +58,7 @@
     self.tabBarController.delegate = self;
     
     [self addNotification];
-    [self checkLogin];
     // Do any additional setup after loading the view.
-}
-
-- (void)checkLogin{
-
-
-//    if (![UserTools userId]) {
-//        
-//        [self toLogin];
-//        
-//    }
-//    
 }
 
 - (void)addNotification{

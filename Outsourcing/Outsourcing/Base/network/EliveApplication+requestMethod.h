@@ -23,74 +23,18 @@
 
 //
 - (void)requestRegisterAction:(NSDictionary*)parm;
-
+//
+- (void)requestGetUserAddress:(NSDictionary*)parm;
 //
 - (void)requestHomeCarousels:(NSDictionary*)parm;
+//
+- (void)requestHomeProducitonList:(NSDictionary*)parm;
+//
+- (void)requestProducitonDetail:(NSDictionary*)parm;
+//
+- (void)requestSubmitOrder:(NSDictionary*)parm;
 
-//
-- (void)requestHomeRecommendations:(NSDictionary*)parm;
-
-//
-- (void)requestCourseCategories:(NSDictionary *)parm;
-
-//
-- (void)requestCourseList:(NSDictionary *)parm;
-
-//
-- (void)requestCourseDetail:(NSDictionary*)parm;
-
-//
-- (void)requestUserSearchAction:(NSDictionary*)parm;
-
-//
-- (void)requestSearchSearchShowAction:(NSDictionary*)parm;
-
-//
-- (void)requestUserInfo:(NSDictionary*)parm;
-
-//
-- (void)requestUploadUserIcon:(NSDictionary*)parm;
-
-//
-- (void)requestSettingUserOrder:(NSDictionary*)parm;
-
-//
-- (void)requestCreateOrder:(NSDictionary*)parm;
-
-//
-- (void)requestGetTheOrderDetail:(NSDictionary*)parm;
-
-//
-- (void)requestSettingUpdateUserInfo:(NSDictionary*)parm;
-
-//
-- (void)requestAliPay:(NSDictionary*)parm;
-
-//
-- (void)requestCourseAddCollection:(NSDictionary *)parm;
-
-//
-- (void)requestUserCollectionsList:(NSDictionary*)parm;
-
-//
-- (void)requestCourseHasCollect:(NSDictionary*)parm;
-
-//
-- (void)requestCourseHasPayFor:(NSDictionary*)parm;
-
-//
-- (void)requestGetMyCourseList:(NSDictionary*)parm;
-
-//
-- (void)requestGetMyMessageList:(NSDictionary*)parm;
-
-//
-- (void)requestGetTheMessageDetail:(NSDictionary*)parm;
-
-//
-- (void)requestDeleteTheOrder:(NSDictionary*)parm;
-//
-- (void)requestDeleteTheMessage:(NSDictionary*)parm;
+- (void)requestGetOrderDetail:(NSDictionary*)parm;
 
 
 @end

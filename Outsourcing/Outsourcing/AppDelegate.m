@@ -29,14 +29,23 @@
     self.window.rootViewController = root;
     
     [self.window makeKeyAndVisible];
-    
-//    LoginViewController *login = [LoginViewController new];
-//    
-//    NavigationViewController *loginNavi = [[NavigationViewController alloc] initWithRootViewController:login];
-//    
-//    [self.window.rootViewController presentViewController:loginNavi animated:YES completion:nil];
-    
+
+    [self checkLogin];
+
     return YES;
+}
+
+- (void)checkLogin{
+    
+    if (![UserTools userId]) {
+
+        LoginViewController *login = [LoginViewController new];
+        
+        NavigationViewController *loginNavi = [[NavigationViewController alloc] initWithRootViewController:login];
+        
+        [self.window.rootViewController presentViewController:loginNavi animated:YES completion:nil];
+
+    }
 }
 
 

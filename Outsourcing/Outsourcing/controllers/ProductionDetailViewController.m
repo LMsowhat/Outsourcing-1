@@ -9,8 +9,13 @@
 #import "ProductionDetailViewController.h"
 #import "Masonry.h"
 #import "UIButton+myButton.h"
+#import "EliveApplication.h"
+#import "MJExtension.h"
+#import "MBProgressHUDManager.h"
+
 #import "ShoppingCart.h"
 #import "OrderCreateController.h"
+#import "ProductionModel.h"
 
 @interface ProductionDetailViewController ()<UIScrollViewDelegate>
 
@@ -29,6 +34,8 @@
 
 @property (nonatomic ,strong)UIButton *submitBtn;
 
+
+@property (nonatomic ,strong)ProductionModel *pModel;
 
 @end
 
@@ -59,12 +66,10 @@
     [self.view addSubview:self.mainScroll];
     
     [self configDefaultView];
-    
-    NSArray *images = @[@"3.jpg",@"4.jpg",@"2.jpg",@"3.jpg",@"5.jpg"];
+
     self.pNumber = 1;
     
-    [self loadProductionData:images];
-//    
+//
 //    self.shoppingCart = [ShoppingCart initWithData:nil];
 ////    self.shoppingCart.backgroundColor = UIColorFromRGBA(0xf1f1f1, 1.0);
 //    self.shoppingCart.frame = CGRectMake(0, kHeight - kTabBarHeight, kWidth, kTabBarHeight);
@@ -87,6 +92,7 @@
         
     }];
     
+    [self sendHttpRequest];
     // Do any additional setup after loading the view.
 }
 
@@ -267,19 +273,89 @@
     [self.view layoutIfNeeded];
 }
 
+#pragma mark - NetWorks
+
+- (void)sendHttpRequest{
+
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[kCurrentController] = self;
+    parameters[@"goodsLid"] = self.goodsLid;
+    
+    [OutsourceNetWork onHttpCode:kProductionDetailNetWork WithParameters:parameters];
+}
+
+- (void)sendSubmitOrderRequest{
+
+    NSMutableDictionary *production = [NSMutableDictionary new];
+    production[@"lGoodsid"] = self.pModel.lId;
+    production[@"strGoodsname"] = self.pModel.strGoodsname;
+    production[@"nPrice"] = self.pModel.nPrice;
+    production[@"strGoodsimgurl"] = self.pModel.strGoodsimgurl;
+    production[@"nGoodsTotalPrice"] = self.pModel.nPrice;
+    production[@"nCount"] = @"1";
+    NSMutableArray *productions = [NSMutableArray arrayWithObjects:production, nil];
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[kCurrentController] = self;
+    parameters[@"lBuyerid"] = [UserTools userId];
+    parameters[@"strBuyername"] = @"李文华";
+    parameters[@"nTotalprice"] = @"999";
+    parameters[@"strInvoiceheader"] = @"知金教育";
+    parameters[@"strRemarks"] = @"quickly";
+    parameters[@"orderGoods"] = productions;
+    
+    [OutsourceNetWork onHttpCode:kSubmitOrderNetWork WithParameters:parameters];
+  
+    [MBProgressHUDManager showHUDAddedTo:self.view];
+}
+
+- (void)getProductionDetail:(id)responseObj{
+
+    self.pModel = [ProductionModel mj_objectWithKeyValues:responseObj];
+    
+    
+    NSArray *images = @[@"3.jpg",@"4.jpg",@"2.jpg",@"3.jpg",@"5.jpg"];
+    [self loadProductionData:images];
+
+    NSLog(@"%@",responseObj);
+    
+}
+
+- (void)resultOfSubmitOrder:(id)responseObj{
+
+    if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
+        
+        [MBProgressHUDManager hideHUDForView:self.view];
+        
+        OrderCreateController *create = [OrderCreateController new];
+        create.orderId = responseObj[@"result"];
+        
+        [self.navigationController pushViewController:create animated:YES];
+
+    }else{
+    
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObj[@"result"] afterDelay:1.0f];
+    }
+    
+    NSLog(@"%@",responseObj);
+
+}
+
+
+
 #pragma mark - Private Method
 
 - (void)loadProductionData:(NSArray *)images{
 
     self.pIcon.image = [UIImage imageNamed:images[0]];
     
-    self.pTitle.text = @"桶装水的title";
+    self.pTitle.text = self.pModel.strGoodsname;
     
     self.specifications.text = @"规格：300ml＊12瓶";
     
-    self.pSales.text = @"销量12090";
+    self.pSales.text = [NSString stringWithFormat:@"销量%@",self.pModel.nMothnumber];
     
-    self.pPrice.text = @"￥20";
+    self.pPrice.text = [NSString stringWithFormat:@"￥%@",self.pModel.nPrice];
     
     self.num.text = [NSString stringWithFormat:@"%ld",self.pNumber];
     
@@ -296,7 +372,6 @@
         
         [self.mainScroll addSubview:imageV];
     }
-
 
 }
 
@@ -346,8 +421,7 @@
 
 - (void)submitBtnClick:(UIButton *)sender{
 
-    OrderCreateController *create = [OrderCreateController new];
-    [self.navigationController pushViewController:create animated:YES];
+    [self sendSubmitOrderRequest];
 
 }
 

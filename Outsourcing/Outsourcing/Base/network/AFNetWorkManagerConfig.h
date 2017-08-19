@@ -81,7 +81,7 @@ typedef void (^LHProgress)(NSProgress *progress);
  */
 +(void)POST:(NSString *)url
     baseURL:(NSString *)baseUrl
-     params:(NSDictionary *)params
+     params:(id)params
     success:(LHResponseSuccess)success
        fail:(LHResponseFail)fail;
 

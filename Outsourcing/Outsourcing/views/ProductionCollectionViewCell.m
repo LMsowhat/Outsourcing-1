@@ -90,11 +90,11 @@
 }
 
 -(void)fitDataWith:(ProductionModel *)model{
-
-    self.pName.text = @"桶装水";
+   
+    self.pName.text = model.strGoodsname;
     self.pStandard.text = @"规格： 19L*1/桶";
-    self.pPrice.text = @"￥20.00";
-    self.pSales.text = @"已售92";
+    self.pPrice.text = [NSString stringWithFormat:@"￥%.2f",[model.nPrice floatValue]];//
+    self.pSales.text = [NSString stringWithFormat:@"已售%d",[model.nMothnumber intValue]];
     
 }
 

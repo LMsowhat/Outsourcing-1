@@ -9,8 +9,11 @@
 #import "OrderCreateController.h"
 #import "OrderDetailListCell.h"
 #import "Masonry.h"
+#import "EliveApplication.h"
+
 #import "ProductionShowView.h"
 #import "PaymentViewController.h"
+
 
 @interface OrderCreateController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -56,6 +59,8 @@
     
     [self.view addSubview:self.mainTableView];
     [self.view addSubview:self.oSettlementBtn];
+    
+    [self sendHttpRequest];
     // Do any additional setup after loading the view.
 }
 
@@ -114,6 +119,8 @@
     return _oSettlementBtn;
 }
 
+
+
 #pragma mark Click-Method
 
 - (void)oSendTimeClick{
@@ -133,6 +140,27 @@
     [self.navigationController popViewControllerAnimated:YES];
     
 }
+
+#pragma mark NetWorks
+
+- (void)sendHttpRequest{
+
+    NSMutableDictionary *parametes = [NSMutableDictionary new];
+    parametes[kCurrentController] = self;
+    parametes[@"lOrderId"] = self.orderId;
+    
+    [OutsourceNetWork onHttpCode:kOrderDetailNetWork WithParameters:parametes];
+}
+
+- (void)orderGetDetail:(id)responseObj{
+
+    
+    
+    NSLog(@"%@",responseObj);
+
+}
+
+
 
 #pragma mark TableViewDelegate
 

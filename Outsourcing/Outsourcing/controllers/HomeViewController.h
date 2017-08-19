@@ -10,4 +10,8 @@
 
 @interface HomeViewController : BaseViewController
 
+- (void)circlesGetData:(id)responseObject;
+
+- (void)productionListGetData:(id)responseObject;
+
 @end

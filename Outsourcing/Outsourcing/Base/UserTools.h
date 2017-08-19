@@ -15,10 +15,6 @@
 +(NSString *)firstTag;
 +(void)setFirstTag:(NSString *)tag;
 
-//network
-+(void)setNetwork:(NSString *)Type;
-+(NSString *)appNetWork;
-
 //token
 +(void)setToken:(NSString *)token;
 +(NSString *)userToken;
