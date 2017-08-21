@@ -15,6 +15,7 @@
 #import "RegisterViewController.h"
 #import "OrderCreateController.h"
 #import "AddressViewController.h"
+#import "NewAddressViewController.h"
 
 @implementation EliveApplication (requestMethod)
 
@@ -76,6 +77,50 @@
             if (responseObject) {
                 
                 [address getMyAddressList:responseObject];
+            }
+        }
+        
+    }];
+
+}
+
+- (void)requestAddNewAddress:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestAddUserAddressWithParameters:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[NewAddressViewController class]]) {
+            
+            NewAddressViewController *newAddress = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [newAddress addNewAddressResult:responseObject];
+            }
+        }
+        
+    }];
+
+}
+
+- (void)requestGetAddressArea:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestGetAddressAreaWithParameters:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[NewAddressViewController class]]) {
+            
+            NewAddressViewController *newAddress = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [newAddress getAddressArea:responseObject];
             }
         }
         

@@ -26,6 +26,9 @@
 //
 - (void)requestGetUserAddressListWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result;
 //
+- (void)requestAddUserAddressWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result;
+//
+- (void)requestGetAddressAreaWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result;
 //- (void)requestHomeCarouselGetDataWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result;
 
 - (void)requestHomeProducitonListRequest:(NSDictionary *)params result:(void (^)(id responseObject))result;

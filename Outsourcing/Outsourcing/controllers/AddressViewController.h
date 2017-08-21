@@ -12,5 +12,4 @@
 
 - (void)getMyAddressList:(id)responseObj;
 
-
 @end

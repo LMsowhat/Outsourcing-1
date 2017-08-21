@@ -12,7 +12,7 @@
 
 
 #import "AddressTableViewCell.h"
-
+#import "NewAddressViewController.h"
 
 @interface AddressViewController ()<UITableViewDelegate ,UITableViewDataSource>
 
@@ -91,7 +91,10 @@
 
 - (void)addNewAddresClick{
 
-//    [self requestAddNewAddress];
+    NewAddressViewController *newAddress = [NewAddressViewController new];
+    
+    [self.navigationController pushViewController:newAddress animated:YES];
+
 }
 
 
@@ -114,25 +117,15 @@
   
 }
 
-- (void)requestAddNewAddress{
-
-    NSMutableDictionary *parameters = [NSMutableDictionary new];
-    parameters[kCurrentController] = self;
-    parameters[@"lUserId"] = [UserTools userId];
-    parameters[@"nMaxNum"] = @"1";
-    parameters[@"nPage"] = @"5";
-    
-    [OutsourceNetWork onHttpCode:kUserAddressNetWork WithParameters:parameters];
-    
-}
-
 
 - (void)getMyAddressList:(id)responseObj{
 
     self.dataSource = [NSMutableArray new];
     if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
         
+        self.dataSource = responseObj[@"result"];
         
+        [self.mainTableView reloadData];
     }else{
     
     
@@ -141,6 +134,7 @@
     NSLog(@"%@",responseObj);
 
 }
+
 
 
 

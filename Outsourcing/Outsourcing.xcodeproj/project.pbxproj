@@ -37,6 +37,7 @@
 		8B9B85001F4571D9009AE5EE /* MyTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B84FF1F4571D9009AE5EE /* MyTicketViewController.m */; };
 		8B9B85031F4571F9009AE5EE /* MyTicketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B85021F4571F9009AE5EE /* MyTicketTableViewCell.m */; };
 		8B9B85061F457707009AE5EE /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B85051F457707009AE5EE /* MoreViewController.m */; };
+		8B9B85091F4AAE7B009AE5EE /* NewAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B85081F4AAE7B009AE5EE /* NewAddressViewController.m */; };
 		8BB4E5D31F00B126006851CF /* OrderCreateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4E5D21F00B126006851CF /* OrderCreateController.m */; };
 		8BD193751F0F363B00A39605 /* HeaderCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD193741F0F363B00A39605 /* HeaderCycleScrollView.m */; };
 		8BE025C21F3862D800B63F5C /* naviBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE025BF1F3862D800B63F5C /* naviBack.png */; };
@@ -242,6 +243,8 @@
 		8B9B85021F4571F9009AE5EE /* MyTicketTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTicketTableViewCell.m; sourceTree = "<group>"; };
 		8B9B85041F457707009AE5EE /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
 		8B9B85051F457707009AE5EE /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
+		8B9B85071F4AAE7B009AE5EE /* NewAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAddressViewController.h; sourceTree = "<group>"; };
+		8B9B85081F4AAE7B009AE5EE /* NewAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewAddressViewController.m; sourceTree = "<group>"; };
 		8BB4E5D11F00B126006851CF /* OrderCreateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCreateController.h; sourceTree = "<group>"; };
 		8BB4E5D21F00B126006851CF /* OrderCreateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCreateController.m; sourceTree = "<group>"; };
 		8BD193731F0F363B00A39605 /* HeaderCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCycleScrollView.h; sourceTree = "<group>"; };
@@ -510,6 +513,8 @@
 				8B9B84F31F43ECC3009AE5EE /* MyInvitationViewController.m */,
 				8B9B84F51F43F761009AE5EE /* AddressViewController.h */,
 				8B9B84F61F43F761009AE5EE /* AddressViewController.m */,
+				8B9B85071F4AAE7B009AE5EE /* NewAddressViewController.h */,
+				8B9B85081F4AAE7B009AE5EE /* NewAddressViewController.m */,
 				8B9B84FB1F4534B3009AE5EE /* MyBarrelViewController.h */,
 				8B9B84FC1F4534B3009AE5EE /* MyBarrelViewController.m */,
 				8B9B84FE1F4571D9009AE5EE /* MyTicketViewController.h */,
@@ -1240,6 +1245,7 @@
 				8B8533FD1F0359BE00D061E4 /* ProductionShowView.m in Sources */,
 				8B9B85061F457707009AE5EE /* MoreViewController.m in Sources */,
 				8B9B84F41F43ECC3009AE5EE /* MyInvitationViewController.m in Sources */,
+				8B9B85091F4AAE7B009AE5EE /* NewAddressViewController.m in Sources */,
 				8BFB15CB1EF0D0A500725244 /* EliveHttpApi.m in Sources */,
 				8B8533F41F00F41C00D061E4 /* OrderDetailListCell.m in Sources */,
 				8B9B84F71F43F761009AE5EE /* AddressViewController.m in Sources */,

@@ -74,6 +74,22 @@ static EliveApplication *elive;
             
             break;
 
+        case kUserAddNewAddressNetWork:
+            
+        {
+            [self requestAddNewAddress:parms];
+        }
+            
+            break;
+            
+        case kUserGetAddressAreaNetWork:
+            
+        {
+            [self requestGetAddressArea:parms];
+        }
+            
+            break;
+
         case kHomePageCirclesNetWork:
             
         {

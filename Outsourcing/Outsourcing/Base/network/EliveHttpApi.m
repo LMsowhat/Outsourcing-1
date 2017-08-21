@@ -115,6 +115,45 @@
 
 }
 
+- (void)requestAddUserAddressWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result{
+
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    
+    parameters[@"lUserid"] = params[@"lUserid"];
+    parameters[@"strReceiptusername"] = params[@"strReceiptusername"];
+    parameters[@"strReceiptmobile"] = params[@"strReceiptmobile"];
+    parameters[@"strLocation"] = params[@"strLocation"];
+    parameters[@"strDetailaddress"] = params[@"strDetailaddress"];
+    
+    [AFNetWorkManagerConfig POST:@"address/add" baseURL:URLHOST params:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        result(responseObject);
+        
+        NSLog(@"%@",responseObject);
+        
+    } fail:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        NSLog(@"%@",error);
+        
+    }];
+
+
+}
+
+- (void)requestGetAddressAreaWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result{
+ 
+    [AFNetWorkManagerConfig GET:@"shop/allLocation" baseURL:URLHOST params:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        result(responseObject);
+        
+    } fail:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        NSLog(@"%@",error);
+
+    }];
+
+}
+
 
 /**
  首页商品列表

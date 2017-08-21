@@ -107,6 +107,14 @@
 #define kUserUploadNetWork                              2001
 //  获取用户地址列表
 #define kUserAddressNetWork                             2002
+//  添加收货地址
+#define kUserAddNewAddressNetWork                       2003
+//  获取收货区域
+#define kUserGetAddressAreaNetWork                      2004
+
+
+
+
 
 
 //  获取轮播图信息

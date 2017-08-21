@@ -433,7 +433,7 @@
     
     if ([data[@"resCode"] isEqualToString:@"0"]) {
         
-        [self loginSuccess:data[@"result"][@"lId"]];
+        [self loginSuccess:data[@"result"]];
 
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         

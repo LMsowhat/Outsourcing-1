@@ -23,17 +23,29 @@
 
 //
 - (void)requestRegisterAction:(NSDictionary*)parm;
+
 //
 - (void)requestGetUserAddress:(NSDictionary*)parm;
+
+//
+- (void)requestAddNewAddress:(NSDictionary*)parm;
+
+//
+- (void)requestGetAddressArea:(NSDictionary*)parm;
+
 //
 - (void)requestHomeCarousels:(NSDictionary*)parm;
+
 //
 - (void)requestHomeProducitonList:(NSDictionary*)parm;
+
 //
 - (void)requestProducitonDetail:(NSDictionary*)parm;
+
 //
 - (void)requestSubmitOrder:(NSDictionary*)parm;
 
+//
 - (void)requestGetOrderDetail:(NSDictionary*)parm;
 
 

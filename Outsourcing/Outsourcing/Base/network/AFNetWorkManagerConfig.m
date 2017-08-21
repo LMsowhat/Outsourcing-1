@@ -60,7 +60,9 @@
 
     AFHTTPSessionManager *manager = [AFNetWorkManagerConfig managerWithBaseURL:baseUrl sessionConfiguration:NO];
 
-    if ([url containsString:@"order/add"]) {
+    BOOL jsonStr = [url containsString:@"order/add"] || [url containsString:@"address/add"];
+    
+    if (jsonStr) {
         
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
 

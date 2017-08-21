@@ -183,7 +183,7 @@
         
         make.centerY.equalTo(cell);
         
-        make.size.equalTo(CGSizeMake(10, 20));
+        make.size.equalTo(CGSizeMake(5 *kScale, 10 *kScale));
         
         make.right.equalTo(cell).offset(-10*kScale);
     }];
