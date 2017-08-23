@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CouponsModel.h"
 
 @interface CouponsTableViewCell : UITableViewCell
 
@@ -14,5 +15,6 @@
 @property (nonatomic,strong) UILabel *        couponTime;
 @property (nonatomic,strong) UILabel *        couponValue;
 
+- (void)fitDataWithModel:(CouponsModel *)model;
 
 @end

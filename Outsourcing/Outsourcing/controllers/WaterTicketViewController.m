@@ -11,7 +11,7 @@
 #import "ProductionModel.h"
 #import "TicketListTableViewCell.h"
 #import "BuyTicketViewController.h"
-
+#import "EliveApplication.h"
 
 @interface WaterTicketViewController ()<UIScrollViewDelegate,UITableViewDelegate ,UITableViewDataSource>
 
@@ -32,6 +32,7 @@
 @property (nonatomic ,strong)NSMutableArray *myTicketArr;
 @property (nonatomic ,strong)NSMutableArray *buyTicketArr;
 
+@property (nonatomic ,strong)NSMutableArray *m_dataSource;
 
 @end
 
@@ -61,6 +62,9 @@
     [self.mainSrollView addSubview:self.myTicketTableView];
     
     [self.view addSubview:self.mainSrollView];
+    
+    [self sendRequestHttp];
+
 }
 
 
@@ -171,6 +175,25 @@
     return _mainSrollView;
 }
 
+-(NSMutableArray *)dataSource{
+
+    if (!_dataSource) {
+        
+        _dataSource = [NSMutableArray new];
+    }
+    return _dataSource;
+}
+
+-(NSMutableArray *)m_dataSource{
+
+    if (!_m_dataSource) {
+        
+        _m_dataSource = [NSMutableArray new];
+    }
+    return _m_dataSource;
+}
+
+
 #pragma mark Click_Method
 
 - (void)buyBtnClick:(UIButton *)sender{
@@ -231,6 +254,57 @@
     
 }
 
+
+#pragma mark NetWorks
+
+- (void)sendRequestHttp{
+    
+    //获取水票列表
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[kCurrentController] = self;
+    parameters[@"nMaxNum"] = @"10";
+    parameters[@"nPage"] = @"1";
+    
+    [OutsourceNetWork onHttpCode:kProductionTicketListNetWork WithParameters:parameters];
+    
+    //获取我的水票列表
+    NSMutableDictionary *m_parameters = [NSMutableDictionary new];
+    m_parameters[kCurrentController] = self;
+    m_parameters[@"lUserId"] = [UserTools userId];
+    m_parameters[@"nMaxNum"] = @"10";
+    m_parameters[@"nPage"] = @"1";
+    
+    [OutsourceNetWork onHttpCode:kUserGetTicketListNetWork WithParameters:m_parameters];
+    
+}
+
+- (void)getTicketList:(id)responseObj{
+    
+    if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
+        
+        self.dataSource = responseObj[@"result"][@"dataList"];
+        
+        [self.buyTicketTableView reloadData];
+        NSLog(@"%@",responseObj);
+    }
+    
+    
+}
+
+- (void)getUserTicketList:(id)responseObj{
+
+    if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
+        
+        self.dataSource = responseObj[@"result"][@"dataList"];
+        
+        [self.myTicketTableView reloadData];
+        NSLog(@"%@",responseObj);
+    }
+    
+    
+}
+
+
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
@@ -255,7 +329,14 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
+    if (tableView == self.buyTicketTableView) {
+        
+        return self.dataSource.count;
+    }
+    if (tableView == self.myTicketTableView) {
+        
+        return self.m_dataSource.count;
+    }
     return 4;
 }
 

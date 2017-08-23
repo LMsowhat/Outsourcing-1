@@ -10,4 +10,12 @@
 
 @interface WaterTicketViewController : BaseViewController
 
+- (void)sendRequestHttp;
+
+
+- (void)getTicketList:(id)responseObj;
+//
+
+- (void)getUserTicketList:(id)responseObj;
+
 @end

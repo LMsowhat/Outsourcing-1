@@ -6,8 +6,13 @@
 //  Copyright © 2017年 李文华. All rights reserved.
 //
 
+
+
 #import "MyTicketViewController.h"
 #import "MyTicketTableViewCell.h"
+#import "EliveApplication.h"
+
+
 
 
 @interface MyTicketViewController ()<UITableViewDelegate ,UITableViewDataSource>
@@ -43,6 +48,8 @@
     [super viewDidLoad];
     
     [self.view addSubview:self.mainTableView];
+    
+//    [self sendRequestHttp];
     // Do any additional setup after loading the view.
 }
 
@@ -70,6 +77,15 @@
     return _mainTableView;
 }
 
+-(NSMutableArray *)dataSource{
+
+    if (!_dataSource) {
+        
+        _dataSource = [NSMutableArray new];
+    }
+    return _dataSource;
+}
+
 #pragma mark Target
 
 - (void)foreAction{
@@ -77,6 +93,11 @@
     [self.navigationController popViewControllerAnimated:YES];
     
 }
+
+
+#pragma mark NetWorks
+
+
 
 
 #pragma mark TableViewDelegate

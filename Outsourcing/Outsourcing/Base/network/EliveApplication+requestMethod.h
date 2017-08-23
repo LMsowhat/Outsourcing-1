@@ -48,5 +48,20 @@
 //
 - (void)requestGetOrderDetail:(NSDictionary*)parm;
 
+//
+- (void)requestGetUserCoupons:(NSDictionary*)parm;
+
+//
+- (void)requestGetTicketList:(NSDictionary*)parm;
+
+//
+//- (void)requestGetUserCoupons:(NSDictionary*)parm;
+
+//
+//- (void)requestGetUserCoupons:(NSDictionary*)parm;
+
+//
+- (void)requestUserGetTicketList:(NSDictionary*)parm;
+
 
 @end

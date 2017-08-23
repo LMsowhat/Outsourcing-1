@@ -154,6 +154,13 @@
     return self;
 }
 
+- (void)fitDataWithModel:(AddressModel *)model{
+
+    self.receiveName.text = model.strReceiptusername;
+    self.receivePhone.text = model.strReceiptmobile;
+    self.Address.text = [NSString stringWithFormat:@"%@%@",model.strLocation,model.strDetailaddress];
+
+}
 
 
 @end

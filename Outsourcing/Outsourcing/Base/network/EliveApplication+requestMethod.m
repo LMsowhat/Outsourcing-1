@@ -16,6 +16,11 @@
 #import "OrderCreateController.h"
 #import "AddressViewController.h"
 #import "NewAddressViewController.h"
+#import "MyTicketViewController.h"
+#import "CouponsViewController.h"
+#import "BuyTicketViewController.h"
+#import "WaterTicketViewController.h"
+
 
 @implementation EliveApplication (requestMethod)
 
@@ -216,7 +221,74 @@
 
 }
 
+- (void)requestGetUserCoupons:(NSDictionary*)parm{
 
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestGetUserCoupons:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[CouponsViewController class]]) {
+            
+            CouponsViewController *coupon = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [coupon getMyCouponsData:responseObject];
+            }
+        }
+        
+    }];
+
+}
+
+- (void)requestGetTicketList:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestGetTicketList:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[WaterTicketViewController class]]) {
+            
+            WaterTicketViewController *ticket = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [ticket getTicketList:responseObject];
+            }
+        }
+        
+    }];
+
+}
+
+
+
+- (void)requestUserGetTicketList:(NSDictionary*)parm{
+
+    
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestUserGetTicketList:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[WaterTicketViewController class]]) {
+            
+            WaterTicketViewController *ticket = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [ticket getUserTicketList:responseObject];
+            }
+        }
+        
+    }];
+
+}
 
 
 

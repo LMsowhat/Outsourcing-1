@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddressModel.h"
 
 @interface AddressTableViewCell : UITableViewCell
 
@@ -26,5 +27,6 @@
 
 @property (nonatomic,strong) UIButton *        seleteBtn;
 
+- (void)fitDataWithModel:(AddressModel *)model;
 
 @end

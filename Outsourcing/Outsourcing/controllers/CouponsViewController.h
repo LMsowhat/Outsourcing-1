@@ -10,4 +10,6 @@
 
 @interface CouponsViewController : BaseViewController
 
+- (void)getMyCouponsData:(id)responseObj;
+
 @end

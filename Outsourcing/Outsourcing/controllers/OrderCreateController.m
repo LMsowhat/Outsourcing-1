@@ -100,7 +100,6 @@
         _oWTicket.textColor = UIColorFromRGBA(0x8F9095, 1.0);
         _oWTicket.text = @"本次使用水票0张";
     }
-
     return _oWTicket;
 }
 
@@ -118,7 +117,6 @@
     }
     return _oSettlementBtn;
 }
-
 
 
 #pragma mark Click-Method
@@ -145,11 +143,21 @@
 
 - (void)sendHttpRequest{
 
+    //获取订单详情
     NSMutableDictionary *parametes = [NSMutableDictionary new];
     parametes[kCurrentController] = self;
     parametes[@"lOrderId"] = self.orderId;
     
     [OutsourceNetWork onHttpCode:kOrderDetailNetWork WithParameters:parametes];
+    
+    //获取优惠信息
+    
+    
+    //获取水票信息
+    
+    
+    //获取收货地址
+    
 }
 
 - (void)orderGetDetail:(id)responseObj{

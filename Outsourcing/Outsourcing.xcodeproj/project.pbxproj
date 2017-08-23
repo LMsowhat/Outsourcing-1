@@ -38,6 +38,10 @@
 		8B9B85031F4571F9009AE5EE /* MyTicketTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B85021F4571F9009AE5EE /* MyTicketTableViewCell.m */; };
 		8B9B85061F457707009AE5EE /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B85051F457707009AE5EE /* MoreViewController.m */; };
 		8B9B85091F4AAE7B009AE5EE /* NewAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B85081F4AAE7B009AE5EE /* NewAddressViewController.m */; };
+		8B9B850D1F4BC4A0009AE5EE /* AddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B850C1F4BC4A0009AE5EE /* AddressModel.m */; };
+		8B9B85131F4BFFB0009AE5EE /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B9B85121F4BFFB0009AE5EE /* Launch Screen.storyboard */; };
+		8B9B85161F4C0468009AE5EE /* CouponsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B85151F4C0468009AE5EE /* CouponsModel.m */; };
+		8B9B85191F4C2AFE009AE5EE /* TicketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B85181F4C2AFE009AE5EE /* TicketModel.m */; };
 		8BB4E5D31F00B126006851CF /* OrderCreateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4E5D21F00B126006851CF /* OrderCreateController.m */; };
 		8BD193751F0F363B00A39605 /* HeaderCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD193741F0F363B00A39605 /* HeaderCycleScrollView.m */; };
 		8BE025C21F3862D800B63F5C /* naviBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE025BF1F3862D800B63F5C /* naviBack.png */; };
@@ -96,7 +100,6 @@
 		8BFB15661EEFC3A200725244 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15651EEFC3A200725244 /* main.m */; };
 		8BFB15691EEFC3A200725244 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15681EEFC3A200725244 /* AppDelegate.m */; };
 		8BFB15711EEFC3A200725244 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BFB15701EEFC3A200725244 /* Assets.xcassets */; };
-		8BFB15741EEFC3A200725244 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8BFB15721EEFC3A200725244 /* LaunchScreen.storyboard */; };
 		8BFB157F1EEFC3A300725244 /* OutsourcingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB157E1EEFC3A300725244 /* OutsourcingTests.m */; };
 		8BFB158A1EEFC3A300725244 /* OutsourcingUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15891EEFC3A300725244 /* OutsourcingUITests.m */; };
 		8BFB15A01EEFEC6F00725244 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB159F1EEFEC6F00725244 /* MainTabBarController.m */; };
@@ -245,6 +248,13 @@
 		8B9B85051F457707009AE5EE /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		8B9B85071F4AAE7B009AE5EE /* NewAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAddressViewController.h; sourceTree = "<group>"; };
 		8B9B85081F4AAE7B009AE5EE /* NewAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewAddressViewController.m; sourceTree = "<group>"; };
+		8B9B850B1F4BC4A0009AE5EE /* AddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressModel.h; sourceTree = "<group>"; };
+		8B9B850C1F4BC4A0009AE5EE /* AddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressModel.m; sourceTree = "<group>"; };
+		8B9B85121F4BFFB0009AE5EE /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		8B9B85141F4C0468009AE5EE /* CouponsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponsModel.h; sourceTree = "<group>"; };
+		8B9B85151F4C0468009AE5EE /* CouponsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsModel.m; sourceTree = "<group>"; };
+		8B9B85171F4C2AFE009AE5EE /* TicketModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketModel.h; sourceTree = "<group>"; };
+		8B9B85181F4C2AFE009AE5EE /* TicketModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketModel.m; sourceTree = "<group>"; };
 		8BB4E5D11F00B126006851CF /* OrderCreateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCreateController.h; sourceTree = "<group>"; };
 		8BB4E5D21F00B126006851CF /* OrderCreateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCreateController.m; sourceTree = "<group>"; };
 		8BD193731F0F363B00A39605 /* HeaderCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCycleScrollView.h; sourceTree = "<group>"; };
@@ -312,7 +322,6 @@
 		8BFB15671EEFC3A200725244 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Outsourcing/AppDelegate.h; sourceTree = SOURCE_ROOT; };
 		8BFB15681EEFC3A200725244 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Outsourcing/AppDelegate.m; sourceTree = SOURCE_ROOT; };
 		8BFB15701EEFC3A200725244 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
-		8BFB15731EEFC3A200725244 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8BFB15751EEFC3A200725244 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		8BFB157A1EEFC3A300725244 /* OutsourcingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OutsourcingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFB157E1EEFC3A300725244 /* OutsourcingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OutsourcingTests.m; sourceTree = "<group>"; };
@@ -492,10 +501,6 @@
 		8B20289C1F16007B007F39AD /* Order */ = {
 			isa = PBXGroup;
 			children = (
-				8BFB15B01EF0CE8F00725244 /* WaterTicketViewController.h */,
-				8BFB15B11EF0CE8F00725244 /* WaterTicketViewController.m */,
-				8BE026311F3D973400B63F5C /* BuyTicketViewController.h */,
-				8BE026321F3D973400B63F5C /* BuyTicketViewController.m */,
 				8BFB15A41EF0CD8600725244 /* OrdersViewController.h */,
 				8BFB15A51EF0CD8600725244 /* OrdersViewController.m */,
 			);
@@ -548,6 +553,17 @@
 				8B2028A21F170E9C007F39AD /* UserTools.m */,
 			);
 			name = libs;
+			sourceTree = "<group>";
+		};
+		8B9B851A1F4C2BCE009AE5EE /* Ticket */ = {
+			isa = PBXGroup;
+			children = (
+				8BFB15B01EF0CE8F00725244 /* WaterTicketViewController.h */,
+				8BFB15B11EF0CE8F00725244 /* WaterTicketViewController.m */,
+				8BE026311F3D973400B63F5C /* BuyTicketViewController.h */,
+				8BE026321F3D973400B63F5C /* BuyTicketViewController.m */,
+			);
+			name = Ticket;
 			sourceTree = "<group>";
 		};
 		8BFB15581EEFC3A200725244 = {
@@ -620,6 +636,7 @@
 				8B20289A1F16003A007F39AD /* Login */,
 				8B2028991F160020007F39AD /* Home */,
 				8B20289C1F16007B007F39AD /* Order */,
+				8B9B851A1F4C2BCE009AE5EE /* Ticket */,
 				8B20289D1F1600A7007F39AD /* Setting */,
 			);
 			path = controllers;
@@ -656,9 +673,9 @@
 				8BFB15671EEFC3A200725244 /* AppDelegate.h */,
 				8BFB15681EEFC3A200725244 /* AppDelegate.m */,
 				8BFB15701EEFC3A200725244 /* Assets.xcassets */,
-				8BFB15721EEFC3A200725244 /* LaunchScreen.storyboard */,
 				8BFB15751EEFC3A200725244 /* Info.plist */,
 				8BFB15CE1EF0D30300725244 /* PrefixHeader.pch */,
+				8B9B85121F4BFFB0009AE5EE /* Launch Screen.storyboard */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -899,6 +916,10 @@
 		8BFB16F11EF114D000725244 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				8B9B850B1F4BC4A0009AE5EE /* AddressModel.h */,
+				8B9B850C1F4BC4A0009AE5EE /* AddressModel.m */,
+				8B9B85141F4C0468009AE5EE /* CouponsModel.h */,
+				8B9B85151F4C0468009AE5EE /* CouponsModel.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -906,6 +927,8 @@
 		8BFB16F21EF114D800725244 /* Ticket */ = {
 			isa = PBXGroup;
 			children = (
+				8B9B85171F4C2AFE009AE5EE /* TicketModel.h */,
+				8B9B85181F4C2AFE009AE5EE /* TicketModel.m */,
 			);
 			name = Ticket;
 			sourceTree = "<group>";
@@ -1055,7 +1078,6 @@
 				8BFB16E91EF1137800725244 /* 2.jpg in Resources */,
 				8BE025FC1F39B3C600B63F5C /* icon_invite@2x.png in Resources */,
 				8BE0262B1F3C905D00B63F5C /* wechat.png in Resources */,
-				8BFB15741EEFC3A200725244 /* LaunchScreen.storyboard in Resources */,
 				8BE026271F3C905D00B63F5C /* selected@3x.png in Resources */,
 				8B20287F1F135577007F39AD /* order@2x.png in Resources */,
 				8BFB167E1EF0DF6E00725244 /* payStatus_yes.png in Resources */,
@@ -1162,6 +1184,7 @@
 				8BFB16D81EF0E21A00725244 /* home_selected@3x.png in Resources */,
 				8BFB16DC1EF0E21A00725244 /* setting_selected.png in Resources */,
 				8BFB16A91EF0DF6E00725244 /* userIcon_default.png in Resources */,
+				8B9B85131F4BFFB0009AE5EE /* Launch Screen.storyboard in Resources */,
 				8BFB16871EF0DF6E00725244 /* registerSelect.png in Resources */,
 				8BFB16821EF0DF6E00725244 /* paySuccess@2x.png in Resources */,
 				8BE026261F3C905D00B63F5C /* selected@2x.png in Resources */,
@@ -1250,12 +1273,14 @@
 				8B8533F41F00F41C00D061E4 /* OrderDetailListCell.m in Sources */,
 				8B9B84F71F43F761009AE5EE /* AddressViewController.m in Sources */,
 				8B20286E1F10CF7A007F39AD /* OrderModel.m in Sources */,
+				8B9B85191F4C2AFE009AE5EE /* TicketModel.m in Sources */,
 				8BFB15A91EF0CDD100725244 /* BaseViewController.m in Sources */,
 				8B2028891F13569E007F39AD /* TicketListTableViewCell.m in Sources */,
 				8BB4E5D31F00B126006851CF /* OrderCreateController.m in Sources */,
 				8BFB15AC1EF0CDFA00725244 /* NavigationViewController.m in Sources */,
 				8BFB17071EF8CC3900725244 /* SCartListTableViewCell.m in Sources */,
 				8B8534001F03A20B00D061E4 /* OrderListTableViewCell.m in Sources */,
+				8B9B85161F4C0468009AE5EE /* CouponsModel.m in Sources */,
 				8B2028981F160015007F39AD /* ProtocolViews.m in Sources */,
 				8BE0260F1F3C035E00B63F5C /* CouponsTableViewCell.m in Sources */,
 				8B2028921F160008007F39AD /* RegisterViewController.m in Sources */,
@@ -1271,6 +1296,7 @@
 				8B9B84FA1F441829009AE5EE /* AddressTableViewCell.m in Sources */,
 				8BE0260C1F3BFEA200B63F5C /* CouponsViewController.m in Sources */,
 				8BFB15B21EF0CE8F00725244 /* WaterTicketViewController.m in Sources */,
+				8B9B850D1F4BC4A0009AE5EE /* AddressModel.m in Sources */,
 				8BFB15A61EF0CD8600725244 /* OrdersViewController.m in Sources */,
 				8BFB15AF1EF0CE3A00725244 /* HomeViewController.m in Sources */,
 				8B9B84FD1F4534B3009AE5EE /* MyBarrelViewController.m in Sources */,
@@ -1318,18 +1344,6 @@
 			targetProxy = 8BFB15861EEFC3A300725244 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		8BFB15721EEFC3A200725244 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8BFB15731EEFC3A200725244 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			path = ..;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		8BFB158C1EEFC3A300725244 /* Debug */ = {
@@ -1427,6 +1441,7 @@
 			baseConfigurationReference = 048B0B41E714DF07C522C264 /* Pods-Outsourcing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 55VDPW57K7;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Outsourcing/AppDelegate/PrefixHeader.pch";
 				INFOPLIST_FILE = Outsourcing/Info.plist;
@@ -1443,6 +1458,7 @@
 			baseConfigurationReference = E5C9C30CB2E71FFDC835D2BA /* Pods-Outsourcing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = 55VDPW57K7;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Outsourcing/AppDelegate/PrefixHeader.pch";
 				INFOPLIST_FILE = Outsourcing/Info.plist;

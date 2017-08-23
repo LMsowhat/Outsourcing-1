@@ -111,6 +111,10 @@
 #define kUserAddNewAddressNetWork                       2003
 //  获取收货区域
 #define kUserGetAddressAreaNetWork                      2004
+//  获取用户优惠券信息
+#define kUserGetCouponsNetWork                          2005
+//  获取用户水票信息
+#define kUserGetTicketListNetWork                       2006
 
 
 
@@ -123,6 +127,15 @@
 #define kHomePageProductionListNetWork                  3001
 //  获取产品详情页面数据
 #define kProductionDetailNetWork                        3002
+//  获取水票列表
+#define kProductionTicketListNetWork                    3003
+//  获取水票详情
+#define kProductionTicketDetailNetWork                  3004
+//  购买水票
+#define kProductionTicketPayNetWork                     3005
+
+
+
 
 //  提交订单
 #define kSubmitOrderNetWork                             4000

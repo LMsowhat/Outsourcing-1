@@ -90,6 +90,14 @@ static EliveApplication *elive;
             
             break;
 
+        case kUserGetTicketListNetWork:
+            
+        {
+            [self requestUserGetTicketList:parms];
+        }
+            
+            break;
+            
         case kHomePageCirclesNetWork:
             
         {
@@ -119,6 +127,34 @@ static EliveApplication *elive;
         {
             
             [self requestGetOrderDetail:parms];
+        }
+            break;
+
+        case kUserGetCouponsNetWork:
+        {
+            
+            [self requestGetUserCoupons:parms];
+        }
+            break;
+            
+        case kProductionTicketListNetWork:
+        {
+            
+            [self requestGetTicketList:parms];
+        }
+            break;
+            
+        case kProductionTicketDetailNetWork:
+        {
+            
+            [self requestGetUserCoupons:parms];
+        }
+            break;
+            
+        case kProductionTicketPayNetWork:
+        {
+            
+            [self requestGetUserCoupons:parms];
         }
             break;
             

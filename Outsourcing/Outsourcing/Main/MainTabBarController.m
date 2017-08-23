@@ -55,7 +55,7 @@
 
     self.viewControllers = @[navi1,navi2,navi3,navi4];
     
-    self.tabBarController.delegate = self;
+    self.delegate = self;
     
     [self addNotification];
     // Do any additional setup after loading the view.
@@ -76,6 +76,40 @@
     
     [self presentViewController:loginNavi animated:YES completion:nil];
     
+}
+
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
+
+    
+    NSLog(@"%@",viewController);
+    if (tabBarController.selectedIndex == 2) {
+        
+        NavigationViewController *navi = (NavigationViewController *)viewController;
+        
+        WaterTicketViewController *ticket = navi.viewControllers.firstObject;
+        
+        [ticket sendRequestHttp];
+    }
+    
+//    if (tabBarController.selectedIndex == 1) {
+//        
+//        NavigationViewController *navi = (NavigationViewController *)viewController;
+//        
+//        CourseViewController *course = navi.viewControllers.firstObject;
+//        
+//        [course checkIsLogin];
+//        
+//    }
+    
+}
+//禁止tab多次点击
+-(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+    UIViewController *tbselect=tabBarController.selectedViewController;
+    if([tbselect isEqual:viewController]){
+        return NO;
+    }
+    return YES;
 }
 
 

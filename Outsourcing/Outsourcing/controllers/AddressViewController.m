@@ -9,10 +9,12 @@
 #import "AddressViewController.h"
 #import "MBProgressHUDManager.h"
 #import "EliveApplication.h"
-
+#import "MJExtension.h"
 
 #import "AddressTableViewCell.h"
 #import "NewAddressViewController.h"
+#import "AddressModel.h"
+
 
 @interface AddressViewController ()<UITableViewDelegate ,UITableViewDataSource>
 
@@ -110,8 +112,8 @@
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     parameters[kCurrentController] = self;
     parameters[@"lUserId"] = [UserTools userId];
-    parameters[@"nMaxNum"] = @"1";
-    parameters[@"nPage"] = @"5";
+    parameters[@"nMaxNum"] = @"10";
+    parameters[@"nPage"] = @"1";
     
     [OutsourceNetWork onHttpCode:kUserAddressNetWork WithParameters:parameters];
   
@@ -123,7 +125,7 @@
     self.dataSource = [NSMutableArray new];
     if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
         
-        self.dataSource = responseObj[@"result"];
+        self.dataSource = responseObj[@"result"][@"dataList"];
         
         [self.mainTableView reloadData];
     }else{
@@ -143,7 +145,7 @@
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-    return 6;
+    return self.dataSource.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -173,9 +175,10 @@
         cell = [[AddressTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID] ;
     }
 
-    cell.receiveName.text = [NSString stringWithFormat:@"李文华%ld",indexPath.section];
-    cell.receivePhone.text = @"15011075120";
-    cell.Address.text = @"北京市海淀区知春路113号银网中心A 座808";
+    AddressModel *model = [AddressModel mj_objectWithKeyValues:self.dataSource[indexPath.section]];
+    
+    [cell fitDataWithModel:model];
+    
     if (indexPath.section == 0) {
         
         cell.seleteBtn.selected = YES;

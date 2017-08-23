@@ -9,6 +9,8 @@
 #import "CouponsViewController.h"
 #import "CouponsTableViewCell.h"
 #import "Masonry.h"
+#import "EliveApplication.h"
+#import "MJExtension.h"
 
 @interface CouponsViewController ()<UITableViewDelegate ,UITableViewDataSource>
 
@@ -26,6 +28,9 @@
     self.view.backgroundColor = UIColorFromRGBA(0xF7F7F7, 1.0);
     
     [self.view addSubview:self.mainTableView];
+    
+    [self sendRequestHttp];
+
     // Do any additional setup after loading the view.
 }
 
@@ -122,12 +127,40 @@
     
 }
 
+#pragma mark NetWorks
+
+- (void)sendRequestHttp{
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[kCurrentController] = self;
+    parameters[@"lUserId"] = [UserTools userId];
+    parameters[@"nMaxNum"] = @"10";
+    parameters[@"nPage"] = @"1";
+    
+    [OutsourceNetWork onHttpCode:kUserGetCouponsNetWork WithParameters:parameters];
+    
+}
+
+
+- (void)getMyCouponsData:(id)responseObj{
+    
+    if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
+        
+        self.dataSource = responseObj[@"result"][@"dataList"];
+        
+        [self.mainTableView reloadData];
+        NSLog(@"%@",responseObj);
+    }
+    
+}
+
+
 #pragma mark TableViewDelegate
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return 7;
+    return self.dataSource.count;
 }
 
 
@@ -141,9 +174,10 @@
         cell = [[CouponsTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID] ;
         
     }
-    cell.couponTitle.text = @"卓玛泉桶装水优惠券";
-    cell.couponTime.text = @"有效期至：2017-08-12";
-    cell.couponValue.text = @"40";
+    
+    CouponsModel *model = [CouponsModel mj_objectWithKeyValues:self.dataSource[indexPath.row]];
+    
+    [cell fitDataWithModel:model];
     
     return cell;
 }

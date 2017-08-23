@@ -115,6 +115,13 @@
 
 }
 
+
+/**
+ 新增地址
+
+ @param params 参数
+ @param result 回调函数
+ */
 - (void)requestAddUserAddressWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result{
 
     NSMutableDictionary *parameters = [NSMutableDictionary new];
@@ -140,6 +147,13 @@
 
 }
 
+
+/**
+ 获取区域
+
+ @param params 参数
+ @param result 回调函数
+ */
 - (void)requestGetAddressAreaWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result{
  
     [AFNetWorkManagerConfig GET:@"shop/allLocation" baseURL:URLHOST params:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -271,6 +285,88 @@
 
 }
 
+/**
+ 获取用户优惠券信息
+
+ @param params 参数
+ @param result 回调函数
+ */
+- (void)requestGetUserCoupons:(NSDictionary *)params result:(void (^)(id responseObject))result{
+
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[@"nPage"] = params[@"nPage"];
+    parameters[@"nMaxNum"] = params[@"nMaxNum"];
+    parameters[@"lUserId"] = params[@"lUserId"];
+ 
+    [AFNetWorkManagerConfig POST:@"coupon/list" baseURL:URLHOST params:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
+            
+            result(responseObject);
+        }else{
+            
+            NSLog(@"%@",responseObject);
+        }
+    } fail:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        NSLog(@"%@",error);
+        
+    }];
+    
+}
+
+- (void)requestGetTicketList:(NSDictionary *)params result:(void (^)(id responseObject))result{
+
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[@"nPage"] = params[@"nPage"];
+    parameters[@"nMaxNum"] = params[@"nMaxNum"];
+    
+    [AFNetWorkManagerConfig POST:@"ticket/list" baseURL:URLHOST params:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
+            
+            result(responseObject);
+        }else{
+            
+            NSLog(@"%@",responseObject);
+        }
+    } fail:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        NSLog(@"%@",error);
+        
+    }];
+    
+}
+
+/**
+ 获取用户水票列表
+
+ @param params 参数
+ @param result 回调函数
+ */
+- (void)requestUserGetTicketList:(NSDictionary *)params result:(void (^)(id responseObject))result{
+
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[@"nPage"] = params[@"nPage"];
+    parameters[@"nMaxNum"] = params[@"nMaxNum"];
+    parameters[@"lUserId"] = params[@"lUserId"];
+    
+    [AFNetWorkManagerConfig POST:@"ticket/myList" baseURL:URLHOST params:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
+            
+            result(responseObject);
+        }else{
+            
+            NSLog(@"%@",responseObject);
+        }
+    } fail:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        NSLog(@"%@",error);
+        
+    }];
+
+}
 
 
 @end

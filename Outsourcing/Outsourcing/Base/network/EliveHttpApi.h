@@ -39,5 +39,11 @@
 
 - (void)requestOrderDetailRequest:(NSDictionary *)params result:(void (^)(id responseObject))result;
 
+- (void)requestGetUserCoupons:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
+- (void)requestGetTicketList:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
+- (void)requestUserGetTicketList:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
 
 @end

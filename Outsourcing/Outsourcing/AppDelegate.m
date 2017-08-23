@@ -30,7 +30,7 @@
     
     [self.window makeKeyAndVisible];
 
-    [self checkLogin];
+//    [self checkLogin];
 
     return YES;
 }

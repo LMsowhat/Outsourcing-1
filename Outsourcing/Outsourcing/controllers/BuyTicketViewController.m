@@ -8,6 +8,9 @@
 
 #import "BuyTicketViewController.h"
 #import "Masonry.h"
+#import "EliveApplication.h"
+
+
 
 @interface BuyTicketViewController ()<UITableViewDelegate ,UITableViewDataSource>
 
@@ -51,6 +54,7 @@
     [self.view addSubview:self.mainTableView];
     
     [self.view addSubview:self.settlementBtn];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -136,6 +140,8 @@
 
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
 
 #pragma mark Setter && Getter
 
