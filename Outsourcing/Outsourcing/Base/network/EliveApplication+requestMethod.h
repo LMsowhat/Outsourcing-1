@@ -63,5 +63,8 @@
 //
 - (void)requestUserGetTicketList:(NSDictionary*)parm;
 
+//
+- (void)requestGetTicketDetail:(NSDictionary*)parm;
+
 
 @end

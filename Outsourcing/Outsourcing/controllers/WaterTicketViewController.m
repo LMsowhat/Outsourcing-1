@@ -8,10 +8,13 @@
 
 #import "WaterTicketViewController.h"
 #import "Masonry.h"
-#import "ProductionModel.h"
+#import "MJExtension.h"
+#import "EliveApplication.h"
+
 #import "TicketListTableViewCell.h"
 #import "BuyTicketViewController.h"
-#import "EliveApplication.h"
+#import "TicketModel.h"
+
 
 @interface WaterTicketViewController ()<UIScrollViewDelegate,UITableViewDelegate ,UITableViewDataSource>
 
@@ -197,9 +200,10 @@
 #pragma mark Click_Method
 
 - (void)buyBtnClick:(UIButton *)sender{
-
+    
     BuyTicketViewController *buyTicket = [BuyTicketViewController new];
-
+    buyTicket.ticketId = self.dataSource[sender.tag][@"lId"];
+    
     [self.navigationController pushViewController:buyTicket animated:YES];
 
 }
@@ -267,14 +271,14 @@
     
     [OutsourceNetWork onHttpCode:kProductionTicketListNetWork WithParameters:parameters];
     
-    //获取我的水票列表
-    NSMutableDictionary *m_parameters = [NSMutableDictionary new];
-    m_parameters[kCurrentController] = self;
-    m_parameters[@"lUserId"] = [UserTools userId];
-    m_parameters[@"nMaxNum"] = @"10";
-    m_parameters[@"nPage"] = @"1";
-    
-    [OutsourceNetWork onHttpCode:kUserGetTicketListNetWork WithParameters:m_parameters];
+//    //获取我的水票列表
+//    NSMutableDictionary *m_parameters = [NSMutableDictionary new];
+//    m_parameters[kCurrentController] = self;
+//    m_parameters[@"lUserId"] = [UserTools userId];
+//    m_parameters[@"nMaxNum"] = @"10";
+//    m_parameters[@"nPage"] = @"1";
+//    
+//    [OutsourceNetWork onHttpCode:kUserGetTicketListNetWork WithParameters:m_parameters];
     
 }
 
@@ -333,10 +337,10 @@
         
         return self.dataSource.count;
     }
-    if (tableView == self.myTicketTableView) {
-        
-        return self.m_dataSource.count;
-    }
+//    if (tableView == self.myTicketTableView) {
+//        
+//        return self.m_dataSource.count;
+//    }
     return 4;
 }
 
@@ -357,8 +361,11 @@
         [cell myTicketFitData:nil];
     }else{
     
-        [cell buyTicketFitData:nil];
-    
+        TicketModel *model = [TicketModel mj_objectWithKeyValues:self.dataSource[indexPath.row]];
+        
+        [cell buyTicketFitData:model];
+        
+        cell.buyBtn.tag = indexPath.row;
         [cell.buyBtn addTarget:self action:@selector(buyBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     

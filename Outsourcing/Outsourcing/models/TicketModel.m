@@ -16,3 +16,12 @@
 }
 
 @end
+
+
+@implementation ContentTicketModel
+
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    
+}
+
+@end

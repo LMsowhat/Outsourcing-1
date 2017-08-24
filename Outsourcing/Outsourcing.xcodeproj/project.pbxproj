@@ -42,6 +42,7 @@
 		8B9B85131F4BFFB0009AE5EE /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B9B85121F4BFFB0009AE5EE /* Launch Screen.storyboard */; };
 		8B9B85161F4C0468009AE5EE /* CouponsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B85151F4C0468009AE5EE /* CouponsModel.m */; };
 		8B9B85191F4C2AFE009AE5EE /* TicketModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B85181F4C2AFE009AE5EE /* TicketModel.m */; };
+		8B9B851D1F4D5C2B009AE5EE /* TicketContentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B851C1F4D5C2B009AE5EE /* TicketContentsCell.m */; };
 		8BB4E5D31F00B126006851CF /* OrderCreateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BB4E5D21F00B126006851CF /* OrderCreateController.m */; };
 		8BD193751F0F363B00A39605 /* HeaderCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD193741F0F363B00A39605 /* HeaderCycleScrollView.m */; };
 		8BE025C21F3862D800B63F5C /* naviBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE025BF1F3862D800B63F5C /* naviBack.png */; };
@@ -255,6 +256,8 @@
 		8B9B85151F4C0468009AE5EE /* CouponsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponsModel.m; sourceTree = "<group>"; };
 		8B9B85171F4C2AFE009AE5EE /* TicketModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketModel.h; sourceTree = "<group>"; };
 		8B9B85181F4C2AFE009AE5EE /* TicketModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketModel.m; sourceTree = "<group>"; };
+		8B9B851B1F4D5C2B009AE5EE /* TicketContentsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TicketContentsCell.h; sourceTree = "<group>"; };
+		8B9B851C1F4D5C2B009AE5EE /* TicketContentsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TicketContentsCell.m; sourceTree = "<group>"; };
 		8BB4E5D11F00B126006851CF /* OrderCreateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderCreateController.h; sourceTree = "<group>"; };
 		8BB4E5D21F00B126006851CF /* OrderCreateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCreateController.m; sourceTree = "<group>"; };
 		8BD193731F0F363B00A39605 /* HeaderCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCycleScrollView.h; sourceTree = "<group>"; };
@@ -896,6 +899,8 @@
 			children = (
 				8B2028871F13569E007F39AD /* TicketListTableViewCell.h */,
 				8B2028881F13569E007F39AD /* TicketListTableViewCell.m */,
+				8B9B851B1F4D5C2B009AE5EE /* TicketContentsCell.h */,
+				8B9B851C1F4D5C2B009AE5EE /* TicketContentsCell.m */,
 			);
 			name = Ticket;
 			sourceTree = "<group>";
@@ -1275,6 +1280,7 @@
 				8B20286E1F10CF7A007F39AD /* OrderModel.m in Sources */,
 				8B9B85191F4C2AFE009AE5EE /* TicketModel.m in Sources */,
 				8BFB15A91EF0CDD100725244 /* BaseViewController.m in Sources */,
+				8B9B851D1F4D5C2B009AE5EE /* TicketContentsCell.m in Sources */,
 				8B2028891F13569E007F39AD /* TicketListTableViewCell.m in Sources */,
 				8BB4E5D31F00B126006851CF /* OrderCreateController.m in Sources */,
 				8BFB15AC1EF0CDFA00725244 /* NavigationViewController.m in Sources */,

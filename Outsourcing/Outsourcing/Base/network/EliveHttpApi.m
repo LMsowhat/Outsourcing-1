@@ -338,6 +338,25 @@
     
 }
 
+- (void)requestGetTicketDetail:(NSDictionary *)params result:(void (^)(id responseObject))result{
+
+    [AFNetWorkManagerConfig GET:[NSString stringWithFormat:@"ticket/detail/%@",params[@"lTicketId"]] baseURL:URLHOST params:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
+            
+            result(responseObject);
+        }else{
+            
+            NSLog(@"%@",responseObject);
+        }
+    } fail:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        NSLog(@"%@",error);
+
+    }];
+}
+
+
 /**
  获取用户水票列表
 

@@ -10,5 +10,9 @@
 
 @interface BuyTicketViewController : BaseViewController
 
+@property (nonatomic,strong) NSString *        ticketId;
+
+- (void)getTicketDetail:(id)responseObj;
+
 
 @end

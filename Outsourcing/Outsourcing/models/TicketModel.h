@@ -21,7 +21,7 @@
 
 @property (nonatomic,strong) NSString *        nPrice;
 
-@property (nonatomic,strong) NSString *        strCouponName;
+@property (nonatomic,strong) NSString *        strGoodsName;
 
 @property (nonatomic,strong) NSString *        strGoodsimgurl;
 
@@ -29,6 +29,20 @@
 
 @property (nonatomic,strong) NSString *        ticketcontents;
 
+
+
+@end
+
+
+@interface ContentTicketModel : NSObject
+
+@property (nonatomic,strong) NSString *        lId;
+
+@property (nonatomic,strong) NSString *        nCount;
+
+@property (nonatomic,strong) NSString *        nPrice;
+
+@property (nonatomic,strong) NSString *        strRemarks;
 
 
 @end

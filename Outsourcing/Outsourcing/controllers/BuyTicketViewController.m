@@ -9,6 +9,11 @@
 #import "BuyTicketViewController.h"
 #import "Masonry.h"
 #import "EliveApplication.h"
+#import "MJExtension.h"
+#import "MBProgressHUDManager.h"
+
+#import "TicketModel.h"
+#import "TicketContentsCell.h"
 
 
 
@@ -18,6 +23,8 @@
 @property (nonatomic ,strong)NSMutableArray *dataSource;
 
 @property (nonatomic ,strong)UIButton *settlementBtn;
+
+@property (nonatomic ,strong)TicketModel *tModel;
 
 @end
 
@@ -44,13 +51,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIView *headerView = [self createHeaderView];
-    
-    UIView *footerView = [self createFooterView];
-    
-    self.mainTableView.tableHeaderView = headerView;
-    self.mainTableView.tableFooterView = footerView;
-    
+    [self sendHttpRequest];
+
     [self.view addSubview:self.mainTableView];
     
     [self.view addSubview:self.settlementBtn];
@@ -63,7 +65,7 @@
 - (UIView *)createHeaderView{
 
     UIView *header = [UIView new];
-    header.frame = CGRectMake(0, 0, kWidth, 126*kScale);
+    header.frame = CGRectMake(0, 0, kWidth, 131*kScale);
     header.backgroundColor = UIColorFromRGBA(0xF7F7F7, 1.0);
     
     UIImageView *productionIcon = [UIImageView new];
@@ -75,12 +77,12 @@
     UILabel *title = [UILabel new];
     title.font = kFont(7);
     title.textColor = UIColorFromRGBA(0x333338, 1.0);
-    title.text = @"依云桶装水 1箱";
+    title.text = self.tModel.strGoodsName;
     
     UILabel *price = [UILabel new];
     price.font = kFont(9);
     price.textColor = UIColorFromRGBA(0x333338, 1.0);
-    price.text = @"¥ 80";
+    price.text = [NSString stringWithFormat:@"￥%@",self.tModel.nPrice];
     price.textAlignment = NSTextAlignmentRight;
 
     [titleView addSubview:title];
@@ -126,11 +128,77 @@
 - (UIView *)createFooterView{
     
     UIView *footer = [UIView new];
+    footer.frame = CGRectMake(0, 0, kWidth, 60*kScale);
+
+    UILabel *preferential = [UILabel new];
+    preferential.font = kFont(7);
+    preferential.textColor = UIColorFromRGBA(0x002A20, 1.0);
     
+    NSString *testStr = @"优惠：-¥ 5";
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:testStr];
+    [str addAttributes:@{NSForegroundColorAttributeName:UIColorFromRGBA(0xFA6650, 1.0),NSFontAttributeName:kFont(7)} range:NSMakeRange(3,testStr.length - 3)];
+    preferential.attributedText = str;
     
+    UILabel *total = [UILabel new];
+    total.font = kFont(7);
+    total.textColor = UIColorFromRGBA(0x333338, 1.0);
+    
+    NSString *testStr1 = @"共：¥ 400";
+    NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:testStr1];
+    [str1 addAttributes:@{NSForegroundColorAttributeName:UIColorFromRGBA(0xFA6650, 1.0),NSFontAttributeName:kFont(9)} range:NSMakeRange(2,testStr1.length - 2)];
+    total.attributedText = str1;
+    
+    UIImageView *imageView = [UIImageView new];
+    imageView.image = [UIImage imageNamed:@"more"];
+    
+    [footer addSubview:preferential];
+    [footer addSubview:total];
+    [footer addSubview:imageView];
+    
+    [preferential makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.left.equalTo(footer).offset(10 *kScale);
+    }];
+
+    [imageView makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerY.equalTo(preferential);
+        
+        make.right.equalTo(footer).offset(-10 *kScale);
+    }];
+    
+    [total makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(preferential.mas_bottom).offset(10 *kScale);
+        
+        make.left.equalTo(footer).offset(10 *kScale);
+    }];
     
     return footer;
 }
+
+
+
+- (void)selectClik:(UIButton *)sender{
+
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
+    
+    TicketContentsCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
+    
+    sender.selected = !sender.selected;
+
+    if (sender.selected) {
+        
+        cell.cPrice.textColor = UIColorFromRGBA(0xFA6650, 1.0);
+    }else{
+
+        cell.cPrice.textColor = UIColorFromRGBA(0x333338, 1.0);
+    }
+
+}
+
+
+
 - (void)settlementClick{
     
     
@@ -141,6 +209,43 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+#pragma mark NetWorks
+
+- (void)sendHttpRequest{
+    
+    //获取水票详情
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[kCurrentController] = self;
+    parameters[@"lTicketId"] = self.ticketId;
+    
+    [OutsourceNetWork onHttpCode:kProductionDetailNetWork WithParameters:parameters];
+    
+    [MBProgressHUDManager showHUDAddedTo:self.view];
+}
+
+- (void)getTicketDetail:(id)responseObj{
+
+    if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
+        
+        [MBProgressHUDManager hideHUDForView:self.view];
+        
+        self.tModel = [TicketModel mj_objectWithKeyValues:responseObj[@"result"]];
+        
+        self.dataSource = responseObj[@"result"][@"ticketcontents"];
+        
+        UIView *headerView = [self createHeaderView];
+        
+        UIView *footerView = [self createFooterView];
+        
+        self.mainTableView.tableHeaderView = headerView;
+        self.mainTableView.tableFooterView = footerView;
+        
+        [self.mainTableView reloadData];
+        NSLog(@"%@",responseObj);
+    }
+    
+}
 
 
 #pragma mark Setter && Getter
@@ -192,20 +297,25 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return 3;
+    return self.dataSource.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *ID = @"UITableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    static NSString *ID = @"TicketDetailTableViewCell";
+    TicketContentsCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID] ;
+        cell = [[TicketContentsCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID] ;
         
     }
+    ContentTicketModel *model = [ContentTicketModel mj_objectWithKeyValues:self.dataSource[indexPath.row]];
     
+    [cell fitDataWithModel:model];
+    
+    cell.selectBtn.tag = indexPath.row;
+    [cell.selectBtn addTarget:self action:@selector(selectClik:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
 }

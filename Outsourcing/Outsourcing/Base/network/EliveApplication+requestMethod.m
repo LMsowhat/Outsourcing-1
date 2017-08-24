@@ -265,10 +265,30 @@
 
 }
 
+- (void)requestGetTicketDetail:(NSDictionary*)parm{
+    
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestGetTicketDetail:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[BuyTicketViewController class]]) {
+            
+            BuyTicketViewController *buyTicket = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [buyTicket getTicketDetail:responseObject];
+            }
+        }
+        
+    }];
+
+}
 
 
 - (void)requestUserGetTicketList:(NSDictionary*)parm{
-
     
     EliveHttpApi *api = [EliveHttpApi new];
     
@@ -289,7 +309,6 @@
     }];
 
 }
-
 
 
 @end

@@ -43,6 +43,8 @@
 
 - (void)requestGetTicketList:(NSDictionary *)params result:(void (^)(id responseObject))result;
 
+- (void)requestGetTicketDetail:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
 - (void)requestUserGetTicketList:(NSDictionary *)params result:(void (^)(id responseObject))result;
 
 

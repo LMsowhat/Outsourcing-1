@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ProductionModel.h"
+#import "TicketModel.h"
 
 @interface TicketListTableViewCell : UITableViewCell
 
@@ -31,9 +31,9 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 
 
-- (void)buyTicketFitData:(ProductionModel *)model;
+- (void)buyTicketFitData:(TicketModel *)model;
 
-- (void)myTicketFitData:(ProductionModel *)model;
+- (void)myTicketFitData:(TicketModel *)model;
 
 
 

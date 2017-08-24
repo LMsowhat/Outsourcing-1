@@ -114,7 +114,7 @@ static EliveApplication *elive;
         case kProductionDetailNetWork:
         {
             
-            [self requestProducitonDetail:parms];
+            [self requestGetTicketDetail:parms];
         }
             break;
         case kSubmitOrderNetWork:
@@ -147,7 +147,7 @@ static EliveApplication *elive;
         case kProductionTicketDetailNetWork:
         {
             
-            [self requestGetUserCoupons:parms];
+            [self requestGetTicketDetail:parms];
         }
             break;
             

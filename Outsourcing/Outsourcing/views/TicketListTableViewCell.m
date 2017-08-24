@@ -175,21 +175,21 @@
     return self;
 }
 
-- (void)buyTicketFitData:(ProductionModel *)model{
+- (void)buyTicketFitData:(TicketModel *)model{
 
     self.pIcon.image = [UIImage imageNamed:@"2.jpg"];
-    self.pName.text = @"卓玛泉桶装水1.8L 水票";
-    self.pSales.text = @"月销392";
-    self.pActivity.text = @"买20赠8";
-    self.pCurrent_Price.text = @"¥ 149";
-    self.pBefore_Prices.text = @"原价：288";
+    self.pName.text = model.strGoodsName;
+    self.pSales.text = [NSString stringWithFormat:@"月销%@",model.nMonthCount];
+    self.pActivity.text = model.strRemarks;
+    self.pCurrent_Price.text = [NSString stringWithFormat:@"￥%@",model.nPrice];
+    self.pBefore_Prices.text = [NSString stringWithFormat:@"原价：%@",model.nOldPrice];
     
     self.payTime.hidden = YES;
     self.tNumber.hidden = YES;
     
 }
 
-- (void)myTicketFitData:(ProductionModel *)model{
+- (void)myTicketFitData:(TicketModel *)model{
     
     self.pIcon.image = [UIImage imageNamed:@"2.jpg"];
     self.pName.text = @"卓玛泉桶装水1.8L 水票";
