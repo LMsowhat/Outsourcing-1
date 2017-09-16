@@ -140,6 +140,8 @@
 //  提交订单
 #define kSubmitOrderNetWork                             4000
 #define kOrderDetailNetWork                             4001
+#define kAddShopCartNetWork                             4002
+#define kUserOrderListNetWork                           4003
 
 
 

@@ -8,10 +8,9 @@
 
 #import "NavigationViewController.h"
 #import "HomeViewController.h"
-#import "OrdersViewController.h"
 #import "WaterTicketViewController.h"
 #import "MyViewController.h"
-
+#import "ShoppingCartController.h"
 
 
 
@@ -39,7 +38,7 @@
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
     
-    BOOL isFirstController = [viewController isKindOfClass:[HomeViewController class]] || [viewController isKindOfClass:[OrdersViewController class]] || [viewController isKindOfClass:[WaterTicketViewController class]] || [viewController isKindOfClass:[MyViewController class]];
+    BOOL isFirstController = [viewController isKindOfClass:[HomeViewController class]] || [viewController isKindOfClass:[ShoppingCartController class]] || [viewController isKindOfClass:[WaterTicketViewController class]] || [viewController isKindOfClass:[MyViewController class]];
    
     if (!isFirstController) {
         

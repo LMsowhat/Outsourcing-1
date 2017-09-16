@@ -41,11 +41,16 @@
         self.pSales.textColor = UIColorFromRGBA(0x8F9095, 1.0);
         self.pSales.textAlignment = NSTextAlignmentRight;
         
+        self.shoppingCart = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.shoppingCart setImage:[UIImage imageNamed:@"cart"] forState:UIControlStateNormal];
+        [self.shoppingCart setImage:[UIImage imageNamed:@"cart_selected"] forState:UIControlStateHighlighted];
+        
         [self addSubview:self.icon];
         [self addSubview:self.pName];
         [self addSubview:self.pStandard];
         [self addSubview:self.pPrice];
         [self addSubview:self.pSales];
+        [self addSubview:self.shoppingCart];
         
         [self.icon makeConstraints:^(MASConstraintMaker *make) {
             
@@ -83,6 +88,15 @@
             
         }];
         
+        [self.shoppingCart makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.size.equalTo(CGSizeMake(20 *kScale, 20 *kScale));
+            
+            make.centerY.equalTo(self.pName.mas_bottom);
+            
+            make.right.equalTo(self);
+        }];
+        
     }
 
     [self layoutIfNeeded];
@@ -92,7 +106,7 @@
 -(void)fitDataWith:(ProductionModel *)model{
    
     self.pName.text = model.strGoodsname;
-    self.pStandard.text = @"规格： 19L*1/桶";
+    self.pStandard.text = [NSString stringWithFormat:@"规格：%@",model.strStandard];
     self.pPrice.text = [NSString stringWithFormat:@"￥%.2f",[model.nPrice floatValue]];//
     self.pSales.text = [NSString stringWithFormat:@"已售%d",[model.nMothnumber intValue]];
     

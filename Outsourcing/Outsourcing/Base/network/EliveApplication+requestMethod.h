@@ -49,6 +49,9 @@
 - (void)requestGetOrderDetail:(NSDictionary*)parm;
 
 //
+- (void)requestGetUserOrderList:(NSDictionary*)parm;
+
+//
 - (void)requestGetUserCoupons:(NSDictionary*)parm;
 
 //
@@ -66,5 +69,7 @@
 //
 - (void)requestGetTicketDetail:(NSDictionary*)parm;
 
+//
+- (void)requestAddShopCartAction:(NSDictionary*)parm;
 
 @end

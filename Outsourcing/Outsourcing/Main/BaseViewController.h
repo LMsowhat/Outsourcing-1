@@ -10,4 +10,8 @@
 
 @interface BaseViewController : UIViewController
 
+@property (nonatomic ,assign)NSInteger currentPage;
+
+@property (nonatomic ,assign)NSInteger currentPage_another;
+
 @end

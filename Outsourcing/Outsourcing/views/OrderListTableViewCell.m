@@ -40,12 +40,7 @@
         self.createTime.font = kFont(5.5);
         self.createTime.textColor = UIColorFromRGBA(0x8F9095, 1.0);
         self.createTime.textAlignment = NSTextAlignmentCenter;
-        
-        self.sendTime = [UILabel new];
-        self.sendTime.font = kFont(5.5);
-        self.sendTime.textColor = UIColorFromRGBA(0x8F9095, 1.0);
-        self.sendTime.textAlignment = NSTextAlignmentCenter;
-        
+  
         self.line1 = [UIView new];
         self.line1.backgroundColor = UIColorFromRGBA(0xDDDDDD, 1.0);
         
@@ -109,7 +104,6 @@
         
         [self addSubview:self.bgView];
         [self.bgView addSubview:self.createTime];
-        [self.bgView addSubview:self.sendTime];
         [self.bgView addSubview:self.line1];
         [self.bgView addSubview:self.orderNum];
         [self.bgView addSubview:self.oStatus];
@@ -138,13 +132,7 @@
             make.top.equalTo(self.bgView).offset(10);
             
         }];
-        
-        [self.sendTime makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.centerX.equalTo(self.bgView).offset(kWidth/4);
-            make.top.equalTo(self.bgView).offset(10);
-        }];
-        
+
         [self.line1 makeConstraints:^(MASConstraintMaker *make) {
             
             make.size.equalTo(CGSizeMake(kWidth - 40, 1));
@@ -241,19 +229,28 @@
 
 
 - (void)fitDataWithModel:(OrderModel *)model{
-
+    //
     self.oIcon.image = [UIImage imageNamed:@"2.jpg"];
-    self.createTime.text = @"下单时间：20017-09-22 15：30";
-    self.sendTime.text = @"配送时间：20017-09-22 15：30";
-    self.orderNum.text = @"订单号：38223943284302";
+    //
+    NSString *timeString = [NSString stringWithFormat:@"下单时间：%@",[CommonTools getTimeFromString:model.dtCreatetime]];
+    self.createTime.text = timeString;
+    //
+    self.orderNum.text = [NSString stringWithFormat:@"订单号：%@",model.strOrdernum];
+    //
     self.oStatus.text = @"未支付";
-    self.oName.text = @"卓玛泉桶装水 1.8L";
-    self.oPrice.text = @"￥49";
-    self.bucketMoney.text = @"桶押金¥0.00";
-    self.oNum.text = @"x 1";
-    self.realMoney.text = @"实付款：¥ 49";
-    
+    //
+    self.oName.text = model.orderGoods.strGoodsname;
+    //
+    self.oPrice.text = [NSString stringWithFormat:@"￥%@",model.orderGoods.nPrice];
+    //
+    self.bucketMoney.text = [NSString stringWithFormat:@"桶押金¥%@",model.nBucketmoney];
+    //
+    self.oNum.text = [NSString stringWithFormat:@"x %@",model.orderGoods.nCount];
+    //
+    self.realMoney.text = [NSString stringWithFormat:@"实付款：¥ %@",model.nTotalprice];
+    //
     self.deleteOrderBtn.hidden = NO;
+    //
     self.toPayBtn.hidden = NO;
 }
 

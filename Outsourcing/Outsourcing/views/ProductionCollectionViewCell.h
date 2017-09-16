@@ -22,6 +22,8 @@
 
 @property (nonatomic,strong) UILabel *        pSales;
 
+@property (nonatomic,strong) UIButton *        shoppingCart;
+
 
 -(void)fitDataWith:(ProductionModel *)model;
 

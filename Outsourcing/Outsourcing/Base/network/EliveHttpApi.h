@@ -36,8 +36,12 @@
 - (void)requestProducitonDetailRequest:(NSDictionary *)params result:(void (^)(id responseObject))result;
 
 - (void)requestSubmitOrdersRequest:(NSDictionary *)params result:(void (^)(id responseObject))result;
-
+//
 - (void)requestOrderDetailRequest:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
+- (void)requestOrderPayDetailRequest:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
+- (void)requestUserOrderListRequest:(NSDictionary *)params result:(void (^)(id responseObject))result;
 
 - (void)requestGetUserCoupons:(NSDictionary *)params result:(void (^)(id responseObject))result;
 
@@ -46,6 +50,8 @@
 - (void)requestGetTicketDetail:(NSDictionary *)params result:(void (^)(id responseObject))result;
 
 - (void)requestUserGetTicketList:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
+- (void)requestUserAddShopCart:(NSDictionary *)params result:(void (^)(id responseObject))result;
 
 
 @end

@@ -79,6 +79,25 @@
     return userCoins;
 }
 
++ (void)setUserEmployees:(NSString *)employeeId{
+
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    [userDefault setObject:employeeId forKey:@"employeeId"];
+    
+    [userDefault synchronize];
+}
+
++(NSString *)userEmployeesId{
+
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    NSString *employeeId = [userDefault objectForKey:@"employeeId"];
+    return employeeId;
+}
+
+
+
 
 + (void)logOut{
     

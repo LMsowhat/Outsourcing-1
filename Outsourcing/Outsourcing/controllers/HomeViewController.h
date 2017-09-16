@@ -14,4 +14,6 @@
 
 - (void)productionListGetData:(id)responseObject;
 
+- (void)userAddShopCart:(id)responseObject;
+
 @end

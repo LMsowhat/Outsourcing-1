@@ -8,8 +8,17 @@
 
 #import "OrdersViewController.h"
 #import "Masonry.h"
-#import "OrderListTableViewCell.h"
+#import "EliveApplication.h"
+#import "MJExtension.h"
+#import "MJRefresh.h"
 
+#import "OrderListTableViewCell.h"
+#import "OrderModel.h"
+
+#import "OrderListCell.h"
+#import "OrderListHeaderView.h"
+#import "OrderListFooterView.h"
+#import "NoResultView.h"
 
 
 @interface OrdersViewController ()<UIScrollViewDelegate,UITableViewDelegate ,UITableViewDataSource>
@@ -31,6 +40,12 @@
 @property (nonatomic ,strong)NSMutableArray *finishedArr;
 @property (nonatomic ,strong)NSMutableArray *unfinishedArr;
 
+@property (nonatomic ,strong)NSMutableDictionary *parameters;
+
+@property (nonatomic ,strong)NoResultView *uView;
+
+@property (nonatomic ,strong)NoResultView *fView;
+
 
 @end
 
@@ -41,12 +56,29 @@
     [super viewWillAppear:animated];
 
     self.navigationItem.title = @"订单";
+    
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, 0, 22, 17);
+    [btn setImage:[UIImage imageNamed:@"naviBack"] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(foreAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    [self.navigationItem setLeftBarButtonItem:leftItem];
+    
+    [self sendHttpRequestForFinish:NO];
+
+    [self sendHttpRequestForFinish:YES];
+
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.currentPage = 1;
+    self.currentPage_another = 1;
     
     [self loadConfigUI];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -57,8 +89,24 @@
     [self.mainSrollView addSubview:self.unfinishedTableView];
     
     [self.mainSrollView addSubview:self.finishedTableView];
+
+    self.uView = [[NoResultView alloc] initWithFrame:CGRectMake(0, 0, kWidth, kHeight - kTopBarHeight - 40)];
+    self.uView.placeHolder.text = @"暂无订单数据";
+    self.uView.hidden = YES;
+    
+    self.fView = [[NoResultView alloc] initWithFrame:CGRectMake(kWidth, 0, kWidth, kHeight - kTopBarHeight - 40)];
+    self.fView.placeHolder.text = @"暂无订单数据";
+    self.fView.hidden = YES;
+    
+    [self.mainSrollView addSubview:self.uView];
+    [self.mainSrollView addSubview:self.fView];
+
     
     [self.view addSubview:self.mainSrollView];
+    
+    
+    
+    
 }
 
 -(UIView *)topTabView{
@@ -123,12 +171,28 @@
     
     if (!_finishedTableView) {
         
-        _finishedTableView = [[UITableView alloc] initWithFrame:CGRectMake(kWidth, 0, kWidth, kHeight - kTopBarHeight - 40 - kTabBarHeight) style:UITableViewStylePlain];
+        _finishedTableView = [[UITableView alloc] initWithFrame:CGRectMake(kWidth, 0, kWidth, kHeight - kTopBarHeight - 40) style:UITableViewStyleGrouped];
         
         _finishedTableView.delegate = self;
         _finishedTableView.dataSource = self;
         _finishedTableView.separatorColor = kClearColor;
         
+        _finishedTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            
+            self.currentPage_another = 1;
+            self.parameters[@"nPage"] = @"1";
+            [self sendHttpRequestForFinish:YES];
+        }];
+        
+        MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            
+            self.currentPage_another += 1;
+            self.parameters[@"nPage"] = [NSString stringWithFormat:@"%ld",self.currentPage_another];
+            [self sendHttpRequestForFinish:YES];
+        }];
+        [footer setTitle:@"已经全部加载完毕" forState:MJRefreshStateNoMoreData];
+        
+        _finishedTableView.mj_footer = footer;
     }
     
     return _finishedTableView;
@@ -138,11 +202,28 @@
 
     if (!_unfinishedTableView) {
         
-        _unfinishedTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWidth, kHeight - kTopBarHeight - 40 - kTabBarHeight) style:UITableViewStylePlain];
+        _unfinishedTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kWidth, kHeight - kTopBarHeight - 40) style:UITableViewStyleGrouped];
         
         _unfinishedTableView.delegate = self;
         _unfinishedTableView.dataSource = self;
         _unfinishedTableView.separatorColor = kClearColor;
+        
+        _unfinishedTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            
+            self.currentPage = 1;
+            self.parameters[@"nPage"] = @"1";
+            [self sendHttpRequestForFinish:NO];
+        }];
+        
+        MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            
+            self.currentPage += 1;
+            self.parameters[@"nPage"] = [NSString stringWithFormat:@"%ld",self.currentPage];
+            [self sendHttpRequestForFinish:NO];
+        }];
+        [footer setTitle:@"已经全部加载完毕" forState:MJRefreshStateNoMoreData];
+        
+        _unfinishedTableView.mj_footer = footer;
     }
 
     return _unfinishedTableView;
@@ -153,7 +234,7 @@
     
     if (!_mainSrollView) {
         
-        _mainSrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kTopBarHeight + 40, kWidth, kHeight - kTopBarHeight - 40 - kTabBarHeight)];
+        _mainSrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kTopBarHeight + 40, kWidth, kHeight - kTopBarHeight - 40)];
         _mainSrollView.delegate = self;
         _mainSrollView.contentSize = CGSizeMake(kWidth * 2, 0);
         _mainSrollView.pagingEnabled = YES;
@@ -165,6 +246,123 @@
     
     return _mainSrollView;
 }
+
+-(NSMutableDictionary *)parameters{
+
+    if (!_parameters) {
+        
+        _parameters = [NSMutableDictionary new];
+        _parameters[kCurrentController] = self;
+        _parameters[@"nPage"] = @"1";
+        _parameters[@"nMaxNum"] = @"4";
+        _parameters[@"lBuyerid"] = [UserTools userId];
+        _parameters[@"nState"] = @"0";
+    }
+
+    return _parameters;
+}
+
+#pragma mark NetWork && 处理数据
+
+- (void)sendHttpRequestForFinish:(BOOL)isFinish{
+
+    if (isFinish) {
+        
+        self.parameters[@"nState"] = @"3";
+        
+    }else{
+        
+        self.parameters[@"nState"] = @"0";
+    }
+    
+    if ([UserTools userEmployeesId]) {
+        
+        self.parameters[@"lDeliveryid"] = [UserTools userEmployeesId];
+    }
+
+    [OutsourceNetWork onHttpCode:kUserOrderListNetWork WithParameters:self.parameters];
+
+}
+
+
+
+
+- (void)getUserOrderList:(id)responseObj{
+
+    if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
+        
+        if (responseObj[@"result"][@"dataList"]) {
+            
+            NSArray *data = responseObj[@"result"][@"dataList"];
+            
+            if ([[data[0][@"nState"] stringValue] isEqualToString:@"0"]) {
+                
+                if (data.count < 4) {
+                    
+                    [self.unfinishedTableView.mj_footer endRefreshingWithNoMoreData];
+                }else{
+                    
+                    [self.unfinishedTableView.mj_footer endRefreshing];
+                }
+                [self.unfinishedTableView.mj_header endRefreshing];
+
+                if (self.currentPage == 1) {
+                    
+                    [self.unfinishedTableView.mj_header endRefreshing];
+
+                    self.unfinishedArr = [NSMutableArray arrayWithArray:data];
+                }else{
+                    
+                    for (NSDictionary *dict in data) {
+                        
+                        [self.unfinishedArr addObject:dict];
+                    }
+                }
+                self.uView.hidden = YES;
+
+                [self.unfinishedTableView reloadData];
+            }else{
+                
+                if (data.count < 4) {
+                    
+                    [self.finishedTableView.mj_footer endRefreshingWithNoMoreData];
+                }else{
+                    
+                    [self.finishedTableView.mj_footer endRefreshing];
+                }
+                if (self.currentPage_another == 1) {
+                    
+                    [self.finishedTableView.mj_header endRefreshing];
+
+                    self.finishedArr = [NSMutableArray arrayWithArray:data];
+                }else{
+                    
+                    for (NSDictionary *dict in data) {
+                        
+                        [self.finishedArr addObject:dict];
+                    }
+                }
+                
+                self.fView.hidden = YES;
+
+                [self.finishedTableView reloadData];
+            }
+        }
+    }
+    
+    if (!self.finishedArr.count || self.finishedArr.count == 0) {
+        
+        self.fView.hidden = NO;
+    }
+    if (!self.unfinishedArr.count || self.unfinishedArr.count == 0) {
+        
+        self.uView.hidden = NO;
+    }
+    
+}
+
+
+
 
 #pragma mark Click-Method
 
@@ -231,6 +429,11 @@
 
 }
 
+- (void)foreAction{
+
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
@@ -249,43 +452,105 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    
-    return 1;
+    if (tableView == self.unfinishedTableView) {
+        
+        return self.unfinishedArr.count;
+    }else {
+        
+        return self.finishedArr.count;
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (tableView == self.unfinishedTableView) {
+        
+        return [self.unfinishedArr[section][@"orderGoods"] count];
+    }else {
+        
+        return [self.finishedArr[section][@"orderGoods"] count];
+    }
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+
+    OrderListHeaderView *header = [[NSBundle mainBundle] loadNibNamed:@"OrderListHeaderView" owner:nil options:nil].lastObject;
     
-    return 4;
+    NSDictionary *dict = [NSDictionary dictionary];
+    
+    if (tableView == self.finishedTableView) {
+        
+        dict = self.finishedArr[section];
+    }
+    if (tableView == self.unfinishedTableView) {
+        
+        dict = self.unfinishedArr[section];
+    }
+    
+    OrderModel *model = [OrderModel mj_objectWithKeyValues:dict];
+    
+    [header fitDataWithModel:model];
+    
+    return header;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+
+    OrderListFooterView *footer = [[NSBundle mainBundle] loadNibNamed:@"OrderListFooterView" owner:nil options:nil].lastObject;
+    
+    NSDictionary *dict = [NSDictionary dictionary];
+    
+    if (tableView == self.finishedTableView) {
+        
+        dict = self.finishedArr[section];
+    }
+    if (tableView == self.unfinishedTableView) {
+        
+        dict = self.unfinishedArr[section];
+    }
+    
+    OrderModel *model = [OrderModel mj_objectWithKeyValues:dict];
+    
+    [footer fitDataWithModel:model];
+    
+    return footer;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+
+    return 60;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+
+    return 80;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *ID = @"UITableViewCell";
-    OrderListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    OrderListCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     
     if (cell == nil)
     {
-        cell = [[OrderListTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID] ;
+        cell = [[NSBundle mainBundle] loadNibNamed:@"OrderListCell" owner:nil options:nil].lastObject;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
     }
-    
-    [cell fitDataWithModel:nil];
+
+    NSDictionary *dict = [NSDictionary dictionary];
     
     if (tableView == self.finishedTableView) {
-        
-        cell.deleteOrderBtn.hidden = YES;
 
-        cell.toPayBtn.hidden = YES;
+        dict = self.finishedArr[indexPath.section][@"orderGoods"][indexPath.row];
     }
     if (tableView == self.unfinishedTableView) {
         
-        [cell.deleteOrderBtn addTarget:self action:@selector(deleteOrderBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [cell.toPayBtn addTarget:self action:@selector(toPayBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        dict = self.unfinishedArr[indexPath.section][@"orderGoods"][indexPath.row];
     }
-    
+    ProductionModel *model = [ProductionModel mj_objectWithKeyValues:dict];
+
+    [cell fitConfigWithModel:model];
     
     return cell;
 }
@@ -299,7 +564,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return 280;
+    return 50 *kScale;
 }
 
 

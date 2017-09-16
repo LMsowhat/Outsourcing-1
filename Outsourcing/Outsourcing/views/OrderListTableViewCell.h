@@ -15,7 +15,6 @@
 @property (nonatomic,strong) UIView *        bgView;
 
 @property (nonatomic,strong) UILabel *        createTime;//下单时间
-@property (nonatomic,strong) UILabel *        sendTime;//配送时间
 @property (nonatomic,strong) UIView *        line1;//上面横线
 @property (nonatomic,strong) UILabel *        orderNum;//订单号
 @property (nonatomic,strong) UILabel *        oStatus;//订单状态

@@ -351,7 +351,7 @@
     
     self.pTitle.text = self.pModel.strGoodsname;
     
-    self.specifications.text = @"规格：300ml＊12瓶";
+    self.specifications.text = [NSString stringWithFormat:@"规格：%@",self.pModel.strStandard];
     
     self.pSales.text = [NSString stringWithFormat:@"销量%@",self.pModel.nMothnumber];
     

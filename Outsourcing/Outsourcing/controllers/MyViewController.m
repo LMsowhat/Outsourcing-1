@@ -16,6 +16,7 @@
 #import "MyBarrelViewController.h"
 #import "MyTicketViewController.h"
 #import "MoreViewController.h"
+#import "OrdersViewController.h"
 
 @interface MyViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -27,7 +28,7 @@
 
 @property (nonatomic ,strong)UILabel *userPhone;
 
-
+@property (nonatomic ,strong)NSArray *childControllers;
 
 @end
 
@@ -38,7 +39,7 @@
     self.navigationItem.title = @"我的";
     
     self.view.backgroundColor = UIColorFromRGBA(0xF7F7F7, 1.0);
-    self.dataSource = [[NSMutableArray alloc] initWithObjects:@[@[@"icon_coupon",@"我的优惠券"],@[@"icon_invite",@"我要邀请"],@[@"icon_address",@"我的地址"]],@[@[@"icon_bucket",@"我的水桶"],@[@"icon_ticket",@"我的水票"],@[@"icon_more",@"更多"]], nil];
+    self.dataSource = [[NSMutableArray alloc] initWithObjects:@[@[@"icon_coupon",@"我的优惠券"],@[@"icon_myorder",@"我的订单"],@[@"icon_invite",@"我要邀请"],@[@"icon_address",@"我的地址"]],@[@[@"icon_bucket",@"我的水桶"],@[@"icon_ticket",@"我的水票"],@[@"icon_more",@"更多"]], nil];
     
     [self.view addSubview:self.mainTableView];
     // Do any additional setup after loading the view.
@@ -114,6 +115,28 @@
     return _userPhone;
 }
 
+-(NSArray *)childControllers{
+   
+    if (!_childControllers) {
+        //优惠券
+        CouponsViewController *coupon = [CouponsViewController new];
+        //订单
+        OrdersViewController *order = [OrdersViewController new];
+        //我的邀请
+        MyInvitationViewController *invitate = [MyInvitationViewController new];
+        //我的地址
+        AddressViewController *address = [AddressViewController new];
+        //我的水桶
+        MyBarrelViewController *barrel = [MyBarrelViewController new];
+        //我的水票
+        MyTicketViewController *ticket = [MyTicketViewController new];
+        //更多
+        MoreViewController *more = [MoreViewController new];
+
+        _childControllers = @[@[coupon,order,invitate,address],@[barrel,ticket,more]];
+    }
+    return _childControllers;
+}
 
 #pragma mark Private Method
 
@@ -197,33 +220,16 @@
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     
-    return 3;
+    return self.dataSource.count + 1;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    switch (section) {
-        case 0:
-            
-            return 1;
-            break;
-            
-        case 1:
-            
-            return 3;
-            break;
-            
-        case 2:
-            
-            return 3;
-            break;
-            
-        default:
-            
-            return 1;
-            break;
+    if (section == 0) {
+        
+        return 1;
     }
-    
+    return [self.dataSource[section -1] count];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -259,186 +265,39 @@
             }];
         }
             break;
-        case 1:
-            
-            switch (indexPath.row) {
-                case 0:
-                {
-                    UIView *cellView = [self createTableViewCell:self.dataSource[indexPath.section -1][indexPath.row][0] Text:self.dataSource[indexPath.section -1][indexPath.row][1]];
-                    
-                    [cell addSubview:cellView];
-                    [cellView makeConstraints:^(MASConstraintMaker *make) {
-                        
-                        make.size.equalTo(cell);
-                    }];
-                }
-                    break;
-                case 1:
-                {
-                    UIView *cellView = [self createTableViewCell:self.dataSource[indexPath.section -1][indexPath.row][0] Text:self.dataSource[indexPath.section -1][indexPath.row][1]];
-                    
-                    [cell addSubview:cellView];
-                    [cellView makeConstraints:^(MASConstraintMaker *make) {
-                        
-                        make.size.equalTo(cell);
-                    }];
-                }
-                    
-                    break;
-                    
-                case 2:
-                {
-                    UIView *cellView = [self createTableViewCell:self.dataSource[indexPath.section -1][indexPath.row][0] Text:self.dataSource[indexPath.section -1][indexPath.row][1]];
-                    
-                    [cell addSubview:cellView];
-                    [cellView makeConstraints:^(MASConstraintMaker *make) {
-                        
-                        make.size.equalTo(cell);
-                    }];
-                }
-                    
-                    break;
-                    
-                    
-                default:
-                    break;
-            }
-            
-            break;
-        case 2:
-            
-            switch (indexPath.row) {
-                case 0:
-                {
-                    UIView *cellView = [self createTableViewCell:self.dataSource[indexPath.section -1][indexPath.row][0] Text:self.dataSource[indexPath.section -1][indexPath.row][1]];
-                    
-                    [cell addSubview:cellView];
-                    [cellView makeConstraints:^(MASConstraintMaker *make) {
-                        
-                        make.size.equalTo(cell);
-                    }];
-                }
-                    break;
-                case 1:
-                {
-                    UIView *cellView = [self createTableViewCell:self.dataSource[indexPath.section -1][indexPath.row][0] Text:self.dataSource[indexPath.section -1][indexPath.row][1]];
-                    
-                    [cell addSubview:cellView];
-                    [cellView makeConstraints:^(MASConstraintMaker *make) {
-                        
-                        make.size.equalTo(cell);
-                    }];
-                }
-                    
-                    break;
-                    
-                case 2:
-                {
-                    UIView *cellView = [self createTableViewCell:self.dataSource[indexPath.section -1][indexPath.row][0] Text:self.dataSource[indexPath.section -1][indexPath.row][1]];
-                    
-                    [cell addSubview:cellView];
-                    [cellView makeConstraints:^(MASConstraintMaker *make) {
-                        
-                        make.size.equalTo(cell);
-                    }];
-                }
-                    break;
-                    
-                    
-                default:
-                    break;
-            }
-            
-            break;
             
         default:
+        {
+            [self configCell:cell withIndexPath:indexPath];
+        }
             break;
     }
     
     return cell;
 }
 
+- (void)configCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath{
+
+    UIView *cellView = [self createTableViewCell:self.dataSource[indexPath.section -1][indexPath.row][0] Text:self.dataSource[indexPath.section -1][indexPath.row][1]];
+    
+    [cell addSubview:cellView];
+    [cellView makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.size.equalTo(cell);
+    }];
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    switch (indexPath.section) {
-        case 0:
-            
-            
-            break;
-            
-        case 1:
-            
-            switch (indexPath.row) {
-                case 0:
-                {
-                    CouponsViewController *coupon = [CouponsViewController new];
-                
-                    [self.navigationController pushViewController:coupon animated:YES];
-                }
-                    break;
-                    
-                case 1:
-                {
-                    MyInvitationViewController *invitate = [MyInvitationViewController new];
-                    
-                    [self.navigationController pushViewController:invitate animated:YES];
-                }
-                    break;
-                    
-                case 2:
-                {
-                    AddressViewController *address = [AddressViewController new];
-                    
-                    [self.navigationController pushViewController:address animated:YES];
-                }
-                    break;
-                    
-                default:
-                    break;
-            }
-            
-            break;
-            
-        case 2:
-            
-            switch (indexPath.row) {
-                case 0:
-                {
-                    MyBarrelViewController *barrel = [MyBarrelViewController new];
-                    
-                    [self.navigationController pushViewController:barrel animated:YES];
-                }
-                    break;
-                    
-                case 1:
-                {
-                    MyTicketViewController *ticket = [MyTicketViewController new];
-                    
-                    [self.navigationController pushViewController:ticket animated:YES];
-                }
-                    break;
-                    
-                case 2:
-                {
-                    MoreViewController *more = [MoreViewController new];
-                    
-                    [self.navigationController pushViewController:more animated:YES];
-                }
-                    break;
-                    
-                default:
-                    break;
-            }
-            
-            break;
-            
-        default:
-            break;
+    if (indexPath.section != 0) {
+        
+        UIViewController *detail = self.childControllers[indexPath.section - 1][indexPath.row];
+        
+        [self.navigationController pushViewController:detail animated:YES];
     }
-    
-    
+  
     
 }
 

@@ -20,6 +20,8 @@
 #import "CouponsViewController.h"
 #import "BuyTicketViewController.h"
 #import "WaterTicketViewController.h"
+#import "OrdersViewController.h"
+
 
 
 @implementation EliveApplication (requestMethod)
@@ -221,6 +223,25 @@
 
 }
 
+- (void)requestGetUserOrderList:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+
+    [api requestUserOrderListRequest:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[OrdersViewController class]]) {
+            
+            OrdersViewController *orderList = [parm objectForKey:kCurrentController];
+            
+            [orderList getUserOrderList:responseObject];
+            
+        }
+    }];
+
+}
+
 - (void)requestGetUserCoupons:(NSDictionary*)parm{
 
     EliveHttpApi *api = [EliveHttpApi new];
@@ -303,6 +324,28 @@
             if (responseObject) {
                 
                 [ticket getUserTicketList:responseObject];
+            }
+        }
+        
+    }];
+
+}
+
+- (void)requestAddShopCartAction:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestUserAddShopCart:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[HomeViewController class]]) {
+            
+            HomeViewController *home = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [home userAddShopCart:responseObject];
             }
         }
         

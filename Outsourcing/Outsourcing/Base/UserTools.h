@@ -27,6 +27,10 @@
 + (void)setUserCoins:(NSString *)coins;
 +(NSString *)userCoins;
 
+//userCoins
++ (void)setUserEmployees:(NSString *)employeeId;
++(NSString *)userEmployeesId;
+
 
 + (void)logOut;
 

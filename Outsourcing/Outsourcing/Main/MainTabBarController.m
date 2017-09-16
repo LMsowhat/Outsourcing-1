@@ -11,11 +11,10 @@
 #import "NavigationViewController.h"
 
 #import "HomeViewController.h"
-#import "OrdersViewController.h"
 #import "WaterTicketViewController.h"
 #import "MyViewController.h"
 #import "LoginViewController.h"
-
+#import "ShoppingCartController.h"
 
 @interface MainTabBarController ()<UITabBarControllerDelegate>
 
@@ -37,10 +36,10 @@
     home.tabBarItem = [[UITabBarItem  alloc] initWithTitle:@"首页" image:[[UIImage imageNamed:@"home"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"home_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [home.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:UIColorFromRGBA(0xFA6650, 1.0),NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
     
-    OrdersViewController *order = [OrdersViewController new];
-    NavigationViewController *navi2 = [[NavigationViewController alloc] initWithRootViewController:order];
-    order.tabBarItem = [[UITabBarItem  alloc] initWithTitle:@"订单" image:[[UIImage imageNamed:@"order"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"order_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [order.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:UIColorFromRGBA(0xFA6650, 1.0),NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+    ShoppingCartController *shoppingCart = [ShoppingCartController new];
+    NavigationViewController *navi2 = [[NavigationViewController alloc] initWithRootViewController:shoppingCart];
+    shoppingCart.tabBarItem = [[UITabBarItem  alloc] initWithTitle:@"购物车" image:[[UIImage imageNamed:@"order"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"order_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [shoppingCart.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:UIColorFromRGBA(0xFA6650, 1.0),NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
 
     
     WaterTicketViewController *water = [WaterTicketViewController new];

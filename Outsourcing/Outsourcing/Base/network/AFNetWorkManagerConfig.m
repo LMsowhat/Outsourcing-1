@@ -60,7 +60,7 @@
 
     AFHTTPSessionManager *manager = [AFNetWorkManagerConfig managerWithBaseURL:baseUrl sessionConfiguration:NO];
 
-    BOOL jsonStr = [url containsString:@"order/add"] || [url containsString:@"address/add"];
+    BOOL jsonStr = [url containsString:@"order/add"] || [url containsString:@"address/add"] || [url containsString:@"shopping/add"];
     
     if (jsonStr) {
         

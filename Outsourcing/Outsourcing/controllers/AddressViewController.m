@@ -42,6 +42,7 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     [self.navigationItem setLeftBarButtonItem:leftItem];
     
+    [self sendHttpRequest];
 }
 
 - (void)viewDidLoad {
@@ -49,7 +50,6 @@
     self.view.backgroundColor = UIColorFromRGBA(0xF7F7F7, 1.0);
     
     [self loadConfigUI];
-    [self sendHttpRequest];
     // Do any additional setup after loading the view.
 }
 
@@ -116,8 +116,22 @@
     parameters[@"nPage"] = @"1";
     
     [OutsourceNetWork onHttpCode:kUserAddressNetWork WithParameters:parameters];
-  
 }
+
+- (void)setupDefaultAddress:(NSInteger)index{
+
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[kCurrentController] = self;
+    parameters[@"lUserId"] = [UserTools userId];
+    parameters[@"nMaxNum"] = @"10";
+    parameters[@"nPage"] = @"1";
+    
+    [OutsourceNetWork onHttpCode:kUserAddressNetWork WithParameters:parameters];
+}
+
+
+
+
 
 
 - (void)getMyAddressList:(id)responseObj{
@@ -128,9 +142,6 @@
         self.dataSource = responseObj[@"result"][@"dataList"];
         
         [self.mainTableView reloadData];
-    }else{
-    
-    
     }
     
     NSLog(@"%@",responseObj);

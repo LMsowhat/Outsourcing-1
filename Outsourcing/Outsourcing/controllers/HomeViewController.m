@@ -15,7 +15,7 @@
 #import "ProductionModel.h"
 #import "HeaderCycleScrollView.h"
 #import "ProductionDetailViewController.h"
-
+#import "MBProgressHUDManager.h"
 
 #define headerHeight 180
 @interface HomeViewController ()
@@ -168,6 +168,9 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
     //重用cell
     ProductionCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kcellIdentifier forIndexPath:indexPath];
     
+    cell.shoppingCart.tag = indexPath.row;
+    [cell.shoppingCart addTarget:self action:@selector(addShopCart:) forControlEvents:UIControlEventTouchUpInside];
+    
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:self.dataSource[indexPath.row]];
     
     ProductionModel *model = [ProductionModel mj_objectWithKeyValues:dict];
@@ -177,6 +180,32 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
     return cell;
     
 }
+
+- (void)addShopCart:(UIButton *)sender{
+
+    NSDictionary *dic = self.dataSource[sender.tag];
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[kCurrentController] = self;
+    parameters[@"strUserName"] = @"李文华";
+    parameters[@"lUserId"] = [UserTools userId];
+    parameters[@"nPrice"] = dic[@"nPrice"];
+    parameters[@"lGoodsId"] = dic[@"lId"];
+    parameters[@"strGoodsname"] = dic[@"strGoodsname"];
+    parameters[@"strGoodsimgurl"] = dic[@"strGoodsimgurl"];
+    parameters[@"strStandard"] = dic[@"strStandard"];
+
+    [OutsourceNetWork onHttpCode:kAddShopCartNetWork WithParameters:parameters];
+}
+
+- (void)userAddShopCart:(id)responseObject{
+
+    if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
+        
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:@"添加购物车成功" afterDelay:1.0f];
+    }
+
+}
+
 
 // The view that is returned must be retrieved from a call to -dequeueReusableSupplementaryViewOfKind:withReuseIdentifier:forIndexPath:
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{

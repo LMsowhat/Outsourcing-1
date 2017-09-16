@@ -100,11 +100,7 @@
 
 - (void)fitDataWithModel:(CouponsModel *)model{
 
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    NSTimeInterval interval    = [model.dExpire doubleValue] / 1000.0;
-    NSDate *date               = [NSDate dateWithTimeIntervalSince1970:interval];
-    NSString *dateString       = [formatter stringFromDate: date];
+    NSString *dateString = [CommonTools getTimeFromString:model.dExpire];
     
     self.couponTime.text = [NSString stringWithFormat:@"有效期至：%@",dateString];
 

@@ -264,11 +264,34 @@
 
 /**
  获取订单详情
-
+ 
  @param params 参数
  @param result 回调函数
  */
 - (void)requestOrderDetailRequest:(NSDictionary *)params result:(void (^)(id responseObject))result{
+    
+    NSString *url = [NSString stringWithFormat:@"order/detail/%@",params[@"lOrderId"]];
+    [AFNetWorkManagerConfig GET:url baseURL:URLHOST params:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
+            
+            result(responseObject);
+        }
+    } fail:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        NSLog(@"%@",error);
+    }];
+    
+    
+}
+
+/**
+ 获取订单支付详情
+
+ @param params 参数
+ @param result 回调函数
+ */
+- (void)requestOrderPayDetailRequest:(NSDictionary *)params result:(void (^)(id responseObject))result{
 
     NSString *url = [NSString stringWithFormat:@"order/payDetail/%@",params[@"lOrderId"]];
     [AFNetWorkManagerConfig GET:url baseURL:URLHOST params:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -284,6 +307,41 @@
 
 
 }
+
+/**
+ 获取我的订单列表
+
+ @param params 参数
+ @param result 回调函数
+ */
+- (void)requestUserOrderListRequest:(NSDictionary *)params result:(void (^)(id responseObject))result{
+
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[@"nPage"] = params[@"nPage"];
+    parameters[@"nMaxNum"] = params[@"nMaxNum"];
+    parameters[@"lBuyerid"] = params[@"lBuyerid"];
+    parameters[@"nState"] = params[@"nState"];
+    parameters[@"lDeliveryid"] = params[@"lDeliveryid"];
+    
+    [AFNetWorkManagerConfig POST:@"order/list" baseURL:URLHOST params:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        result(responseObject);
+
+//        if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
+//            
+//            result(responseObject);
+//        }else{
+//            
+//            NSLog(@"%@",responseObject);
+//        }
+    } fail:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        NSLog(@"%@",error);
+        
+    }];
+    
+}
+
 
 /**
  获取用户优惠券信息
@@ -340,7 +398,7 @@
 
 - (void)requestGetTicketDetail:(NSDictionary *)params result:(void (^)(id responseObject))result{
 
-    [AFNetWorkManagerConfig GET:[NSString stringWithFormat:@"ticket/detail/%@",params[@"lTicketId"]] baseURL:URLHOST params:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    [AFNetWorkManagerConfig GET:[NSString stringWithFormat:@"ticket/detail/%@",params[@"goodsLid"]] baseURL:URLHOST params:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
             
@@ -385,6 +443,39 @@
         
     }];
 
+}
+
+/**
+ 添加购物车
+
+ @param params 参数
+ @param result 回调函数
+ */
+- (void)requestUserAddShopCart:(NSDictionary *)params result:(void (^)(id responseObject))result{
+
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[@"strUserName"] = params[@"strUserName"];
+    parameters[@"lUserId"] = params[@"lUserId"];
+    parameters[@"nPrice"] = params[@"nPrice"];
+    parameters[@"lGoodsId"] = params[@"lGoodsId"];
+    parameters[@"strGoodsname"] = params[@"strGoodsname"];
+    parameters[@"strGoodsimgurl"] = params[@"strGoodsimgurl"];
+    parameters[@"strStandard"] = params[@"strStandard"];
+
+    [AFNetWorkManagerConfig POST:@"shopping/add" baseURL:URLHOST params:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+        if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
+            
+            result(responseObject);
+        }else{
+            
+            NSLog(@"%@",responseObject);
+        }
+    } fail:^(NSURLSessionDataTask *task, NSError *error) {
+        
+        NSLog(@"%@",error);
+        
+    }];
 }
 
 

@@ -10,4 +10,7 @@
 
 @interface OrdersViewController : BaseViewController
 
+- (void)getUserOrderList:(id)responseObj;
+
+
 @end

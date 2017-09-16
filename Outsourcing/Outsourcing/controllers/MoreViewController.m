@@ -80,7 +80,7 @@
 
     if (!_dataSource) {
         
-        _dataSource = @[@"意见反馈",@"服务条款",@"关于我们",@"找回密码"];
+        _dataSource = @[@"意见反馈",@"服务条款",@"关于我们",@"修改密码"];
         
     }
     return _dataSource;
