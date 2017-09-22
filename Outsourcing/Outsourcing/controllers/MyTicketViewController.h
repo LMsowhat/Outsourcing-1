@@ -11,4 +11,6 @@
 @interface MyTicketViewController : BaseViewController
 
 
+- (void)getMyTicket:(id)responseObject;
+
 @end

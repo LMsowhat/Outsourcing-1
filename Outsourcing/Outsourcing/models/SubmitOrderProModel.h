@@ -18,6 +18,7 @@
 @property (nonatomic,strong) NSString *        nCount;
 @property (nonatomic,strong) NSString *        nGoodsFactPrice;
 @property (nonatomic,strong) NSString *        nGoodsTotalPrice;
+@property (nonatomic,strong) NSString *        nPrice;
 @property (nonatomic,strong) NSString *        nWatertickets;
 
 

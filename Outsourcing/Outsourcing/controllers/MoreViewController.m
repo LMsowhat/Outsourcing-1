@@ -9,12 +9,19 @@
 #import "MoreViewController.h"
 #import "Masonry.h"
 
+#import "FeedbackViewController.h"
+#import "ServerViewController.h"
+#import "AboutUsViewController.h"
+#import "RetrieveViewController.h"
+
 
 @interface MoreViewController ()<UITableViewDelegate ,UITableViewDataSource>
 
 @property (nonatomic ,strong)UITableView *mainTableView;
 
 @property (nonatomic ,strong)NSArray *dataSource;
+
+@property (nonatomic ,strong)NSArray *subViewControllers;
 
 
 @end
@@ -86,12 +93,29 @@
     return _dataSource;
 }
 
+-(NSArray *)subViewControllers{
+
+    if (!_subViewControllers) {
+        
+        FeedbackViewController *feedback = [FeedbackViewController new];
+        ServerViewController *server = [ServerViewController new];
+        AboutUsViewController *about = [AboutUsViewController new];
+        RetrieveViewController *retrieve = [RetrieveViewController new];
+        
+        _subViewControllers = [NSArray arrayWithObjects:feedback,server,about,retrieve, nil];
+    }
+
+    return _subViewControllers;
+}
+
+
 #pragma  mark Tatget
 
 - (void)logoutClick{
-
-
-
+    
+    [UserTools logOut];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NEEDLOGIN object:nil];
 
 }
 
@@ -160,6 +184,8 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    [self gotoViewControllers:indexPath.row];
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -167,6 +193,16 @@
     
     return 27 *kScale;
 }
+
+- (void)gotoViewControllers:(NSInteger)index{
+
+    UIViewController *controller = self.subViewControllers[index];
+
+    [self.navigationController pushViewController:controller animated:YES];
+
+}
+
+
 
 
 @end

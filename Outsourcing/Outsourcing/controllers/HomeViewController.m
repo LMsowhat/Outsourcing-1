@@ -10,6 +10,7 @@
 #import "SDCycleScrollView.h"
 #import "EliveApplication.h"
 #import "MJExtension.h"
+#import "MJRefresh.h"
 
 #import "ProductionCollectionViewCell.h"
 #import "ProductionModel.h"
@@ -30,6 +31,8 @@ UIGestureRecognizerDelegate
 @property (nonatomic ,strong)UICollectionView *mainCollection;
 @property (nonatomic ,strong)NSMutableArray *dataSource;
 @property (nonatomic ,strong)SDCycleScrollView *headerSDCycle;
+@property (nonatomic ,strong)NSMutableArray *cycSource;
+
 
 @end
 
@@ -64,10 +67,12 @@ UIGestureRecognizerDelegate
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     
     parameters[kCurrentController] = self;
-    parameters[@"nPage"] = @"1";
+    parameters[@"nPage"] = [NSString stringWithFormat:@"%ld",self.currentPage ? self.currentPage : 1];
     parameters[@"nMaxNum"] = @"6";
     
     [OutsourceNetWork onHttpCode:kHomePageProductionListNetWork WithParameters:parameters];
+    
+    [OutsourceNetWork onHttpCode:kHomePageCirclesNetWork WithParameters:parameters];
     
 }
 #pragma mark - Setter & Getter
@@ -85,8 +90,23 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
         _mainCollection.backgroundColor = kWhiteColor;
         _mainCollection.delegate = self;
         _mainCollection.dataSource = self;
-        _mainCollection.showsVerticalScrollIndicator = NO;
+//        _mainCollection.showsVerticalScrollIndicator = NO;
         _mainCollection.showsHorizontalScrollIndicator = NO;
+        
+        _mainCollection.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            
+            self.currentPage = 1;
+            [self sendHttpRequest];
+        }];
+        
+        MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            
+            self.currentPage += 1;
+            [self sendHttpRequest];
+        }];
+        [footer setTitle:@"已经全部加载完毕" forState:MJRefreshStateNoMoreData];
+        
+        _mainCollection.mj_footer = footer;
         
         //注册Cell
         [_mainCollection registerClass:[ProductionCollectionViewCell class] forCellWithReuseIdentifier:kcellIdentifier];
@@ -102,34 +122,80 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
 
     if (!_headerSDCycle) {
         
-        _headerSDCycle = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kWidth, headerHeight) imageNamesGroup:@[@"3.jpg",@"4.jpg",@"5.jpg"]];
+        _headerSDCycle = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kWidth, headerHeight) delegate:self placeholderImage:[UIImage imageNamed:@"3.jpg"]];
         _headerSDCycle.delegate = self;
         _headerSDCycle.autoScrollTimeInterval = 2;
         _headerSDCycle.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
-        
 
     }
     return _headerSDCycle;
+}
+
+-(NSMutableArray *)dataSource{
+    
+    if (!_dataSource) {
+        
+        _dataSource = [NSMutableArray new];
+    }
+    return _dataSource;
 }
 
 #pragma mark - NetWork Responses
 
 - (void)circlesGetData:(id)responseObject{
 
-
+    NSLog(@"%@",responseObject);
+    
+    if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
+        
+        if (!self.cycSource) {
+            
+            self.cycSource = [NSMutableArray new];
+        }
+        for (NSDictionary *dict in responseObject[@"result"][@"dataList"]) {
+            
+            if (dict[@"lId"]) {
+                
+                NSString *imageUrl = [NSString stringWithFormat:@"%@/common/getImg/1/%@",URLHOST,dict[@"lId"]];
+                [self.cycSource addObject:imageUrl];
+            }
+        }
+        if (self.cycSource.count > 0) {
+            
+            self.headerSDCycle.imageURLStringsGroup = self.cycSource;
+            [self.mainCollection reloadData];
+        }
+    }
 }
 
 - (void)productionListGetData:(id)responseObject{
 
-    self.dataSource = [NSMutableArray arrayWithArray:responseObject];
+    [self.mainCollection.mj_header endRefreshing];
+    [self.mainCollection.mj_footer endRefreshing];
+    //responseObject[@"result"][@"dataList"]
+    if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
+        
+        if ([responseObject[@"result"][@"dataList"] count] < 6) {
+            
+            [self.mainCollection.mj_footer endRefreshingWithNoMoreData];
+        }
+        if (!self.currentPage || self.currentPage == 1) {
+            
+            self.dataSource = [NSMutableArray arrayWithArray:responseObject[@"result"][@"dataList"]];
+        }else{
+        
+            for (NSDictionary *temp in responseObject[@"result"][@"dataList"]) {
+                
+                [self.dataSource addObject:temp];
+            }
+        }
+    }
     
     [self.mainCollection reloadData];
     NSLog(@"%@",responseObject);
 
 }
 
-
-#pragma mark - Target Mehtods
 
 #pragma mark - UICollectionView Delegate &Datasource
 /** 点击图片回调 */
@@ -145,7 +211,6 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
     //    NSLog(@"index has rolled-----%ld",(long)index);
     
 }
-
 
 
 #pragma mark- CollectionViewDelegate

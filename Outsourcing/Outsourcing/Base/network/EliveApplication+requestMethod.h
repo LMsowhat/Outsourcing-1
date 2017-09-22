@@ -31,6 +31,15 @@
 - (void)requestAddNewAddress:(NSDictionary*)parm;
 
 //
+- (void)requestSetDefultAddress:(NSDictionary*)parm;
+
+//
+- (void)requestDeleteTheAddress:(NSDictionary*)parm;
+
+//
+- (void)requestSetupAddress:(NSDictionary*)parm;
+
+//
 - (void)requestGetAddressArea:(NSDictionary*)parm;
 
 //
@@ -49,7 +58,13 @@
 - (void)requestGetOrderDetail:(NSDictionary*)parm;
 
 //
+- (void)requestGetPayOrderDetail:(NSDictionary*)parm;
+
+//
 - (void)requestGetUserOrderList:(NSDictionary*)parm;
+
+//
+- (void)requestGoOrderClearingDetail:(NSDictionary*)parm;
 
 //
 - (void)requestGetUserCoupons:(NSDictionary*)parm;
@@ -58,7 +73,7 @@
 - (void)requestGetTicketList:(NSDictionary*)parm;
 
 //
-//- (void)requestGetUserCoupons:(NSDictionary*)parm;
+- (void)requestPayForTicket:(NSDictionary*)parm;
 
 //
 //- (void)requestGetUserCoupons:(NSDictionary*)parm;
@@ -71,5 +86,12 @@
 
 //
 - (void)requestAddShopCartAction:(NSDictionary*)parm;
+
+//
+- (void)requestAddUserFeedbackAction:(NSDictionary*)parm;
+
+//
+- (void)requestSettingGetMoreAction:(NSDictionary*)parm;
+
 
 @end

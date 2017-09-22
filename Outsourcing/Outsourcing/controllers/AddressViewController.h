@@ -10,6 +10,17 @@
 
 @interface AddressViewController : BaseViewController
 
+@property (nonatomic,assign) BOOL          isSelectedAddress;
+
+@property (nonatomic,copy) void(^passAddress)(NSDictionary *);
+
+
 - (void)getMyAddressList:(id)responseObj;
+
+- (void)resultOfSetDefault:(id)responseObj;
+
+- (void)resultOfDeleteAddress:(id)responseObj;
+
+
 
 @end

@@ -10,10 +10,12 @@
 
 @interface NewAddressViewController : BaseViewController
 
+@property (nonatomic,strong) NSDictionary *        addressDict;
 
 - (void)getAddressArea:(id)responseObj;
 
 - (void)addNewAddressResult:(id)responseObj;
 
+- (void)setupAddressResult:(id)responseObj;
 
 @end

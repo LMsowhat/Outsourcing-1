@@ -55,7 +55,7 @@
 
     [super viewWillAppear:animated];
 
-    self.navigationItem.title = @"订单";
+    self.navigationItem.title = @"我的订单";
     
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -208,7 +208,7 @@
         _unfinishedTableView.dataSource = self;
         _unfinishedTableView.separatorColor = kClearColor;
         
-        _unfinishedTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _unfinishedTableView.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
             
             self.currentPage = 1;
             self.parameters[@"nPage"] = @"1";
@@ -265,7 +265,7 @@
 #pragma mark NetWork && 处理数据
 
 - (void)sendHttpRequestForFinish:(BOOL)isFinish{
-
+    
     if (isFinish) {
         
         self.parameters[@"nState"] = @"3";
@@ -285,8 +285,6 @@
 }
 
 
-
-
 - (void)getUserOrderList:(id)responseObj{
 
     if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
@@ -295,7 +293,7 @@
             
             NSArray *data = responseObj[@"result"][@"dataList"];
             
-            if ([[data[0][@"nState"] stringValue] isEqualToString:@"0"]) {
+            if (data.count>0 && [[data[0][@"nState"] stringValue] isEqualToString:@"0"]) {
                 
                 if (data.count < 4) {
                     
@@ -366,14 +364,12 @@
 
 #pragma mark Click-Method
 
-- (void)deleteOrderBtnClick:(UIButton *)sender{
-
+- (void)deleteButtonClick:(UIButton *)sender{
 
 
 }
 
-- (void)toPayBtnClick:(UIButton *)sender{
-    
+- (void)payButtonClick:(UIButton *)sender{
     
     
 }
@@ -386,13 +382,15 @@
 
     if (CGRectContainsPoint(CGRectMake(0, kTopBarHeight, kWidth/2, 40), point))
     {
-        [self checkOutLabelWith:0];
+        [self.unfinishedTableView.mj_header beginRefreshing];
+        [self checkOutLabelWith:0];//未完成
         
         self.mainSrollView.contentOffset = CGPointMake(0, 0);
         
     }else{
-    
-        [self checkOutLabelWith:1];
+        
+        [self .finishedTableView.mj_header beginRefreshing];
+        [self checkOutLabelWith:1];//已完成
         
         self.mainSrollView.contentOffset = CGPointMake(kWidth, 0);
 
@@ -507,6 +505,11 @@
     if (tableView == self.unfinishedTableView) {
         
         dict = self.unfinishedArr[section];
+        footer.deleteButton.tag = section;
+        footer.payButton.tag = section;
+        [footer.deleteButton addTarget:self action:@selector(deleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [footer.payButton addTarget:self action:@selector(payButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        
     }
     
     OrderModel *model = [OrderModel mj_objectWithKeyValues:dict];

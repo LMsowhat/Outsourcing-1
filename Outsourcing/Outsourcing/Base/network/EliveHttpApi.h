@@ -28,8 +28,15 @@
 //
 - (void)requestAddUserAddressWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result;
 //
+- (void)requestSetDefultAddressWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result;
+//
+- (void)requestDeleteAddressWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result;
+//
+- (void)requestSetupAddressWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result;
+//
 - (void)requestGetAddressAreaWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result;
-//- (void)requestHomeCarouselGetDataWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result;
+//
+- (void)requestHomeCarouselGetDataWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result;
 
 - (void)requestHomeProducitonListRequest:(NSDictionary *)params result:(void (^)(id responseObject))result;
 
@@ -38,6 +45,8 @@
 - (void)requestSubmitOrdersRequest:(NSDictionary *)params result:(void (^)(id responseObject))result;
 //
 - (void)requestOrderDetailRequest:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
+- (void)requestOrderClearingRequest:(NSDictionary *)params result:(void (^)(id responseObject))result;
 
 - (void)requestOrderPayDetailRequest:(NSDictionary *)params result:(void (^)(id responseObject))result;
 
@@ -49,9 +58,16 @@
 
 - (void)requestGetTicketDetail:(NSDictionary *)params result:(void (^)(id responseObject))result;
 
+- (void)requestPayForTicket:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
 - (void)requestUserGetTicketList:(NSDictionary *)params result:(void (^)(id responseObject))result;
 
 - (void)requestUserAddShopCart:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
+
+- (void)requestAddUserFeedback:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
+- (void)requestSettingGetMore:(NSDictionary *)params result:(void (^)(id responseObject))result;
 
 
 @end

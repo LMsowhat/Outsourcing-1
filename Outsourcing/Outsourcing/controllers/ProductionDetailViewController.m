@@ -12,10 +12,13 @@
 #import "EliveApplication.h"
 #import "MJExtension.h"
 #import "MBProgressHUDManager.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #import "ShoppingCart.h"
 #import "OrderCreateController.h"
 #import "ProductionModel.h"
+
+
 
 @interface ProductionDetailViewController ()<UIScrollViewDelegate>
 
@@ -56,7 +59,8 @@
     
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     [self.navigationItem setLeftBarButtonItem:leftItem];
-    
+ 
+    [self sendHttpRequest];
 }
 
 
@@ -68,21 +72,7 @@
     [self configDefaultView];
 
     self.pNumber = 1;
-    
-//
-//    self.shoppingCart = [ShoppingCart initWithData:nil];
-////    self.shoppingCart.backgroundColor = UIColorFromRGBA(0xf1f1f1, 1.0);
-//    self.shoppingCart.frame = CGRectMake(0, kHeight - kTabBarHeight, kWidth, kTabBarHeight);
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTap:)];
-//
-//    [self.shoppingCart addGestureRecognizer:tap];
-//    //展示购物车
-//    [self.shoppingCart.shoppingBtn addTarget:self action:@selector(showShoppingCart:) forControlEvents:UIControlEventTouchUpInside];
-//    //submit
-//    [self.shoppingCart.submitBtn addTarget:self action:@selector(submitClick) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    
-//    
+    //
     [self.view addSubview:self.submitBtn];
     [self.submitBtn makeConstraints:^(MASConstraintMaker *make) {
         
@@ -92,7 +82,6 @@
         
     }];
     
-    [self sendHttpRequest];
     // Do any additional setup after loading the view.
 }
 
@@ -289,19 +278,18 @@
     NSMutableDictionary *production = [NSMutableDictionary new];
     production[@"lGoodsid"] = self.pModel.lId;
     production[@"strGoodsname"] = self.pModel.strGoodsname;
-    production[@"nPrice"] = self.pModel.nPrice;
+    NSInteger totalPrice = ([self.pModel.nPrice integerValue] * self.pNumber);
+    production[@"nGoodsTotalPrice"] = [NSString stringWithFormat:@"%ld",totalPrice];
     production[@"strGoodsimgurl"] = self.pModel.strGoodsimgurl;
-    production[@"nGoodsTotalPrice"] = self.pModel.nPrice;
-    production[@"nCount"] = @"1";
+    production[@"nPrice"] = [NSString stringWithFormat:@"%@",self.pModel.nPrice];
+    production[@"nCount"] = [NSString stringWithFormat:@"%ld",self.pNumber];
     NSMutableArray *productions = [NSMutableArray arrayWithObjects:production, nil];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     parameters[kCurrentController] = self;
     parameters[@"lBuyerid"] = [UserTools userId];
-    parameters[@"strBuyername"] = @"李文华";
-    parameters[@"nTotalprice"] = @"999";
-    parameters[@"strInvoiceheader"] = @"知金教育";
-    parameters[@"strRemarks"] = @"quickly";
+    parameters[@"strBuyername"] = @"姓名";
+    parameters[@"nTotalprice"] = production[@"nGoodsTotalPrice"];
     parameters[@"orderGoods"] = productions;
     
     [OutsourceNetWork onHttpCode:kSubmitOrderNetWork WithParameters:parameters];
@@ -313,9 +301,7 @@
 
     self.pModel = [ProductionModel mj_objectWithKeyValues:responseObj];
     
-    
-    NSArray *images = @[@"3.jpg",@"4.jpg",@"2.jpg",@"3.jpg",@"5.jpg"];
-    [self loadProductionData:images];
+    [self loadProductionData:responseObj];
 
     NSLog(@"%@",responseObj);
     
@@ -323,9 +309,9 @@
 
 - (void)resultOfSubmitOrder:(id)responseObj{
 
+    [MBProgressHUDManager hideHUDForView:self.view];
+
     if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
-        
-        [MBProgressHUDManager hideHUDForView:self.view];
         
         OrderCreateController *create = [OrderCreateController new];
         create.orderId = responseObj[@"result"];
@@ -345,9 +331,10 @@
 
 #pragma mark - Private Method
 
-- (void)loadProductionData:(NSArray *)images{
+- (void)loadProductionData:(NSDictionary *)pDict{
 
-    self.pIcon.image = [UIImage imageNamed:images[0]];
+    
+    [self.pIcon sd_setImageWithURL:kGetImageUrl(URLHOST,@"0", self.pModel.lId) placeholderImage:[UIImage imageNamed:@"3.jpg"]];
     
     self.pTitle.text = self.pModel.strGoodsname;
     
@@ -355,23 +342,23 @@
     
     self.pSales.text = [NSString stringWithFormat:@"销量%@",self.pModel.nMothnumber];
     
-    self.pPrice.text = [NSString stringWithFormat:@"￥%@",self.pModel.nPrice];
+    self.pPrice.text = [NSString stringWithFormat:@"￥%.2f",[self.pModel.nPrice floatValue]/100];
     
     self.num.text = [NSString stringWithFormat:@"%ld",self.pNumber];
     
     CGFloat dHeight = self.pPrice.frame.origin.y + 140;
     
-    self.mainScroll.contentSize = CGSizeMake(kWidth, dHeight + 200*images.count);
+    UIImageView *imageV = [UIImageView new];
     
-    for (int i = 0; i < images.count; i++) {
-        
-        UIImageView *imageV = [UIImageView new];
-        
-        imageV.image = [UIImage imageNamed:images[i]];
-        imageV.frame = CGRectMake(20, 200 * i + dHeight, kWidth - 40, 200);
-        
-        [self.mainScroll addSubview:imageV];
-    }
+    [imageV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/common/getImg/2/%@",URLHOST,self.pModel.lId]] placeholderImage:[UIImage imageNamed:@"3.jpg"]];
+    
+    CGFloat iHeight = imageV.image.size.height * (kWidth - 40)/imageV.image.size.width;
+    
+    imageV.frame = CGRectMake(20, dHeight, kWidth - 40, iHeight);
+    
+    self.mainScroll.contentSize = CGSizeMake(kWidth, dHeight + iHeight);
+
+    [self.mainScroll addSubview:imageV];
 
 }
 
@@ -421,7 +408,13 @@
 
 - (void)submitBtnClick:(UIButton *)sender{
 
-    [self sendSubmitOrderRequest];
+    if ([UserTools userId]) {
+        
+        [self sendSubmitOrderRequest];
+    }else{
+    
+        [[NSNotificationCenter defaultCenter] postNotificationName:NEEDLOGIN object:nil];
+    }
 
 }
 

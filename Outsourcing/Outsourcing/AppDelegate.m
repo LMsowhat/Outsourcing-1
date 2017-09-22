@@ -11,7 +11,11 @@
 #import "LoginViewController.h"
 #import "NavigationViewController.h"
 
-@interface AppDelegate ()
+#import "WaterTicketViewController.h"
+
+
+
+@interface AppDelegate ()<UITabBarControllerDelegate>
 
 @end
 
@@ -25,27 +29,42 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     MainTabBarController *root = [MainTabBarController new];
+    root.delegate = self;
     
     self.window.rootViewController = root;
     
     [self.window makeKeyAndVisible];
 
-    [self checkLogin];
+//    [self checkLogin];
 
     return YES;
 }
 
-- (void)checkLogin{
+
+
+
+#pragma mark --UITabBarControllerDelegate
+
+-(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
     
-    if (![UserTools userId]) {
-
-        LoginViewController *login = [LoginViewController new];
+    if (tabBarController.selectedIndex == 2) {
         
-        NavigationViewController *loginNavi = [[NavigationViewController alloc] initWithRootViewController:login];
+        NavigationViewController *navi = (NavigationViewController *)viewController;
         
-        [self.window.rootViewController presentViewController:loginNavi animated:YES completion:nil];
-
+        WaterTicketViewController *ticket = navi.viewControllers.firstObject;
+        
+        [ticket sendRequestHttp];
     }
+    
+    
+}
+//禁止tab多次点击
+-(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+    UIViewController *tbselect=tabBarController.selectedViewController;
+    if([tbselect isEqual:viewController]){
+        return NO;
+    }
+    return YES;
 }
 
 

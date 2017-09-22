@@ -37,14 +37,15 @@
 
     self.navigationController.navigationBarHidden = NO;
 
+    
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, 0, 17, 17);
-    [btn setImage:[UIImage imageNamed:@"shutDown"] forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(shutDown) forControlEvents:UIControlEventTouchUpInside];
+    btn.frame = CGRectMake(0, 0, 22, 17);
+    [btn setImage:[UIImage imageNamed:@"naviBack"] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(foreAction) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     [self.navigationItem setLeftBarButtonItem:leftItem];
-    
+
     UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeCustom];
     btn2.frame = CGRectMake(0, 0, 35, 21);
     btn2.titleLabel.font = kFont(7);
@@ -419,7 +420,7 @@
 }
 
 
-- (void)shutDown{
+- (void)foreAction{
     
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 

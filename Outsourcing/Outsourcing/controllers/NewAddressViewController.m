@@ -39,8 +39,6 @@
     
     self.navigationController.navigationBarHidden = NO;
     
-    self.navigationItem.title = @"新增地址";
-    
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, 0, 22, 17);
     [btn setImage:[UIImage imageNamed:@"naviBack"] forState:UIControlStateNormal];
@@ -204,8 +202,15 @@
         _rName.backgroundColor = UIColorFromRGBA(0xFFFFFF, 1.0);
         
         _rName.font = kFont(7);
-        
-        _rName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"收货人姓名" attributes:@{NSForegroundColorAttributeName:UIColorFromRGBA(0x8F9095, 1.0)}];
+        NSString *str = @"";
+        if (self.addressDict && [self.addressDict[@"strReceiptusername"] length] > 1) {
+            
+            str = self.addressDict[@"strReceiptusername"];
+        }else{
+            
+            str = @"收货人姓名";
+        }
+        _rName.attributedPlaceholder = [[NSAttributedString alloc] initWithString:str attributes:@{NSForegroundColorAttributeName:UIColorFromRGBA(0x8F9095, 1.0)}];
     }
     return _rName;
 }
@@ -222,7 +227,15 @@
         
         _rPhone.font = kFont(7);
         
-        _rPhone.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"收货人联系方式" attributes:@{NSForegroundColorAttributeName:UIColorFromRGBA(0x8F9095, 1.0)}];
+        NSString *str = @"";
+        if (self.addressDict && [self.addressDict[@"strReceiptmobile"] length] > 1) {
+            
+            str = self.addressDict[@"strReceiptmobile"];
+        }else{
+            
+            str = @"收货人联系方式";
+        }
+        _rPhone.attributedPlaceholder = [[NSAttributedString alloc] initWithString:str attributes:@{NSForegroundColorAttributeName:UIColorFromRGBA(0x8F9095, 1.0)}];
     }
     return _rPhone;
 }
@@ -239,7 +252,15 @@
         
         _rArea.font = kFont(7);
         
-        _rArea.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"收货区/县" attributes:@{NSForegroundColorAttributeName:UIColorFromRGBA(0x8F9095, 1.0)}];
+        NSString *str = @"";
+        if (self.addressDict && [self.addressDict[@"strLocation"] length] > 1) {
+            
+            str = self.addressDict[@"strLocation"];
+        }else{
+        
+            str = @"收货区/县";
+        }
+        _rArea.attributedPlaceholder = [[NSAttributedString alloc] initWithString:str attributes:@{NSForegroundColorAttributeName:UIColorFromRGBA(0x8F9095, 1.0)}];
     }
     return _rArea;
 }
@@ -256,7 +277,15 @@
         
         _rDetailAddress.font = kFont(7);
         
-        _rDetailAddress.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"详细地址" attributes:@{NSForegroundColorAttributeName:UIColorFromRGBA(0x8F9095, 1.0)}];
+        NSString *str = @"";
+        if (self.addressDict && [self.addressDict[@"strDetailaddress"] length] > 1) {
+            
+            str = self.addressDict[@"strDetailaddress"];
+        }else{
+            
+            str = @"详细地址";
+        }
+        _rDetailAddress.attributedPlaceholder = [[NSAttributedString alloc] initWithString:str attributes:@{NSForegroundColorAttributeName:UIColorFromRGBA(0x8F9095, 1.0)}];
     }
     return _rDetailAddress;
 }
@@ -272,6 +301,7 @@
         _areaPicker.delegate = self;
         
         _areaPicker.dataSource = self;
+        
     }
 
     return _areaPicker;
@@ -290,7 +320,13 @@
 
 - (void)saveAddress{
 
-    [self requestAddNewAddress];
+    if (self.addressDict) {
+        
+        [self requestExchangeAddress];
+    }else{
+    
+        [self requestAddNewAddress];
+    }
 }
 
 - (void)areaEditChanged:(UITextField *)sender{
@@ -335,6 +371,20 @@
     }
 }
 
+- (void)requestExchangeAddress{
+
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[kCurrentController] = self;
+    parameters[@"lId"] = self.addressDict[@"lId"];
+    parameters[@"strReceiptusername"] = self.rName.text.length > 1 ? self.rName.text : nil;
+    parameters[@"strReceiptmobile"] = self.rPhone.text.length > 1 ? self.rPhone.text : nil;
+    parameters[@"strLocation"] = self.rArea.text.length > 1 ? self.rArea.text : nil;
+    parameters[@"strDetailaddress"] = self.rDetailAddress.text.length > 1 ? self.rDetailAddress.text : nil;
+
+    [OutsourceNetWork onHttpCode:kUserModificationTheAddressNetWork WithParameters:parameters];
+    
+}
+
 - (void)getAddressArea:(id)responseObj{
 
     if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
@@ -352,8 +402,28 @@
         [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:@"地址添加成功" afterDelay:1.0f];
         
         [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObj[@"result"] afterDelay:1.0f];
     }
+
 }
+
+- (void)setupAddressResult:(id)responseObj{
+
+    if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
+        
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:@"地址修改成功" afterDelay:1.0f];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+    
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObj[@"result"] afterDelay:1.0f];
+    }
+
+}
+
+
 
 - (BOOL)checkInput{
 

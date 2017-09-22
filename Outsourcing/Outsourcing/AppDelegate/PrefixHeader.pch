@@ -16,6 +16,7 @@
 
 #import "macros.h"
 #import "CommonTools.h"
+#import "NoResultView.h"
 
 
 // Include any system framework and library headers here that should be included in all compilation units.

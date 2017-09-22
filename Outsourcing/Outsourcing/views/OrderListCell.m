@@ -26,11 +26,11 @@
 
 - (void)fitConfigWithModel:(ProductionModel *)model{
 
-    [self.pIcon sd_setImageWithURL:[NSURL URLWithString:model.strGoodsimgurl] placeholderImage:[UIImage imageNamed:@"2.jpg"]];
+    [self.pIcon sd_setImageWithURL:kGetImageUrl(URLHOST, @"0", model.lGoodsid) placeholderImage:[UIImage imageNamed:@"2.jpg"]];
 
     self.pName.text = model.strGoodsname;
  
-    self.pPrice.text = [NSString stringWithFormat:@"￥%@",model.nPrice];
+    self.pPrice.text = [NSString stringWithFormat:@"￥%.2f",[model.nPrice floatValue]/100];
     
     self.pNum.text = [NSString stringWithFormat:@"x %@",model.nCount];
     

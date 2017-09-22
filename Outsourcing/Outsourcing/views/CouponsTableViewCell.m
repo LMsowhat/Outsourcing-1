@@ -106,7 +106,7 @@
 
     self.couponTitle.text = model.strCouponName;
     
-    self.couponValue.text = model.nPrice;
+    self.couponValue.text = [NSString stringWithFormat:@"%ld",[model.nPrice integerValue]/100];
     
 }
 

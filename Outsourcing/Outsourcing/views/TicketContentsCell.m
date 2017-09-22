@@ -84,7 +84,7 @@
 
     self.cName.text = model.strRemarks;
     self.cDescription.text = @"赠品：水票";
-    self.cPrice.text = [NSString stringWithFormat:@"￥%@",model.nPrice];
+    self.cPrice.text = [NSString stringWithFormat:@"￥%.2f",[model.nPrice floatValue]/100];
 
 }
 

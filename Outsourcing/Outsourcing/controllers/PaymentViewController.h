@@ -10,4 +10,6 @@
 
 @interface PaymentViewController : BaseViewController
 
+@property (nonatomic,assign) CGFloat          factTotalPrice;
+
 @end

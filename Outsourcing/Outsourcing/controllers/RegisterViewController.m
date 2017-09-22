@@ -225,10 +225,9 @@
 //    //获取验证码
 //    NSMutableDictionary *parameters = [NSMutableDictionary new];
 //    parameters[kCurrentController] = self;
-//    parameters[@"phone"] = self.psdTextField.text;
-//    parameters[@"sms_template_code"] = @"register_message";
+//    parameters[@"strMobile"] = self.userNameTextField.text;
 //    
-//    [EliveApp onHttpCode:kUserSendCodeNetWork WithParameters:parameters];
+//    [OutsourceNetWork onHttpCode:kUserSendCodeNetWork WithParameters:parameters];
 
     NSLog(@"getCodeClick !!!!");
 }
@@ -424,9 +423,10 @@
 
 - (void)registerSendCodeGetData:(NSDictionary *)data{
 
-    [self editResultBy:data];
-//    [self countDown];
- 
+    if (![data[@"resCode"] isEqualToString:@"0"]) {
+        
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:data[@"result"] afterDelay:1.0f];
+    }
 }
 
 - (void)registerGetData:(NSDictionary *)data{

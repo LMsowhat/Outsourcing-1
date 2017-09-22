@@ -11,12 +11,17 @@
 #import "Masonry.h"
 #import "EliveApplication.h"
 #import "MJExtension.h"
+#import "MJRefresh.h"
+#import "MBProgressHUDManager.h"
+
 
 @interface CouponsViewController ()<UITableViewDelegate ,UITableViewDataSource>
 
 @property (nonatomic ,strong)UITableView *mainTableView;
 
 @property (nonatomic ,strong)NSMutableArray *dataSource;
+
+@property (nonatomic ,strong)NoResultView *noDataView;
 
 
 @end
@@ -27,7 +32,12 @@
     [super viewDidLoad];
     self.view.backgroundColor = UIColorFromRGBA(0xF7F7F7, 1.0);
     
+    self.noDataView = [[NoResultView alloc] initWithFrame:CGRectMake(0, 0, kWidth, kHeight - kTopBarHeight)];
+    self.noDataView.hidden = YES;
+    self.noDataView.placeHolder.text = @"暂无可用优惠券";
+
     [self.view addSubview:self.mainTableView];
+    [self.view addSubview:self.noDataView];
     
     [self sendRequestHttp];
 
@@ -84,12 +94,34 @@
         _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         _mainTableView.tableFooterView = [self createBottomView];
+        
+        _mainTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            
+            self.currentPage = 1;
+            [self sendRequestHttp];
+        }];
+        
+        MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            
+            self.currentPage += 1;
+            [self sendRequestHttp];
+        }];
+        [footer setTitle:@"已经全部加载完毕" forState:MJRefreshStateNoMoreData];
+        
+        _mainTableView.mj_footer = footer;
     }
 
     return _mainTableView;
 }
 
+-(NSMutableArray *)dataSource{
 
+    if (!_dataSource) {
+        
+        _dataSource = [NSMutableArray new];
+    }
+    return _dataSource;
+}
 
 #pragma mark Private Method
 
@@ -135,7 +167,11 @@
     parameters[kCurrentController] = self;
     parameters[@"lUserId"] = [UserTools userId];
     parameters[@"nMaxNum"] = @"10";
-    parameters[@"nPage"] = @"1";
+    parameters[@"nPage"] = [NSString stringWithFormat:@"%ld",self.currentPage ? self.currentPage : 1];
+    if (self.nFullPrice) {
+        
+        parameters[@"nFullPrice"] = self.nFullPrice;
+    }
     
     [OutsourceNetWork onHttpCode:kUserGetCouponsNetWork WithParameters:parameters];
     
@@ -146,10 +182,59 @@
     
     if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
         
-        self.dataSource = responseObj[@"result"][@"dataList"];
+        [self.mainTableView.mj_header endRefreshing];
+        [self.mainTableView.mj_footer endRefreshing];
+        
+        NSInteger count = 0;
+
+        if (self.isSelectedCoupons) {
+            
+            for (NSDictionary *temp in responseObj[@"result"][@"dataList"]) {
+                
+                if ([[temp[@"nDataFlag"] stringValue] isEqualToString:@"1"]) {
+                    
+                    count ++;
+                    [self.dataSource addObject:temp];
+                }
+            }
+            if (count < 10) {
+                
+                [self.mainTableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            
+        }else{
+        
+            if ([responseObj[@"result"][@"dataList"] count] < 10) {
+                
+                [self.mainTableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            if (!self.currentPage || self.currentPage == 1) {
+                
+                self.dataSource = responseObj[@"result"][@"dataList"];
+            }else{
+            
+                for (NSDictionary *tem in responseObj[@"result"][@"dataList"]) {
+                    
+                    [self.dataSource addObject:tem];
+                }
+            }
+        }
+        
+        if (!self.dataSource.count) {
+            
+            self.noDataView.hidden = NO;
+        }else{
+            
+            self.noDataView.hidden = YES;
+        }
         
         [self.mainTableView reloadData];
         NSLog(@"%@",responseObj);
+    }else{
+    
+        self.noDataView.hidden = NO;
+        
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObj[@"result"] afterDelay:1.0f];
     }
     
 }
@@ -185,6 +270,14 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (self.isSelectedCoupons) {
+        
+        WeakSelf(weakSelf);
+        self.passCoupons(weakSelf.dataSource[indexPath.row]);
+        
+        [self foreAction];
+    }
     
 }
 

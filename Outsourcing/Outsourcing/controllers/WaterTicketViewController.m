@@ -10,6 +10,8 @@
 #import "Masonry.h"
 #import "MJExtension.h"
 #import "EliveApplication.h"
+#import "MBProgressHUDManager.h"
+
 
 #import "TicketListTableViewCell.h"
 #import "BuyTicketViewController.h"
@@ -47,6 +49,9 @@
     [super viewWillAppear:animated];
     
     self.navigationItem.title = @"水票";
+    
+    [self sendRequestHttp];
+
 }
 
 - (void)viewDidLoad {
@@ -66,7 +71,6 @@
     
     [self.view addSubview:self.mainSrollView];
     
-    [self sendRequestHttp];
 
 }
 
@@ -271,14 +275,14 @@
     
     [OutsourceNetWork onHttpCode:kProductionTicketListNetWork WithParameters:parameters];
     
-//    //获取我的水票列表
-//    NSMutableDictionary *m_parameters = [NSMutableDictionary new];
-//    m_parameters[kCurrentController] = self;
-//    m_parameters[@"lUserId"] = [UserTools userId];
-//    m_parameters[@"nMaxNum"] = @"10";
-//    m_parameters[@"nPage"] = @"1";
-//    
-//    [OutsourceNetWork onHttpCode:kUserGetTicketListNetWork WithParameters:m_parameters];
+    //获取我的水票列表
+    NSMutableDictionary *m_parameters = [NSMutableDictionary new];
+    m_parameters[kCurrentController] = self;
+    m_parameters[@"lUserId"] = [UserTools userId];
+    m_parameters[@"nMaxNum"] = @"10";
+    m_parameters[@"nPage"] = @"1";
+    
+    [OutsourceNetWork onHttpCode:kUserGetTicketListNetWork WithParameters:m_parameters];
     
 }
 
@@ -299,10 +303,13 @@
 
     if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
         
-        self.dataSource = responseObj[@"result"][@"dataList"];
+        self.m_dataSource = responseObj[@"result"][@"dataList"];
         
         [self.myTicketTableView reloadData];
         NSLog(@"%@",responseObj);
+    }else{
+    
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObj[@"result"] afterDelay:1.0f];
     }
     
     
@@ -337,10 +344,10 @@
         
         return self.dataSource.count;
     }
-//    if (tableView == self.myTicketTableView) {
-//        
-//        return self.m_dataSource.count;
-//    }
+    if (tableView == self.myTicketTableView) {
+        
+        return self.m_dataSource.count;
+    }
     return 4;
 }
 
@@ -358,11 +365,12 @@
     
     if (tableView == self.myTicketTableView) {
         
-        [cell myTicketFitData:nil];
+        TicketModel *model = [TicketModel mj_objectWithKeyValues:self.m_dataSource[indexPath.row]];
+
+        [cell myTicketFitData:model];
     }else{
     
         TicketModel *model = [TicketModel mj_objectWithKeyValues:self.dataSource[indexPath.row]];
-        
         [cell buyTicketFitData:model];
         
         cell.buyBtn.tag = indexPath.row;

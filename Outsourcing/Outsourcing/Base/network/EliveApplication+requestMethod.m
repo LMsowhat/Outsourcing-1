@@ -21,10 +21,36 @@
 #import "BuyTicketViewController.h"
 #import "WaterTicketViewController.h"
 #import "OrdersViewController.h"
+#import "OrderDetailViewController.h"
+#import "FeedbackViewController.h"
+#import "ServerViewController.h"
+#import "AboutUsViewController.h"
+#import "RetrieveViewController.h"
 
 
 
 @implementation EliveApplication (requestMethod)
+
+- (void)requestSendCodeAction:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestSendCodeGetDataWithParameters:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[RegisterViewController class]]) {
+            
+            RegisterViewController *registers = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [registers registerSendCodeGetData:responseObject];
+            }
+        }
+        
+    }];
+}
 
 - (void)requestRegisterAction:(NSDictionary*)parm{
     
@@ -113,6 +139,70 @@
 
 }
 
+- (void)requestSetDefultAddress:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestSetDefultAddressWithParameters:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[AddressViewController class]]) {
+            
+            AddressViewController *address = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [address resultOfSetDefault:responseObject];
+            }
+        }
+        
+    }];
+}
+
+- (void)requestDeleteTheAddress:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestDeleteAddressWithParameters:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[AddressViewController class]]) {
+            
+            AddressViewController *address = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [address resultOfDeleteAddress:responseObject];
+            }
+        }
+        
+    }];
+}
+
+- (void)requestSetupAddress:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestSetupAddressWithParameters:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[NewAddressViewController class]]) {
+            
+            NewAddressViewController *newAddress = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [newAddress setupAddressResult:responseObject];
+            }
+        }
+        
+    }];
+}
+
+
 - (void)requestGetAddressArea:(NSDictionary*)parm{
 
     EliveHttpApi *api = [EliveHttpApi new];
@@ -133,6 +223,27 @@
         
     }];
 
+}
+
+- (void)requestHomeCarousels:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestHomeCarouselGetDataWithParameters:nil result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[HomeViewController class]]) {
+            
+            HomeViewController *home = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [home circlesGetData:responseObject];
+            }
+        }
+        
+    }];
 }
 
 
@@ -223,6 +334,51 @@
 
 }
 
+- (void)requestGoOrderClearingDetail:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestOrderClearingRequest:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[OrderCreateController class]]) {
+            
+            OrderCreateController *order = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [order resultOfClearing:responseObject];
+            }
+        }
+        
+    }];
+
+}
+
+- (void)requestGetPayOrderDetail:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestOrderPayDetailRequest:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[OrderDetailViewController class]]) {
+            
+            OrderDetailViewController *payOrderDetail = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [payOrderDetail orderGetDetail:responseObject];
+            }
+        }
+        
+    }];
+
+
+}
+
 - (void)requestGetUserOrderList:(NSDictionary*)parm{
 
     EliveHttpApi *api = [EliveHttpApi new];
@@ -308,6 +464,28 @@
 
 }
 
+- (void)requestPayForTicket:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestPayForTicket:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[BuyTicketViewController class]]) {
+            
+            BuyTicketViewController *buyTicket = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [buyTicket payForTicketResult:responseObject];
+            }
+        }
+        
+    }];
+
+}
+
 
 - (void)requestUserGetTicketList:(NSDictionary*)parm{
     
@@ -327,6 +505,15 @@
             }
         }
         
+        if ([controller isKindOfClass:[MyTicketViewController class]]) {
+            
+            MyTicketViewController *myticket = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [myticket getMyTicket:responseObject];
+            }
+        }
     }];
 
 }
@@ -352,6 +539,50 @@
     }];
 
 }
+
+- (void)requestAddUserFeedbackAction:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestAddUserFeedback:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[FeedbackViewController class]]) {
+            
+            FeedbackViewController *feedback = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [feedback resultOfFeedback:responseObject];
+            }
+        }
+        
+    }];
+}
+
+
+- (void)requestSettingGetMoreAction:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestSettingGetMore:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[ServerViewController class]]) {
+            
+            ServerViewController *server = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [server getServerContent:responseObject];
+            }
+        }
+        
+    }];
+}
+
 
 
 @end

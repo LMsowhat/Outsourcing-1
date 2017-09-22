@@ -59,8 +59,8 @@
     success:(LHResponseSuccess)success fail:(LHResponseFail)fail{
 
     AFHTTPSessionManager *manager = [AFNetWorkManagerConfig managerWithBaseURL:baseUrl sessionConfiguration:NO];
-
-    BOOL jsonStr = [url containsString:@"order/add"] || [url containsString:@"address/add"] || [url containsString:@"shopping/add"];
+    //
+    BOOL jsonStr = [url containsString:@"order/add"] || [url containsString:@"address/add"] || [url containsString:@"shopping/add"] || [url containsString:@"order/settlement"] || [url containsString:@"address/update"] || [url containsString:@"ticket/buy"];
     
     if (jsonStr) {
         

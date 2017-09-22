@@ -14,5 +14,6 @@
 
 - (void)getTicketDetail:(id)responseObj;
 
+- (void)payForTicketResult:(id)responseObject;
 
 @end

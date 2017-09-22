@@ -89,6 +89,9 @@
 #define CCDownloadItems                                [CCDownloadItem sharedInstance]
 #define kCachePath NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject
 
+#define kGetImageUrl(urlhost,imageId,productionId) [NSURL URLWithString:[NSString stringWithFormat:@"%@/common/getImg/%@/%@",urlhost,imageId,productionId]]
+
+
 //  检查更新
 #define kAPPCheckVersion                                9999
 //  登出
@@ -109,6 +112,12 @@
 #define kUserAddressNetWork                             2002
 //  添加收货地址
 #define kUserAddNewAddressNetWork                       2003
+//  设置默认收货地址
+#define kUserSetDefaultAddressNetWork                   2007
+//  删除一条收货地址
+#define kUserDeleteTheAddressNetWork                    2008
+//  修改一条收货地址
+#define kUserModificationTheAddressNetWork              2009
 //  获取收货区域
 #define kUserGetAddressAreaNetWork                      2004
 //  获取用户优惠券信息
@@ -139,9 +148,21 @@
 
 //  提交订单
 #define kSubmitOrderNetWork                             4000
+//  订单详情(去结算页面)
 #define kOrderDetailNetWork                             4001
-#define kAddShopCartNetWork                             4002
-#define kUserOrderListNetWork                           4003
+//  去结算
+#define kOrderClearingNetWork                           4002
+//  订单详情(去付款页面)
+#define kOrderDetailTwoNetWork                          4003
+//  添加购物车
+#define kAddShopCartNetWork                             4004
+//  订单列表
+#define kUserOrderListNetWork                           4005
 
+
+//  更多内容
+#define kSettingGetMoreNetWork                          5000
+//  用户反馈
+#define kUserFeedbackNetWork                            5001
 
 

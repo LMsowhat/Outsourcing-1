@@ -69,6 +69,13 @@
     return self;
 }
 
+- (void)fitDataWithModel:(TicketModel *)model{
+
+    self.tTitle.text = model.strTicketName;
+    self.tDate.text = model.strExpire;
+    self.tNumber.text = [NSString stringWithFormat:@"%@张",model.nRemainingCount];
+
+}
 
 
 

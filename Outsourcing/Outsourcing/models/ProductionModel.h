@@ -25,6 +25,7 @@
 
 //订单里商品的模型补充
 @property (nonatomic,strong) NSString *        nCount;//商品数量
+@property (nonatomic,strong) NSString *        lGoodsid;//商品ID
 
 
 @end

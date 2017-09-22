@@ -9,6 +9,7 @@
 #import "ProductionShowView.h"
 #import "Masonry.h"
 
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation ProductionShowView
 
@@ -19,29 +20,30 @@
     if (self) {
     
         self.pIcon = [UIImageView new];
-        self.pIcon.image = [UIImage imageNamed:@"2.jpg"];
+        [self.pIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/common/getImg/0/%@",URLHOST,model.lGoodsid]] placeholderImage:[UIImage imageNamed:@"2.jpg"]];
+        //[UIImage imageNamed:[NSString stringWithFormat:@"%@/common/getImg/0/%@",URLHOST,model.lGoodsid]];
         
         self.pPrice = [UILabel new];
         self.pPrice.font = kFont(7);
         self.pPrice.textColor = UIColorFromRGBA(0x333338, 1.0);
-        self.pPrice.text = @"￥26.00";
+        self.pPrice.text = [NSString stringWithFormat:@"￥%ld",[model.nPrice integerValue]/100];
        
         self.pName = [UILabel new];
         self.pName.font = kFont(7);
         self.pName.textColor = UIColorFromRGBA(0x333338, 1.0);
-        self.pName.text = @"雀巢优活系列";
+        self.pName.text = model.strGoodsname;
         
         self.barrelPrice = [UILabel new];
         self.barrelPrice.font = kFont(6);
         self.barrelPrice.textColor = UIColorFromRGBA(0x8F9095, 1.0);
         self.barrelPrice.textAlignment = NSTextAlignmentRight;
-        self.barrelPrice.text = @"桶押金0.00";
+//        self.barrelPrice.text = @"桶押金0.00";
         
         self.pNum = [UILabel new];
         self.pNum.font = kFont(5.5);
         self.pNum.textColor = UIColorFromRGBA(0x8F9095, 1.0);
         self.pNum.textAlignment = NSTextAlignmentRight;
-        self.pNum.text = @"x2";
+        self.pNum.text = [NSString stringWithFormat:@"x %@",model.nCount];
         
         [self addSubview:self.pIcon];
         [self addSubview:self.pName];
@@ -52,14 +54,14 @@
         
         [self.pIcon makeConstraints:^(MASConstraintMaker *make) {
             
-            make.size.equalTo(CGSizeMake(45 *kScale, 45 *kScale));
+            make.size.equalTo(CGSizeMake(15 *kScale, 15 *kScale));
             make.centerY.equalTo(self);
             make.left.equalTo(self).offset(10 *kScale);
         }];
         
         [self.pName makeConstraints:^(MASConstraintMaker *make) {
             
-            make.top.equalTo(self.pIcon.mas_top);
+            make.centerY.equalTo(self.pIcon);
             make.left.equalTo(self.pIcon.mas_right).offset(10);
             
         }];
@@ -80,8 +82,8 @@
         
         [self.pNum makeConstraints:^(MASConstraintMaker *make) {
             
-            make.centerY.equalTo(self.barrelPrice);
-            make.right.equalTo(self).offset(-10*kScale);
+            make.centerY.equalTo(self.pPrice);
+            make.right.equalTo(self.pPrice.mas_left).offset(-10*kScale);
             
         }];
         

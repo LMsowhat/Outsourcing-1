@@ -12,9 +12,9 @@
 
 - (void)fitDataWithModel:(OrderModel *)model{
 
-    self.bPrice.text = [NSString stringWithFormat:@"桶押金：￥%@",model.nBucketmoney];
+    self.bPrice.text = [NSString stringWithFormat:@"桶押金：￥%.2f",[model.nBucketmoney floatValue]/100];
 
-    self.oTotalPrice.text = [NSString stringWithFormat:@"实付款：￥%@",model.nTotalprice];
+    self.oTotalPrice.text = [NSString stringWithFormat:@"实付款：￥%.2f",[model.nTotalprice floatValue]/100];
 
     if (model.nState != 0) {
         

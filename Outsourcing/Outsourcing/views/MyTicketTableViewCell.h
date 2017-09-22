@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TicketModel.h"
+
 
 @interface MyTicketTableViewCell : UITableViewCell
 
@@ -15,6 +17,8 @@
 @property (nonatomic,strong) UILabel *        tDate;
 
 @property (nonatomic,strong) UILabel *        tNumber;
+
+- (void)fitDataWithModel:(TicketModel *)model;
 
 
 @end

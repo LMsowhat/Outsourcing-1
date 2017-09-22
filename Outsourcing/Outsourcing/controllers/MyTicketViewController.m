@@ -9,10 +9,13 @@
 
 
 #import "MyTicketViewController.h"
-#import "MyTicketTableViewCell.h"
 #import "EliveApplication.h"
+#import "MJRefresh.h"
+#import "MJExtension.h"
+#import "MBProgressHUDManager.h"
 
-
+#import "MyTicketTableViewCell.h"
+#import "TicketModel.h"
 
 
 @interface MyTicketViewController ()<UITableViewDelegate ,UITableViewDataSource>
@@ -20,6 +23,8 @@
 @property (nonatomic ,strong)UITableView *mainTableView;
 
 @property (nonatomic ,strong)NSMutableArray *dataSource;
+
+@property (nonatomic ,strong)NoResultView *noDataView;
 
 @end
 
@@ -41,13 +46,19 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     [self.navigationItem setLeftBarButtonItem:leftItem];
     
+    [self sendHttpRequest];
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.noDataView = [[NoResultView alloc] initWithFrame:CGRectMake(0, 0, kWidth, kHeight)];
+    self.noDataView.placeHolder.text = @"暂无水票";
+    self.noDataView.hidden = YES;
+    
     [self.view addSubview:self.mainTableView];
+    [self.view addSubview:self.noDataView];
     
 //    [self sendRequestHttp];
     // Do any additional setup after loading the view.
@@ -97,21 +108,42 @@
 
 #pragma mark NetWorks
 
+- (void)sendHttpRequest{
 
+    //获取我的水票列表
+    NSMutableDictionary *m_parameters = [NSMutableDictionary new];
+    m_parameters[kCurrentController] = self;
+    m_parameters[@"lUserId"] = [UserTools userId];
+    m_parameters[@"nMaxNum"] = @"10";
+    m_parameters[@"nPage"] = @"1";
+    
+    [OutsourceNetWork onHttpCode:kUserGetTicketListNetWork WithParameters:m_parameters];
+
+}
+
+- (void)getMyTicket:(id)responseObject{
+
+    if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
+        
+        self.dataSource = responseObject[@"result"][@"dataList"];
+        
+        self.noDataView.hidden = YES;
+        [self.mainTableView reloadData];
+        NSLog(@"%@",responseObject);
+    }else{
+        
+        self.noDataView.hidden = NO;
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObject[@"result"] afterDelay:1.0f];
+    }
+}
 
 
 #pragma mark TableViewDelegate
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    
-    return 5;
-}
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    return 1;
+    return self.dataSource.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -124,10 +156,10 @@
         cell = [[MyTicketTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID] ;
         
     }
-    cell.tTitle.text = @"怡宝雀巢桶装水通用水票";
-    cell.tDate.text = @"2019-07-16 14:29";
-    cell.tNumber.text = @"28张";
     
+    TicketModel *model = [TicketModel mj_objectWithKeyValues:self.dataSource[indexPath.row]];
+    
+    [cell fitDataWithModel:model];
     return cell;
 }
 

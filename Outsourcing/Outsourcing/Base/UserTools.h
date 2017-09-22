@@ -23,11 +23,11 @@
 + (void)setUserId:(NSString *)userId;
 +(NSString *)userId;
 
-//userCoins
-+ (void)setUserCoins:(NSString *)coins;
-+(NSString *)userCoins;
+//userAddress
++ (void)setUserAddress:(NSDictionary *)userAddress;
++(NSDictionary *)userAddress;
 
-//userCoins
+//employeeId
 + (void)setUserEmployees:(NSString *)employeeId;
 +(NSString *)userEmployeesId;
 

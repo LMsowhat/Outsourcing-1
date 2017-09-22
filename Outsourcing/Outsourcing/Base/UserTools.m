@@ -64,19 +64,20 @@
     return userId;
 }
 
-+ (void)setUserCoins:(NSString *)coins{
-    
++ (void)setUserAddress:(NSDictionary *)userAddress{
+
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
-    [userDefault setObject:coins forKey:@"userCoins"];
+    [userDefault setObject:userAddress forKey:@"address"];
     [userDefault synchronize];
 }
-+(NSString *)userCoins{
-    
+
++(NSDictionary *)userAddress{
+
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
-    NSString *userCoins = [userDefault objectForKey:@"userCoins"];
-    return userCoins;
+    NSDictionary *userAddress = [userDefault objectForKey:@"address"];
+    return userAddress;
 }
 
 + (void)setUserEmployees:(NSString *)employeeId{
@@ -101,12 +102,10 @@
 
 + (void)logOut{
     
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"e_token"];
-    
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userId"];
     
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userCoins"];
-    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"address"];
+
 }
 
 

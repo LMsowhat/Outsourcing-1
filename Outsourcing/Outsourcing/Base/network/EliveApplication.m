@@ -82,6 +82,30 @@ static EliveApplication *elive;
             
             break;
             
+        case kUserSetDefaultAddressNetWork:
+            
+        {
+            [self requestSetDefultAddress:parms];
+        }
+            
+            break;
+            
+        case kUserDeleteTheAddressNetWork:
+            
+        {
+            [self requestDeleteTheAddress:parms];
+        }
+            
+            break;
+            
+        case kUserModificationTheAddressNetWork:
+            
+        {
+            [self requestSetupAddress:parms];
+        }
+            
+            break;
+            
         case kUserGetAddressAreaNetWork:
             
         {
@@ -129,7 +153,20 @@ static EliveApplication *elive;
             [self requestGetOrderDetail:parms];
         }
             break;
-
+            
+        case kOrderClearingNetWork:
+        {
+            
+            [self requestGoOrderClearingDetail:parms];
+        }
+            break;
+        case kOrderDetailTwoNetWork:
+        {
+            
+            [self requestGetPayOrderDetail:parms];
+        }
+            break;
+            
         case kUserOrderListNetWork:
         {
             
@@ -161,7 +198,7 @@ static EliveApplication *elive;
         case kProductionTicketPayNetWork:
         {
             
-            [self requestGetUserCoupons:parms];
+            [self requestPayForTicket:parms];
         }
             break;
             
@@ -169,6 +206,20 @@ static EliveApplication *elive;
         {
             
             [self requestAddShopCartAction:parms];
+        }
+            break;
+            
+        case kSettingGetMoreNetWork:
+        {
+            
+            [self requestSettingGetMoreAction:parms];
+        }
+            break;
+            
+        case kUserFeedbackNetWork:
+        {
+            
+            [self requestAddUserFeedbackAction:parms];
         }
             break;
             

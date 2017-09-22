@@ -8,7 +8,7 @@
 
 #import "TicketListTableViewCell.h"
 #import "Masonry.h"
-
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation TicketListTableViewCell
 
@@ -177,12 +177,16 @@
 
 - (void)buyTicketFitData:(TicketModel *)model{
 
-    self.pIcon.image = [UIImage imageNamed:@"2.jpg"];
+    [self.pIcon sd_setImageWithURL:kGetImageUrl(URLHOST, @"0", model.lId) placeholderImage:[UIImage imageNamed:@"2.jpg"]];
     self.pName.text = model.strGoodsName;
     self.pSales.text = [NSString stringWithFormat:@"月销%@",model.nMonthCount];
     self.pActivity.text = model.strRemarks;
-    self.pCurrent_Price.text = [NSString stringWithFormat:@"￥%@",model.nPrice];
-    self.pBefore_Prices.text = [NSString stringWithFormat:@"原价：%@",model.nOldPrice];
+    self.pCurrent_Price.text = [NSString stringWithFormat:@"￥%.2f",[model.nPrice floatValue]/100];
+
+    NSString *disPrice = [NSString stringWithFormat:@"原价：¥%.2f",[model.nOldPrice floatValue]/100];
+    NSMutableAttributedString *attPrice = [[NSMutableAttributedString alloc] initWithString:disPrice];
+    [attPrice addAttributes:@{NSStrikethroughStyleAttributeName:@(NSUnderlineStyleSingle),NSBaselineOffsetAttributeName:@(0)} range:NSMakeRange(0, disPrice.length)];
+    self.pBefore_Prices.attributedText = attPrice;
     
     self.payTime.hidden = YES;
     self.tNumber.hidden = YES;
@@ -191,10 +195,10 @@
 
 - (void)myTicketFitData:(TicketModel *)model{
     
-    self.pIcon.image = [UIImage imageNamed:@"2.jpg"];
-    self.pName.text = @"卓玛泉桶装水1.8L 水票";
-    self.payTime.text = @"2016-06-09 12:00";
-    self.tNumber.text = @"28张";
+    [self.pIcon sd_setImageWithURL:kGetImageUrl(URLHOST, @"0", model.lId) placeholderImage:[UIImage imageNamed:@"2.jpg"]];
+    self.pName.text = model.strTicketName;
+    self.payTime.text = model.strExpire;
+    self.tNumber.text = [NSString stringWithFormat:@"%@张",model.nRemainingCount];
     
     self.pSales.hidden = YES;
     self.pActivity.hidden = YES;

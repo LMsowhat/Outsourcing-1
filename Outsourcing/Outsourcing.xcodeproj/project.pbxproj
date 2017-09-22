@@ -119,6 +119,17 @@
 		8BE0262D1F3C905D00B63F5C /* wechat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BE026211F3C905D00B63F5C /* wechat@3x.png */; };
 		8BE026301F3D4CE000B63F5C /* PaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE0262F1F3D4CE000B63F5C /* PaymentViewController.m */; };
 		8BE026331F3D973400B63F5C /* BuyTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE026321F3D973400B63F5C /* BuyTicketViewController.m */; };
+		8BEC49841F6D4F1700CE19C5 /* ServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BEC49831F6D4F1700CE19C5 /* ServerViewController.m */; };
+		8BEC49871F6D4F2700CE19C5 /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BEC49861F6D4F2700CE19C5 /* AboutUsViewController.m */; };
+		8BEC498A1F6D4F9500CE19C5 /* RetrieveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BEC49891F6D4F9500CE19C5 /* RetrieveViewController.m */; };
+		8BEC49901F6D507200CE19C5 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BEC498E1F6D507200CE19C5 /* FeedbackViewController.m */; };
+		8BEC49911F6D507200CE19C5 /* FeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BEC498F1F6D507200CE19C5 /* FeedbackViewController.xib */; };
+		8BEC49931F6D5A6A00CE19C5 /* ServerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BEC49921F6D5A6A00CE19C5 /* ServerViewController.xib */; };
+		8BEC49951F6D5E6F00CE19C5 /* AboutUsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BEC49941F6D5E6F00CE19C5 /* AboutUsViewController.xib */; };
+		8BEC49971F6D633400CE19C5 /* RetrieveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BEC49961F6D633400CE19C5 /* RetrieveViewController.xib */; };
+		8BEC499A1F6D793E00CE19C5 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BEC49991F6D793E00CE19C5 /* OrderDetailViewController.m */; };
+		8BEC499D1F6E56AC00CE19C5 /* OrderInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BEC499C1F6E56AC00CE19C5 /* OrderInputView.m */; };
+		8BEC499F1F6E56BB00CE19C5 /* OrderInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BEC499E1F6E56BB00CE19C5 /* OrderInputView.xib */; };
 		8BFB15661EEFC3A200725244 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15651EEFC3A200725244 /* main.m */; };
 		8BFB15691EEFC3A200725244 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB15681EEFC3A200725244 /* AppDelegate.m */; };
 		8BFB15711EEFC3A200725244 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BFB15701EEFC3A200725244 /* Assets.xcassets */; };
@@ -371,6 +382,23 @@
 		8BE0262F1F3D4CE000B63F5C /* PaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentViewController.m; sourceTree = "<group>"; };
 		8BE026311F3D973400B63F5C /* BuyTicketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuyTicketViewController.h; sourceTree = "<group>"; };
 		8BE026321F3D973400B63F5C /* BuyTicketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuyTicketViewController.m; sourceTree = "<group>"; };
+		8BEC49821F6D4F1700CE19C5 /* ServerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerViewController.h; sourceTree = "<group>"; };
+		8BEC49831F6D4F1700CE19C5 /* ServerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerViewController.m; sourceTree = "<group>"; };
+		8BEC49851F6D4F2700CE19C5 /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
+		8BEC49861F6D4F2700CE19C5 /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
+		8BEC49881F6D4F9500CE19C5 /* RetrieveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RetrieveViewController.h; sourceTree = "<group>"; };
+		8BEC49891F6D4F9500CE19C5 /* RetrieveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RetrieveViewController.m; sourceTree = "<group>"; };
+		8BEC498D1F6D507200CE19C5 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
+		8BEC498E1F6D507200CE19C5 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
+		8BEC498F1F6D507200CE19C5 /* FeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FeedbackViewController.xib; sourceTree = "<group>"; };
+		8BEC49921F6D5A6A00CE19C5 /* ServerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ServerViewController.xib; sourceTree = "<group>"; };
+		8BEC49941F6D5E6F00CE19C5 /* AboutUsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutUsViewController.xib; sourceTree = "<group>"; };
+		8BEC49961F6D633400CE19C5 /* RetrieveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RetrieveViewController.xib; sourceTree = "<group>"; };
+		8BEC49981F6D793E00CE19C5 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
+		8BEC49991F6D793E00CE19C5 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
+		8BEC499B1F6E56AC00CE19C5 /* OrderInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderInputView.h; sourceTree = "<group>"; };
+		8BEC499C1F6E56AC00CE19C5 /* OrderInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderInputView.m; sourceTree = "<group>"; };
+		8BEC499E1F6E56BB00CE19C5 /* OrderInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderInputView.xib; sourceTree = "<group>"; };
 		8BFB15611EEFC3A200725244 /* Outsourcing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Outsourcing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BFB15651EEFC3A200725244 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8BFB15671EEFC3A200725244 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Outsourcing/AppDelegate.h; sourceTree = SOURCE_ROOT; };
@@ -548,6 +576,8 @@
 			children = (
 				8BB4E5D11F00B126006851CF /* OrderCreateController.h */,
 				8BB4E5D21F00B126006851CF /* OrderCreateController.m */,
+				8BEC49981F6D793E00CE19C5 /* OrderDetailViewController.h */,
+				8BEC49991F6D793E00CE19C5 /* OrderDetailViewController.m */,
 				8BE0262E1F3D4CE000B63F5C /* PaymentViewController.h */,
 				8BE0262F1F3D4CE000B63F5C /* PaymentViewController.m */,
 			);
@@ -582,6 +612,18 @@
 				8B9B84FF1F4571D9009AE5EE /* MyTicketViewController.m */,
 				8B9B85041F457707009AE5EE /* MoreViewController.h */,
 				8B9B85051F457707009AE5EE /* MoreViewController.m */,
+				8BEC498D1F6D507200CE19C5 /* FeedbackViewController.h */,
+				8BEC498E1F6D507200CE19C5 /* FeedbackViewController.m */,
+				8BEC498F1F6D507200CE19C5 /* FeedbackViewController.xib */,
+				8BEC49821F6D4F1700CE19C5 /* ServerViewController.h */,
+				8BEC49831F6D4F1700CE19C5 /* ServerViewController.m */,
+				8BEC49921F6D5A6A00CE19C5 /* ServerViewController.xib */,
+				8BEC49851F6D4F2700CE19C5 /* AboutUsViewController.h */,
+				8BEC49861F6D4F2700CE19C5 /* AboutUsViewController.m */,
+				8BEC49941F6D5E6F00CE19C5 /* AboutUsViewController.xib */,
+				8BEC49881F6D4F9500CE19C5 /* RetrieveViewController.h */,
+				8BEC49891F6D4F9500CE19C5 /* RetrieveViewController.m */,
+				8BEC49961F6D633400CE19C5 /* RetrieveViewController.xib */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -600,6 +642,9 @@
 			children = (
 				8B89AAEF1F68DBD500AE2BB9 /* NoResultView.h */,
 				8B89AAF01F68DBD500AE2BB9 /* NoResultView.m */,
+				8BEC499B1F6E56AC00CE19C5 /* OrderInputView.h */,
+				8BEC499C1F6E56AC00CE19C5 /* OrderInputView.m */,
+				8BEC499E1F6E56BB00CE19C5 /* OrderInputView.xib */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -1173,6 +1218,7 @@
 				8BE025FB1F39B3C600B63F5C /* icon_invite.png in Resources */,
 				8BFB16D91EF0E21A00725244 /* home.png in Resources */,
 				8BE026011F39B3C600B63F5C /* icon_ticket.png in Resources */,
+				8BEC49931F6D5A6A00CE19C5 /* ServerViewController.xib in Resources */,
 				8BFB169B1EF0DF6E00725244 /* setting_myMessage@3x.png in Resources */,
 				8B2028831F135577007F39AD /* ticket_selected@3x.png in Resources */,
 				8BE025DF1F39B2E100B63F5C /* more@3x.png in Resources */,
@@ -1207,9 +1253,11 @@
 				8BE025FE1F39B3C600B63F5C /* icon_more.png in Resources */,
 				8BE026281F3C905D00B63F5C /* unSelected.png in Resources */,
 				8BE026001F39B3C600B63F5C /* icon_more@3x.png in Resources */,
+				8BEC49951F6D5E6F00CE19C5 /* AboutUsViewController.xib in Resources */,
 				8BE025D21F39659200B63F5C /* icon_massage@2x.png in Resources */,
 				8BFB16EA1EF1137800725244 /* 3.jpg in Resources */,
 				8BE025D11F39659200B63F5C /* icon_massage@1x.png in Resources */,
+				8BEC49971F6D633400CE19C5 /* RetrieveViewController.xib in Resources */,
 				8BFB16A21EF0DF6E00725244 /* shutDown.png in Resources */,
 				8BE025F91F39B3C600B63F5C /* icon_coupon@2x.png in Resources */,
 				8BE025F41F39B3C500B63F5C /* icon_address@3x.png in Resources */,
@@ -1240,6 +1288,7 @@
 				8B2028841F135577007F39AD /* ticket.png in Resources */,
 				8BFB167A1EF0DF6E00725244 /* payFailure@3x.png in Resources */,
 				8BE025D71F39A70D00B63F5C /* icon_avatar@1x.png in Resources */,
+				8BEC499F1F6E56BB00CE19C5 /* OrderInputView.xib in Resources */,
 				8BE025C41F3862D800B63F5C /* naviBack@3x.png in Resources */,
 				8BE026071F3AAE7100B63F5C /* calculate.png in Resources */,
 				8BE026231F3C905D00B63F5C /* ali_icon@2x.png in Resources */,
@@ -1279,6 +1328,7 @@
 				8BE0262A1F3C905D00B63F5C /* unSelected@3x.png in Resources */,
 				8BFB169D1EF0DF6E00725244 /* setting_myOrder@2x.png in Resources */,
 				8BFB16D81EF0E21A00725244 /* home_selected@3x.png in Resources */,
+				8BEC49911F6D507200CE19C5 /* FeedbackViewController.xib in Resources */,
 				8BFB16DC1EF0E21A00725244 /* setting_selected.png in Resources */,
 				8B89AAEB1F67B78C00AE2BB9 /* OrderListFooterView.xib in Resources */,
 				8BFB16A91EF0DF6E00725244 /* userIcon_default.png in Resources */,
@@ -1361,19 +1411,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BFB15691EEFC3A200725244 /* AppDelegate.m in Sources */,
+				8BEC49841F6D4F1700CE19C5 /* ServerViewController.m in Sources */,
 				8BFB15C71EF0D0A500725244 /* UIButton+myButton.m in Sources */,
 				8B28221D1F5C33070015D2DC /* SubmitOrderProModel.m in Sources */,
+				8BEC499A1F6D793E00CE19C5 /* OrderDetailViewController.m in Sources */,
+				8BEC498A1F6D4F9500CE19C5 /* RetrieveViewController.m in Sources */,
 				8B2028A31F170E9C007F39AD /* UserTools.m in Sources */,
 				8B89AAE61F67B44C00AE2BB9 /* OrderListHeaderView.m in Sources */,
 				8B89AADC1F6783C800AE2BB9 /* CommonTools.m in Sources */,
 				8B8533FD1F0359BE00D061E4 /* ProductionShowView.m in Sources */,
+				8BEC49871F6D4F2700CE19C5 /* AboutUsViewController.m in Sources */,
 				8B9B85061F457707009AE5EE /* MoreViewController.m in Sources */,
 				8B9B84F41F43ECC3009AE5EE /* MyInvitationViewController.m in Sources */,
 				8B9B85091F4AAE7B009AE5EE /* NewAddressViewController.m in Sources */,
 				8BFB15CB1EF0D0A500725244 /* EliveHttpApi.m in Sources */,
 				8B8533F41F00F41C00D061E4 /* OrderDetailListCell.m in Sources */,
 				8B2822051F5804670015D2DC /* ShoppingCartController.m in Sources */,
+				8BEC499D1F6E56AC00CE19C5 /* OrderInputView.m in Sources */,
 				8B9B84F71F43F761009AE5EE /* AddressViewController.m in Sources */,
+				8BEC49901F6D507200CE19C5 /* FeedbackViewController.m in Sources */,
 				8B20286E1F10CF7A007F39AD /* OrderModel.m in Sources */,
 				8B89AAE01F678D8F00AE2BB9 /* OrderListCell.m in Sources */,
 				8B9B85191F4C2AFE009AE5EE /* TicketModel.m in Sources */,

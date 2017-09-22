@@ -82,7 +82,7 @@
     self.moneyLabel = [UILabel new];
     self.moneyLabel.font = kFont(9);
     self.moneyLabel.textColor = UIColorFromRGBA(0xFA6650, 1.0);
-    self.moneyLabel.text = @"￥88";
+    self.moneyLabel.text = [NSString stringWithFormat:@"%.2f",self.factTotalPrice];
     
     UIView *view2 = [UIView new];
     view2.backgroundColor = UIColorFromRGBA(0xFFFFFF, 1.0);

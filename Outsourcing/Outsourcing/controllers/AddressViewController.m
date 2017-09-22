@@ -10,6 +10,7 @@
 #import "MBProgressHUDManager.h"
 #import "EliveApplication.h"
 #import "MJExtension.h"
+#import "MJRefresh.h"
 
 #import "AddressTableViewCell.h"
 #import "NewAddressViewController.h"
@@ -21,6 +22,11 @@
 @property (nonatomic ,strong)UITableView *mainTableView;
 
 @property (nonatomic ,strong)NSMutableArray *dataSource;
+
+@property (nonatomic ,strong)UIButton   *seletedButton;
+
+@property (nonatomic ,strong)NoResultView   *noDataView;
+
 
 @end
 
@@ -55,7 +61,12 @@
 
 - (void)loadConfigUI{
 
+    self.noDataView = [[NoResultView alloc] initWithFrame:CGRectMake(0, 0, kWidth, kHeight)];
+    self.noDataView.hidden = YES;
+    self.noDataView.placeHolder.text = @"暂无收货地址";
+    
     [self.view addSubview:self.mainTableView];
+    [self.view addSubview:self.noDataView];
     
     UIButton *addNewAddress = [UIButton buttonWithType:UIButtonTypeCustom];
     addNewAddress.frame = CGRectMake(0, kHeight - 24.5 *kScale, kWidth, 24.5 *kScale);
@@ -85,8 +96,32 @@
         _mainTableView.dataSource = self;
         
         _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        _mainTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            
+            self.currentPage = 1;
+            [self sendHttpRequest];
+        }];
+        
+        MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            
+            self.currentPage += 1;
+            [self sendHttpRequest];
+        }];
+        [footer setTitle:@"已经全部加载完毕" forState:MJRefreshStateNoMoreData];
+        
+        _mainTableView.mj_footer = footer;
     }
     return _mainTableView;
+}
+
+-(NSMutableArray *)dataSource{
+
+    if (!_dataSource) {
+        
+        _dataSource = [NSMutableArray new];
+    }
+    return _dataSource;
 }
 
 #pragma mark Target
@@ -94,6 +129,46 @@
 - (void)addNewAddresClick{
 
     NewAddressViewController *newAddress = [NewAddressViewController new];
+    newAddress.navigationItem.title = @"新增地址";
+    
+    [self.navigationController pushViewController:newAddress animated:YES];
+
+}
+
+- (void)seleteBtnClick:(UIButton *)sender{
+
+    self.seletedButton.selected = NO;
+    
+    sender.selected = YES;
+
+    self.seletedButton = sender;
+    
+    [self setupDefaultAddress:sender.tag];
+}
+
+- (void)deleteBtnClick:(UIButton *)sender{
+
+    WeakSelf(weakSelf);
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"确认删除" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        [weakSelf deleteTheAddress:sender.tag];
+    }]];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+        return ;
+    }]];
+    
+    [weakSelf presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)editBtnClick:(UIButton *)sender{
+    
+    NewAddressViewController *newAddress = [NewAddressViewController new];
+    newAddress.navigationItem.title = @"编辑地址";
+    newAddress.addressDict = self.dataSource[sender.tag];
     
     [self.navigationController pushViewController:newAddress animated:YES];
 
@@ -113,7 +188,7 @@
     parameters[kCurrentController] = self;
     parameters[@"lUserId"] = [UserTools userId];
     parameters[@"nMaxNum"] = @"10";
-    parameters[@"nPage"] = @"1";
+    parameters[@"nPage"] = [NSString stringWithFormat:@"%ld",self.currentPage ? self.currentPage : 1];
     
     [OutsourceNetWork onHttpCode:kUserAddressNetWork WithParameters:parameters];
 }
@@ -122,33 +197,85 @@
 
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     parameters[kCurrentController] = self;
-    parameters[@"lUserId"] = [UserTools userId];
-    parameters[@"nMaxNum"] = @"10";
-    parameters[@"nPage"] = @"1";
+    parameters[@"lId"] = self.dataSource[index][@"lId"];
     
-    [OutsourceNetWork onHttpCode:kUserAddressNetWork WithParameters:parameters];
+    [OutsourceNetWork onHttpCode:kUserSetDefaultAddressNetWork WithParameters:parameters];
 }
 
-
-
-
-
+- (void)deleteTheAddress:(NSInteger)index{
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[kCurrentController] = self;
+    parameters[@"lId"] = self.dataSource[index][@"lId"];
+    
+    [OutsourceNetWork onHttpCode:kUserDeleteTheAddressNetWork WithParameters:parameters];
+}
 
 - (void)getMyAddressList:(id)responseObj{
 
-    self.dataSource = [NSMutableArray new];
+    [self.mainTableView.mj_header endRefreshing];
+    [self.mainTableView.mj_footer endRefreshing];
+    
     if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
         
-        self.dataSource = responseObj[@"result"][@"dataList"];
+        self.noDataView.hidden = YES;
+        if ([responseObj[@"result"][@"dataList"] count] < 10) {
+            
+            [self.mainTableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        if (!self.currentPage || self.currentPage == 1) {
+            
+            self.dataSource = responseObj[@"result"][@"dataList"];
+        }else{
+        
+            for (NSDictionary *temp in self.dataSource) {
+                
+                [self.dataSource addObject:temp];
+            }
+        }
+        
+        for (NSDictionary *temp in self.dataSource) {
+            
+            if ([temp[@"nIsdefault"] boolValue]) {
+                
+                [UserTools setUserAddress:temp];
+            }
+        }
         
         [self.mainTableView reloadData];
+    }else{
+    
+        self.noDataView.hidden = NO;
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObj[@"result"] afterDelay:1.0f];
     }
     
     NSLog(@"%@",responseObj);
 
 }
 
+- (void)resultOfSetDefault:(id)responseObj{
 
+    if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
+        
+        self.currentPage = 1;
+        [self sendHttpRequest];
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:@"设置默认地址成功" afterDelay:1.0f];
+    }
+}
+
+- (void)resultOfDeleteAddress:(id)responseObj{
+
+    if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
+        
+        self.currentPage = 1;
+        [self sendHttpRequest];
+
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:@"删除成功" afterDelay:1.0f];
+    }else{
+    
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObj[@"result"] afterDelay:1.0f];
+    }
+}
 
 
 #pragma mark TableViewDelegate
@@ -190,10 +317,19 @@
     
     [cell fitDataWithModel:model];
     
-    if (indexPath.section == 0) {
+    cell.seleteBtn.tag = indexPath.section;
+    cell.editBtn.tag = indexPath.section;
+    cell.deleteBtn.tag = indexPath.section;
+    [cell.seleteBtn addTarget:self action:@selector(seleteBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.deleteBtn addTarget:self action:@selector(deleteBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.editBtn addTarget:self action:@selector(editBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if ([model.nIsdefault boolValue]) {
         
-        cell.seleteBtn.selected = YES;
+        self.seletedButton = cell.seleteBtn;
+        self.seletedButton.selected = YES;
     }
+    
     
     return cell;
 }
@@ -201,6 +337,14 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (self.isSelectedAddress) {
+        
+        NSDictionary *dict = self.dataSource[indexPath.section];
+        self.passAddress(dict);
+        [self foreAction];
+    }
+    
     
 }
 

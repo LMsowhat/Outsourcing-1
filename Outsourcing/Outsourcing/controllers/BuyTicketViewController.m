@@ -11,10 +11,11 @@
 #import "EliveApplication.h"
 #import "MJExtension.h"
 #import "MBProgressHUDManager.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #import "TicketModel.h"
 #import "TicketContentsCell.h"
-
+#import "CouponsViewController.h"
 
 
 @interface BuyTicketViewController ()<UITableViewDelegate ,UITableViewDataSource>
@@ -25,6 +26,16 @@
 @property (nonatomic ,strong)UIButton *settlementBtn;
 
 @property (nonatomic ,strong)TicketModel *tModel;
+
+@property (nonatomic ,strong)UILabel *couponLabel;
+@property (nonatomic ,copy)NSDictionary *couponDict;
+
+@property (nonatomic ,strong)UILabel *totalLabel;
+@property (nonatomic ,copy)NSString *totalPrice;
+
+
+@property (nonatomic ,strong)UIButton *selectTagButton;
+
 
 @end
 
@@ -52,7 +63,7 @@
     [super viewDidLoad];
     
     [self sendHttpRequest];
-
+    
     [self.view addSubview:self.mainTableView];
     
     [self.view addSubview:self.settlementBtn];
@@ -69,7 +80,7 @@
     header.backgroundColor = UIColorFromRGBA(0xF7F7F7, 1.0);
     
     UIImageView *productionIcon = [UIImageView new];
-    productionIcon.image = [UIImage imageNamed:@"2.jpg"];
+    [productionIcon sd_setImageWithURL:kGetImageUrl(URLHOST, @"0", self.tModel.lId) placeholderImage:[UIImage imageNamed:@"2.jpg"]];
     
     UIView *titleView = [UIView new];
     titleView.backgroundColor = UIColorFromRGBA(0xFFFFFF, 1.0);
@@ -82,7 +93,7 @@
     UILabel *price = [UILabel new];
     price.font = kFont(9);
     price.textColor = UIColorFromRGBA(0x333338, 1.0);
-    price.text = [NSString stringWithFormat:@"￥%@",self.tModel.nPrice];
+    price.text = [NSString stringWithFormat:@"￥%.2f",[self.tModel.nPrice floatValue]/100];
     price.textAlignment = NSTextAlignmentRight;
 
     [titleView addSubview:title];
@@ -130,46 +141,61 @@
     UIView *footer = [UIView new];
     footer.frame = CGRectMake(0, 0, kWidth, 60*kScale);
 
-    UILabel *preferential = [UILabel new];
-    preferential.font = kFont(7);
-    preferential.textColor = UIColorFromRGBA(0x002A20, 1.0);
+    self.couponLabel = [UILabel new];
+    self.couponLabel.font = kFont(7);
+    self.couponLabel.textColor = UIColorFromRGBA(0x002A20, 1.0);
     
-    NSString *testStr = @"优惠：-¥ 5";
+    NSString *testStr = @"优惠：-¥0.00";
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:testStr];
     [str addAttributes:@{NSForegroundColorAttributeName:UIColorFromRGBA(0xFA6650, 1.0),NSFontAttributeName:kFont(7)} range:NSMakeRange(3,testStr.length - 3)];
-    preferential.attributedText = str;
+    self.couponLabel.attributedText = str;
     
-    UILabel *total = [UILabel new];
-    total.font = kFont(7);
-    total.textColor = UIColorFromRGBA(0x333338, 1.0);
+    self.totalLabel = [UILabel new];
+    self.totalLabel.font = kFont(7);
+    self.totalLabel.textColor = UIColorFromRGBA(0x333338, 1.0);
     
-    NSString *testStr1 = @"共：¥ 400";
+    NSString *testStr1 = [NSString stringWithFormat:@"共：¥%.2f",self.totalPrice ? [self.totalPrice floatValue]/100 : 0];
     NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:testStr1];
     [str1 addAttributes:@{NSForegroundColorAttributeName:UIColorFromRGBA(0xFA6650, 1.0),NSFontAttributeName:kFont(9)} range:NSMakeRange(2,testStr1.length - 2)];
-    total.attributedText = str1;
+    self.totalLabel.attributedText = str1;
     
     UIImageView *imageView = [UIImageView new];
     imageView.image = [UIImage imageNamed:@"more"];
     
-    [footer addSubview:preferential];
-    [footer addSubview:total];
-    [footer addSubview:imageView];
+    UIButton *selectCoupon = [UIButton buttonWithType:UIButtonTypeCustom];
+    selectCoupon.backgroundColor = kClearColor;
+    [selectCoupon setTitle:@"" forState:UIControlStateNormal];
+    [selectCoupon addTarget:self action:@selector(selectCouponClick) forControlEvents:UIControlEventTouchUpInside];
     
-    [preferential makeConstraints:^(MASConstraintMaker *make) {
+    [footer addSubview:self.couponLabel];
+    [footer addSubview:self.totalLabel];
+    [footer addSubview:imageView];
+    [footer addSubview:selectCoupon];
+    
+    [self.couponLabel makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.left.equalTo(footer).offset(10 *kScale);
     }];
 
     [imageView makeConstraints:^(MASConstraintMaker *make) {
         
-        make.centerY.equalTo(preferential);
+        make.centerY.equalTo(self.couponLabel);
         
         make.right.equalTo(footer).offset(-10 *kScale);
     }];
     
-    [total makeConstraints:^(MASConstraintMaker *make) {
+    [selectCoupon makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(preferential.mas_bottom).offset(10 *kScale);
+        make.width.equalTo(@(kWidth));
+        
+        make.centerY.equalTo(self.couponLabel);
+        
+        make.top.bottom.equalTo(self.couponLabel);
+    }];
+    
+    [self.totalLabel makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.couponLabel.mas_bottom).offset(10 *kScale);
         
         make.left.equalTo(footer).offset(10 *kScale);
     }];
@@ -177,15 +203,47 @@
     return footer;
 }
 
+- (void)selectCouponClick{
 
+    CouponsViewController *coupon = [CouponsViewController new];
+    coupon.isSelectedCoupons = YES;
+    coupon.nFullPrice = self.totalPrice;
+    coupon.passCoupons = ^(NSDictionary *couponDict) {
+        //处理优惠券
+        self.couponDict = couponDict;
+        NSString *testStr = [NSString stringWithFormat:@"优惠：-¥%.2f",self.couponDict ? [self.couponDict[@"nPrice"] floatValue]/100 : 0];
+        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:testStr];
+        [str addAttributes:@{NSForegroundColorAttributeName:UIColorFromRGBA(0xFA6650, 1.0),NSFontAttributeName:kFont(7)} range:NSMakeRange(3,testStr.length - 3)];
+        self.couponLabel.attributedText = str;
+        
+        //处理订单总价
+        NSInteger total = [self.totalPrice integerValue] - [self.couponDict[@"nPrice"] integerValue];
+        self.totalPrice = [NSString stringWithFormat:@"%ld",total > 0 ? total : 0];
+        NSString *testStr1 = [NSString stringWithFormat:@"共：¥%.2f",self.totalPrice ? [self.totalPrice floatValue]/100 : 0];
+        NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:testStr1];
+        [str1 addAttributes:@{NSForegroundColorAttributeName:UIColorFromRGBA(0xFA6650, 1.0),NSFontAttributeName:kFont(9)} range:NSMakeRange(2,testStr1.length - 2)];
+        self.totalLabel.attributedText = str1;
+    };
+    [self.navigationController pushViewController:coupon animated:YES];
+    NSLog(@"ddfsafasfa");
+}
 
 - (void)selectClik:(UIButton *)sender{
 
+    sender.selected = !sender.selected;
+
+    //处理选中记录
+    if (self.selectTagButton) {
+        
+        self.selectTagButton.selected = NO;
+    }
+    self.selectTagButton = sender;
+    
+    //处理UI
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
     
     TicketContentsCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
     
-    sender.selected = !sender.selected;
 
     if (sender.selected) {
         
@@ -195,12 +253,34 @@
         cell.cPrice.textColor = UIColorFromRGBA(0x333338, 1.0);
     }
 
+    //处理数据
+    
+    NSInteger selectPrice = [self.dataSource[sender.tag][@"nPrice"] integerValue];
+    
+    NSInteger total = [self.totalPrice integerValue];
+    
+    self.totalPrice = [NSString stringWithFormat:@"%ld",sender.selected ? (total + selectPrice) : (total - selectPrice)];
+    
+    NSString *testStr1 = [NSString stringWithFormat:@"共：¥%.2f",self.totalPrice ? [self.totalPrice floatValue]/100 : 0];
+    NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:testStr1];
+    [str1 addAttributes:@{NSForegroundColorAttributeName:UIColorFromRGBA(0xFA6650, 1.0),NSFontAttributeName:kFont(9)} range:NSMakeRange(2,testStr1.length - 2)];
+    self.totalLabel.attributedText = str1;
+    
 }
 
 
 
 - (void)settlementClick{
     
+    NSMutableDictionary *parametes = [NSMutableDictionary new];
+    parametes[kCurrentController] = self;
+    parametes[@"lUserid"] = [UserTools userId];//用户id
+    parametes[@"lTicketConId"] = self.dataSource[self.selectTagButton.tag][@"lId"];//水票id
+    parametes[@"nFactPrice"] = self.totalPrice;//实际支付价格
+    parametes[@"nCount"] = self.dataSource[self.selectTagButton.tag][@"nCount"];//水票数量
+    parametes[@"lMyCouponId"] = self.couponDict[@"lLd"];//优惠券id
+    
+    [OutsourceNetWork onHttpCode:kProductionTicketPayNetWork WithParameters:parametes];
     
 }
 
@@ -219,16 +299,16 @@
     parameters[kCurrentController] = self;
     parameters[@"lTicketId"] = self.ticketId;
     
-    [OutsourceNetWork onHttpCode:kProductionDetailNetWork WithParameters:parameters];
+    [OutsourceNetWork onHttpCode:kProductionTicketDetailNetWork WithParameters:parameters];
     
     [MBProgressHUDManager showHUDAddedTo:self.view];
 }
 
 - (void)getTicketDetail:(id)responseObj{
 
+    [MBProgressHUDManager hideHUDForView:self.view];
+
     if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
-        
-        [MBProgressHUDManager hideHUDForView:self.view];
         
         self.tModel = [TicketModel mj_objectWithKeyValues:responseObj[@"result"]];
         
@@ -247,6 +327,17 @@
     
 }
 
+- (void)payForTicketResult:(id)responseObject{
+
+    if (responseObject[@"resCode"]) {
+        
+        
+    }else{
+    
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObject[@"result"] afterDelay:1.0f];
+    }
+    NSLog(@"%@",responseObject);
+}
 
 #pragma mark Setter && Getter
 
@@ -259,8 +350,6 @@
         _mainTableView.delegate = self;
         
         _mainTableView.dataSource = self;
-        
-        
         
     }
 

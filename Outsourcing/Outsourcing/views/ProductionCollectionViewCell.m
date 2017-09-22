@@ -8,6 +8,7 @@
 
 #import "ProductionCollectionViewCell.h"
 #import "Masonry.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation ProductionCollectionViewCell
 
@@ -18,7 +19,6 @@
     if (self) {
         
         self.icon = [UIImageView new];
-        self.icon.image = [UIImage imageNamed:@"5.jpg"];
         
         self.pName = [UILabel new];
         self.pName.font = kFont(7);
@@ -96,7 +96,6 @@
             
             make.right.equalTo(self);
         }];
-        
     }
 
     [self layoutIfNeeded];
@@ -105,9 +104,10 @@
 
 -(void)fitDataWith:(ProductionModel *)model{
    
+    [self.icon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/common/getImg/0/%@",URLHOST,model.lId]] placeholderImage:[UIImage imageNamed:@"5.jpg"]];
     self.pName.text = model.strGoodsname;
     self.pStandard.text = [NSString stringWithFormat:@"规格：%@",model.strStandard];
-    self.pPrice.text = [NSString stringWithFormat:@"￥%.2f",[model.nPrice floatValue]];//
+    self.pPrice.text = [NSString stringWithFormat:@"￥%.2f",[model.nPrice floatValue]/100];//
     self.pSales.text = [NSString stringWithFormat:@"已售%d",[model.nMothnumber intValue]];
     
 }
