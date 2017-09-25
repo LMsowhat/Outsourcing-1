@@ -18,11 +18,13 @@
 //
 - (void)requestSendCodeGetDataWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result;
 //
-//
 - (void)requestLoginGetDataWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result;
 //
-//
 - (void)requestRegistersGetDataWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result;
+//
+- (void)requestUserUpdatePassWork:(NSDictionary *)params result:(void (^)(id responseObject))result;
+//
+- (void)requestGetUserInfo:(NSDictionary *)params result:(void (^)(id responseObject))result;
 //
 - (void)requestGetUserAddressListWithParameters:(NSDictionary *)params result:(void (^)(id responseObject))result;
 //
@@ -68,6 +70,24 @@
 - (void)requestAddUserFeedback:(NSDictionary *)params result:(void (^)(id responseObject))result;
 
 - (void)requestSettingGetMore:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
+- (void)requestGetPayOrderString:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
+- (void)requestShoppingChartList:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
+- (void)requestShoppingDeleteProduction:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
+- (void)requestSetPayNstate:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
+- (void)requestUserGetMessage:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
+- (void)requestUserGetBucketNum:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
+- (void)requestUserGetRefundBucket:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
+- (void)requestUserDeleteOrder:(NSDictionary *)params result:(void (^)(id responseObject))result;
+
+- (void)requestEmploeeJustSendOrder:(NSDictionary *)params result:(void (^)(id responseObject))result;
 
 
 @end

@@ -7,6 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B193AA61F74AC4E003DE858 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193AA51F74AC4E003DE858 /* libc++.tbd */; };
+		8B193AA81F74AC58003DE858 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193AA71F74AC58003DE858 /* libz.tbd */; };
+		8B193AAA1F74AC62003DE858 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193AA91F74AC62003DE858 /* SystemConfiguration.framework */; };
+		8B193AAC1F74AC76003DE858 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193AAB1F74AC76003DE858 /* CoreTelephony.framework */; };
+		8B193AAE1F74AC83003DE858 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193AAD1F74AC83003DE858 /* QuartzCore.framework */; };
+		8B193AB01F74AC8E003DE858 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193AAF1F74AC8E003DE858 /* CoreText.framework */; };
+		8B193AB21F74ACA8003DE858 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193AB11F74ACA8003DE858 /* CoreGraphics.framework */; };
+		8B193AB41F74ACB3003DE858 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193AB31F74ACB3003DE858 /* UIKit.framework */; };
+		8B193AB61F74ACCD003DE858 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193AB51F74ACCD003DE858 /* Foundation.framework */; };
+		8B193AB81F74ACD6003DE858 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193AB71F74ACD6003DE858 /* CFNetwork.framework */; };
+		8B193ABA1F74ACE3003DE858 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193AB91F74ACE3003DE858 /* CoreMotion.framework */; };
+		8B193ABD1F74B4D5003DE858 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8B193ABB1F74B4D5003DE858 /* AlipaySDK.bundle */; };
+		8B193ABE1F74B4D5003DE858 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193ABC1F74B4D5003DE858 /* AlipaySDK.framework */; };
+		8B193AC11F74E2B0003DE858 /* PayResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B193AC01F74E2B0003DE858 /* PayResultView.m */; };
+		8B193AC91F74FB7E003DE858 /* ShoppingChartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B193AC71F74FB7E003DE858 /* ShoppingChartCell.m */; };
+		8B193ACA1F74FB7E003DE858 /* ShoppingChartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B193AC81F74FB7E003DE858 /* ShoppingChartCell.xib */; };
+		8B193ACF1F74FF18003DE858 /* icon_checked_checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B193ACB1F74FF18003DE858 /* icon_checked_checkbox.png */; };
+		8B193AD01F74FF18003DE858 /* icon_deleteChart.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B193ACC1F74FF18003DE858 /* icon_deleteChart.png */; };
+		8B193AD11F74FF18003DE858 /* icon_unchecked_checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B193ACD1F74FF18003DE858 /* icon_unchecked_checkbox.png */; };
+		8B193AD51F750786003DE858 /* ShoppingBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B193AD41F750786003DE858 /* ShoppingBottomView.m */; };
+		8B193AD71F750791003DE858 /* ShoppingBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B193AD61F750791003DE858 /* ShoppingBottomView.xib */; };
+		8B193ADA1F7551D0003DE858 /* ShoppingChartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B193AD91F7551D0003DE858 /* ShoppingChartModel.m */; };
+		8B193ADD1F75EBF8003DE858 /* OrderHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B193ADC1F75EBF8003DE858 /* OrderHeaderView.m */; };
+		8B193ADF1F75EC06003DE858 /* OrderHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B193ADE1F75EC06003DE858 /* OrderHeaderView.xib */; };
+		8B193AE21F764EDD003DE858 /* EmployeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B193AE11F764EDD003DE858 /* EmployeeViewController.m */; };
+		8B193AE51F7650AC003DE858 /* MyMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B193AE41F7650AC003DE858 /* MyMessageViewController.m */; };
+		8B193AE91F76541C003DE858 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B193AE71F76541C003DE858 /* MessageCell.m */; };
+		8B193AEA1F76541C003DE858 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B193AE81F76541C003DE858 /* MessageCell.xib */; };
 		8B20286E1F10CF7A007F39AD /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B20286D1F10CF7A007F39AD /* OrderModel.m */; };
 		8B20287B1F135577007F39AD /* order_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B20286F1F135576007F39AD /* order_selected.png */; };
 		8B20287C1F135577007F39AD /* order_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B2028701F135576007F39AD /* order_selected@2x.png */; };
@@ -231,6 +259,42 @@
 
 /* Begin PBXFileReference section */
 		048B0B41E714DF07C522C264 /* Pods-Outsourcing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outsourcing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Outsourcing/Pods-Outsourcing.debug.xcconfig"; sourceTree = "<group>"; };
+		8B193AA51F74AC4E003DE858 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		8B193AA71F74AC58003DE858 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		8B193AA91F74AC62003DE858 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		8B193AAB1F74AC76003DE858 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		8B193AAD1F74AC83003DE858 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		8B193AAF1F74AC8E003DE858 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		8B193AB11F74ACA8003DE858 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8B193AB31F74ACB3003DE858 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8B193AB51F74ACCD003DE858 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8B193AB71F74ACD6003DE858 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		8B193AB91F74ACE3003DE858 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		8B193ABB1F74B4D5003DE858 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		8B193ABC1F74B4D5003DE858 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		8B193ABF1F74E2B0003DE858 /* PayResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayResultView.h; sourceTree = "<group>"; };
+		8B193AC01F74E2B0003DE858 /* PayResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayResultView.m; sourceTree = "<group>"; };
+		8B193AC61F74FB7E003DE858 /* ShoppingChartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingChartCell.h; sourceTree = "<group>"; };
+		8B193AC71F74FB7E003DE858 /* ShoppingChartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingChartCell.m; sourceTree = "<group>"; };
+		8B193AC81F74FB7E003DE858 /* ShoppingChartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoppingChartCell.xib; sourceTree = "<group>"; };
+		8B193ACB1F74FF18003DE858 /* icon_checked_checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_checked_checkbox.png; sourceTree = "<group>"; };
+		8B193ACC1F74FF18003DE858 /* icon_deleteChart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_deleteChart.png; sourceTree = "<group>"; };
+		8B193ACD1F74FF18003DE858 /* icon_unchecked_checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_unchecked_checkbox.png; sourceTree = "<group>"; };
+		8B193AD31F750786003DE858 /* ShoppingBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingBottomView.h; sourceTree = "<group>"; };
+		8B193AD41F750786003DE858 /* ShoppingBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingBottomView.m; sourceTree = "<group>"; };
+		8B193AD61F750791003DE858 /* ShoppingBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoppingBottomView.xib; sourceTree = "<group>"; };
+		8B193AD81F7551D0003DE858 /* ShoppingChartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingChartModel.h; sourceTree = "<group>"; };
+		8B193AD91F7551D0003DE858 /* ShoppingChartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingChartModel.m; sourceTree = "<group>"; };
+		8B193ADB1F75EBF8003DE858 /* OrderHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHeaderView.h; sourceTree = "<group>"; };
+		8B193ADC1F75EBF8003DE858 /* OrderHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHeaderView.m; sourceTree = "<group>"; };
+		8B193ADE1F75EC06003DE858 /* OrderHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderHeaderView.xib; sourceTree = "<group>"; };
+		8B193AE01F764EDD003DE858 /* EmployeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeViewController.h; sourceTree = "<group>"; };
+		8B193AE11F764EDD003DE858 /* EmployeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeViewController.m; sourceTree = "<group>"; };
+		8B193AE31F7650AC003DE858 /* MyMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageViewController.h; sourceTree = "<group>"; };
+		8B193AE41F7650AC003DE858 /* MyMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMessageViewController.m; sourceTree = "<group>"; };
+		8B193AE61F76541C003DE858 /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
+		8B193AE71F76541C003DE858 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
+		8B193AE81F76541C003DE858 /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		8B20286C1F10CF7A007F39AD /* OrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderModel.h; sourceTree = "<group>"; };
 		8B20286D1F10CF7A007F39AD /* OrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderModel.m; sourceTree = "<group>"; };
 		8B20286F1F135576007F39AD /* order_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = order_selected.png; sourceTree = "<group>"; };
@@ -514,6 +578,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B193ABA1F74ACE3003DE858 /* CoreMotion.framework in Frameworks */,
+				8B193AB81F74ACD6003DE858 /* CFNetwork.framework in Frameworks */,
+				8B193AB61F74ACCD003DE858 /* Foundation.framework in Frameworks */,
+				8B193AB41F74ACB3003DE858 /* UIKit.framework in Frameworks */,
+				8B193AB21F74ACA8003DE858 /* CoreGraphics.framework in Frameworks */,
+				8B193AB01F74AC8E003DE858 /* CoreText.framework in Frameworks */,
+				8B193AAE1F74AC83003DE858 /* QuartzCore.framework in Frameworks */,
+				8B193AAC1F74AC76003DE858 /* CoreTelephony.framework in Frameworks */,
+				8B193AAA1F74AC62003DE858 /* SystemConfiguration.framework in Frameworks */,
+				8B193AA81F74AC58003DE858 /* libz.tbd in Frameworks */,
+				8B193ABE1F74B4D5003DE858 /* AlipaySDK.framework in Frameworks */,
+				8B193AA61F74AC4E003DE858 /* libc++.tbd in Frameworks */,
 				D531F341D718CD82617539FD /* libPods-Outsourcing.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -538,6 +614,19 @@
 		4043D5030A6FB7E57E5EFC06 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8B193ABB1F74B4D5003DE858 /* AlipaySDK.bundle */,
+				8B193ABC1F74B4D5003DE858 /* AlipaySDK.framework */,
+				8B193AB91F74ACE3003DE858 /* CoreMotion.framework */,
+				8B193AB71F74ACD6003DE858 /* CFNetwork.framework */,
+				8B193AB51F74ACCD003DE858 /* Foundation.framework */,
+				8B193AB31F74ACB3003DE858 /* UIKit.framework */,
+				8B193AB11F74ACA8003DE858 /* CoreGraphics.framework */,
+				8B193AAF1F74AC8E003DE858 /* CoreText.framework */,
+				8B193AAD1F74AC83003DE858 /* QuartzCore.framework */,
+				8B193AAB1F74AC76003DE858 /* CoreTelephony.framework */,
+				8B193AA91F74AC62003DE858 /* SystemConfiguration.framework */,
+				8B193AA71F74AC58003DE858 /* libz.tbd */,
+				8B193AA51F74AC4E003DE858 /* libc++.tbd */,
 				C50945F5B73A5D1E42B8A442 /* libPods-Outsourcing.a */,
 			);
 			name = Frameworks;
@@ -598,8 +687,12 @@
 			children = (
 				8BFB15B31EF0CEBA00725244 /* MyViewController.h */,
 				8BFB15B41EF0CEBA00725244 /* MyViewController.m */,
+				8B193AE31F7650AC003DE858 /* MyMessageViewController.h */,
+				8B193AE41F7650AC003DE858 /* MyMessageViewController.m */,
 				8BE0260A1F3BFEA200B63F5C /* CouponsViewController.h */,
 				8BE0260B1F3BFEA200B63F5C /* CouponsViewController.m */,
+				8B193AE01F764EDD003DE858 /* EmployeeViewController.h */,
+				8B193AE11F764EDD003DE858 /* EmployeeViewController.m */,
 				8B9B84F21F43ECC3009AE5EE /* MyInvitationViewController.h */,
 				8B9B84F31F43ECC3009AE5EE /* MyInvitationViewController.m */,
 				8B9B84F51F43F761009AE5EE /* AddressViewController.h */,
@@ -640,11 +733,16 @@
 		8B20289F1F160120007F39AD /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				8B193ABF1F74E2B0003DE858 /* PayResultView.h */,
+				8B193AC01F74E2B0003DE858 /* PayResultView.m */,
 				8B89AAEF1F68DBD500AE2BB9 /* NoResultView.h */,
 				8B89AAF01F68DBD500AE2BB9 /* NoResultView.m */,
 				8BEC499B1F6E56AC00CE19C5 /* OrderInputView.h */,
 				8BEC499C1F6E56AC00CE19C5 /* OrderInputView.m */,
 				8BEC499E1F6E56BB00CE19C5 /* OrderInputView.xib */,
+				8B193ADB1F75EBF8003DE858 /* OrderHeaderView.h */,
+				8B193ADC1F75EBF8003DE858 /* OrderHeaderView.m */,
+				8B193ADE1F75EC06003DE858 /* OrderHeaderView.xib */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -848,6 +946,9 @@
 		8BFB15CF1EF0DF6E00725244 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				8B193ACB1F74FF18003DE858 /* icon_checked_checkbox.png */,
+				8B193ACC1F74FF18003DE858 /* icon_deleteChart.png */,
+				8B193ACD1F74FF18003DE858 /* icon_unchecked_checkbox.png */,
 				8B28220C1F5953FA0015D2DC /* cart_selected.png */,
 				8B28220D1F5953FA0015D2DC /* cart_selected@2x.png */,
 				8B28220E1F5953FA0015D2DC /* cart_selected@3x.png */,
@@ -997,23 +1098,12 @@
 		8BFB16EE1EF1148E00725244 /* Order */ = {
 			isa = PBXGroup;
 			children = (
-				8B8533FB1F0359BE00D061E4 /* ProductionShowView.h */,
-				8B8533FC1F0359BE00D061E4 /* ProductionShowView.m */,
-				8B8533F21F00F41C00D061E4 /* OrderDetailListCell.h */,
-				8B8533F31F00F41C00D061E4 /* OrderDetailListCell.m */,
-				8B8533FE1F03A20B00D061E4 /* OrderListTableViewCell.h */,
-				8B8533FF1F03A20B00D061E4 /* OrderListTableViewCell.m */,
-				8B89AADD1F678D8F00AE2BB9 /* OrderListCell.h */,
-				8B89AADE1F678D8F00AE2BB9 /* OrderListCell.m */,
-				8B89AADF1F678D8F00AE2BB9 /* OrderListCell.xib */,
-				8B89AAE41F67B44C00AE2BB9 /* OrderListHeaderView.h */,
-				8B89AAE51F67B44C00AE2BB9 /* OrderListHeaderView.m */,
-				8B89AAE21F67B43500AE2BB9 /* OrderListHeaderView.xib */,
-				8B89AAE71F67B78000AE2BB9 /* OrderListFooterView.h */,
-				8B89AAE81F67B78000AE2BB9 /* OrderListFooterView.m */,
-				8B89AAEA1F67B78C00AE2BB9 /* OrderListFooterView.xib */,
-				8B2822181F5C2A9B0015D2DC /* InputTextView.h */,
-				8B2822191F5C2A9B0015D2DC /* InputTextView.m */,
+				8B193AC61F74FB7E003DE858 /* ShoppingChartCell.h */,
+				8B193AC71F74FB7E003DE858 /* ShoppingChartCell.m */,
+				8B193AC81F74FB7E003DE858 /* ShoppingChartCell.xib */,
+				8B193AD31F750786003DE858 /* ShoppingBottomView.h */,
+				8B193AD41F750786003DE858 /* ShoppingBottomView.m */,
+				8B193AD61F750791003DE858 /* ShoppingBottomView.xib */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -1032,12 +1122,32 @@
 		8BFB16F01EF114AC00725244 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				8B8533FB1F0359BE00D061E4 /* ProductionShowView.h */,
+				8B8533FC1F0359BE00D061E4 /* ProductionShowView.m */,
+				8B8533F21F00F41C00D061E4 /* OrderDetailListCell.h */,
+				8B8533F31F00F41C00D061E4 /* OrderDetailListCell.m */,
+				8B8533FE1F03A20B00D061E4 /* OrderListTableViewCell.h */,
+				8B8533FF1F03A20B00D061E4 /* OrderListTableViewCell.m */,
+				8B89AADD1F678D8F00AE2BB9 /* OrderListCell.h */,
+				8B89AADE1F678D8F00AE2BB9 /* OrderListCell.m */,
+				8B89AADF1F678D8F00AE2BB9 /* OrderListCell.xib */,
+				8B89AAE41F67B44C00AE2BB9 /* OrderListHeaderView.h */,
+				8B89AAE51F67B44C00AE2BB9 /* OrderListHeaderView.m */,
+				8B89AAE21F67B43500AE2BB9 /* OrderListHeaderView.xib */,
+				8B89AAE71F67B78000AE2BB9 /* OrderListFooterView.h */,
+				8B89AAE81F67B78000AE2BB9 /* OrderListFooterView.m */,
+				8B89AAEA1F67B78C00AE2BB9 /* OrderListFooterView.xib */,
+				8B2822181F5C2A9B0015D2DC /* InputTextView.h */,
+				8B2822191F5C2A9B0015D2DC /* InputTextView.m */,
 				8BE0260D1F3C035E00B63F5C /* CouponsTableViewCell.h */,
 				8BE0260E1F3C035E00B63F5C /* CouponsTableViewCell.m */,
 				8B9B84F81F441829009AE5EE /* AddressTableViewCell.h */,
 				8B9B84F91F441829009AE5EE /* AddressTableViewCell.m */,
 				8B9B85011F4571F9009AE5EE /* MyTicketTableViewCell.h */,
 				8B9B85021F4571F9009AE5EE /* MyTicketTableViewCell.m */,
+				8B193AE61F76541C003DE858 /* MessageCell.h */,
+				8B193AE71F76541C003DE858 /* MessageCell.m */,
+				8B193AE81F76541C003DE858 /* MessageCell.xib */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -1069,6 +1179,8 @@
 				8B20286D1F10CF7A007F39AD /* OrderModel.m */,
 				8B28221B1F5C33070015D2DC /* SubmitOrderProModel.h */,
 				8B28221C1F5C33070015D2DC /* SubmitOrderProModel.m */,
+				8B193AD81F7551D0003DE858 /* ShoppingChartModel.h */,
+				8B193AD91F7551D0003DE858 /* ShoppingChartModel.m */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -1162,6 +1274,7 @@
 					8BFB15601EEFC3A200725244 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 55VDPW57K7;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					8BFB15791EEFC3A300725244 = {
@@ -1224,6 +1337,7 @@
 				8BE025DF1F39B2E100B63F5C /* more@3x.png in Resources */,
 				8BFB16DB1EF0E21A00725244 /* home@3x.png in Resources */,
 				8B2822091F58051C0015D2DC /* icon_myorder.png in Resources */,
+				8B193ACA1F74FB7E003DE858 /* ShoppingChartCell.xib in Resources */,
 				8BFB167D1EF0DF6E00725244 /* payStatus_no@3x.png in Resources */,
 				8BFB16A61EF0DF6E00725244 /* time_icon@2x.png in Resources */,
 				8B2028851F135577007F39AD /* ticket@2x.png in Resources */,
@@ -1239,6 +1353,7 @@
 				8B2822151F5953FA0015D2DC /* cart.png in Resources */,
 				8BE025F61F39B3C600B63F5C /* icon_bucket@2x.png in Resources */,
 				8BFB166D1EF0DF6E00725244 /* guide_image1.jpg in Resources */,
+				8B193ACF1F74FF18003DE858 /* icon_checked_checkbox.png in Resources */,
 				8B2822131F5953FA0015D2DC /* cart_selected@2x.png in Resources */,
 				8BE026091F3AAE7100B63F5C /* calculate@3x.png in Resources */,
 				8BE025DD1F39B2E100B63F5C /* more.png in Resources */,
@@ -1275,11 +1390,14 @@
 				8BFB16791EF0DF6E00725244 /* payFailure@2x.png in Resources */,
 				8BFB167F1EF0DF6E00725244 /* payStatus_yes@2x.png in Resources */,
 				8BFB16991EF0DF6E00725244 /* setting_myMessage.png in Resources */,
+				8B193AD11F74FF18003DE858 /* icon_unchecked_checkbox.png in Resources */,
 				8B2822161F5953FA0015D2DC /* cart@2x.png in Resources */,
 				8BFB16A71EF0DF6E00725244 /* time_icon@3x.png in Resources */,
+				8B193ABD1F74B4D5003DE858 /* AlipaySDK.bundle in Resources */,
 				8BFB167B1EF0DF6E00725244 /* payStatus_no.png in Resources */,
 				8BFB16461EF0DF6E00725244 /* back@3x.png in Resources */,
 				8B28220A1F58051C0015D2DC /* icon_myorder@2x.png in Resources */,
+				8B193AEA1F76541C003DE858 /* MessageCell.xib in Resources */,
 				8BFB16441EF0DF6E00725244 /* back.png in Resources */,
 				8BFB16451EF0DF6E00725244 /* back@2x.png in Resources */,
 				8BFB15711EEFC3A200725244 /* Assets.xcassets in Resources */,
@@ -1305,6 +1423,7 @@
 				8BE026131F3C070B00B63F5C /* coupons.png in Resources */,
 				8BFB16831EF0DF6E00725244 /* paySuccess@3x.png in Resources */,
 				8B2028821F135577007F39AD /* ticket_selected@2x.png in Resources */,
+				8B193AD71F750791003DE858 /* ShoppingBottomView.xib in Resources */,
 				8BE025FF1F39B3C600B63F5C /* icon_more@2x.png in Resources */,
 				8BE026291F3C905D00B63F5C /* unSelected@2x.png in Resources */,
 				8BE025D31F39659200B63F5C /* icon_massage@3x.png in Resources */,
@@ -1323,6 +1442,7 @@
 				8BFB16EB1EF1137800725244 /* 4.jpg in Resources */,
 				8BFB169C1EF0DF6E00725244 /* setting_myOrder.png in Resources */,
 				8B2028811F135577007F39AD /* ticket_selected.png in Resources */,
+				8B193AD01F74FF18003DE858 /* icon_deleteChart.png in Resources */,
 				8B28220B1F58051C0015D2DC /* icon_myorder@3x.png in Resources */,
 				8BFB16A31EF0DF6E00725244 /* shutDown@2x.png in Resources */,
 				8BE0262A1F3C905D00B63F5C /* unSelected@3x.png in Resources */,
@@ -1331,6 +1451,7 @@
 				8BEC49911F6D507200CE19C5 /* FeedbackViewController.xib in Resources */,
 				8BFB16DC1EF0E21A00725244 /* setting_selected.png in Resources */,
 				8B89AAEB1F67B78C00AE2BB9 /* OrderListFooterView.xib in Resources */,
+				8B193ADF1F75EC06003DE858 /* OrderHeaderView.xib in Resources */,
 				8BFB16A91EF0DF6E00725244 /* userIcon_default.png in Resources */,
 				8B9B85131F4BFFB0009AE5EE /* Launch Screen.storyboard in Resources */,
 				8BFB16871EF0DF6E00725244 /* registerSelect.png in Resources */,
@@ -1416,10 +1537,13 @@
 				8B28221D1F5C33070015D2DC /* SubmitOrderProModel.m in Sources */,
 				8BEC499A1F6D793E00CE19C5 /* OrderDetailViewController.m in Sources */,
 				8BEC498A1F6D4F9500CE19C5 /* RetrieveViewController.m in Sources */,
+				8B193AE51F7650AC003DE858 /* MyMessageViewController.m in Sources */,
+				8B193AE21F764EDD003DE858 /* EmployeeViewController.m in Sources */,
 				8B2028A31F170E9C007F39AD /* UserTools.m in Sources */,
 				8B89AAE61F67B44C00AE2BB9 /* OrderListHeaderView.m in Sources */,
 				8B89AADC1F6783C800AE2BB9 /* CommonTools.m in Sources */,
 				8B8533FD1F0359BE00D061E4 /* ProductionShowView.m in Sources */,
+				8B193ADD1F75EBF8003DE858 /* OrderHeaderView.m in Sources */,
 				8BEC49871F6D4F2700CE19C5 /* AboutUsViewController.m in Sources */,
 				8B9B85061F457707009AE5EE /* MoreViewController.m in Sources */,
 				8B9B84F41F43ECC3009AE5EE /* MyInvitationViewController.m in Sources */,
@@ -1428,6 +1552,7 @@
 				8B8533F41F00F41C00D061E4 /* OrderDetailListCell.m in Sources */,
 				8B2822051F5804670015D2DC /* ShoppingCartController.m in Sources */,
 				8BEC499D1F6E56AC00CE19C5 /* OrderInputView.m in Sources */,
+				8B193AC11F74E2B0003DE858 /* PayResultView.m in Sources */,
 				8B9B84F71F43F761009AE5EE /* AddressViewController.m in Sources */,
 				8BEC49901F6D507200CE19C5 /* FeedbackViewController.m in Sources */,
 				8B20286E1F10CF7A007F39AD /* OrderModel.m in Sources */,
@@ -1436,11 +1561,13 @@
 				8BFB15A91EF0CDD100725244 /* BaseViewController.m in Sources */,
 				8B9B851D1F4D5C2B009AE5EE /* TicketContentsCell.m in Sources */,
 				8B2028891F13569E007F39AD /* TicketListTableViewCell.m in Sources */,
+				8B193AD51F750786003DE858 /* ShoppingBottomView.m in Sources */,
 				8BB4E5D31F00B126006851CF /* OrderCreateController.m in Sources */,
 				8BFB15AC1EF0CDFA00725244 /* NavigationViewController.m in Sources */,
 				8BFB17071EF8CC3900725244 /* SCartListTableViewCell.m in Sources */,
 				8B8534001F03A20B00D061E4 /* OrderListTableViewCell.m in Sources */,
 				8B9B85161F4C0468009AE5EE /* CouponsModel.m in Sources */,
+				8B193AC91F74FB7E003DE858 /* ShoppingChartCell.m in Sources */,
 				8B2028981F160015007F39AD /* ProtocolViews.m in Sources */,
 				8BE0260F1F3C035E00B63F5C /* CouponsTableViewCell.m in Sources */,
 				8B2028921F160008007F39AD /* RegisterViewController.m in Sources */,
@@ -1458,6 +1585,7 @@
 				8B9B84FA1F441829009AE5EE /* AddressTableViewCell.m in Sources */,
 				8BE0260C1F3BFEA200B63F5C /* CouponsViewController.m in Sources */,
 				8BFB15B21EF0CE8F00725244 /* WaterTicketViewController.m in Sources */,
+				8B193ADA1F7551D0003DE858 /* ShoppingChartModel.m in Sources */,
 				8B9B850D1F4BC4A0009AE5EE /* AddressModel.m in Sources */,
 				8BFB15A61EF0CD8600725244 /* OrdersViewController.m in Sources */,
 				8BFB15AF1EF0CE3A00725244 /* HomeViewController.m in Sources */,
@@ -1473,6 +1601,7 @@
 				8BD193751F0F363B00A39605 /* HeaderCycleScrollView.m in Sources */,
 				8BFB16FA1EF11AC000725244 /* ProductionModel.m in Sources */,
 				8BFB15A01EEFEC6F00725244 /* MainTabBarController.m in Sources */,
+				8B193AE91F76541C003DE858 /* MessageCell.m in Sources */,
 				8BFB17011EF776CC00725244 /* ProductionDetail.m in Sources */,
 				8BFB17041EF8C9CE00725244 /* ShoppingCart.m in Sources */,
 			);
@@ -1607,13 +1736,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 55VDPW57K7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Outsourcing/AppDelegate/PrefixHeader.pch";
 				INFOPLIST_FILE = Outsourcing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.liwenhua.Outsourcing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 			};
 			name = Debug;
@@ -1625,13 +1761,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 55VDPW57K7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Outsourcing/AppDelegate/PrefixHeader.pch";
 				INFOPLIST_FILE = Outsourcing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.liwenhua.Outsourcing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 			};
 			name = Release;

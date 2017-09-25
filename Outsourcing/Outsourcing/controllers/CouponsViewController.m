@@ -13,7 +13,7 @@
 #import "MJExtension.h"
 #import "MJRefresh.h"
 #import "MBProgressHUDManager.h"
-
+#import "ServerViewController.h"
 
 @interface CouponsViewController ()<UITableViewDelegate ,UITableViewDataSource>
 
@@ -98,6 +98,10 @@
         _mainTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             
             self.currentPage = 1;
+            if (self.dataSource) {
+                
+                [self.dataSource removeAllObjects];
+            }
             [self sendRequestHttp];
         }];
         
@@ -150,7 +154,10 @@
 
 - (void)useRules{
 
-
+    ServerViewController *server = [ServerViewController new];
+    server.navigationItem.title = @"水票使用须知";
+    
+    [self.navigationController pushViewController:server animated:YES];
 }
 
 - (void)foreAction{
@@ -165,7 +172,7 @@
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     parameters[kCurrentController] = self;
-    parameters[@"lUserId"] = [UserTools userId];
+    parameters[@"lUserId"] = [UserTools getUserId];
     parameters[@"nMaxNum"] = @"10";
     parameters[@"nPage"] = [NSString stringWithFormat:@"%ld",self.currentPage ? self.currentPage : 1];
     if (self.nFullPrice) {
@@ -203,14 +210,14 @@
             }
             
         }else{
-        
+            
             if ([responseObj[@"result"][@"dataList"] count] < 10) {
                 
                 [self.mainTableView.mj_footer endRefreshingWithNoMoreData];
             }
             if (!self.currentPage || self.currentPage == 1) {
                 
-                self.dataSource = responseObj[@"result"][@"dataList"];
+                self.dataSource = [NSMutableArray arrayWithArray:responseObj[@"result"][@"dataList"]];
             }else{
             
                 for (NSDictionary *tem in responseObj[@"result"][@"dataList"]) {
@@ -220,14 +227,8 @@
             }
         }
         
-        if (!self.dataSource.count) {
-            
-            self.noDataView.hidden = NO;
-        }else{
-            
-            self.noDataView.hidden = YES;
-        }
-        
+        self.noDataView.hidden = YES;
+
         [self.mainTableView reloadData];
         NSLog(@"%@",responseObj);
     }else{

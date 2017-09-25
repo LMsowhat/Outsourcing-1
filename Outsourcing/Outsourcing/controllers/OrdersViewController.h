@@ -12,5 +12,6 @@
 
 - (void)getUserOrderList:(id)responseObj;
 
+- (void)deleteOrderResult:(id)responseObject;
 
 @end

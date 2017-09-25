@@ -360,7 +360,7 @@
         
         NSMutableDictionary *parameters = [NSMutableDictionary new];
         parameters[kCurrentController] = self;
-        parameters[@"lUserid"] = [UserTools userId];
+        parameters[@"lUserid"] = [UserTools getUserId];
         parameters[@"strReceiptusername"] = self.rName.text;
         parameters[@"strReceiptmobile"] = self.rPhone.text;
         parameters[@"strLocation"] = self.rArea.text;

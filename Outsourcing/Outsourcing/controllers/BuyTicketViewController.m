@@ -16,7 +16,7 @@
 #import "TicketModel.h"
 #import "TicketContentsCell.h"
 #import "CouponsViewController.h"
-
+#import "PaymentViewController.h"
 
 @interface BuyTicketViewController ()<UITableViewDelegate ,UITableViewDataSource>
 
@@ -233,7 +233,7 @@
     sender.selected = !sender.selected;
 
     //处理选中记录
-    if (self.selectTagButton) {
+    if (self.selectTagButton && self.settlementBtn.selected == YES) {
         
         self.selectTagButton.selected = NO;
     }
@@ -272,15 +272,22 @@
 
 - (void)settlementClick{
     
-    NSMutableDictionary *parametes = [NSMutableDictionary new];
-    parametes[kCurrentController] = self;
-    parametes[@"lUserid"] = [UserTools userId];//用户id
-    parametes[@"lTicketConId"] = self.dataSource[self.selectTagButton.tag][@"lId"];//水票id
-    parametes[@"nFactPrice"] = self.totalPrice;//实际支付价格
-    parametes[@"nCount"] = self.dataSource[self.selectTagButton.tag][@"nCount"];//水票数量
-    parametes[@"lMyCouponId"] = self.couponDict[@"lLd"];//优惠券id
-    
-    [OutsourceNetWork onHttpCode:kProductionTicketPayNetWork WithParameters:parametes];
+    if ([UserTools getUserId]) {
+        
+        NSMutableDictionary *parametes = [NSMutableDictionary new];
+        parametes[kCurrentController] = self;
+        parametes[@"lUserid"] = [UserTools getUserId];//用户id
+        parametes[@"lTicketConId"] = self.dataSource[self.selectTagButton.tag][@"lId"];//水票id
+        parametes[@"nFactPrice"] = self.totalPrice;//实际支付价格
+        parametes[@"nCount"] = self.dataSource[self.selectTagButton.tag][@"nCount"];//水票数量
+        parametes[@"lMyCouponId"] = self.couponDict[@"lLd"];//优惠券id
+        
+        [OutsourceNetWork onHttpCode:kProductionTicketPayNetWork WithParameters:parametes];
+        
+    }else{
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NEEDLOGIN object:nil];
+    }
     
 }
 
@@ -331,6 +338,12 @@
 
     if (responseObject[@"resCode"]) {
         
+        PaymentViewController *pay = [PaymentViewController new];
+        pay.orderId = responseObject[@"result"];
+        pay.nOrderType = @"1";
+        pay.factTotalPrice = [self.totalPrice floatValue];
+        
+        [self.navigationController pushViewController:pay animated:YES];
         
     }else{
     
@@ -377,12 +390,6 @@
 
 #pragma mark TableViewDelegate
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    
-    return 1;
-}
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
@@ -397,7 +404,8 @@
     if (cell == nil)
     {
         cell = [[TicketContentsCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:ID] ;
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     }
     ContentTicketModel *model = [ContentTicketModel mj_objectWithKeyValues:self.dataSource[indexPath.row]];
     

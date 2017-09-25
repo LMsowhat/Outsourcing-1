@@ -7,6 +7,8 @@
 //
 
 #import "ServerViewController.h"
+#import "EliveApplication.h"
+#import "MBProgressHUDManager.h"
 
 @interface ServerViewController ()
 
@@ -23,7 +25,7 @@
     
     self.navigationController.navigationBarHidden = NO;
     
-    self.navigationItem.title = @"服务条款";
+//    self.navigationItem.title = @"服务条款";
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, 0, 22, 17);
@@ -33,6 +35,7 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     [self.navigationItem setLeftBarButtonItem:leftItem];
  
+    [self sendHttpRequest];
     
 }
 
@@ -40,8 +43,9 @@
     [super viewDidLoad];
 
     self.webView.scalesPageToFit = YES;
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
     
+//    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
+//    [self.webView loadHTMLString:<#(nonnull NSString *)#> baseURL:<#(nullable NSURL *)#>];
     // Do any additional setup after loading the view.
 }
 
@@ -50,15 +54,35 @@
 
 - (void)sendHttpRequest{
 
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[kCurrentController] = self;
+    if ([self.navigationItem.title isEqualToString:@"服务条款"]) {
+        
+        parameters[@"nType"] = @"0";
+    }
+    if ([self.navigationItem.title isEqualToString:@"关于我们"]) {
+        
+        parameters[@"nType"] = @"1";
+    }
+    if ([self.navigationItem.title isEqualToString:@"水票使用须知"]) {
+        
+        parameters[@"nType"] = @"2";
+    }
+    [OutsourceNetWork onHttpCode:kSettingGetMoreNetWork WithParameters:parameters];
 
 }
 
 - (void)getServerContent:(id)responseObject{
 
+    if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
+        
+        [self.webView loadHTMLString:responseObject[@"result"] baseURL:nil];
+    }else{
     
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObject[@"result"] afterDelay:1.0f];
+    }
     NSLog(@"%@",responseObject);
 }
-
 
 - (void)foreAction{
     

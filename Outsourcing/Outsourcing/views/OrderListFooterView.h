@@ -19,6 +19,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *payButton;
 
+@property (weak, nonatomic) IBOutlet UIButton *sendButton;
+
 
 - (void)fitDataWithModel:(OrderModel *)model;
 

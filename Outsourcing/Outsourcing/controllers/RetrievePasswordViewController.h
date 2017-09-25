@@ -10,4 +10,8 @@
 
 @interface RetrievePasswordViewController : BaseViewController
 
+- (void)registerSendCodeGetData:(NSDictionary *)data;
+
+- (void)resultOfGetBackPasswork:(id)responseObject;
+
 @end

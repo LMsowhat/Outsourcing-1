@@ -26,7 +26,7 @@
         self.pPrice = [UILabel new];
         self.pPrice.font = kFont(7);
         self.pPrice.textColor = UIColorFromRGBA(0x333338, 1.0);
-        self.pPrice.text = [NSString stringWithFormat:@"￥%ld",[model.nPrice integerValue]/100];
+        self.pPrice.text = [NSString stringWithFormat:@"￥%.2f",[model.nPrice floatValue]/100];
        
         self.pName = [UILabel new];
         self.pName.font = kFont(7);

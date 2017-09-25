@@ -57,6 +57,22 @@ static EliveApplication *elive;
         }
             
             break;
+            
+        case kUserUpdatePassWorkNetWork:
+            
+        {
+            [self requestUpdatePassWork:parms];
+        }
+            
+            break;
+            
+        case kUserGetInfoNetWork:
+            
+        {
+            [self requestGetUserInfo:parms];
+        }
+            
+            break;
 
         case kUserSendCodeNetWork:
             
@@ -222,7 +238,70 @@ static EliveApplication *elive;
             [self requestAddUserFeedbackAction:parms];
         }
             break;
+
+        case kAliPayNetWork:
+        {
             
+            [self requestGetPayOrderString:parms];
+        }
+            break;
+            
+        case kUserGetChartListNetWork:
+        {
+            
+            [self requestGetShpoppingList:parms];
+        }
+            break;
+            
+        case kUserDeleteFromChartNetWork:
+        {
+            
+            [self requestShpoppingDelete:parms];
+        }
+            break;
+            
+        case kTicketallPayNetWork:
+        {
+            
+            [self requestSetPayNstate:parms];
+        }
+            break;
+            
+        case kUserGetMessageNetWork:
+        {
+            
+            [self requestUserGetMessage:parms];
+        }
+            break;
+            
+        case kUserGetBucketNetWork:
+        {
+            
+            [self requestUserGetBucket:parms];
+        }
+            break;
+            
+        case kUserRefundBucketNetWork:
+        {
+            
+            [self requestUserRefundBucket:parms];
+        }
+            break;
+            
+        case kDeleteOrderNetWork:
+        {
+            
+            [self requestUserDeleteOrder:parms];
+        }
+            break;
+            
+        case kJustSendNetWork:
+        {
+            
+            [self requestEmploeeJustSendOrder:parms];
+        }
+            break;
+
         default:
             break;
     }

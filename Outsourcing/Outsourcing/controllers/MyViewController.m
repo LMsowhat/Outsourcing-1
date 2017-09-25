@@ -9,6 +9,7 @@
 #import "MyViewController.h"
 #import "UIButton+myButton.h"
 #import "Masonry.h"
+#import "EliveApplication.h"
 
 #import "CouponsViewController.h"
 #import "MyInvitationViewController.h"
@@ -17,6 +18,9 @@
 #import "MyTicketViewController.h"
 #import "MoreViewController.h"
 #import "OrdersViewController.h"
+#import "EmployeeViewController.h"
+#import "MyMessageViewController.h"
+
 
 @interface MyViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -39,9 +43,15 @@
     self.navigationItem.title = @"我的";
     
     self.view.backgroundColor = UIColorFromRGBA(0xF7F7F7, 1.0);
-    self.dataSource = [[NSMutableArray alloc] initWithObjects:@[@[@"icon_coupon",@"我的优惠券"],@[@"icon_myorder",@"我的订单"],@[@"icon_invite",@"我要邀请"],@[@"icon_address",@"我的地址"]],@[@[@"icon_bucket",@"我的水桶"],@[@"icon_ticket",@"我的水票"],@[@"icon_more",@"更多"]], nil];
+    
+    [self dealDataSource];
     
     [self.view addSubview:self.mainTableView];
+    
+    if ([UserTools getUserId]) {
+        
+        self.userPhone.text = @"登录";
+    }
     // Do any additional setup after loading the view.
 }
 
@@ -52,20 +62,41 @@
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     rightBtn.frame = CGRectMake(0, 0, 20, 20);
     [rightBtn setImage:[UIImage imageNamed:@"icon_massage"] forState:UIControlStateNormal];
-    [rightBtn setBadgeValue:@"0"];
-    [rightBtn setBadgeFont:kFont(5)];
-    [rightBtn setBadgeBGColor:UIColorFromRGBA(0xE96F59, 1.0)];
-    [rightBtn setBadgeTextColor:UIColorFromRGBA(0xFFFFFF, 1.0)];
-    [rightBtn setBadgeOriginX:12];
-    [rightBtn setBadgeOriginY:-6];
+    [rightBtn addTarget:self action:@selector(messageClick) forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     [self.navigationItem setRightBarButtonItem:rightItem];
     
     self.navigationController.navigationBar.barTintColor = UIColorFromRGBA(0xFFFFFF, 1.0);
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName:UIColorFromRGBA(0x1C1F2D, 1.0)};
-    
+    if ([UserTools getUserId]) {
+        
+        [self sendHttpRequest];
+    }
 }
+
+#pragma mark NetWorks
+
+- (void)sendHttpRequest{
+
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[kCurrentController] = self;
+    parameters[@"userId"] = [UserTools getUserId];
+    
+    [OutsourceNetWork onHttpCode:kUserGetInfoNetWork WithParameters:parameters];
+}
+
+- (void)getMyInfo:(id)responseObject{
+
+    if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
+        
+        self.userPhone.text = responseObject[@"result"][@"strMobile"];
+    }
+
+    [self dealDataSource];
+    [self.mainTableView reloadData];
+}
+
 
 #pragma mark Setter && Getter
 
@@ -73,7 +104,7 @@
 
     if (!_mainTableView) {
         
-        _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kTopBarHeight, kWidth, kHeight - kTopBarHeight) style:UITableViewStyleGrouped];
+        _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kTopBarHeight, kWidth, kHeight - kTopBarHeight - kTabBarHeight) style:UITableViewStyleGrouped];
         
         _mainTableView.delegate = self;
         
@@ -109,36 +140,58 @@
         
         _userPhone.font = kFont(7);
         
-        _userPhone.text = @"15011075120";
+        _userPhone.text = @"登录";
     }
 
     return _userPhone;
 }
 
--(NSArray *)childControllers{
-   
-    if (!_childControllers) {
-        //优惠券
-        CouponsViewController *coupon = [CouponsViewController new];
-        //订单
-        OrdersViewController *order = [OrdersViewController new];
-        //我的邀请
-        MyInvitationViewController *invitate = [MyInvitationViewController new];
-        //我的地址
-        AddressViewController *address = [AddressViewController new];
-        //我的水桶
-        MyBarrelViewController *barrel = [MyBarrelViewController new];
-        //我的水票
-        MyTicketViewController *ticket = [MyTicketViewController new];
-        //更多
-        MoreViewController *more = [MoreViewController new];
+#pragma mark Private Method
 
-        _childControllers = @[@[coupon,order,invitate,address],@[barrel,ticket,more]];
+- (void)messageClick{
+
+    if (![UserTools getUserId]) {
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NEEDLOGIN object:nil];
+    }else{
+    
+        MyMessageViewController *myMessage = [MyMessageViewController new];
+        
+        [self.navigationController pushViewController:myMessage animated:YES];
     }
-    return _childControllers;
+    
 }
 
-#pragma mark Private Method
+- (void)dealDataSource{
+
+    //优惠券
+    CouponsViewController *coupon = [CouponsViewController new];
+    //优惠券
+    EmployeeViewController *employee = [EmployeeViewController new];
+    //订单
+    OrdersViewController *order = [OrdersViewController new];
+    //我的邀请
+    MyInvitationViewController *invitate = [MyInvitationViewController new];
+    //我的地址
+    AddressViewController *address = [AddressViewController new];
+    //我的水桶
+    MyBarrelViewController *barrel = [MyBarrelViewController new];
+    //我的水票
+    MyTicketViewController *ticket = [MyTicketViewController new];
+    //更多
+    MoreViewController *more = [MoreViewController new];
+    
+    if ([UserTools userEmployeesId]) {
+        
+        self.dataSource = [[NSMutableArray alloc] initWithObjects:@[@[@"icon_coupon",@"我的优惠券"],@[@"icon_myorder",@"我的配送单"],@[@"icon_myorder",@"我的订单"],@[@"icon_invite",@"我要邀请"],@[@"icon_address",@"我的地址"]],@[@[@"icon_bucket",@"我的水桶"],@[@"icon_ticket",@"我的水票"],@[@"icon_more",@"更多"]], nil];
+
+        self.childControllers = @[@[coupon,employee,order,invitate,address],@[barrel,ticket,more]];
+    }else{
+        self.dataSource = [[NSMutableArray alloc] initWithObjects:@[@[@"icon_coupon",@"我的优惠券"],@[@"icon_myorder",@"我的订单"],@[@"icon_invite",@"我要邀请"],@[@"icon_address",@"我的地址"]],@[@[@"icon_bucket",@"我的水桶"],@[@"icon_ticket",@"我的水票"],@[@"icon_more",@"更多"]], nil];
+        
+        self.childControllers = @[@[coupon,order,invitate,address],@[barrel,ticket,more]];
+    }
+}
 
 - (UIView *)createUserView{
 
@@ -280,6 +333,10 @@
 
     UIView *cellView = [self createTableViewCell:self.dataSource[indexPath.section -1][indexPath.row][0] Text:self.dataSource[indexPath.section -1][indexPath.row][1]];
     
+    for (UIView *view in cell.subviews) {
+        
+        [view removeFromSuperview];
+    }
     [cell addSubview:cellView];
     [cellView makeConstraints:^(MASConstraintMaker *make) {
         
@@ -291,14 +348,29 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section != 0) {
-        
-        UIViewController *detail = self.childControllers[indexPath.section - 1][indexPath.row];
-        
-        [self.navigationController pushViewController:detail animated:YES];
-    }
-  
+    BOOL isLogin = [[UserTools getUserId] boolValue];
     
+    if (!isLogin) {
+        
+        if (indexPath.section == 2 && indexPath.row == 2){
+            
+            UIViewController *detail = self.childControllers[indexPath.section - 1][indexPath.row];
+            
+            [self.navigationController pushViewController:detail animated:YES];
+        }else{
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:NEEDLOGIN object:nil];
+        }
+    }
+    if (isLogin) {
+        
+        if (indexPath.section != 0) {
+            
+            UIViewController *detail = self.childControllers[indexPath.section - 1][indexPath.row];
+            
+            [self.navigationController pushViewController:detail animated:YES];
+        }
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

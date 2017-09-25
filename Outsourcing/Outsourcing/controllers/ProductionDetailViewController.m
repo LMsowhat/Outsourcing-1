@@ -38,6 +38,10 @@
 @property (nonatomic ,strong)UIButton *submitBtn;
 
 
+
+@property (nonatomic ,strong)UIImageView *imageV;
+
+
 @property (nonatomic ,strong)ProductionModel *pModel;
 
 @end
@@ -60,7 +64,6 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     [self.navigationItem setLeftBarButtonItem:leftItem];
  
-    [self sendHttpRequest];
 }
 
 
@@ -71,6 +74,9 @@
     
     [self configDefaultView];
 
+    [self sendHttpRequest];
+    
+    //记录商品数量
     self.pNumber = 1;
     //
     [self.view addSubview:self.submitBtn];
@@ -287,10 +293,11 @@
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     parameters[kCurrentController] = self;
-    parameters[@"lBuyerid"] = [UserTools userId];
+    parameters[@"lBuyerid"] = [UserTools getUserId];
     parameters[@"strBuyername"] = @"姓名";
     parameters[@"nTotalprice"] = production[@"nGoodsTotalPrice"];
     parameters[@"orderGoods"] = productions;
+    parameters[@"nAddOrderType"] = @"0";
     
     [OutsourceNetWork onHttpCode:kSubmitOrderNetWork WithParameters:parameters];
   
@@ -348,17 +355,20 @@
     
     CGFloat dHeight = self.pPrice.frame.origin.y + 140;
     
-    UIImageView *imageV = [UIImageView new];
+    if (!self.imageV) {
+        
+        self.imageV = [UIImageView new];
+    }
     
-    [imageV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/common/getImg/2/%@",URLHOST,self.pModel.lId]] placeholderImage:[UIImage imageNamed:@"3.jpg"]];
+    [self.imageV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/common/getImg/2/%@",URLHOST,self.pModel.lId]] placeholderImage:[UIImage imageNamed:@"3.jpg"]];
     
-    CGFloat iHeight = imageV.image.size.height * (kWidth - 40)/imageV.image.size.width;
+    CGFloat iHeight = self.imageV.image.size.height * (kWidth - 40)/self.imageV.image.size.width;
     
-    imageV.frame = CGRectMake(20, dHeight, kWidth - 40, iHeight);
+    self.imageV.frame = CGRectMake(20, dHeight, kWidth - 40, iHeight);
     
     self.mainScroll.contentSize = CGSizeMake(kWidth, dHeight + iHeight);
 
-    [self.mainScroll addSubview:imageV];
+    [self.mainScroll addSubview:self.imageV];
 
 }
 
@@ -408,7 +418,7 @@
 
 - (void)submitBtnClick:(UIButton *)sender{
 
-    if ([UserTools userId]) {
+    if ([UserTools getUserId]) {
         
         [self sendSubmitOrderRequest];
     }else{

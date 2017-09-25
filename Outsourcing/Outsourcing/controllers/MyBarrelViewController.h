@@ -10,4 +10,9 @@
 
 @interface MyBarrelViewController : BaseViewController
 
+- (void)getMyBarrel:(id)responseObject;
+
+- (void)refundBucket:(id)responseObject;
+
+
 @end

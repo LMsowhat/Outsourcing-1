@@ -12,16 +12,51 @@
 
 - (void)fitDataWithModel:(OrderModel *)model{
 
-    self.bPrice.text = [NSString stringWithFormat:@"桶押金：￥%.2f",[model.nBucketmoney floatValue]/100];
+    float total = [model.nBucketnum floatValue] * [model.nBucketmoney floatValue];
+    self.bPrice.text = [NSString stringWithFormat:@"桶押金：￥%.2f",total/100];
 
-    self.oTotalPrice.text = [NSString stringWithFormat:@"实付款：￥%.2f",[model.nTotalprice floatValue]/100];
-
-    if (model.nState != 0) {
+    self.oTotalPrice.text = [NSString stringWithFormat:@"实付款：￥%.2f",[model.nFactPrice floatValue]/100];
+    
+    if (model.conState == 2) {
         
         self.deleteButton.hidden = YES;
         
         self.payButton.hidden = YES;
+        
+        if (model.nSendState != 1) {
+            
+            self.sendButton.hidden = NO;
+        }else{
+
+            self.sendButton.hidden = YES;
+        }
+        
+    }else{
+        
+        self.sendButton.hidden = YES;
+        
+        if (model.nState == 3) {
+            
+            self.deleteButton.hidden = YES;
+            
+            self.payButton.hidden = YES;
+        }else if (model.nState == 0){
+            
+            [self.payButton setTitle:@"去结算" forState:UIControlStateNormal];
+            
+            self.deleteButton.hidden = NO;
+            
+            self.payButton.hidden = NO;
+        }else{
+            [self.payButton setTitle:@"立即支付" forState:UIControlStateNormal];
+            
+            self.deleteButton.hidden = NO;
+            
+            self.payButton.hidden = NO;
+        }
     }
+    
+    
     
 }
 

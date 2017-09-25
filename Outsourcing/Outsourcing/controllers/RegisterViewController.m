@@ -220,14 +220,15 @@
     }
     sender.userInteractionEnabled = NO;
     
-    [self countDown];
+    //获取验证码
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[kCurrentController] = self;
+    parameters[@"strMobile"] = self.userNameTextField.text;
+    parameters[@"type"] = @"0";
+    
+    [OutsourceNetWork onHttpCode:kUserSendCodeNetWork WithParameters:parameters];
 
-//    //获取验证码
-//    NSMutableDictionary *parameters = [NSMutableDictionary new];
-//    parameters[kCurrentController] = self;
-//    parameters[@"strMobile"] = self.userNameTextField.text;
-//    
-//    [OutsourceNetWork onHttpCode:kUserSendCodeNetWork WithParameters:parameters];
+    [self countDown];
 
     NSLog(@"getCodeClick !!!!");
 }
@@ -243,7 +244,7 @@
         parameters[kCurrentController] = self;
         parameters[@"strMobile"] = self.userNameTextField.text;
         parameters[@"strPassword"] = self.psdTextField.text;
-        parameters[@"strUserSmsCode"] = @"4444";
+        parameters[@"strUserSmsCode"] = self.messageCodeTextField.text;
         
         [OutsourceNetWork onHttpCode:kUserRegisterNetWork WithParameters:parameters];
     }
@@ -398,6 +399,14 @@
     return YES;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    //当用户按下ruturn，把焦点从textField移开那么键盘就会消失了
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
 - (void)codeEditChanged:(UITextField *)sender{
     
     
@@ -423,10 +432,8 @@
 
 - (void)registerSendCodeGetData:(NSDictionary *)data{
 
-    if (![data[@"resCode"] isEqualToString:@"0"]) {
-        
-        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:data[@"result"] afterDelay:1.0f];
-    }
+    [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:data[@"result"] afterDelay:1.0f];
+
 }
 
 - (void)registerGetData:(NSDictionary *)data{
@@ -435,7 +442,7 @@
         
         [self loginSuccess:data[@"result"]];
 
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        [self foreAction];
         
     }else{
         
@@ -572,7 +579,6 @@
     
     [UserTools setUserId:userId];
     
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 
 }
 

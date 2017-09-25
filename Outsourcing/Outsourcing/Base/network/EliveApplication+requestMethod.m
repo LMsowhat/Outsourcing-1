@@ -26,6 +26,14 @@
 #import "ServerViewController.h"
 #import "AboutUsViewController.h"
 #import "RetrieveViewController.h"
+#import "PaymentViewController.h"
+#import "ShoppingCartController.h"
+#import "MyMessageViewController.h"
+#import "EmployeeViewController.h"
+#import "MyViewController.h"
+#import "MyBarrelViewController.h"
+#import "RetrieveViewController.h"
+#import "RetrievePasswordViewController.h"
 
 
 
@@ -48,7 +56,15 @@
                 [registers registerSendCodeGetData:responseObject];
             }
         }
-        
+        if ([controller isKindOfClass:[RetrievePasswordViewController class]]) {
+            
+            RetrievePasswordViewController *registers = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+//                [registers registerSendCodeGetData:responseObject];
+            }
+        }
     }];
 }
 
@@ -94,6 +110,60 @@
         
     }];
 }
+
+- (void)requestUpdatePassWork:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestUserUpdatePassWork:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[RetrieveViewController class]]) {
+            
+            RetrieveViewController *retrieve = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [retrieve resultOfUpdatePasswork:responseObject];
+            }
+        }
+        if ([controller isKindOfClass:[RetrievePasswordViewController class]]) {
+            
+            RetrievePasswordViewController *retrieve = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [retrieve resultOfGetBackPasswork:responseObject];
+            }
+        }
+        
+    }];
+
+}
+
+
+- (void)requestGetUserInfo:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestGetUserInfo:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[MyViewController class]]) {
+            
+            MyViewController *myView = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [myView getMyInfo:responseObject];
+            }
+        }
+        
+    }];
+}
+
 
 - (void)requestGetUserAddress:(NSDictionary*)parm{
 
@@ -307,7 +377,15 @@
                 [production resultOfSubmitOrder:responseObject];
             }
         }
-        
+        if ([controller isKindOfClass:[ShoppingCartController class]]) {
+            
+            ShoppingCartController *shopping = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [shopping resultOfSubmitOrder:responseObject];
+            }
+        }
     }];
 
 }
@@ -390,6 +468,13 @@
         if ([controller isKindOfClass:[OrdersViewController class]]) {
             
             OrdersViewController *orderList = [parm objectForKey:kCurrentController];
+            
+            [orderList getUserOrderList:responseObject];
+            
+        }
+        if ([controller isKindOfClass:[EmployeeViewController class]]) {
+            
+            EmployeeViewController *orderList = [parm objectForKey:kCurrentController];
             
             [orderList getUserOrderList:responseObject];
             
@@ -582,6 +667,211 @@
         
     }];
 }
+
+- (void)requestGetPayOrderString:(NSDictionary*)parm{
+    
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestGetPayOrderString:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[PaymentViewController class]]) {
+            
+            PaymentViewController *payController = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                if ([parm[@"nPayType"] isEqualToString:@"0"]) {
+                    
+                    [payController getAliPayOrderString:responseObject];
+                }
+                if ([parm[@"nPayType"] isEqualToString:@"1"]) {
+                    
+                    [payController getWechatPayOrderString:responseObject];
+                }
+                
+            }
+        }
+        
+    }];
+}
+
+- (void)requestGetShpoppingList:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestShoppingChartList:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[ShoppingCartController class]]) {
+            
+            ShoppingCartController *shoppingChart = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [shoppingChart getShoppingDetail:responseObject];
+                
+            }
+        }
+    }];
+}
+
+- (void)requestShpoppingDelete:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestShoppingDeleteProduction:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[ShoppingCartController class]]) {
+            
+            ShoppingCartController *shoppingChart = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [shoppingChart deleteProductionResult:responseObject];
+                
+            }
+        }
+    }];
+
+}
+
+- (void)requestSetPayNstate:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestSetPayNstate:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[OrderDetailViewController class]]) {
+            
+            OrderDetailViewController *orderDetail = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [orderDetail setPayNstateResult:responseObject];
+                
+            }
+        }
+    }];
+}
+
+- (void)requestUserGetMessage:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestUserGetMessage:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[MyMessageViewController class]]) {
+            
+            MyMessageViewController *myMessage = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [myMessage getMyMessageList:responseObject];
+                
+            }
+        }
+    }];
+
+}
+
+- (void)requestUserGetBucket:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestUserGetBucketNum:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[MyBarrelViewController class]]) {
+            
+            MyBarrelViewController *myBarrel = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [myBarrel getMyBarrel:responseObject];
+                
+            }
+        }
+    }];
+}
+
+- (void)requestUserRefundBucket:(NSDictionary*)parm{
+
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestUserGetRefundBucket:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[MyBarrelViewController class]]) {
+            
+            MyBarrelViewController *myBarrel = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [myBarrel refundBucket:responseObject];
+                
+            }
+        }
+    }];
+}
+
+- (void)requestUserDeleteOrder:(NSDictionary*)parm{
+    
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestUserDeleteOrder:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[OrdersViewController class]]) {
+            
+            OrdersViewController *order = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [order deleteOrderResult:responseObject];
+                
+            }
+        }
+    }];
+
+}
+
+- (void)requestEmploeeJustSendOrder:(NSDictionary*)parm{
+
+    
+    EliveHttpApi *api = [EliveHttpApi new];
+    
+    UIViewController *controller = [parm objectForKey:kCurrentController];
+    
+    [api requestEmploeeJustSendOrder:parm result:^(id responseObject) {
+        
+        if ([controller isKindOfClass:[EmployeeViewController class]]) {
+            
+            EmployeeViewController *emploee = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [emploee actionToSendResult:responseObject];
+                
+            }
+        }
+    }];
+
+}
+
+
+
 
 
 

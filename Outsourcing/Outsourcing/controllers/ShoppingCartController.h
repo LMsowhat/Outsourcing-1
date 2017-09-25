@@ -10,4 +10,15 @@
 
 @interface ShoppingCartController : BaseViewController
 
+- (void)sendHttpRequest;
+
+
+- (void)getShoppingDetail:(id)responsObject;
+
+
+- (void)deleteProductionResult:(id)responstObject;
+
+
+- (void)resultOfSubmitOrder:(id)responstObject;
+
 @end

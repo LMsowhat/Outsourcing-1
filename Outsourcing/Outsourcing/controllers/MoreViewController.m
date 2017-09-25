@@ -58,6 +58,14 @@
     logout.backgroundColor = UIColorFromRGBA(0xFA6650, 1.0);
     [logout addTarget:self action:@selector(logoutClick) forControlEvents:UIControlEventTouchUpInside];
     
+    if (![UserTools getUserId]) {
+        
+        logout.hidden = YES;
+    }else{
+    
+        logout.hidden = NO;
+    }
+    
     [self.view addSubview:logout];
     // Do any additional setup after loading the view.
 }
@@ -99,7 +107,7 @@
         
         FeedbackViewController *feedback = [FeedbackViewController new];
         ServerViewController *server = [ServerViewController new];
-        AboutUsViewController *about = [AboutUsViewController new];
+        ServerViewController *about = [ServerViewController new];
         RetrieveViewController *retrieve = [RetrieveViewController new];
         
         _subViewControllers = [NSArray arrayWithObjects:feedback,server,about,retrieve, nil];
@@ -127,16 +135,14 @@
 
 #pragma mark TableViewDelegate
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    
-    return 1;
-}
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    return 4;
+    if (![UserTools getUserId]) {
+        
+        return 3;
+    }else{
+        return 4;
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -197,7 +203,8 @@
 - (void)gotoViewControllers:(NSInteger)index{
 
     UIViewController *controller = self.subViewControllers[index];
-
+    controller.navigationItem.title = self.dataSource[index];
+    
     [self.navigationController pushViewController:controller animated:YES];
 
 }

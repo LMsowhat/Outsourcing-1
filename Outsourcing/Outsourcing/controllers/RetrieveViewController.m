@@ -9,8 +9,10 @@
 #import "RetrieveViewController.h"
 #import "MBProgressHUDManager.h"
 
+#import "EliveApplication.h"
 
-@interface RetrieveViewController ()
+
+@interface RetrieveViewController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 
@@ -44,6 +46,18 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     [self.navigationItem setLeftBarButtonItem:leftItem];
     
+    if (self.phoneTextField) {
+        
+        self.phoneTextField.text = @"";
+    }
+    if (self.oldTextField) {
+        
+        self.oldTextField.text = @"";
+    }
+    if (self.newsTextField) {
+        
+        self.newsTextField.text = @"";
+    }
     
 }
 
@@ -51,11 +65,13 @@
     [super viewDidLoad];
     self.view.backgroundColor = UIColorFromRGBA(0xF7F7F7, 1.0);
     
-    
     [self.submitButton addTarget:self action:@selector(submitButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
+    self.phoneTextField.delegate = self;
     [self.phoneTextField addTarget:self action:@selector(phoneTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    self.oldTextField.delegate = self;
     [self.oldTextField addTarget:self action:@selector(phoneTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    self.newsTextField.delegate = self;
     [self.newsTextField addTarget:self action:@selector(phoneTextFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     
@@ -114,10 +130,30 @@
     
     if (isOk) {
         
+        NSMutableDictionary *parameters = [NSMutableDictionary new];
+        parameters[kCurrentController] = self;
+        parameters[@"lUserId"] = [UserTools getUserId];
+        parameters[@"strPasswordOld"] = self.submitData[@"oldPsd"];
+        parameters[@"strMobile"] = self.submitData[@"phone"];
+        parameters[@"strPassword"] = self.submitData[@"newPsd"];
         
+        [OutsourceNetWork onHttpCode:kUserUpdatePassWorkNetWork WithParameters:parameters];
     }
 
 }
+
+- (void)resultOfUpdatePasswork:(id)responseObject{
+
+    [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObject[@"result"] afterDelay:1.0f];
+    
+    if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
+        
+        [self foreAction];
+    }
+}
+
+
+
 
 - (void)foreAction{
     
@@ -145,6 +181,14 @@
 
 }
 
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    //当用户按下ruturn，把焦点从textField移开那么键盘就会消失了
+    [textField resignFirstResponder];
+    
+    return YES;
+}
 
 
 

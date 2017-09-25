@@ -113,8 +113,8 @@
     //获取我的水票列表
     NSMutableDictionary *m_parameters = [NSMutableDictionary new];
     m_parameters[kCurrentController] = self;
-    m_parameters[@"lUserId"] = [UserTools userId];
-    m_parameters[@"nMaxNum"] = @"10";
+    m_parameters[@"lUserId"] = [UserTools getUserId];
+    m_parameters[@"nMaxNum"] = @"100";
     m_parameters[@"nPage"] = @"1";
     
     [OutsourceNetWork onHttpCode:kUserGetTicketListNetWork WithParameters:m_parameters];

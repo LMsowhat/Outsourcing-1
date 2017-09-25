@@ -100,6 +100,10 @@
         _mainTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             
             self.currentPage = 1;
+            if (self.dataSource) {
+                
+                [self.dataSource removeAllObjects];
+            }
             [self sendHttpRequest];
         }];
         
@@ -186,7 +190,7 @@
 
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     parameters[kCurrentController] = self;
-    parameters[@"lUserId"] = [UserTools userId];
+    parameters[@"lUserId"] = [UserTools getUserId];
     parameters[@"nMaxNum"] = @"10";
     parameters[@"nPage"] = [NSString stringWithFormat:@"%ld",self.currentPage ? self.currentPage : 1];
     
@@ -225,7 +229,7 @@
         }
         if (!self.currentPage || self.currentPage == 1) {
             
-            self.dataSource = responseObj[@"result"][@"dataList"];
+            self.dataSource = [NSMutableArray arrayWithArray:responseObj[@"result"][@"dataList"]];
         }else{
         
             for (NSDictionary *temp in self.dataSource) {

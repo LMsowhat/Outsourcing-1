@@ -27,22 +27,23 @@
     
 }
 
-+ (void)setToken:(NSString *)token{
+
+
++ (void)setInvite:(NSString *)inviteCode{
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
-    [userDefault setObject:token forKey:@"e_token"];
+    [userDefault setObject:inviteCode forKey:@"invite"];
     [userDefault synchronize];
     
 }
 
-
-+ (NSString *)userToken{
++ (NSString *)userInviteCode{
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
-    NSString *token = [userDefault objectForKey:@"e_token"];
-    return token;
+    NSString *invite = [userDefault objectForKey:@"invite"];
+    return invite;
 }
 
 
@@ -50,7 +51,7 @@
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
-    [userDefault setObject:userId forKey:@"userId"];
+    [userDefault setObject:userId forKey:@"clientId"];
     [userDefault synchronize];
     
 }
@@ -60,9 +61,21 @@
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     
-    NSString *userId = [userDefault objectForKey:@"userId"];
+    NSString *userId = [userDefault objectForKey:@"clientId"];
     return userId;
 }
+
+
++(NSString *)getUserId{
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    NSString *userId = [userDefault objectForKey:@"clientId"] ? [userDefault objectForKey:@"clientId"] : [userDefault objectForKey:@"employeeId"];
+    
+    return userId;
+}
+
+
 
 + (void)setUserAddress:(NSDictionary *)userAddress{
 
@@ -97,14 +110,33 @@
     return employeeId;
 }
 
++ (void)setUserEmployeeName:(NSString *)employeeName{
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    [userDefault setObject:employeeName forKey:@"employeeName"];
+    
+    [userDefault synchronize];
+}
 
++(NSString *)userEmployeesName{
+
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    NSString *employeeName = [userDefault objectForKey:@"employeeName"];
+    return employeeName;
+}
 
 
 + (void)logOut{
     
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userId"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"clientId"];
     
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"address"];
+
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"employeeId"];
+
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"employeeName"];
 
 }
 

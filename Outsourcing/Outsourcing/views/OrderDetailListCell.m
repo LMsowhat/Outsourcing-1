@@ -39,18 +39,19 @@
         [self addSubview:self.left_label];
         [self addSubview:self.right_icon];
         
-        [self.left_label makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.centerY.equalTo(self);
-            make.left.equalTo(self).offset(10*kScale);
-            
-        }];
         
         [self.right_icon makeConstraints:^(MASConstraintMaker *make) {
             
             make.centerY.equalTo(self);
             make.right.equalTo(self).offset(-10*kScale);
             
+        }];
+        
+        [self.left_label makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.centerY.equalTo(self);
+            make.left.equalTo(self).offset(10*kScale);
+            make.right.equalTo(self.right_icon).offset(-5);
         }];
         
         

@@ -11,7 +11,7 @@
 #import "MJExtension.h"
 #import "EliveApplication.h"
 #import "MBProgressHUDManager.h"
-
+#import "MJRefresh.h"
 
 #import "TicketListTableViewCell.h"
 #import "BuyTicketViewController.h"
@@ -34,10 +34,12 @@
 
 @property (nonatomic ,strong)NSMutableArray *dataSource;
 
-@property (nonatomic ,strong)NSMutableArray *myTicketArr;
-@property (nonatomic ,strong)NSMutableArray *buyTicketArr;
-
 @property (nonatomic ,strong)NSMutableArray *m_dataSource;
+
+@property (nonatomic ,strong)NoResultView *uView;
+
+@property (nonatomic ,strong)NoResultView *fView;
+
 
 @end
 
@@ -68,6 +70,17 @@
     [self.mainSrollView addSubview:self.buyTicketTableView];
     
     [self.mainSrollView addSubview:self.myTicketTableView];
+    
+    self.uView = [[NoResultView alloc] initWithFrame:CGRectMake(0, 0, kWidth, kHeight - kTopBarHeight - 40)];
+    self.uView.placeHolder.text = @"暂无水票";
+    self.uView.hidden = YES;
+    
+    self.fView = [[NoResultView alloc] initWithFrame:CGRectMake(kWidth, 0, kWidth, kHeight - kTopBarHeight - 40)];
+    self.fView.placeHolder.text = @"暂无水票";
+    self.fView.hidden = YES;
+    
+    [self.mainSrollView addSubview:self.uView];
+    [self.mainSrollView addSubview:self.fView];
     
     [self.view addSubview:self.mainSrollView];
     
@@ -145,6 +158,25 @@
         _myTicketTableView.dataSource = self;
         _myTicketTableView.separatorColor = kClearColor;
         
+        _myTicketTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            
+            self.currentPage_another = 1;
+            if (self.m_dataSource) {
+                
+                [self.m_dataSource removeAllObjects];
+            }
+            [self getMyTicketListRequest];
+        }];
+        
+        MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            
+            self.currentPage_another += 1;
+            [self getMyTicketListRequest];
+        }];
+        [footer setTitle:@"已经全部加载完毕" forState:MJRefreshStateNoMoreData];
+        
+        _myTicketTableView.mj_footer = footer;
+        
     }
     
     return _myTicketTableView;
@@ -159,6 +191,25 @@
         _buyTicketTableView.delegate = self;
         _buyTicketTableView.dataSource = self;
         _buyTicketTableView.separatorColor = kClearColor;
+        
+        _buyTicketTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            
+            self.currentPage = 1;
+            if (self.dataSource) {
+                
+                [self.dataSource removeAllObjects];
+            }
+            [self getTiketListRequest];
+        }];
+        
+        MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            
+            self.currentPage += 1;
+            [self getTiketListRequest];
+        }];
+        [footer setTitle:@"已经全部加载完毕" forState:MJRefreshStateNoMoreData];
+        
+        _buyTicketTableView.mj_footer = footer;
     }
     
     return _buyTicketTableView;
@@ -219,12 +270,16 @@
     
     if (CGRectContainsPoint(CGRectMake(0, kTopBarHeight, kWidth/2, 40), point))
     {
+        [self.buyTicketTableView.mj_header beginRefreshing];
+
         [self checkOutLabelWith:0];
         
         self.mainSrollView.contentOffset = CGPointMake(0, 0);
         
     }else{
-        
+
+        [self.myTicketTableView.mj_header beginRefreshing];
+
         [self checkOutLabelWith:1];
         
         self.mainSrollView.contentOffset = CGPointMake(kWidth, 0);
@@ -240,26 +295,20 @@
         self.myTicketLabel.textColor = UIColorFromRGBA(0xFA6650, 1.0);
         self.buyTicketLabel.textColor = UIColorFromRGBA(0x333338, 1.0);
         
+        [self.myTicketTableView.mj_header beginRefreshing];
         [self.tagView updateConstraints:^(MASConstraintMaker *make) {
             
             make.centerX.equalTo(_topTabView).offset(-kWidth/4);;
-            
         }];
-        
-        
     }else{
-        
         self.buyTicketLabel.textColor = UIColorFromRGBA(0xFA6650, 1.0);
         self.myTicketLabel.textColor = UIColorFromRGBA(0x333338, 1.0);
         
         [self.tagView updateConstraints:^(MASConstraintMaker *make) {
             
             make.centerX.equalTo(_topTabView).offset(kWidth/4);;
-            
         }];
-        
     }
-    
 }
 
 
@@ -267,52 +316,104 @@
 
 - (void)sendRequestHttp{
     
+    [self getTiketListRequest];
+    
+    [self getMyTicketListRequest];
+}
+
+- (void)getTiketListRequest{
+
     //获取水票列表
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     parameters[kCurrentController] = self;
     parameters[@"nMaxNum"] = @"10";
-    parameters[@"nPage"] = @"1";
+    parameters[@"nPage"] = self.currentPage ? [NSString stringWithFormat:@"%ld",self.currentPage] : @"1";
     
     [OutsourceNetWork onHttpCode:kProductionTicketListNetWork WithParameters:parameters];
-    
-    //获取我的水票列表
-    NSMutableDictionary *m_parameters = [NSMutableDictionary new];
-    m_parameters[kCurrentController] = self;
-    m_parameters[@"lUserId"] = [UserTools userId];
-    m_parameters[@"nMaxNum"] = @"10";
-    m_parameters[@"nPage"] = @"1";
-    
-    [OutsourceNetWork onHttpCode:kUserGetTicketListNetWork WithParameters:m_parameters];
+}
+
+- (void)getMyTicketListRequest{
+
+    if ([UserTools getUserId]) {
+        //获取我的水票列表
+        NSMutableDictionary *m_parameters = [NSMutableDictionary new];
+        m_parameters[kCurrentController] = self;
+        m_parameters[@"lUserId"] = [UserTools getUserId];
+        m_parameters[@"nMaxNum"] = @"10";
+        m_parameters[@"nPage"] = self.currentPage_another ? [NSString stringWithFormat:@"%ld",self.currentPage_another] : @"1";
+        
+        [OutsourceNetWork onHttpCode:kUserGetTicketListNetWork WithParameters:m_parameters];
+    }else{
+        
+//        [self.myTicketTableView.mj_header endRefreshing];
+    }
     
 }
 
+
 - (void)getTicketList:(id)responseObj{
+    
+    [self.buyTicketTableView.mj_header endRefreshing];
+    [self.buyTicketTableView.mj_footer endRefreshing];
     
     if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
         
-        self.dataSource = responseObj[@"result"][@"dataList"];
+        if (!self.currentPage || self.currentPage == 1) {
+            
+            self.dataSource = [NSMutableArray arrayWithArray:responseObj[@"result"][@"dataList"]];
+        }else{
         
+            for (NSDictionary *temp in responseObj[@"result"][@"dataList"]) {
+                
+                [self.dataSource addObject:temp];
+            }
+        }
+        if ([responseObj[@"result"][@"dataList"] count] < 10) {
+            
+            [self.buyTicketTableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        
+        self.uView.hidden = YES;
         [self.buyTicketTableView reloadData];
         NSLog(@"%@",responseObj);
+    }else{
+        
+        self.uView.hidden = NO;
+        
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObj[@"result"] afterDelay:1.0f];
     }
-    
-    
 }
 
 - (void)getUserTicketList:(id)responseObj{
 
+    [self.myTicketTableView.mj_header endRefreshing];
+    [self.myTicketTableView.mj_footer endRefreshing];
+    
     if ([responseObj[@"resCode"] isEqualToString:@"0"]) {
         
-        self.m_dataSource = responseObj[@"result"][@"dataList"];
+        if (!self.currentPage_another || self.currentPage_another == 1) {
+            
+            self.m_dataSource = [NSMutableArray arrayWithArray:responseObj[@"result"][@"dataList"]];
+        }else{
+            
+            for (NSDictionary *temp in responseObj[@"result"][@"dataList"]) {
+                
+                [self.m_dataSource addObject:temp];
+            }
+        }
+        if ([responseObj[@"result"][@"dataList"] count] < 10) {
+            
+            [self.myTicketTableView.mj_footer endRefreshingWithNoMoreData];
+        }
         
+        self.fView.hidden = YES;
         [self.myTicketTableView reloadData];
         NSLog(@"%@",responseObj);
     }else{
     
+        self.fView.hidden = NO;
         [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObj[@"result"] afterDelay:1.0f];
     }
-    
-    
 }
 
 

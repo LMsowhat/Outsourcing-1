@@ -21,6 +21,8 @@
 
 @property (nonatomic,strong) NSString *        nPrice;
 
+@property (nonatomic,strong) NSString *        lGoodsid;
+
 @property (nonatomic,strong) NSString *        strGoodsName;
 
 @property (nonatomic,strong) NSString *        strGoodsimgurl;

@@ -15,6 +15,7 @@
 /*
  
  */
+@property (nonatomic,assign) NSInteger         conState;//控制器角色 1，订单列表  2，配送单列表
 @property (nonatomic,strong) NSString *        dtCreatetime;//订单创建时间
 @property (nonatomic,strong) NSString *        lBuyerid;
 @property (nonatomic,strong) NSString *        lId;
@@ -23,7 +24,7 @@
 @property (nonatomic,strong) NSString *        nBucketnum;
 @property (nonatomic,strong) NSString *        nCouponPrice;
 @property (nonatomic,strong) NSString *        nFactPrice;
-@property (nonatomic,strong) NSString *        nSendState;
+@property (nonatomic,assign) NSInteger         nSendState;
 @property (nonatomic,assign) NSInteger         nState;
 @property (nonatomic,strong) NSString *        nTotalWatertickets;
 @property (nonatomic,strong) NSString *        nTotalWaterticketsPrice;

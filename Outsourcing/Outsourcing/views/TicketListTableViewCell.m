@@ -57,7 +57,7 @@
         self.pCurrent_Price.textAlignment = NSTextAlignmentLeft;
         
         self.pBefore_Prices = [UILabel new];
-        self.pBefore_Prices.font = kFont(5.5);
+        self.pBefore_Prices.font = kFont(5);
         self.pBefore_Prices.textColor = UIColorFromRGBA(0x333338, 1.0);
         self.pBefore_Prices.textAlignment = NSTextAlignmentLeft;
         
@@ -103,7 +103,7 @@
             
             make.size.equalTo(CGSizeMake(90, 90));
             make.centerY.equalTo(self.bgView);
-            make.left.equalTo(self.bgView).offset(20);
+            make.left.equalTo(self.bgView).offset(10);
             
         }];
         
@@ -160,7 +160,7 @@
         
         [self.buyBtn makeConstraints:^(MASConstraintMaker *make) {
             
-            make.size.equalTo(CGSizeMake(80, 30));
+            make.size.equalTo(CGSizeMake(30 *kScale, 15*kScale));
             make.bottom.equalTo(self.pIcon.mas_bottom);
             make.right.equalTo(self.bgView).offset(-20);
             
@@ -177,7 +177,7 @@
 
 - (void)buyTicketFitData:(TicketModel *)model{
 
-    [self.pIcon sd_setImageWithURL:kGetImageUrl(URLHOST, @"0", model.lId) placeholderImage:[UIImage imageNamed:@"2.jpg"]];
+    [self.pIcon sd_setImageWithURL:kGetImageUrl(URLHOST, @"0", model.lGoodsid) placeholderImage:[UIImage imageNamed:@"2.jpg"]];
     self.pName.text = model.strGoodsName;
     self.pSales.text = [NSString stringWithFormat:@"月销%@",model.nMonthCount];
     self.pActivity.text = model.strRemarks;
@@ -195,7 +195,7 @@
 
 - (void)myTicketFitData:(TicketModel *)model{
     
-    [self.pIcon sd_setImageWithURL:kGetImageUrl(URLHOST, @"0", model.lId) placeholderImage:[UIImage imageNamed:@"2.jpg"]];
+    [self.pIcon sd_setImageWithURL:kGetImageUrl(URLHOST, @"0", model.lGoodsid) placeholderImage:[UIImage imageNamed:@"2.jpg"]];
     self.pName.text = model.strTicketName;
     self.payTime.text = model.strExpire;
     self.tNumber.text = [NSString stringWithFormat:@"%@张",model.nRemainingCount];

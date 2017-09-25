@@ -7,6 +7,8 @@
 //
 
 #import "AboutUsViewController.h"
+#import "EliveApplication.h"
+
 
 @interface AboutUsViewController ()
 
@@ -48,6 +50,12 @@
 
 - (void)sendHttpRequest{
     
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[kCurrentController] = self;
+    parameters[@"nType"] = @"0";
+    
+    [OutsourceNetWork onHttpCode:kUserFeedbackNetWork WithParameters:parameters];
+
 }
 
 - (void)getMoreAboutUs:(id)responseObject{

@@ -25,6 +25,12 @@
 - (void)requestRegisterAction:(NSDictionary*)parm;
 
 //
+- (void)requestUpdatePassWork:(NSDictionary*)parm;
+
+//
+- (void)requestGetUserInfo:(NSDictionary*)parm;
+
+//
 - (void)requestGetUserAddress:(NSDictionary*)parm;
 
 //
@@ -92,6 +98,37 @@
 
 //
 - (void)requestSettingGetMoreAction:(NSDictionary*)parm;
+
+//
+- (void)requestGetPayOrderString:(NSDictionary*)parm;
+
+//
+- (void)requestGetShpoppingList:(NSDictionary*)parm;
+
+//
+- (void)requestShpoppingDelete:(NSDictionary*)parm;
+
+//
+- (void)requestSetPayNstate:(NSDictionary*)parm;
+
+//
+- (void)requestUserGetMessage:(NSDictionary*)parm;
+
+//
+- (void)requestUserGetBucket:(NSDictionary*)parm;
+
+//
+- (void)requestUserRefundBucket:(NSDictionary*)parm;
+
+//
+- (void)requestUserDeleteOrder:(NSDictionary*)parm;
+
+//
+- (void)requestEmploeeJustSendOrder:(NSDictionary*)parm;
+
+
+
+
 
 
 @end

@@ -15,9 +15,9 @@
 +(NSString *)firstTag;
 +(void)setFirstTag:(NSString *)tag;
 
-//token
-+(void)setToken:(NSString *)token;
-+(NSString *)userToken;
+//inviteCode
++(void)setInvite:(NSString *)inviteCode;
++(NSString *)userInviteCode;
 
 //userId
 + (void)setUserId:(NSString *)userId;
@@ -30,7 +30,11 @@
 //employeeId
 + (void)setUserEmployees:(NSString *)employeeId;
 +(NSString *)userEmployeesId;
+//employeeName
++ (void)setUserEmployeeName:(NSString *)employeeName;
++(NSString *)userEmployeesName;
 
++(NSString *)getUserId;
 
 + (void)logOut;
 

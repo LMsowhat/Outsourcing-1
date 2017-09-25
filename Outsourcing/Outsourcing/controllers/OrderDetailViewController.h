@@ -15,4 +15,7 @@
 
 - (void)orderGetDetail:(id)responseObj;
 
+- (void)setPayNstateResult:(id)responseObject;
+
+
 @end

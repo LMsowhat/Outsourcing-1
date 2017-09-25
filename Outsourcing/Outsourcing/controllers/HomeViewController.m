@@ -72,7 +72,10 @@ UIGestureRecognizerDelegate
     
     [OutsourceNetWork onHttpCode:kHomePageProductionListNetWork WithParameters:parameters];
     
-    [OutsourceNetWork onHttpCode:kHomePageCirclesNetWork WithParameters:parameters];
+    if (!self.currentPage) {
+        
+        [OutsourceNetWork onHttpCode:kHomePageCirclesNetWork WithParameters:parameters];
+    }
     
 }
 #pragma mark - Setter & Getter
@@ -96,6 +99,11 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
         _mainCollection.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             
             self.currentPage = 1;
+            if (self.dataSource) {
+                
+                [self.dataSource removeAllObjects];
+            }
+
             [self sendHttpRequest];
         }];
         
@@ -248,18 +256,25 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
 
 - (void)addShopCart:(UIButton *)sender{
 
-    NSDictionary *dic = self.dataSource[sender.tag];
-    NSMutableDictionary *parameters = [NSMutableDictionary new];
-    parameters[kCurrentController] = self;
-    parameters[@"strUserName"] = @"李文华";
-    parameters[@"lUserId"] = [UserTools userId];
-    parameters[@"nPrice"] = dic[@"nPrice"];
-    parameters[@"lGoodsId"] = dic[@"lId"];
-    parameters[@"strGoodsname"] = dic[@"strGoodsname"];
-    parameters[@"strGoodsimgurl"] = dic[@"strGoodsimgurl"];
-    parameters[@"strStandard"] = dic[@"strStandard"];
-
-    [OutsourceNetWork onHttpCode:kAddShopCartNetWork WithParameters:parameters];
+    if ([UserTools getUserId]) {
+        
+        NSDictionary *dic = self.dataSource[sender.tag];
+        NSMutableDictionary *parameters = [NSMutableDictionary new];
+        parameters[kCurrentController] = self;
+        parameters[@"strUserName"] = @"李文华";
+        parameters[@"lUserId"] = [UserTools getUserId];
+        parameters[@"nPrice"] = dic[@"nPrice"];
+        parameters[@"lGoodsId"] = dic[@"lId"];
+        parameters[@"strGoodsname"] = dic[@"strGoodsname"];
+        parameters[@"strGoodsimgurl"] = dic[@"strGoodsimgurl"];
+        parameters[@"strStandard"] = dic[@"strStandard"];
+        
+        [OutsourceNetWork onHttpCode:kAddShopCartNetWork WithParameters:parameters];
+    }else{
+    
+        [[NSNotificationCenter defaultCenter] postNotificationName:NEEDLOGIN object:nil];
+    }
+    
 }
 
 - (void)userAddShopCart:(id)responseObject{

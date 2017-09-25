@@ -13,7 +13,7 @@
 + (NSString *)getTimeFromString:(NSString *)timeString{
  
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
     NSTimeInterval interval    = [timeString doubleValue] / 1000.0;
     NSDate *date               = [NSDate dateWithTimeIntervalSince1970:interval];
     NSString *dateString       = [formatter stringFromDate: date];

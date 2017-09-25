@@ -10,4 +10,6 @@
 
 @interface RetrieveViewController : BaseViewController
 
+- (void)resultOfUpdatePasswork:(id)responseObject;
+
 @end

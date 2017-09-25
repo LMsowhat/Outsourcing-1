@@ -236,6 +236,8 @@
         
         _psdTextField.delegate = self;
         
+        _psdTextField.secureTextEntry = YES;
+        
         _psdTextField.backgroundColor = UIColorFromRGBA(0xFFFFFF, 1.0);
         
         _psdTextField.font = kFont(7);
@@ -275,6 +277,14 @@
 {
     //禁止输入空格
     if ([string isEqual: @" "]) return NO;
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    //当用户按下ruturn，把焦点从textField移开那么键盘就会消失了
+    [textField resignFirstResponder];
+    
     return YES;
 }
 
@@ -435,7 +445,17 @@
 
 - (void)loginSuccess:(id)responseObject{
     
-    [UserTools setUserId:responseObject[@"lId"]];
+    if ([[responseObject[@"nUserType"] stringValue] isEqualToString:@"0"]) {
+        
+        [UserTools setUserEmployees:responseObject[@"lId"]];
+
+        [UserTools setUserEmployeeName:responseObject[@"strUsername"]];
+    }else{
+    
+        [UserTools setUserId:responseObject[@"lId"]];
+    }
+    
+    [UserTools setInvite:responseObject[@"strInvitecode"]];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 
 //    for (UIViewController *controller in self.navigationController.viewControllers) {

@@ -56,8 +56,8 @@
  
         [bgView makeConstraints:^(MASConstraintMaker *make) {
             
-            make.size.equalTo(CGSizeMake(167 *kScale, 42 *kScale));
-            
+            make.height.equalTo(@(42 *kScale));
+            make.width.equalTo(self).offset(-20);
             make.center.equalTo(self);
             
         }];
@@ -66,7 +66,7 @@
             
             make.bottom.equalTo(bgView.centerY).offset(-1*kScale);
             
-            make.left.equalTo(self).offset(34*kScale);
+            make.left.equalTo(self).offset(24*kScale);
             
         }];
         
@@ -106,7 +106,7 @@
 
     self.couponTitle.text = model.strCouponName;
     
-    self.couponValue.text = [NSString stringWithFormat:@"%ld",[model.nPrice integerValue]/100];
+    self.couponValue.text = [NSString stringWithFormat:@"%.2f",[model.nPrice floatValue]/100];
     
 }
 

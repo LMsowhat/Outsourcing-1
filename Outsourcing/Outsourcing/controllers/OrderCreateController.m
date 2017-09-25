@@ -73,7 +73,7 @@
 
 
 //输入备注，发票抬头view
-@property (nonatomic ,strong)OrderInputView *inputView;
+@property (nonatomic ,assign)NSInteger inputType;//输入类型  1，发票抬头 2，备注
 @property (nonatomic ,strong)NSMutableDictionary *inputArray;
 
 
@@ -86,7 +86,7 @@
 
     [super viewWillAppear:animated];
 
-    self.navigationItem.title = @"提交订单";
+    self.navigationItem.title = @"订单结算";
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, 0, 22, 17);
@@ -101,15 +101,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.inputView = [[NSBundle mainBundle] loadNibNamed:@"OrderInputView" owner:nil options:nil].lastObject;
-    self.inputView.frame = self.view.frame;
-    self.inputView.hidden = YES;
-    self.inputView.myTextView.delegate = self;
-    [self.inputView.saveButon addTarget:self action:@selector(saveClick:) forControlEvents:UIControlEventTouchUpInside];
-    
     [self.view addSubview:self.mainTableView];
     [self.view addSubview:self.oSettlementBtn];
-    [self.view addSubview:self.inputView];
 
     [self sendHttpRequest];
     // Do any additional setup after loading the view.
@@ -278,7 +271,7 @@
         oTotalTitle = [UILabel new];
         oTotalTitle.font = kFont(7);
         oTotalTitle.textColor = UIColorFromRGBA(0x333338, 1.0);
-        oTotalTitle.text = @"订单合计：";
+        oTotalTitle.text = @"商品总价：";
         
         self.oTotalPrice = [UILabel new];
         self.oTotalPrice.font = kFont(7);
@@ -309,7 +302,7 @@
             
             make.centerY.equalTo(self.nBucketPrice);
             
-            make.left.equalTo(self.nBucketPrice.mas_right).offset(20);
+            make.left.equalTo(self.nBucketPrice.mas_right).offset(5);
         }];
         
         [self.nBucketNum makeConstraints:^(MASConstraintMaker *make) {
@@ -428,12 +421,11 @@
 
 
 - (void)settlementClick{
-    
     //去结算
     NSMutableDictionary *parametes = [NSMutableDictionary new];
     parametes[kCurrentController] = self;
     parametes[@"lId"] = self.orderId;//订单id
-    parametes[@"lBuyerid"] = [UserTools userId];//用户id
+    parametes[@"lBuyerid"] = [UserTools getUserId];//用户id
     parametes[@"lAddressid"] = self.addressDict[@"lId"] ? self.addressDict[@"lId"] : [UserTools userAddress][@"lId"];//地址id
     parametes[@"strReceiptusername"] = self.addressDict[@"strReceiptusername"] ?
                                        self.addressDict[@"strReceiptusername"] :
@@ -459,14 +451,6 @@
     
     [OutsourceNetWork onHttpCode:kOrderClearingNetWork WithParameters:parametes];
 }
-
-- (void)saveClick:(UIButton *)sender{
-    
-    self.inputView.myTextView.text = @"";
-    self.inputView.hidden = YES;
-
-}
-
 
 - (void)foreAction{
     
@@ -510,7 +494,7 @@
         self.submitPrice = self.dataSource[@"nFactPrice"];
         self.oWTicket.text = [NSString stringWithFormat:@"本次使用水票%ld张",ticketNum];
         
-        self.oTotalPrice.text = [NSString stringWithFormat:@"￥%ld",[self.dataSource[@"nTotalprice"] integerValue]/100];
+        self.oTotalPrice.text = [NSString stringWithFormat:@"￥%.2f",[self.dataSource[@"nTotalprice"] floatValue]/100];
 
         [self.mainTableView reloadData];
         
@@ -537,33 +521,6 @@
     }
     
 
-}
-
-#pragma mark TableViewDelegate
-/**
- 内容发生改变编辑 自定义文本框placeholder
- 有时候我们要控件自适应输入的文本的内容的高度，只要在textViewDidChange的代理方法中加入调整控件大小的代理即可
- @param textView textView
- */
-- (void)textViewDidChange:(UITextView *)textView
-{
-    if (textView.markedTextRange == nil) {
-        
-        if (!self.inputArray) {
-            
-            self.inputArray = [NSMutableDictionary new];
-        }
-        if (self.inputView.isRemark == 1) {
-            
-            self.inputArray[@"strRemarks"] = textView.text;
-            
-        }else if (self.inputView.isRemark == 2){
-        
-            self.inputArray[@"strInvoiceheader"] = textView.text;
-        }
-    }
-    
-    
 }
 
 #pragma mark TableViewDelegate
@@ -609,12 +566,14 @@
     
     if (indexPath.row == dCount +3) {
         
-        cell.left_label.text = @"发票抬头";
+        NSString *str = self.inputArray[@"strInvoiceheader"] ? self.inputArray[@"strInvoiceheader"] : @"";//
+        cell.left_label.text = [NSString stringWithFormat:@"发票抬头：%@",str];
 
     }
     if (indexPath.row == dCount +4) {
         
-        cell.left_label.text = @"备注";
+        NSString *str = self.inputArray[@"strRemarks"] ? self.inputArray[@"strRemarks"] : @"";//
+        cell.left_label.text = [NSString stringWithFormat:@"备注：%@",str];
 
     }
     if (indexPath.row == dCount +5) {
@@ -633,7 +592,7 @@
     if (indexPath.row == dCount +7) {
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        NSString *testStr = [NSString stringWithFormat:@"共￥%ld",[self.submitPrice integerValue]/100];
+        NSString *testStr = [NSString stringWithFormat:@"共￥%.2f",[self.submitPrice floatValue]/100];
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:testStr];
         [str addAttributes:@{NSForegroundColorAttributeName:UIColorFromRGBA(0xFA6650, 1.0),NSFontAttributeName:kFont(9)} range:NSMakeRange(1,testStr.length - 1)];
         cell.left_label.attributedText = str;
@@ -672,7 +631,7 @@
     if (indexPath.row == nCount +6) {
         
         CouponsViewController *coupon = [CouponsViewController new];
-        coupon.nFullPrice = self.submitPrice;
+        coupon.nFullPrice = self.dataSource[@"nFactPrice"];
         coupon.isSelectedCoupons = YES;
         WeakSelf(weakSelf);
         coupon.passCoupons = ^(NSDictionary *couponDict) {
@@ -692,18 +651,79 @@
     
     if (indexPath.row == nCount + 3) {
         
-        self.inputView.isRemark = 2;
-        self.inputView.hidden = NO;
+        self.inputType = 1;
+        [self editInputContentTiTle:@"请输入发票信息"];
     }
     if (indexPath.row == nCount + 4) {
         
-        self.inputView.isRemark = 1;
-        self.inputView.hidden = NO;
+        self.inputType = 2;
+        
+        [self editInputContentTiTle:@"请输入备注"];
     }
     
     
     NSLog(@"%ld",indexPath.row);
 }
+
+- (void)editInputContentTiTle:(NSString *)title{
+
+    WeakSelf(weakSelf);
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"保存" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        [weakSelf.mainTableView reloadData];
+        
+    }]];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+        return ;
+    }]];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        
+        if (weakSelf.inputType == 1) {
+            
+            if (weakSelf.inputArray[@"strInvoiceheader"]) {
+                
+                textField.text = weakSelf.inputArray[@"strInvoiceheader"];
+            }
+        }
+        if (weakSelf.inputType == 2) {
+            
+            if (weakSelf.inputArray[@"strRemarks"]) {
+                
+                textField.text = weakSelf.inputArray[@"strRemarks"];
+            }
+        }
+        [[NSNotificationCenter defaultCenter] addObserver:weakSelf selector:@selector(alertTextFieldDidChange:) name:UITextFieldTextDidChangeNotification object:textField];
+        
+    }];
+    
+    [weakSelf presentViewController:alertController animated:YES completion:nil];
+    
+}
+
+- (void)alertTextFieldDidChange:(NSNotification *)noti{
+
+    UITextField *textFile = noti.object;
+
+    if (!self.inputArray) {
+        
+        self.inputArray = [NSMutableDictionary new];
+    }
+    if (self.inputType == 1) {
+        
+        self.inputArray[@"strInvoiceheader"] = textFile.text;
+    }
+    if (self.inputType == 2) {
+        
+        self.inputArray[@"strRemarks"] = textFile.text;
+    }
+    
+}
+
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -16,14 +16,18 @@
 
     self.oNumber.text = [NSString stringWithFormat:@"订单号：%@",model.strOrdernum];
 
-    if (model.nState == 0) {
-        
-        self.oStatus.text = @"未支付";
+    if (model.nState == 3) {
+
+        self.oStatus.text = @"已支付";
     }else{
     
-        self.oStatus.text = @"已支付";
+        self.oStatus.text = @"未支付";
     }
 
+    if ([UserTools userEmployeesId]) {
+        
+        self.oStatus.hidden = YES;
+    }
 }
 
 

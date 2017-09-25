@@ -18,8 +18,8 @@
 #import "ProductionShowView.h"
 #import "PaymentViewController.h"
 #import "SubmitOrderProModel.h"
-
-
+#import "OrderModel.h"
+#import "OrderHeaderView.h"
 
 @interface OrderDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -40,7 +40,9 @@
 
 @property (nonatomic ,strong)UILabel *receiveName;
 @property (nonatomic ,strong)UILabel *receiveAddress;
+//商品头部展示
 
+@property (nonatomic ,strong)OrderHeaderView *headerView;
 //商品底部展示
 @property (nonatomic ,strong)UIView *proBottomView;
 
@@ -48,6 +50,9 @@
 
 @property (nonatomic ,strong)UILabel *oTotalPrice;
 
+//是否使用全部水票支付
+@property (nonatomic ,assign)BOOL isTicketPayOff;
+@property (nonatomic ,strong)OrderModel *model;
 
 @end
 
@@ -133,6 +138,15 @@
     return _oSettlementBtn;
 }
 
+-(OrderHeaderView *)headerView{
+
+    if (!_headerView) {
+        
+        _headerView = [[NSBundle mainBundle] loadNibNamed:@"OrderHeaderView" owner:nil options:nil].lastObject;
+    }
+
+    return _headerView;
+}
 
 -(UIView *)addressView{
     
@@ -150,15 +164,11 @@
         self.receiveAddress.textColor = UIColorFromRGBA(0x8F9095, 1.0);
         //        self.receiveAddress.text = @"北京市海淀区知春路113号银网中心A座808";
         
-        UIView *lineView1 = [UIView new];
-        lineView1.backgroundColor = UIColorFromRGBA(0xDDDDDD, 1.0);
-        
         self.receiveName.text = [NSString stringWithFormat:@"%@   %@",self.dataSource[@"strReceiptusername"],self.dataSource[@"strReceiptmobile"]];
         self.receiveAddress.text = [NSString stringWithFormat:@"%@%@",self.dataSource[@"strLocation"],self.dataSource[@"strDetailaddress"]];
         
         [_addressView addSubview:self.receiveName];
         [_addressView addSubview:self.receiveAddress];
-        [_addressView addSubview:lineView1];
         
         [self.receiveName makeConstraints:^(MASConstraintMaker *make) {
             
@@ -173,18 +183,7 @@
             
             make.top.equalTo(self.receiveName.mas_bottom).offset(2 *kScale);
         }];
-        
-        [lineView1 makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.centerX.equalTo(_addressView);
-            
-            make.size.equalTo(CGSizeMake(kWidth - 10 *kScale, 1));
-            
-            make.bottom.equalTo(_addressView).offset(-1);
-        }];
-        
     }
-    
     return _addressView;
 }
 
@@ -204,7 +203,7 @@
         oTotalTitle = [UILabel new];
         oTotalTitle.font = kFont(7);
         oTotalTitle.textColor = UIColorFromRGBA(0x333338, 1.0);
-        oTotalTitle.text = @"订单合计：";
+        oTotalTitle.text = @"商品总价：";
         
         self.oTotalPrice = [UILabel new];
         self.oTotalPrice = [UILabel new];
@@ -255,7 +254,7 @@
 
 - (UIView *)createProCell:(NSIndexPath *)indexPath{
     
-    SubmitOrderProModel *model = [SubmitOrderProModel mj_objectWithKeyValues:self.dataSource[@"orderGoods"][indexPath.row - 2]];
+    SubmitOrderProModel *model = [SubmitOrderProModel mj_objectWithKeyValues:self.dataSource[@"orderGoods"][indexPath.row - 3]];
     
     ProductionShowView *cell = [[ProductionShowView alloc] initWithFrame:CGRectMake(0, 0, kWidth, 45 *kScale) AndModel:model];
     
@@ -276,11 +275,39 @@
     
 }
 
+- (void)setPayNstateHttpRequest{
+
+    //修改订单为成功
+    NSMutableDictionary *parametes = [NSMutableDictionary new];
+    parametes[kCurrentController] = self;
+    parametes[@"lOrderId"] = self.orderId;
+    parametes[@"nState"] = @"3";
+    
+    [OutsourceNetWork onHttpCode:kTicketallPayNetWork WithParameters:parametes];
+}
+
+- (void)setPayNstateResult:(id)responseObject{
+
+    PaymentViewController *payMent = [PaymentViewController new];
+    payMent.factTotalPrice = [self.dataSource[@"nFactPrice"] floatValue];
+    payMent.orderId = self.orderId;
+    payMent.orderModel = self.model;
+    payMent.nOrderType = @"0";
+    payMent.isTicketPay = self.isTicketPayOff;
+    
+    [self.navigationController pushViewController:payMent animated:YES];
+    NSLog(@"%@",responseObject);
+}
+
+
+
 - (void)orderGetDetail:(id)responseObj{
 
     if ([responseObj[@"resCode"] isEqualToString:@"0"] && responseObj[@"result"]) {
         
         self.dataSource = responseObj[@"result"];
+        
+        self.model = [OrderModel mj_objectWithKeyValues:self.dataSource];
         
         NSInteger nBucketmoney = [self.dataSource[@"nBucketmoney"] integerValue];
         NSInteger ticketNum = 0;
@@ -290,14 +317,25 @@
             
             ticketNum += num;
         }
+        //订单时间和订单号
+        self.headerView.creatTime.text = [NSString stringWithFormat:@"下单时间：%@",[CommonTools getTimeFromString:self.dataSource[@"dtCreatetime"]]];
+        self.headerView.orderNumber.text = [NSString stringWithFormat:@"订单号：%@",self.dataSource[@"strOrdernum"]];
         
+        //收获地址
         self.receiveName.text = [NSString stringWithFormat:@"%@   %@",self.dataSource[@"strReceiptusername"],self.dataSource[@"strReceiptmobile"]];
         self.receiveAddress.text = [NSString stringWithFormat:@"%@%@",self.dataSource[@"strLocation"],self.dataSource[@"strDetailaddress"]];
+        //使用水票情况
         self.oWTicket.text = [NSString stringWithFormat:@"本次使用水票%ld张",ticketNum];
+        //桶押金
         self.nBucketPrice.text = [NSString stringWithFormat:@"桶押金 ￥%ld (x %ld)",[self.dataSource[@"nBucketnum"] integerValue] * nBucketmoney/100,[self.dataSource[@"nBucketnum"] integerValue]];
+        //订单总价
+        self.oTotalPrice.text = [NSString stringWithFormat:@"￥%.2f",[self.dataSource[@"nTotalprice"] floatValue]/100];
         
-        self.oTotalPrice.text = [NSString stringWithFormat:@"￥%ld",[self.dataSource[@"nTotalprice"] integerValue]/100];
-        
+        //判断是否全部使用水票支付
+        if ([self.dataSource[@"nFactPrice"] integerValue] == 0 && ticketNum != 0) {
+            
+            self.isTicketPayOff = YES;
+        }
         [self.mainTableView reloadData];
         
     }else{
@@ -312,21 +350,52 @@
 
 - (void)settlementClick{
     
-    PaymentViewController *payMent = [PaymentViewController new];
-    payMent.factTotalPrice = [self.dataSource[@"nFactPrice"] floatValue];
+    if (self.isTicketPayOff) {
+        WeakSelf(weakSelf);
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"是否使用水票支付？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+            [self setPayNstateHttpRequest];
+        }]];
+        
+        [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            
+            return ;
+        }]];
+        
+        [weakSelf presentViewController:alertController animated:YES completion:nil];
+        
+    }else{
+        PaymentViewController *payMent = [PaymentViewController new];
+        payMent.factTotalPrice = [self.dataSource[@"nFactPrice"] floatValue];
+        payMent.orderId = self.orderId;
+        payMent.orderModel = self.model;
+        payMent.nOrderType = @"0";
+        
+        [self.navigationController pushViewController:payMent animated:YES];
+    }
     
-    [self.navigationController pushViewController:payMent animated:YES];
 }
-
-
-
-
-
 
 
 - (void)foreAction{
     
-    [self.navigationController popViewControllerAnimated:YES];
+    WeakSelf(weakSelf);
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"是否放弃付款？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        
+    }]];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+        return ;
+    }]];
+    
+    [weakSelf presentViewController:alertController animated:YES completion:nil];
     
 }
 
@@ -336,16 +405,10 @@
 
 #pragma mark TableViewDelegate
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    
-    return 1;
-}
-
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 //    return 9;
-        return 6 + [self.dataSource[@"orderGoods"] count];
+        return 7 + [self.dataSource[@"orderGoods"] count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -363,25 +426,30 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell setLeftView:nil RightView:nil others:self.addressView];
     }
-    if (indexPath.row > 1 && indexPath.row < dCount +2) {
+    if (indexPath.row == 2) {
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell setLeftView:nil RightView:nil others:self.headerView];
+    }
+    if (indexPath.row > 2 && indexPath.row < dCount +3) {
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell setLeftView:nil RightView:nil others:[self createProCell:indexPath]];
         
     }
-    if (indexPath.row == dCount +2) {
+    if (indexPath.row == dCount +3) {
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell setLeftView:nil RightView:nil others:self.proBottomView];
     }
 
-    if (indexPath.row == dCount +3) {
+    if (indexPath.row == dCount +4) {
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.left_label.text = @"使用水票";
         [cell setLeftView:nil RightView:self.oWTicket others:nil];
     }
-    if (indexPath.row == dCount +4) {
+    if (indexPath.row == dCount +5) {
         
         NSString *testStr = [NSString stringWithFormat:@"优惠（-￥%ld）",self.dataSource[@"nCouponPrice"] ? [self.dataSource[@"nCouponPrice"] integerValue]/100 : 0];
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:testStr];
@@ -389,10 +457,10 @@
         cell.left_label.attributedText = str;
         [cell setLeftView:nil RightView:[UILabel new] others:nil];
     }
-    if (indexPath.row == dCount +5) {
+    if (indexPath.row == dCount +6) {
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        NSString *testStr = [NSString stringWithFormat:@"共￥%ld",[self.dataSource[@"nFactPrice"] integerValue]/100];
+        NSString *testStr = [NSString stringWithFormat:@"共￥%.2f",[self.dataSource[@"nFactPrice"] floatValue]/100];
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:testStr];
         [str addAttributes:@{NSForegroundColorAttributeName:UIColorFromRGBA(0xFA6650, 1.0),NSFontAttributeName:kFont(9)} range:NSMakeRange(1,testStr.length - 1)];
         cell.left_label.attributedText = str;
@@ -415,12 +483,16 @@
         
         return 25*kScale;
     }
-    if (indexPath.row > 1 && indexPath.row < [self.dataSource[@"orderGoods"] count] +2) {
+    if (indexPath.row == 2) {
+        
+        return 30*kScale;
+    }
+    if (indexPath.row > 1 && indexPath.row < [self.dataSource[@"orderGoods"] count] +3) {
         
         return 30 *kScale;
     }
     
-    if (indexPath.row == [self.dataSource[@"orderGoods"] count] + 2) {
+    if (indexPath.row == [self.dataSource[@"orderGoods"] count] + 3) {
         
         return 25 *kScale;
     }

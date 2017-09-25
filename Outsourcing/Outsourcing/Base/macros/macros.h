@@ -107,7 +107,7 @@
 //  获取用户信息
 #define kUserGetInfoNetWork                             2000
 //  修改用户信息
-#define kUserUploadNetWork                              2001
+#define kUserUpdatePassWorkNetWork                      2001
 //  获取用户地址列表
 #define kUserAddressNetWork                             2002
 //  添加收货地址
@@ -124,9 +124,12 @@
 #define kUserGetCouponsNetWork                          2005
 //  获取用户水票信息
 #define kUserGetTicketListNetWork                       2006
-
-
-
+//  获取用户通知信息
+#define kUserGetMessageNetWork                          2010
+//  获取用户桶个数
+#define kUserGetBucketNetWork                           2011
+//  退桶
+#define kUserRefundBucketNetWork                        2012
 
 
 
@@ -144,8 +147,6 @@
 #define kProductionTicketPayNetWork                     3005
 
 
-
-
 //  提交订单
 #define kSubmitOrderNetWork                             4000
 //  订单详情(去结算页面)
@@ -158,11 +159,28 @@
 #define kAddShopCartNetWork                             4004
 //  订单列表
 #define kUserOrderListNetWork                           4005
+//  获取OrderString
+#define kAliPayNetWork                                  4006
+//  订单列表
+#define kWechatPayNetWork                               4007
+//  全部使用水票支付
+#define kTicketallPayNetWork                            4008
+//  删除订单
+#define kDeleteOrderNetWork                             4009
+//  订单立即配送
+#define kJustSendNetWork                                4010
+
+
+//  获取购物车列表
+#define kUserGetChartListNetWork                        5000
+//  从购物车删除商品
+#define kUserDeleteFromChartNetWork                     5001
+
 
 
 //  更多内容
-#define kSettingGetMoreNetWork                          5000
+#define kSettingGetMoreNetWork                          6000
 //  用户反馈
-#define kUserFeedbackNetWork                            5001
+#define kUserFeedbackNetWork                            6001
 
 

@@ -8,7 +8,14 @@
 
 #import "PaymentViewController.h"
 #import "Masonry.h"
+#import <AlipaySDK/AlipaySDK.h>
+#import "EliveApplication.h"
+#import "MBProgressHUDManager.h"
+#import "MJExtension.h"
 
+#import "OrdersViewController.h"
+#import "MainTabBarController.h"
+#import "PayResultView.h"
 
 @interface PaymentViewController ()
 
@@ -18,6 +25,14 @@
 //
 
 @property (nonatomic ,strong)UIButton *confirmBtn;
+
+@property (nonatomic ,strong)PayResultView *resultViewOfPayFor;
+
+
+//记录订单信息
+
+@property (nonatomic ,strong)NSDictionary *orderDict;
+
 
 @end
 
@@ -37,6 +52,9 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     [self.navigationItem setLeftBarButtonItem:leftItem];
     
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payCallBack:) name:aliPaySuccess object:nil];
+    
 }
 
 - (void)viewDidLoad {
@@ -44,7 +62,13 @@
     
     self.view.backgroundColor = UIColorFromRGBA(0xF7F7F7, 1.0);
     
-    [self loadConfigUI];
+    if (self.isTicketPay) {
+        
+        [self PayResult:YES];
+    }else{
+    
+        [self loadConfigUI];
+    }
     
     // Do any additional setup after loading the view.
 }
@@ -82,7 +106,7 @@
     self.moneyLabel = [UILabel new];
     self.moneyLabel.font = kFont(9);
     self.moneyLabel.textColor = UIColorFromRGBA(0xFA6650, 1.0);
-    self.moneyLabel.text = [NSString stringWithFormat:@"%.2f",self.factTotalPrice];
+    self.moneyLabel.text = [NSString stringWithFormat:@"%.2f",self.factTotalPrice/100];
     
     UIView *view2 = [UIView new];
     view2.backgroundColor = UIColorFromRGBA(0xFFFFFF, 1.0);
@@ -239,11 +263,156 @@
     self.selectedBtn = sender;
 }
 
+- (void)PayResult:(BOOL)success{
+
+    self.navigationItem.title = @"支付结果";
+
+    if (success) {
+        
+        self.resultViewOfPayFor = [[PayResultView alloc] initSuccess:YES WithModel:self.orderModel];
+        self.resultViewOfPayFor.frame = CGRectMake(0, kTopBarHeight, kWidth, kHeight - kTopBarHeight);
+        [self.resultViewOfPayFor.seeOrderBtn addTarget:self action:@selector(seeOrderClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.resultViewOfPayFor.goBackBtn addTarget:self action:@selector(backHome:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.view addSubview:self.resultViewOfPayFor];
+    }else{
+    
+        self.resultViewOfPayFor = [[PayResultView alloc] initSuccess:NO WithModel:nil];
+        self.resultViewOfPayFor.frame = CGRectMake(0, kTopBarHeight, kWidth, kHeight - kTopBarHeight);
+        [self.resultViewOfPayFor.payAgainBtn addTarget:self action:@selector(payAgainClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.view addSubview:self.resultViewOfPayFor];
+    
+    }
+
+}
+
+
+- (void)getAliPayOrderString:(id)responseObject{
+
+    if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
+        
+        [[AlipaySDK defaultService] payOrder:responseObject[@"result"] fromScheme:@"lwh15011075120" callback:^(NSDictionary *resultDic) {
+            
+            [self aliPayEdit:resultDic];
+            
+            
+//            NSLog(@"resultStatus%@",resultDic[@"resultStatus"]);
+//            if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+//                
+//                [self PayResult:YES];
+//            }else{
+//                
+//                [self PayResult:NO];
+//            }
+            
+        }];
+    }else{
+        
+        
+        //获取订单失败
+    }
+
+
+}
+
+- (void)aliPayEdit:(NSDictionary *)info{
+
+    if ([info[@"resultStatus"] isEqualToString:@"9000"]) {
+        
+        NSString *string = info[@"result"];
+        
+        NSData *dictData = [string dataUsingEncoding:NSUTF8StringEncoding];
+        
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:dictData options:NSJSONReadingMutableContainers error:nil];
+        
+        if ([dic isKindOfClass:[NSDictionary class]] && dic[@"alipay_trade_app_pay_response"]) {
+            
+            self.orderDict = dic[@"alipay_trade_app_pay_response"];
+            
+            NSMutableDictionary *dict = [NSMutableDictionary new];
+            dict[@"strOrdernum"] = self.orderDict[@"out_trade_no"];
+            dict[@"dtCreatetime"] = self.orderDict[@"timestamp"];//
+            dict[@"nFactPrice"] = self.orderDict[@"total_amount"];
+            
+            self.orderModel = [OrderModel mj_objectWithKeyValues:dict];
+        }
+        [self PayResult:YES];
+    }else{
+        
+        [self PayResult:NO];
+    }
+}
+
+
+- (void)getWechatPayOrderString:(id)responseObject{
+
+    if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
+        
+        
+    }else{
+        
+        //获取订单失败
+    }
+}
+
+
+
+- (void)payCallBack:(NSNotification *)noti{
+    
+    NSDictionary *resultDic = noti.userInfo;
+    
+    [self aliPayEdit:resultDic];
+    
+}
+
+
+
+
+
+
 - (void)confirmClick{
 
-
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[kCurrentController] = self;
+    parameters[@"lId"] = self.orderId;
+    parameters[@"nOrderType"] = self.nOrderType;
+    parameters[@"nPayType"] = [NSString stringWithFormat:@"%ld",self.selectedBtn.tag];
+    
+    [OutsourceNetWork onHttpCode:kAliPayNetWork WithParameters:parameters];
     NSLog(@"%ld",self.selectedBtn.tag);
 }
+
+
+- (void)seeOrderClick:(id)sender{
+    
+    OrdersViewController *orderList = [OrdersViewController new];
+    
+    [self.navigationController pushViewController:orderList animated:YES];
+    
+}
+
+- (void)backHome:(id)sender{
+    
+    MainTabBarController *mainTab = (MainTabBarController *)self.tabBarController;
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    mainTab.tabBar.hidden = NO;
+    mainTab.selectedIndex = 0;
+    
+}
+
+- (void)payAgainClick:(id)sender{
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        [self.resultViewOfPayFor removeFromSuperview];
+    }];
+    
+    
+}
+
 
 - (void)foreAction{
     

@@ -10,4 +10,10 @@
 
 @interface MyViewController : BaseViewController
 
+
+- (void)sendHttpRequest;
+
+
+- (void)getMyInfo:(id)responseObject;
+
 @end

@@ -11,6 +11,7 @@
 #import "EliveApplication.h"
 #import "MJExtension.h"
 #import "MJRefresh.h"
+#import "MBProgressHUDManager.h"
 
 #import "OrderListTableViewCell.h"
 #import "OrderModel.h"
@@ -19,6 +20,8 @@
 #import "OrderListHeaderView.h"
 #import "OrderListFooterView.h"
 #import "NoResultView.h"
+#import "PaymentViewController.h"
+#import "OrderCreateController.h"
 
 
 @interface OrdersViewController ()<UIScrollViewDelegate,UITableViewDelegate ,UITableViewDataSource>
@@ -56,7 +59,6 @@
     [super viewWillAppear:animated];
 
     self.navigationItem.title = @"我的订单";
-    
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, 0, 22, 17);
@@ -181,6 +183,10 @@
             
             self.currentPage_another = 1;
             self.parameters[@"nPage"] = @"1";
+            if (self.finishedArr) {
+                
+                [self.finishedArr removeAllObjects];
+            }
             [self sendHttpRequestForFinish:YES];
         }];
         
@@ -208,10 +214,14 @@
         _unfinishedTableView.dataSource = self;
         _unfinishedTableView.separatorColor = kClearColor;
         
-        _unfinishedTableView.mj_header = [MJRefreshHeader headerWithRefreshingBlock:^{
+        _unfinishedTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             
             self.currentPage = 1;
             self.parameters[@"nPage"] = @"1";
+            if (self.unfinishedArr) {
+                
+                [self.unfinishedArr removeAllObjects];
+            }
             [self sendHttpRequestForFinish:NO];
         }];
         
@@ -241,7 +251,6 @@
         _mainSrollView.showsVerticalScrollIndicator = NO;
         _mainSrollView.showsHorizontalScrollIndicator = NO;
         _mainSrollView.bounces = NO;
-        
     }
     
     return _mainSrollView;
@@ -255,8 +264,8 @@
         _parameters[kCurrentController] = self;
         _parameters[@"nPage"] = @"1";
         _parameters[@"nMaxNum"] = @"4";
-        _parameters[@"lBuyerid"] = [UserTools userId];
-        _parameters[@"nState"] = @"0";
+        _parameters[@"lBuyerid"] = [UserTools getUserId];
+        _parameters[@"nState"] = @"-1";
     }
 
     return _parameters;
@@ -272,14 +281,13 @@
         
     }else{
         
-        self.parameters[@"nState"] = @"0";
+        self.parameters[@"nState"] = @"-1";
     }
     
     if ([UserTools userEmployeesId]) {
         
         self.parameters[@"lDeliveryid"] = [UserTools userEmployeesId];
     }
-
     [OutsourceNetWork onHttpCode:kUserOrderListNetWork WithParameters:self.parameters];
 
 }
@@ -293,7 +301,7 @@
             
             NSArray *data = responseObj[@"result"][@"dataList"];
             
-            if (data.count>0 && [[data[0][@"nState"] stringValue] isEqualToString:@"0"]) {
+            if (data.count>0 && ![[data[0][@"nState"] stringValue] isEqualToString:@"3"]) {
                 
                 if (data.count < 4) {
                     
@@ -359,18 +367,74 @@
     
 }
 
+- (void)deleteOrderResult:(id)responseObject{
+
+    if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
+        
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:@"删除成功" afterDelay:1.5f];
+
+        self.currentPage = 1;
+        self.currentPage_another = 1;
+        [self sendHttpRequestForFinish:NO];
+        [self sendHttpRequestForFinish:YES];
+    }else{
+        
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObject[@"result"] afterDelay:1.5f];
+    }
+    NSLog(@"%@",responseObject);
+}
 
 
 
 #pragma mark Click-Method
 
 - (void)deleteButtonClick:(UIButton *)sender{
+    
+    WeakSelf(weakSelf);
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"确认删除此商品？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        NSDictionary *dict = weakSelf.unfinishedArr[sender.tag];
 
-
+        NSMutableDictionary *parameters = [NSMutableDictionary new];
+        parameters[kCurrentController] = weakSelf;
+        parameters[@"lOrderId"] = dict[@"lId"];
+        
+        [OutsourceNetWork onHttpCode:kDeleteOrderNetWork WithParameters:parameters];
+        
+    }]];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+        return ;
+    }]];
+    
+    [weakSelf presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)payButtonClick:(UIButton *)sender{
     
+    NSString *bTitle = sender.titleLabel.text;
+    
+    NSDictionary *dict = self.unfinishedArr[sender.tag];
+
+    if ([bTitle isEqualToString:@"去结算"]) {
+        
+        OrderCreateController *creat = [OrderCreateController new];
+        creat.orderId = dict[@"lId"];
+        
+        [self.navigationController pushViewController:creat animated:YES];
+    }
+    if ([bTitle isEqualToString:@"立即支付"]) {
+        
+        PaymentViewController *pay = [PaymentViewController new];
+        pay.orderId = dict[@"lId"];
+        pay.nOrderType = @"0";
+        pay.factTotalPrice = [dict[@"nFactPrice"] floatValue];
+        
+        [self.navigationController pushViewController:pay animated:YES];
+    }
     
 }
 
@@ -389,13 +453,11 @@
         
     }else{
         
-        [self .finishedTableView.mj_header beginRefreshing];
+        [self.finishedTableView.mj_header beginRefreshing];
         [self checkOutLabelWith:1];//已完成
         
         self.mainSrollView.contentOffset = CGPointMake(kWidth, 0);
-
     }
-
 }
 
 - (void)checkOutLabelWith:(NSInteger)tag{
@@ -496,22 +558,21 @@
 
     OrderListFooterView *footer = [[NSBundle mainBundle] loadNibNamed:@"OrderListFooterView" owner:nil options:nil].lastObject;
     
-    NSDictionary *dict = [NSDictionary dictionary];
+    NSMutableDictionary *dict = nil;
     
     if (tableView == self.finishedTableView) {
         
-        dict = self.finishedArr[section];
+        dict = [NSMutableDictionary dictionaryWithDictionary:self.finishedArr[section]];
     }
     if (tableView == self.unfinishedTableView) {
         
-        dict = self.unfinishedArr[section];
+        dict = [NSMutableDictionary dictionaryWithDictionary:self.unfinishedArr[section]];
         footer.deleteButton.tag = section;
         footer.payButton.tag = section;
         [footer.deleteButton addTarget:self action:@selector(deleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [footer.payButton addTarget:self action:@selector(payButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        
     }
-    
+    dict[@"conState"] = @"1";
     OrderModel *model = [OrderModel mj_objectWithKeyValues:dict];
     
     [footer fitDataWithModel:model];

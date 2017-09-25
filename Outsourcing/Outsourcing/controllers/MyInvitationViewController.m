@@ -83,7 +83,7 @@
     UILabel *v2_label2 = [UILabel new];
     v2_label2.font = kFont(9);
     v2_label2.textColor = UIColorFromRGBA(0x333338, 1.0);
-    v2_label2.text = @"347902083";
+    v2_label2.text = [UserTools userInviteCode];
     v2_label2.textAlignment = NSTextAlignmentCenter;
     
     UIImageView *imageView = [UIImageView new];

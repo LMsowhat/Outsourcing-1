@@ -197,6 +197,13 @@
         return;
     }
     sender.userInteractionEnabled = NO;
+    //获取验证码
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    parameters[kCurrentController] = self;
+    parameters[@"strMobile"] = self.userNameTextField.text;
+    parameters[@"type"] = @"1";
+    
+    [OutsourceNetWork onHttpCode:kUserSendCodeNetWork WithParameters:parameters];
     
     [self countDown];
     
@@ -210,16 +217,30 @@
     
     if (checkInput) {
         
-        [MBProgressHUDManager showTextHUDAddedTo:self.navigationController.view WithText:@"密码修改成功" afterDelay:1.0f];
+        NSMutableDictionary *parameters = [NSMutableDictionary new];
+        parameters[kCurrentController] = self;
+        parameters[@"lUserId"] = [UserTools getUserId];
+        parameters[@"strUserSmsCode"] = self.messageCodeTextField.text;
+        parameters[@"strPassword"] = self.psdTextField.text;
+        parameters[@"strMobile"] = self.userNameTextField.text;
+        
+        [OutsourceNetWork onHttpCode:kUserUpdatePassWorkNetWork WithParameters:parameters];
+    }
+    NSLog(@"saveBtnClick!!!!");
+}
+
+- (void)resultOfGetBackPasswork:(id)responseObject{
+
+    [MBProgressHUDManager showTextHUDAddedTo:self.navigationController.view WithText:responseObject[@"result"] afterDelay:1.0f];
+
+    if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
         
         [self.navigationController popViewControllerAnimated:YES];
     }
-    
-    
-    
-    
-    NSLog(@"saveBtnClick!!!!");
+
 }
+
+
 
 - (BOOL)checkTheTextFieldInput{
     
@@ -374,6 +395,14 @@
     return YES;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    //当用户按下ruturn，把焦点从textField移开那么键盘就会消失了
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
 - (void)codeEditChanged:(UITextField *)sender{
     
     
@@ -399,8 +428,7 @@
 
 - (void)registerSendCodeGetData:(NSDictionary *)data{
     
-    //    [self countDown];
-    
+    [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:data[@"result"] afterDelay:1.0f];
 }
 
 - (void)countDown{
@@ -476,7 +504,6 @@
 
 - (void)loginSuccess:(id)responseObject{
     
-    [UserTools setToken:responseObject[@"token"]];
     [UserTools setUserId:responseObject[@"id"]];
     
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];

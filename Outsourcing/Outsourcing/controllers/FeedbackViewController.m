@@ -59,7 +59,7 @@
 
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     parameters[kCurrentController] = self;
-    parameters[@"lUserId"] = [UserTools userId];
+    parameters[@"lUserId"] = [UserTools getUserId];
     parameters[@"strContent"] = self.inputString;
     
     [OutsourceNetWork onHttpCode:kUserFeedbackNetWork WithParameters:parameters];
@@ -133,6 +133,13 @@
 
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    //当用户按下ruturn，把焦点从textField移开那么键盘就会消失了
+    [textField resignFirstResponder];
+    
+    return YES;
+}
 
 
 
