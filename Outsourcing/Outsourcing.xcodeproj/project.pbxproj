@@ -1273,9 +1273,9 @@
 				TargetAttributes = {
 					8BFB15601EEFC3A200725244 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 55VDPW57K7;
+						DevelopmentTeam = JXDJ88EMLK;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					8BFB15791EEFC3A300725244 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -1737,7 +1737,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 55VDPW57K7;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Hebei ZhiLong High-tech Electronic Technology Co., Ltd (JXDJ88EMLK)";
+				DEVELOPMENT_TEAM = JXDJ88EMLK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1746,8 +1747,11 @@
 				INFOPLIST_FILE = Outsourcing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.liwenhua.Outsourcing;
+				NEW_SETTING = "";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.outsourcing.zhilonggk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "01efc8c7-563b-46de-af13-c07bb0ab7667";
+				PROVISIONING_PROFILE_SPECIFIER = distri_AdHoc_songshui;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
@@ -1762,7 +1766,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = 55VDPW57K7;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Hebei ZhiLong High-tech Electronic Technology Co., Ltd (JXDJ88EMLK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hebei ZhiLong High-tech Electronic Technology Co., Ltd (JXDJ88EMLK)";
+				DEVELOPMENT_TEAM = JXDJ88EMLK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1771,8 +1777,11 @@
 				INFOPLIST_FILE = Outsourcing/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.liwenhua.Outsourcing;
+				NEW_SETTING = "";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.outsourcing.zhilonggk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "01efc8c7-563b-46de-af13-c07bb0ab7667";
+				PROVISIONING_PROFILE_SPECIFIER = distri_AdHoc_songshui;
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 			};

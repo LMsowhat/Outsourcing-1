@@ -58,11 +58,15 @@
     }
     if (tabBarController.selectedIndex == 1) {
         
-        NavigationViewController *navi = (NavigationViewController *)viewController;
+        if ([UserTools getUserId]) {
+            
+            NavigationViewController *navi = (NavigationViewController *)viewController;
+            
+            ShoppingCartController *chart = navi.viewControllers.firstObject;
+            
+            [chart sendHttpRequest];
+        }
         
-        ShoppingCartController *chart = navi.viewControllers.firstObject;
-        
-        [chart sendHttpRequest];
     }
     
 }

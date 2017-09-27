@@ -215,7 +215,8 @@
 - (void)dealTheTotalPrice{
 
     self.totalPrice = 0;
-    for (NSDictionary *temp in self.submitDataSource) {
+    NSArray *temArr = [NSArray arrayWithArray:self.submitDataSource];
+    for (NSDictionary *temp in temArr) {
         
         NSInteger price = [temp[@"nPrice"] integerValue];
         
@@ -223,7 +224,6 @@
         
         self.totalPrice += price * nCount;
     }
-    
     self.bottomView.totalPrice.text = [NSString stringWithFormat:@"%.2f",self.totalPrice > 0 ? (float)self.totalPrice/100 : 0.00];
 }
 
@@ -248,7 +248,8 @@
     BOOL has = NO;
     //直接操作数组会报错
     NSDictionary *dArr = self.dataSource[sender.tag];
-    for (NSDictionary *temp in self.submitDataSource) {
+    NSArray *tempArr = [NSArray arrayWithArray:self.submitDataSource];
+    for (NSDictionary *temp in tempArr) {
         
         if ([[temp[@"lGoodsid"] stringValue] isEqualToString:[dArr[@"lGoodsId"] stringValue]]) {
             
@@ -340,24 +341,42 @@
 //增加，减少产品数量
 - (void)dealDataScoutceIndex:(NSInteger)index Add:(BOOL)isAdd{
     //找到数据源，修改数据源
-    NSMutableArray *mutableTemp = self.dataSource;//[NSMutableArray arrayWithArray:self.dataSource]
+    NSMutableArray *mutableTemp = self.dataSource;
     NSMutableDictionary *temp = [NSMutableDictionary dictionaryWithDictionary:mutableTemp[index]];
     NSInteger nCount = [temp[@"nGoodsCount"] integerValue];
     if (isAdd) {
         
         nCount ++;
     }else{
-    
         if (nCount != 1) {
             
             nCount --;
         }
     }
     temp[@"nGoodsCount"] = [NSString stringWithFormat:@"%ld",nCount];
+    
     //替换原来数据源
     [mutableTemp replaceObjectAtIndex:index withObject:temp];
+    
     //重新给定数据源
     self.dataSource = mutableTemp;
+    
+    //查找是否已经选中此条数据，选中，修改数量
+    NSDictionary *dArr = self.dataSource[index];
+    NSArray *tempArr = [NSArray arrayWithArray:self.submitDataSource];
+    for (NSDictionary *tem in tempArr) {
+        
+        if ([[tem[@"lGoodsid"] stringValue] isEqualToString:[dArr[@"lGoodsId"] stringValue]]) {
+            
+            NSMutableDictionary *mTemp = [NSMutableDictionary dictionaryWithDictionary:tem];
+            
+            [self.submitDataSource removeObject:tem];
+            
+            mTemp[@"nCount"] = temp[@"nGoodsCount"];
+            
+            [self.submitDataSource addObject:mTemp];
+        }
+    }
     
     [self dealTheTotalPrice];
     
@@ -390,7 +409,24 @@
     cell.addButton.tag = indexPath.row;
     cell.selectButton.tag = indexPath.row;
     cell.deleteButton.tag = indexPath.row;
-    if (self.bottomView.allSelectButton.selected) {
+    
+    BOOL has = NO;
+    if (self.submitDataSource) {
+        
+        NSDictionary *tem = self.dataSource[indexPath.row];
+        
+        NSArray *temArr = [NSArray arrayWithArray:self.submitDataSource];
+        
+        for (NSDictionary *dict in temArr) {
+
+            if ([[dict[@"lGoodsid"] stringValue] isEqualToString:[tem[@"lGoodsId"] stringValue]]) {
+                
+                has = YES;
+            }
+        }
+    }
+    
+    if (self.bottomView.allSelectButton.selected || has) {
         
         cell.selectButton.selected = YES;
     }
