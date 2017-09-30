@@ -20,7 +20,7 @@
 #import "OrderListHeaderView.h"
 #import "OrderListFooterView.h"
 #import "NoResultView.h"
-
+#import "EmployeeDetailController.h"
 
 
 @interface EmployeeViewController ()<UIScrollViewDelegate,UITableViewDelegate ,UITableViewDataSource>
@@ -568,6 +568,10 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    EmployeeDetailController *detail = [EmployeeDetailController new];
+    detail.orderId = self.dataSource[indexPath.section][@"lId"];
+    
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -276,22 +276,13 @@
 - (void)sendHttpRequestForFinish:(BOOL)isFinish{
     
     if (isFinish) {
-        
         self.parameters[@"nState"] = @"3";
-        
     }else{
-        
         self.parameters[@"nState"] = @"-1";
-    }
-    
-    if ([UserTools userEmployeesId]) {
-        
-        self.parameters[@"lDeliveryid"] = [UserTools userEmployeesId];
     }
     [OutsourceNetWork onHttpCode:kUserOrderListNetWork WithParameters:self.parameters];
 
 }
-
 
 - (void)getUserOrderList:(id)responseObj{
 
@@ -302,23 +293,18 @@
             NSArray *data = responseObj[@"result"][@"dataList"];
             
             if (data.count>0 && ![[data[0][@"nState"] stringValue] isEqualToString:@"3"]) {
-                
                 if (data.count < 4) {
-                    
                     [self.unfinishedTableView.mj_footer endRefreshingWithNoMoreData];
                 }else{
-                    
                     [self.unfinishedTableView.mj_footer endRefreshing];
                 }
                 [self.unfinishedTableView.mj_header endRefreshing];
 
                 if (self.currentPage == 1) {
-                    
                     [self.unfinishedTableView.mj_header endRefreshing];
 
                     self.unfinishedArr = [NSMutableArray arrayWithArray:data];
                 }else{
-                    
                     for (NSDictionary *dict in data) {
                         
                         [self.unfinishedArr addObject:dict];
@@ -328,21 +314,16 @@
 
                 [self.unfinishedTableView reloadData];
             }else{
-                
                 if (data.count < 4) {
-                    
                     [self.finishedTableView.mj_footer endRefreshingWithNoMoreData];
                 }else{
-                    
                     [self.finishedTableView.mj_footer endRefreshing];
                 }
                 if (self.currentPage_another == 1) {
-                    
                     [self.finishedTableView.mj_header endRefreshing];
 
                     self.finishedArr = [NSMutableArray arrayWithArray:data];
                 }else{
-                    
                     for (NSDictionary *dict in data) {
                         
                         [self.finishedArr addObject:dict];

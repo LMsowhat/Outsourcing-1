@@ -34,7 +34,7 @@
 #import "MyBarrelViewController.h"
 #import "RetrieveViewController.h"
 #import "RetrievePasswordViewController.h"
-
+#import "EmployeeDetailController.h"
 
 
 @implementation EliveApplication (requestMethod)
@@ -405,6 +405,16 @@
             if (responseObject) {
                 
                 [order orderGetDetail:responseObject];
+            }
+        }
+        
+        if ([controller isKindOfClass:[EmployeeDetailController class]]) {
+            
+            EmployeeDetailController *emDetail = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [emDetail deliveryGetDetail:responseObject];
             }
         }
         

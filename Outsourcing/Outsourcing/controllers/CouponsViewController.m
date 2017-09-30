@@ -155,7 +155,7 @@
 - (void)useRules{
 
     ServerViewController *server = [ServerViewController new];
-    server.navigationItem.title = @"水票使用须知";
+    server.navigationItem.title = @"优惠券说明";
     
     [self.navigationController pushViewController:server animated:YES];
 }

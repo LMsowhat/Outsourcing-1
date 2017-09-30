@@ -25,8 +25,6 @@
     
     self.navigationController.navigationBarHidden = NO;
     
-//    self.navigationItem.title = @"服务条款";
-    
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, 0, 22, 17);
     [btn setImage:[UIImage imageNamed:@"naviBack"] forState:UIControlStateNormal];
@@ -64,10 +62,15 @@
         
         parameters[@"nType"] = @"1";
     }
-    if ([self.navigationItem.title isEqualToString:@"水票使用须知"]) {
+    if ([self.navigationItem.title isEqualToString:@"优惠券说明"]) {
         
         parameters[@"nType"] = @"2";
     }
+    if ([self.navigationItem.title isEqualToString:@"桶押金说明"]) {
+        
+        parameters[@"nType"] = @"4";
+    }
+    
     [OutsourceNetWork onHttpCode:kSettingGetMoreNetWork WithParameters:parameters];
 
 }

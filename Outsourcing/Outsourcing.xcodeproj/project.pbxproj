@@ -67,6 +67,11 @@
 		8B2822171F5953FA0015D2DC /* cart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B2822111F5953FA0015D2DC /* cart@3x.png */; };
 		8B28221A1F5C2A9B0015D2DC /* InputTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2822191F5C2A9B0015D2DC /* InputTextView.m */; };
 		8B28221D1F5C33070015D2DC /* SubmitOrderProModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B28221C1F5C33070015D2DC /* SubmitOrderProModel.m */; };
+		8B3588791F7CE9FB00A73635 /* EmployeeDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3588781F7CE9FB00A73635 /* EmployeeDetailController.m */; };
+		8B35887C1F7CEF6D00A73635 /* EmploeeDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B35887B1F7CEF6D00A73635 /* EmploeeDetailHeaderView.m */; };
+		8B35887F1F7CEF8700A73635 /* EmploeeDetailFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B35887E1F7CEF8700A73635 /* EmploeeDetailFooterView.m */; };
+		8B3588811F7CEF9C00A73635 /* EmploeeDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B3588801F7CEF9C00A73635 /* EmploeeDetailHeaderView.xib */; };
+		8B3588831F7CEFA800A73635 /* EmploeeDetailFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B3588821F7CEFA800A73635 /* EmploeeDetailFooterView.xib */; };
 		8B8533F41F00F41C00D061E4 /* OrderDetailListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8533F31F00F41C00D061E4 /* OrderDetailListCell.m */; };
 		8B8533FD1F0359BE00D061E4 /* ProductionShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8533FC1F0359BE00D061E4 /* ProductionShowView.m */; };
 		8B8534001F03A20B00D061E4 /* OrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8533FF1F03A20B00D061E4 /* OrderListTableViewCell.m */; };
@@ -338,6 +343,14 @@
 		8B2822191F5C2A9B0015D2DC /* InputTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputTextView.m; sourceTree = "<group>"; };
 		8B28221B1F5C33070015D2DC /* SubmitOrderProModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitOrderProModel.h; sourceTree = "<group>"; };
 		8B28221C1F5C33070015D2DC /* SubmitOrderProModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitOrderProModel.m; sourceTree = "<group>"; };
+		8B3588771F7CE9FB00A73635 /* EmployeeDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmployeeDetailController.h; sourceTree = "<group>"; };
+		8B3588781F7CE9FB00A73635 /* EmployeeDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmployeeDetailController.m; sourceTree = "<group>"; };
+		8B35887A1F7CEF6D00A73635 /* EmploeeDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmploeeDetailHeaderView.h; sourceTree = "<group>"; };
+		8B35887B1F7CEF6D00A73635 /* EmploeeDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmploeeDetailHeaderView.m; sourceTree = "<group>"; };
+		8B35887D1F7CEF8700A73635 /* EmploeeDetailFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmploeeDetailFooterView.h; sourceTree = "<group>"; };
+		8B35887E1F7CEF8700A73635 /* EmploeeDetailFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmploeeDetailFooterView.m; sourceTree = "<group>"; };
+		8B3588801F7CEF9C00A73635 /* EmploeeDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmploeeDetailHeaderView.xib; sourceTree = "<group>"; };
+		8B3588821F7CEFA800A73635 /* EmploeeDetailFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmploeeDetailFooterView.xib; sourceTree = "<group>"; };
 		8B8533F21F00F41C00D061E4 /* OrderDetailListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailListCell.h; sourceTree = "<group>"; };
 		8B8533F31F00F41C00D061E4 /* OrderDetailListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailListCell.m; sourceTree = "<group>"; };
 		8B8533FB1F0359BE00D061E4 /* ProductionShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductionShowView.h; sourceTree = "<group>"; };
@@ -693,6 +706,8 @@
 				8BE0260B1F3BFEA200B63F5C /* CouponsViewController.m */,
 				8B193AE01F764EDD003DE858 /* EmployeeViewController.h */,
 				8B193AE11F764EDD003DE858 /* EmployeeViewController.m */,
+				8B3588771F7CE9FB00A73635 /* EmployeeDetailController.h */,
+				8B3588781F7CE9FB00A73635 /* EmployeeDetailController.m */,
 				8B9B84F21F43ECC3009AE5EE /* MyInvitationViewController.h */,
 				8B9B84F31F43ECC3009AE5EE /* MyInvitationViewController.m */,
 				8B9B84F51F43F761009AE5EE /* AddressViewController.h */,
@@ -1148,6 +1163,12 @@
 				8B193AE61F76541C003DE858 /* MessageCell.h */,
 				8B193AE71F76541C003DE858 /* MessageCell.m */,
 				8B193AE81F76541C003DE858 /* MessageCell.xib */,
+				8B35887A1F7CEF6D00A73635 /* EmploeeDetailHeaderView.h */,
+				8B35887B1F7CEF6D00A73635 /* EmploeeDetailHeaderView.m */,
+				8B3588801F7CEF9C00A73635 /* EmploeeDetailHeaderView.xib */,
+				8B35887D1F7CEF8700A73635 /* EmploeeDetailFooterView.h */,
+				8B35887E1F7CEF8700A73635 /* EmploeeDetailFooterView.m */,
+				8B3588821F7CEFA800A73635 /* EmploeeDetailFooterView.xib */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -1342,6 +1363,7 @@
 				8BFB16A61EF0DF6E00725244 /* time_icon@2x.png in Resources */,
 				8B2028851F135577007F39AD /* ticket@2x.png in Resources */,
 				8BE026241F3C905D00B63F5C /* ali_icon@3x.png in Resources */,
+				8B3588811F7CEF9C00A73635 /* EmploeeDetailHeaderView.xib in Resources */,
 				8BFB169A1EF0DF6E00725244 /* setting_myMessage@2x.png in Resources */,
 				8BE025C31F3862D800B63F5C /* naviBack@2x.png in Resources */,
 				8B89AAE11F678D8F00AE2BB9 /* OrderListCell.xib in Resources */,
@@ -1398,6 +1420,7 @@
 				8BFB16461EF0DF6E00725244 /* back@3x.png in Resources */,
 				8B28220A1F58051C0015D2DC /* icon_myorder@2x.png in Resources */,
 				8B193AEA1F76541C003DE858 /* MessageCell.xib in Resources */,
+				8B3588831F7CEFA800A73635 /* EmploeeDetailFooterView.xib in Resources */,
 				8BFB16441EF0DF6E00725244 /* back.png in Resources */,
 				8BFB16451EF0DF6E00725244 /* back@2x.png in Resources */,
 				8BFB15711EEFC3A200725244 /* Assets.xcassets in Resources */,
@@ -1565,6 +1588,7 @@
 				8BB4E5D31F00B126006851CF /* OrderCreateController.m in Sources */,
 				8BFB15AC1EF0CDFA00725244 /* NavigationViewController.m in Sources */,
 				8BFB17071EF8CC3900725244 /* SCartListTableViewCell.m in Sources */,
+				8B3588791F7CE9FB00A73635 /* EmployeeDetailController.m in Sources */,
 				8B8534001F03A20B00D061E4 /* OrderListTableViewCell.m in Sources */,
 				8B9B85161F4C0468009AE5EE /* CouponsModel.m in Sources */,
 				8B193AC91F74FB7E003DE858 /* ShoppingChartCell.m in Sources */,
@@ -1594,12 +1618,14 @@
 				8B9B85001F4571D9009AE5EE /* MyTicketViewController.m in Sources */,
 				8B28221A1F5C2A9B0015D2DC /* InputTextView.m in Sources */,
 				8B9B85031F4571F9009AE5EE /* MyTicketTableViewCell.m in Sources */,
+				8B35887F1F7CEF8700A73635 /* EmploeeDetailFooterView.m in Sources */,
 				8B2028901F160008007F39AD /* AgreementTextViewController.m in Sources */,
 				8BFB15C81EF0D0A500725244 /* AFNetWorkManagerConfig.m in Sources */,
 				8B89AAEE1F67BD8E00AE2BB9 /* CALayer+CALayer_BorderColor.m in Sources */,
 				8BFB15C91EF0D0A500725244 /* EliveApplication+requestMethod.m in Sources */,
 				8BD193751F0F363B00A39605 /* HeaderCycleScrollView.m in Sources */,
 				8BFB16FA1EF11AC000725244 /* ProductionModel.m in Sources */,
+				8B35887C1F7CEF6D00A73635 /* EmploeeDetailHeaderView.m in Sources */,
 				8BFB15A01EEFEC6F00725244 /* MainTabBarController.m in Sources */,
 				8B193AE91F76541C003DE858 /* MessageCell.m in Sources */,
 				8BFB17011EF776CC00725244 /* ProductionDetail.m in Sources */,

@@ -21,7 +21,7 @@
 #import "AddressViewController.h"
 #import "CouponsViewController.h"
 #import "OrderInputView.h"
-
+#import "ServerViewController.h"
 
 
 @interface OrderCreateController ()<UITableViewDelegate, UITableViewDataSource, UITextViewDelegate>
@@ -48,15 +48,7 @@
 //商品底部展示
 @property (nonatomic ,strong)UIView *proBottomView;
 
-@property (nonatomic ,strong)UIImageView *buttonBackground;//加减按钮图片
-@property (nonatomic ,strong)UIButton *substractBtn;//减按钮
-@property (nonatomic ,strong)UIButton *addBtn;//加按钮
 @property (nonatomic ,strong)UILabel *nBucketPrice;//桶押金
-@property (nonatomic ,strong)NSString *totalBucketPrice;
-@property (nonatomic ,strong)UILabel *nBucketNum;//押桶个数
-@property (nonatomic ,assign)NSInteger totalBucketNum;
-
-
 
 @property (nonatomic ,strong)UILabel *oTotalPrice;
 
@@ -247,25 +239,15 @@
         
         _proBottomView = [UIView new];
         
-        self.buttonBackground = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"calculate"]];
-        
-        self.addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.addBtn setTitle:@"" forState:UIControlStateNormal];
-        [self.addBtn setBackgroundColor:kClearColor];
-        [self.addBtn addTarget:self action:@selector(addtionClick) forControlEvents:UIControlEventTouchUpInside];
-        
-        self.substractBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.substractBtn setTitle:@"" forState:UIControlStateNormal];
-        [self.substractBtn setBackgroundColor:kClearColor];
-        [self.substractBtn addTarget:self action:@selector(subtractionClick) forControlEvents:UIControlEventTouchUpInside];
-        
         self.nBucketPrice = [UILabel new];
         self.nBucketPrice.font = kFont(6);
         self.nBucketPrice.textColor = UIColorFromRGBA(0x8F9095, 1.0);
         
-        self.nBucketNum = [UILabel new];
-        self.nBucketNum.font = kFont(6);
-        self.nBucketNum.textColor = UIColorFromRGBA(0x8F9095, 1.0);
+        UIButton *bucketInstruction = [UIButton buttonWithType:UIButtonTypeCustom];
+        [bucketInstruction setTitle:@"桶押金说明" forState:UIControlStateNormal];
+        [bucketInstruction.titleLabel setFont:kFont(6)];
+        [bucketInstruction setTitleColor:UIColorFromRGBA(0xFA6650, 1.0) forState:UIControlStateNormal];
+        [bucketInstruction addTarget:self action:@selector(bucketInstructionClick) forControlEvents:UIControlEventTouchUpInside];
         
         UILabel *oTotalTitle = [UILabel new];
         oTotalTitle = [UILabel new];
@@ -280,14 +262,11 @@
         UIView *line = [UIView new];
         line.backgroundColor = UIColorFromRGBA(0xDDDDDD, 1.0);
 
-        [_proBottomView addSubview:self.buttonBackground];
-        [_proBottomView addSubview:self.addBtn];
-        [_proBottomView addSubview:self.substractBtn];
-        [_proBottomView addSubview:self.nBucketNum];
         [_proBottomView addSubview:self.nBucketPrice];
         [_proBottomView addSubview:oTotalTitle];
         [_proBottomView addSubview:self.oTotalPrice];
         [_proBottomView addSubview:line];
+        [_proBottomView addSubview:bucketInstruction];
         
         [self.nBucketPrice makeConstraints:^(MASConstraintMaker *make) {
             
@@ -296,39 +275,12 @@
             make.left.equalTo(_proBottomView).offset(10 *kScale);
         }];
         
-        [self.buttonBackground makeConstraints:^(MASConstraintMaker *make) {
+        [bucketInstruction makeConstraints:^(MASConstraintMaker *make) {
             
-            make.size.equalTo(CGSizeMake(30 *kScale, 7*kScale));
+            make.centerY.equalTo(_proBottomView);
             
-            make.centerY.equalTo(self.nBucketPrice);
-            
-            make.left.equalTo(self.nBucketPrice.mas_right).offset(5);
+            make.left.equalTo(self.nBucketPrice.mas_right).offset(3);
         }];
-        
-        [self.nBucketNum makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.center.equalTo(self.buttonBackground);
-            
-        }];
-        
-        [self.substractBtn makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.size.equalTo(CGSizeMake(15 *kScale, 7 *kScale));
-            
-            make.centerY.equalTo(self.buttonBackground);
-            
-            make.left.equalTo(self.buttonBackground.mas_left);
-        }];
-        
-        [self.addBtn makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.size.equalTo(CGSizeMake(15 *kScale, 7 *kScale));
-            
-            make.centerY.equalTo(self.buttonBackground);
-            
-            make.right.equalTo(self.buttonBackground.mas_right);
-        }];
- 
         
         [self.oTotalPrice makeConstraints:^(MASConstraintMaker *make) {
             
@@ -388,37 +340,14 @@
 
 #pragma mark Click-Method
 
-- (void)addtionClick{
+- (void)bucketInstructionClick{
 
-    if (!self.totalBucketNum) {
-        
-        self.totalBucketNum = 0;
-    }
-    self.totalBucketNum += 1;
-    //总共桶押金
-    self.nBucketNum.text = [NSString stringWithFormat:@"%ld",self.totalBucketNum];
-    self.nBucketPrice.text = [NSString stringWithFormat:@"桶押金：￥%ld",self.totalBucketNum * [self.dataSource[@"nBucketmoney"] integerValue]/100];
+    ServerViewController *server = [ServerViewController new];
+    server.navigationItem.title = @"桶押金说明";
     
-    //订单实际总价格
-    self.submitPrice = [NSString stringWithFormat:@"%ld",[self.submitPrice integerValue] + [self.dataSource[@"nBucketmoney"] integerValue]];
+    [self.navigationController pushViewController:server animated:YES];
     
-    [self.mainTableView reloadData];
 }
-- (void)subtractionClick{
-    
-    if (!self.totalBucketNum || self.totalBucketNum == 0) return;
-    
-    self.totalBucketNum -= 1;
-
-    self.nBucketNum.text = [NSString stringWithFormat:@"%ld",self.totalBucketNum];
-    self.nBucketPrice.text = [NSString stringWithFormat:@"桶押金：￥%ld",self.totalBucketNum * [self.dataSource[@"nBucketmoney"] integerValue]/100];
-    
-    self.submitPrice = [NSString stringWithFormat:@"%ld",[self.submitPrice integerValue] - [self.dataSource[@"nBucketmoney"] integerValue]];
-
-    [self.mainTableView reloadData];
-}
-
-
 
 - (void)settlementClick{
     //去结算
@@ -445,7 +374,6 @@
     parametes[@"nTotalprice"] = self.dataSource[@"nTotalprice"];//订单总价
     parametes[@"lMyCouponId"] = self.couponDict[@"lLd"];//优惠券id
     parametes[@"nCouponPrice"] = self.couponDict[@"nPrice"];//优惠券金额
-    parametes[@"nBucketnum"] = [NSString stringWithFormat:@"%ld",self.totalBucketNum];//押桶个数
     
     parametes[@"orderGoods"] = self.dataSource[@"orderGoods"];//商品信息
     
@@ -480,7 +408,6 @@
         
         self.dataSource = responseObj[@"result"];
         
-        NSInteger nBucketmoney = [self.dataSource[@"nBucketmoney"] integerValue];
         NSInteger ticketNum = 0;
         for (NSDictionary *temp in self.dataSource[@"orderGoods"]) {
             
@@ -488,9 +415,7 @@
             
             ticketNum += num;
         }
-        self.totalBucketNum = [self.dataSource[@"nBucketnum"] integerValue];
-        self.nBucketNum.text = [NSString stringWithFormat:@"%ld",self.totalBucketNum];
-        self.nBucketPrice.text = [NSString stringWithFormat:@"桶押金 ￥%ld",self.totalBucketNum * nBucketmoney/100];
+        self.nBucketPrice.text = [NSString stringWithFormat:@"桶押金：￥%.2f（x%@）",[self.dataSource[@"nBucketmoney"] floatValue]/100,self.dataSource[@"nBucketnum"]];
         self.submitPrice = self.dataSource[@"nFactPrice"];
         self.oWTicket.text = [NSString stringWithFormat:@"本次使用水票%ld张",ticketNum];
         
@@ -631,7 +556,8 @@
     if (indexPath.row == nCount +6) {
         
         CouponsViewController *coupon = [CouponsViewController new];
-        coupon.nFullPrice = self.dataSource[@"nFactPrice"];
+        NSInteger fullPrice = [self.dataSource[@"nFactPrice"] integerValue] - [self.dataSource[@"nBucketmoney"] integerValue];
+        coupon.nFullPrice = [NSString stringWithFormat:@"%ld",fullPrice];
         coupon.isSelectedCoupons = YES;
         WeakSelf(weakSelf);
         coupon.passCoupons = ^(NSDictionary *couponDict) {
