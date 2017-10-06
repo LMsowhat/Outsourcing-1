@@ -37,8 +37,6 @@
 @property (nonatomic ,strong)UITableView *finishedTableView;
 @property (nonatomic ,strong)UITableView *unfinishedTableView;
 
-@property (nonatomic ,strong)NSMutableArray *dataSource;
-
 @property (nonatomic ,strong)NSMutableArray *finishedArr;
 @property (nonatomic ,strong)NSMutableArray *unfinishedArr;
 
@@ -355,22 +353,6 @@
     
 }
 
-- (void)actionToSendResult:(id)responseObject{
-
-    [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObject[@"result"] afterDelay:1.5f];
-
-    if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
-        
-        [self.unfinishedTableView.mj_header beginRefreshing];
-        [self.finishedTableView.mj_header beginRefreshing];
-        
-    }else{
-    
-        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObject[@"result"] afterDelay:1.5f];
-    }
-    NSLog(@"%@",responseObject);
-}
-
 #pragma mark Click-Method
 
 - (void)sendButtonClick:(UIButton *)sender{
@@ -569,7 +551,15 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     EmployeeDetailController *detail = [EmployeeDetailController new];
-    detail.orderId = self.dataSource[indexPath.section][@"lId"];
+    if (tableView == self.unfinishedTableView) {
+        
+        detail.isFinished = NO;
+        detail.orderId = self.unfinishedArr[indexPath.section][@"lId"];
+    }else{
+    
+        detail.isFinished = YES;
+        detail.orderId = self.finishedArr[indexPath.section][@"lId"];
+    }
     
     [self.navigationController pushViewController:detail animated:YES];
 }

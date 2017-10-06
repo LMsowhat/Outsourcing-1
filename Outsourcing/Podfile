@@ -12,6 +12,6 @@ pod 'MJExtension'
 pod 'MJRefresh'
 
 pod 'MBProgressHUD'
-
+pod 'WechatOpenSDK'
 
 end

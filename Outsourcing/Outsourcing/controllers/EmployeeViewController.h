@@ -12,6 +12,5 @@
 
 - (void)getUserOrderList:(id)responseObj;
 
-- (void)actionToSendResult:(id)responseObject;
 
 @end

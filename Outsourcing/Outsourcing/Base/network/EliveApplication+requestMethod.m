@@ -36,7 +36,6 @@
 #import "RetrievePasswordViewController.h"
 #import "EmployeeDetailController.h"
 
-
 @implementation EliveApplication (requestMethod)
 
 - (void)requestSendCodeAction:(NSDictionary*)parm{
@@ -408,16 +407,6 @@
             }
         }
         
-        if ([controller isKindOfClass:[EmployeeDetailController class]]) {
-            
-            EmployeeDetailController *emDetail = [parm objectForKey:kCurrentController];
-            
-            if (responseObject) {
-                
-                [emDetail deliveryGetDetail:responseObject];
-            }
-        }
-        
     }];
 
 }
@@ -462,6 +451,15 @@
             }
         }
         
+        if ([controller isKindOfClass:[EmployeeDetailController class]]) {
+            
+            EmployeeDetailController *emDetail = [parm objectForKey:kCurrentController];
+            
+            if (responseObject) {
+                
+                [emDetail deliveryGetDetail:responseObject];
+            }
+        }
     }];
 
 
@@ -866,9 +864,9 @@
     
     [api requestEmploeeJustSendOrder:parm result:^(id responseObject) {
         
-        if ([controller isKindOfClass:[EmployeeViewController class]]) {
+        if ([controller isKindOfClass:[EmployeeDetailController class]]) {
             
-            EmployeeViewController *emploee = [parm objectForKey:kCurrentController];
+            EmployeeDetailController *emploee = [parm objectForKey:kCurrentController];
             
             if (responseObject) {
                 

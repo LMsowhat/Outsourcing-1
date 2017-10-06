@@ -12,7 +12,11 @@
 
 @property (nonatomic,strong) NSString *        orderId;
 
+@property (nonatomic,assign) BOOL          isFinished;
+
 - (void)deliveryGetDetail:(id)responseObj;
+
+- (void)actionToSendResult:(id)responseObject;
 
 
 @end

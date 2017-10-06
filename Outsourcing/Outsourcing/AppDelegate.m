@@ -32,6 +32,9 @@
     MainTabBarController *root = [MainTabBarController new];
     root.delegate = self;
     
+    //register Weixin app
+//    [WXApi registerApp:@"wxa24da5d6e8fe75db" withDescription:NSLocalizedString(@"WizNote", nil)];
+    
     self.window.rootViewController = root;
     
     [self.window makeKeyAndVisible];
