@@ -133,7 +133,7 @@
     }else{
         
         self.noDataView.hidden = NO;
-        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObject[@"result"] afterDelay:1.0f];
+//        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObject[@"result"] afterDelay:1.0f];
     }
 }
 

@@ -250,7 +250,7 @@
     }else{
     
         self.noDataView.hidden = NO;
-        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObj[@"result"] afterDelay:1.0f];
+//        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:responseObj[@"result"] afterDelay:1.0f];
     }
     
     NSLog(@"%@",responseObj);

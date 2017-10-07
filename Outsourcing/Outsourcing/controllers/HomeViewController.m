@@ -17,6 +17,8 @@
 #import "HeaderCycleScrollView.h"
 #import "ProductionDetailViewController.h"
 #import "MBProgressHUDManager.h"
+#import "ActivityViewController.h"
+
 
 #define headerHeight 180
 @interface HomeViewController ()
@@ -156,21 +158,27 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
     
     if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
         
+        
         if (!self.cycSource) {
             
             self.cycSource = [NSMutableArray new];
         }
-        for (NSDictionary *dict in responseObject[@"result"][@"dataList"]) {
-            
-            if (dict[@"lId"]) {
-                
-                NSString *imageUrl = [NSString stringWithFormat:@"%@/common/getImg/1/%@",URLHOST,dict[@"lId"]];
-                [self.cycSource addObject:imageUrl];
-            }
-        }
+        self.cycSource = [NSMutableArray arrayWithArray:responseObject[@"result"][@"dataList"]];
+        
         if (self.cycSource.count > 0) {
             
-            self.headerSDCycle.imageURLStringsGroup = self.cycSource;
+            NSMutableArray *images = [NSMutableArray new];
+            
+            for (NSInteger i = 0; i < self.cycSource.count; i++) {
+                
+                if (self.cycSource[i][@"lId"]) {
+                    
+                    NSString *imageUrl = [NSString stringWithFormat:@"%@/common/getImg/1/%@",URLHOST,self.cycSource[i][@"lId"]];
+                    
+                    [images addObject:imageUrl];
+                }
+            }
+            self.headerSDCycle.imageURLStringsGroup = images;
             [self.mainCollection reloadData];
         }
     }
@@ -209,6 +217,11 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
 /** 点击图片回调 */
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
     
+    ActivityViewController *activity = [ActivityViewController new];
+    activity.navigationItem.title = self.cycSource[index][@"strActivityName"];
+    activity.infoDict = self.cycSource[index];
+    
+    [self.navigationController pushViewController:activity animated:YES];
     //    NSLog(@"index has clicked----%ld",(long)index);
     
 }

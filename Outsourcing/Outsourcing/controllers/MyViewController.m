@@ -92,7 +92,6 @@
         
         self.userPhone.text = responseObject[@"result"][@"strMobile"];
     }
-
     [self dealDataSource];
     [self.mainTableView reloadData];
 }

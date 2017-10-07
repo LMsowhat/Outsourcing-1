@@ -23,6 +23,7 @@
 
 @property (nonatomic ,strong)NSArray *subViewControllers;
 
+@property (nonatomic ,strong)UIButton *logout;
 
 @end
 
@@ -44,29 +45,21 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     [self.navigationItem setLeftBarButtonItem:leftItem];
     
+    if (![UserTools getUserId]) {
+        
+        self.logout.hidden = YES;
+    }else{
+        
+        self.logout.hidden = NO;
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.view addSubview:self.mainTableView];
-    UIButton *logout = [UIButton buttonWithType:UIButtonTypeCustom];
-    logout.frame = CGRectMake(0, kHeight - 24.5 *kScale, kWidth, 24.5 *kScale);
-    [logout setTitle:@"退出登录" forState:UIControlStateNormal];
-    [logout.titleLabel setFont:kFont(7)];
-    [logout.titleLabel setTextColor:UIColorFromRGBA(0xFFFFFF, 1.0)];
-    logout.backgroundColor = UIColorFromRGBA(0xFA6650, 1.0);
-    [logout addTarget:self action:@selector(logoutClick) forControlEvents:UIControlEventTouchUpInside];
     
-    if (![UserTools getUserId]) {
-        
-        logout.hidden = YES;
-    }else{
-    
-        logout.hidden = NO;
-    }
-    
-    [self.view addSubview:logout];
+    [self.view addSubview:self.logout];
     // Do any additional setup after loading the view.
 }
 
@@ -116,6 +109,20 @@
     return _subViewControllers;
 }
 
+-(UIButton *)logout{
+
+    if (!_logout) {
+        
+        _logout = [UIButton buttonWithType:UIButtonTypeCustom];
+        _logout.frame = CGRectMake(0, kHeight - 24.5 *kScale, kWidth, 24.5 *kScale);
+        [_logout setTitle:@"退出登录" forState:UIControlStateNormal];
+        [_logout.titleLabel setFont:kFont(7)];
+        [_logout.titleLabel setTextColor:UIColorFromRGBA(0xFFFFFF, 1.0)];
+        _logout.backgroundColor = UIColorFromRGBA(0xFA6650, 1.0);
+        [_logout addTarget:self action:@selector(logoutClick) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _logout;
+}
 
 #pragma  mark Tatget
 

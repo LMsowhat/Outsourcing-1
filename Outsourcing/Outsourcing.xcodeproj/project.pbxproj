@@ -84,6 +84,11 @@
 		8B89AAEB1F67B78C00AE2BB9 /* OrderListFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B89AAEA1F67B78C00AE2BB9 /* OrderListFooterView.xib */; };
 		8B89AAEE1F67BD8E00AE2BB9 /* CALayer+CALayer_BorderColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B89AAED1F67BD8E00AE2BB9 /* CALayer+CALayer_BorderColor.m */; };
 		8B89AAF11F68DBD500AE2BB9 /* NoResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B89AAF01F68DBD500AE2BB9 /* NoResultView.m */; };
+		8B98376C1F879DCE0086A83C /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B98376B1F879DCE0086A83C /* ActivityViewController.m */; };
+		8B98376F1F8876590086A83C /* icon_wechat_friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B98376D1F8876590086A83C /* icon_wechat_friends.png */; };
+		8B9837701F8876590086A83C /* icon_wechat_moments.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B98376E1F8876590086A83C /* icon_wechat_moments.png */; };
+		8B9837731F8876930086A83C /* WechatShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9837721F8876930086A83C /* WechatShareView.m */; };
+		8B9837751F8876A00086A83C /* WechatShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B9837741F8876A00086A83C /* WechatShareView.xib */; };
 		8B9B84F41F43ECC3009AE5EE /* MyInvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B84F31F43ECC3009AE5EE /* MyInvitationViewController.m */; };
 		8B9B84F71F43F761009AE5EE /* AddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B84F61F43F761009AE5EE /* AddressViewController.m */; };
 		8B9B84FA1F441829009AE5EE /* AddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B84F91F441829009AE5EE /* AddressTableViewCell.m */; };
@@ -372,6 +377,13 @@
 		8B89AAED1F67BD8E00AE2BB9 /* CALayer+CALayer_BorderColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+CALayer_BorderColor.m"; sourceTree = "<group>"; };
 		8B89AAEF1F68DBD500AE2BB9 /* NoResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoResultView.h; sourceTree = "<group>"; };
 		8B89AAF01F68DBD500AE2BB9 /* NoResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoResultView.m; sourceTree = "<group>"; };
+		8B98376A1F879DCE0086A83C /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityViewController.h; sourceTree = "<group>"; };
+		8B98376B1F879DCE0086A83C /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityViewController.m; sourceTree = "<group>"; };
+		8B98376D1F8876590086A83C /* icon_wechat_friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_wechat_friends.png; sourceTree = "<group>"; };
+		8B98376E1F8876590086A83C /* icon_wechat_moments.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_wechat_moments.png; sourceTree = "<group>"; };
+		8B9837711F8876930086A83C /* WechatShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatShareView.h; sourceTree = "<group>"; };
+		8B9837721F8876930086A83C /* WechatShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WechatShareView.m; sourceTree = "<group>"; };
+		8B9837741F8876A00086A83C /* WechatShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WechatShareView.xib; sourceTree = "<group>"; };
 		8B9B84F21F43ECC3009AE5EE /* MyInvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInvitationViewController.h; sourceTree = "<group>"; };
 		8B9B84F31F43ECC3009AE5EE /* MyInvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInvitationViewController.m; sourceTree = "<group>"; };
 		8B9B84F51F43F761009AE5EE /* AddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressViewController.h; sourceTree = "<group>"; };
@@ -650,6 +662,8 @@
 			children = (
 				8BFB15AD1EF0CE3A00725244 /* HomeViewController.h */,
 				8BFB15AE1EF0CE3A00725244 /* HomeViewController.m */,
+				8B98376A1F879DCE0086A83C /* ActivityViewController.h */,
+				8B98376B1F879DCE0086A83C /* ActivityViewController.m */,
 				8BFB16FC1EF223C900725244 /* ProductionDetailViewController.h */,
 				8BFB16FD1EF223C900725244 /* ProductionDetailViewController.m */,
 				8B2822031F5804670015D2DC /* ShoppingCartController.h */,
@@ -961,6 +975,8 @@
 		8BFB15CF1EF0DF6E00725244 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				8B98376D1F8876590086A83C /* icon_wechat_friends.png */,
+				8B98376E1F8876590086A83C /* icon_wechat_moments.png */,
 				8B193ACB1F74FF18003DE858 /* icon_checked_checkbox.png */,
 				8B193ACC1F74FF18003DE858 /* icon_deleteChart.png */,
 				8B193ACD1F74FF18003DE858 /* icon_unchecked_checkbox.png */,
@@ -1106,6 +1122,9 @@
 				8BFB17031EF8C9CE00725244 /* ShoppingCart.m */,
 				8BFB17051EF8CC3900725244 /* SCartListTableViewCell.h */,
 				8BFB17061EF8CC3900725244 /* SCartListTableViewCell.m */,
+				8B9837711F8876930086A83C /* WechatShareView.h */,
+				8B9837721F8876930086A83C /* WechatShareView.m */,
+				8B9837741F8876A00086A83C /* WechatShareView.xib */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1296,7 +1315,7 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = JXDJ88EMLK;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					8BFB15791EEFC3A300725244 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -1359,6 +1378,7 @@
 				8BFB16DB1EF0E21A00725244 /* home@3x.png in Resources */,
 				8B2822091F58051C0015D2DC /* icon_myorder.png in Resources */,
 				8B193ACA1F74FB7E003DE858 /* ShoppingChartCell.xib in Resources */,
+				8B9837751F8876A00086A83C /* WechatShareView.xib in Resources */,
 				8BFB167D1EF0DF6E00725244 /* payStatus_no@3x.png in Resources */,
 				8BFB16A61EF0DF6E00725244 /* time_icon@2x.png in Resources */,
 				8B2028851F135577007F39AD /* ticket@2x.png in Resources */,
@@ -1374,6 +1394,7 @@
 				8BFB16961EF0DF6E00725244 /* setting_myCourse.png in Resources */,
 				8B2822151F5953FA0015D2DC /* cart.png in Resources */,
 				8BE025F61F39B3C600B63F5C /* icon_bucket@2x.png in Resources */,
+				8B9837701F8876590086A83C /* icon_wechat_moments.png in Resources */,
 				8BFB166D1EF0DF6E00725244 /* guide_image1.jpg in Resources */,
 				8B193ACF1F74FF18003DE858 /* icon_checked_checkbox.png in Resources */,
 				8B2822131F5953FA0015D2DC /* cart_selected@2x.png in Resources */,
@@ -1381,6 +1402,7 @@
 				8BE025DD1F39B2E100B63F5C /* more.png in Resources */,
 				8BFB16A81EF0DF6E00725244 /* user_protocol.jpg in Resources */,
 				8B2822171F5953FA0015D2DC /* cart@3x.png in Resources */,
+				8B98376F1F8876590086A83C /* icon_wechat_friends.png in Resources */,
 				8BE025F51F39B3C600B63F5C /* icon_bucket.png in Resources */,
 				8BE025F31F39B3C500B63F5C /* icon_address@2x.png in Resources */,
 				8BFB16811EF0DF6E00725244 /* paySuccess.png in Resources */,
@@ -1566,6 +1588,8 @@
 				8B89AAE61F67B44C00AE2BB9 /* OrderListHeaderView.m in Sources */,
 				8B89AADC1F6783C800AE2BB9 /* CommonTools.m in Sources */,
 				8B8533FD1F0359BE00D061E4 /* ProductionShowView.m in Sources */,
+				8B9837731F8876930086A83C /* WechatShareView.m in Sources */,
+				8B98376C1F879DCE0086A83C /* ActivityViewController.m in Sources */,
 				8B193ADD1F75EBF8003DE858 /* OrderHeaderView.m in Sources */,
 				8BEC49871F6D4F2700CE19C5 /* AboutUsViewController.m in Sources */,
 				8B9B85061F457707009AE5EE /* MoreViewController.m in Sources */,
@@ -1764,6 +1788,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Hebei ZhiLong High-tech Electronic Technology Co., Ltd (JXDJ88EMLK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = JXDJ88EMLK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1776,8 +1801,8 @@
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.outsourcing.zhilonggk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "01efc8c7-563b-46de-af13-c07bb0ab7667";
-				PROVISIONING_PROFILE_SPECIFIER = distri_AdHoc_songshui;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
@@ -1793,7 +1818,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Hebei ZhiLong High-tech Electronic Technology Co., Ltd (JXDJ88EMLK)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hebei ZhiLong High-tech Electronic Technology Co., Ltd (JXDJ88EMLK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = JXDJ88EMLK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1806,8 +1831,8 @@
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.outsourcing.zhilonggk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "01efc8c7-563b-46de-af13-c07bb0ab7667";
-				PROVISIONING_PROFILE_SPECIFIER = distri_AdHoc_songshui;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 			};

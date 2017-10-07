@@ -11,12 +11,14 @@
 #import "LoginViewController.h"
 #import "NavigationViewController.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "WXApi.h"
+
 
 #import "WaterTicketViewController.h"
 #import "ShoppingCartController.h"
 
 
-@interface AppDelegate ()<UITabBarControllerDelegate>
+@interface AppDelegate ()<UITabBarControllerDelegate,WXApiDelegate>
 
 @end
 
@@ -33,7 +35,7 @@
     root.delegate = self;
     
     //register Weixin app
-//    [WXApi registerApp:@"wxa24da5d6e8fe75db" withDescription:NSLocalizedString(@"WizNote", nil)];
+    [WXApi registerApp:@"wx32196df1f871cc29"];
     
     self.window.rootViewController = root;
     
@@ -83,6 +85,12 @@
 }
 
 
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+
+    return [WXApi handleOpenURL:url delegate:self];
+
+}
+
 -(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
 
     //如果极简开发包不可用，会跳转支付宝钱包进行支付，需要将支付宝钱包的支付结果回传给开发包
@@ -105,6 +113,10 @@
 
         }];
     }
+    
+    //
+    return [WXApi handleOpenURL:url delegate:self];
+
     return YES;
 }
 
@@ -133,6 +145,51 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+#pragma mark - WXApiDelegate
+//WXApiDelegate
+/*! @brief 收到一个来自微信的请求，第三方应用程序处理完后调用sendResp向微信发送结果
+ *
+ * 收到一个来自微信的请求，异步处理完成后必须调用sendResp发送处理结果给微信。
+ * 可能收到的请求有GetMessageFromWXReq、ShowMessageFromWXReq等。
+ * @param req 具体请求内容，是自动释放的
+ */
+-(void) onReq:(BaseReq*)req
+{
+    
+    NSLog(@"Can't bind by weixin!");
+}
+
+
+
+/*! @brief 发送一个sendReq后，收到微信的回应
+ *
+ * 收到一个来自微信的处理结果。调用一次sendReq后会收到onResp。
+ * 可能收到的处理结果有SendMessageToWXResp、SendAuthResp等。
+ */
+-(void) onResp:(BaseResp*)resp
+{
+    if ([resp isKindOfClass:[SendMessageToWXResp class]]) {//微信分享回调
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:wechatShare object:nil userInfo:@{@"resCode":[NSString stringWithFormat:@"%d",resp.errCode]}];
+
+    }else if ([resp isKindOfClass:[SendAuthResp class]]){//微信登录回调
+    
+    
+    }else if ([resp isKindOfClass:[PayResp class]]){//微信支付回调
+    
+        [[NSNotificationCenter defaultCenter] postNotificationName:wechatPaySuccess object:nil userInfo:@{@"resCode":[NSString stringWithFormat:@"%d",resp.errCode]}];
+
+    }
+    
+    
+    
+    
+    //微信总是给app delegate发送消息
+    
+}
+
 
 
 @end

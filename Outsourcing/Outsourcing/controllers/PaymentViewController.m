@@ -9,6 +9,7 @@
 #import "PaymentViewController.h"
 #import "Masonry.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "WXApi.h"
 #import "EliveApplication.h"
 #import "MBProgressHUDManager.h"
 #import "MJExtension.h"
@@ -17,7 +18,7 @@
 #import "MainTabBarController.h"
 #import "PayResultView.h"
 
-@interface PaymentViewController ()
+@interface PaymentViewController ()<WXApiDelegate>
 
 @property (nonatomic ,strong)UILabel *moneyLabel;
 
@@ -31,7 +32,7 @@
 
 //记录订单信息
 
-@property (nonatomic ,strong)NSDictionary *orderDict;
+@property (nonatomic ,strong)NSMutableDictionary *orderDict;
 
 
 @end
@@ -54,6 +55,8 @@
     
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payCallBack:) name:aliPaySuccess object:nil];
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(wechatPayCallBack:) name:wechatPaySuccess object:nil];
     
 }
 
@@ -296,16 +299,6 @@
             
             [self aliPayEdit:resultDic];
             
-            
-//            NSLog(@"resultStatus%@",resultDic[@"resultStatus"]);
-//            if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
-//                
-//                [self PayResult:YES];
-//            }else{
-//                
-//                [self PayResult:NO];
-//            }
-            
         }];
     }else{
         
@@ -349,9 +342,32 @@
 
     if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
         
+        NSDictionary *dict = responseObject[@"result"];
+
+        //记录订单信息
+        self.orderDict = [NSMutableDictionary new];
+        self.orderDict[@"strOrdernum"] = dict[@"strOrdernum"];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+        NSString*dateTime = [formatter stringFromDate:[NSDate  date]];
         
+        self.orderDict[@"dtCreatetime"] = dateTime;
+        self.orderDict[@"nFactPrice"] = [NSString stringWithFormat:@"%.2f",[dict[@"nFactPrice"] floatValue]/100];
+        self.orderModel = [OrderModel mj_objectWithKeyValues:self.orderDict];
+
+        //填充微信支付参数
+        PayReq *request = [PayReq new];
+        request.openID = [dict objectForKey:@"lwh15011075120"];
+        request.partnerId = [dict objectForKey:@"partnerid"];
+        request.prepayId= [dict objectForKey:@"prepayid"];
+        request.package = [dict objectForKey:@"package"];
+        request.nonceStr= [dict objectForKey:@"noncestr"];
+        request.timeStamp= [[dict objectForKey:@"timestamp"] intValue];
+        request.sign= [dict objectForKey:@"sign"];
+        [WXApi sendReq:request];
     }else{
         
+        [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:@"网络错误" afterDelay:1.0f];
         //获取订单失败
     }
 }
@@ -367,7 +383,27 @@
 }
 
 
+- (void)wechatPayCallBack:(NSNotification *)noti{
+    
+    NSDictionary *resultDic = noti.userInfo;
 
+    if ([resultDic[@"resCode"] isEqualToString:@"0"]) {
+        
+        [self PayResult:YES];
+        NSLog(@"展示成功页面");
+    }else{
+    
+        if ([resultDic[@"resCode"] isEqualToString:@"-2"]) {
+            
+            NSLog(@"取消付款");
+        }
+        if ([resultDic[@"resCode"] isEqualToString:@"-1"]) {
+            
+            NSLog(@"可能的原因：签名错误、未注册APPID、项目设置APPID不正确、注册的APPID与设置的不匹配、其他异常等。");
+        }
+        [self PayResult:NO];
+    }
+}
 
 
 
@@ -419,5 +455,6 @@
     [self.navigationController popViewControllerAnimated:YES];
     
 }
+
 
 @end

@@ -293,7 +293,7 @@
             
             make.centerY.equalTo(_proBottomView);
             
-            make.right.equalTo(self.oTotalPrice.mas_left).offset(-2 *kScale);
+            make.right.equalTo(self.oTotalPrice.mas_left).offset(-2);
         }];
         
         [line makeConstraints:^(MASConstraintMaker *make) {
@@ -371,6 +371,7 @@
     parametes[@"strInvoiceheader "] = self.inputArray[@"strInvoiceheader"];//发票抬头
     parametes[@"strRemarks"] = self.inputArray[@"strInvoiceheader"];//备注
     parametes[@"nFactPrice"] = self.submitPrice;//实际支付价格
+//    parametes[@"nFactPrice"] = @"1";//实际支付价格
     parametes[@"nTotalprice"] = self.dataSource[@"nTotalprice"];//订单总价
     parametes[@"lMyCouponId"] = self.couponDict[@"lLd"];//优惠券id
     parametes[@"nCouponPrice"] = self.couponDict[@"nPrice"];//优惠券金额
@@ -415,7 +416,7 @@
             
             ticketNum += num;
         }
-        self.nBucketPrice.text = [NSString stringWithFormat:@"桶押金：￥%.2f（x%@）",[self.dataSource[@"nBucketmoney"] floatValue]/100,self.dataSource[@"nBucketnum"]];
+        self.nBucketPrice.text = [NSString stringWithFormat:@"桶押金:￥%.2f(x%@)",[self.dataSource[@"nBucketmoney"] floatValue]/100,self.dataSource[@"nBucketnum"]];
         self.submitPrice = self.dataSource[@"nFactPrice"];
         self.oWTicket.text = [NSString stringWithFormat:@"本次使用水票%ld张",ticketNum];
         

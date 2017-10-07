@@ -541,13 +541,6 @@
         
         result(responseObject);
 
-//        if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
-//            
-//            result(responseObject);
-//        }else{
-//            
-//            NSLog(@"%@",responseObject);
-//        }
     } fail:^(NSURLSessionDataTask *task, NSError *error) {
         
         NSLog(@"%@",error);
@@ -596,13 +589,8 @@
     
     [AFNetWorkManagerConfig POST:@"ticket/list" baseURL:URLHOST params:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         
-        if ([responseObject[@"resCode"] isEqualToString:@"0"]) {
-            
-            result(responseObject);
-        }else{
-            
-            NSLog(@"%@",responseObject);
-        }
+        result(responseObject);
+
     } fail:^(NSURLSessionDataTask *task, NSError *error) {
         
         NSLog(@"%@",error);

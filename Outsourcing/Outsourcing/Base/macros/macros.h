@@ -73,6 +73,8 @@
 /***常用****/
 #define NEEDLOGIN @"appneedtologin"
 #define aliPaySuccess @"aliPaySuccessCallBack"
+#define wechatPaySuccess @"wechatPaySuccessCallBack"
+#define wechatShare @"wechatShareCallBack"
 #define DownloadSuccess @"downloadsuccess"
 #define WIFIDOWNLOAD @"wifi_download"
 #define WIFIWATCH @"wifi_see"

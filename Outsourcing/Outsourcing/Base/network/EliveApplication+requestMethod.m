@@ -61,7 +61,7 @@
             
             if (responseObject) {
                 
-//                [registers registerSendCodeGetData:responseObject];
+                [registers registerSendCodeGetData:responseObject];
             }
         }
     }];
