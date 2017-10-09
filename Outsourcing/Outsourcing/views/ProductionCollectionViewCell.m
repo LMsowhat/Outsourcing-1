@@ -64,7 +64,7 @@
             
             make.top.equalTo(self.icon.mas_bottom).offset(10);
             make.left.equalTo(self.icon);
-            
+            make.right.equalTo(self).offset(-40);
         }];
         
         [self.pStandard makeConstraints:^(MASConstraintMaker *make) {

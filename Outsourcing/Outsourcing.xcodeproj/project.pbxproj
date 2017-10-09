@@ -18,8 +18,6 @@
 		8B193AB61F74ACCD003DE858 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193AB51F74ACCD003DE858 /* Foundation.framework */; };
 		8B193AB81F74ACD6003DE858 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193AB71F74ACD6003DE858 /* CFNetwork.framework */; };
 		8B193ABA1F74ACE3003DE858 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193AB91F74ACE3003DE858 /* CoreMotion.framework */; };
-		8B193ABD1F74B4D5003DE858 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8B193ABB1F74B4D5003DE858 /* AlipaySDK.bundle */; };
-		8B193ABE1F74B4D5003DE858 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193ABC1F74B4D5003DE858 /* AlipaySDK.framework */; };
 		8B193AC11F74E2B0003DE858 /* PayResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B193AC01F74E2B0003DE858 /* PayResultView.m */; };
 		8B193AC91F74FB7E003DE858 /* ShoppingChartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B193AC71F74FB7E003DE858 /* ShoppingChartCell.m */; };
 		8B193ACA1F74FB7E003DE858 /* ShoppingChartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B193AC81F74FB7E003DE858 /* ShoppingChartCell.xib */; };
@@ -89,6 +87,8 @@
 		8B9837701F8876590086A83C /* icon_wechat_moments.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B98376E1F8876590086A83C /* icon_wechat_moments.png */; };
 		8B9837731F8876930086A83C /* WechatShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9837721F8876930086A83C /* WechatShareView.m */; };
 		8B9837751F8876A00086A83C /* WechatShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B9837741F8876A00086A83C /* WechatShareView.xib */; };
+		8B9837781F889FDC0086A83C /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8B9837761F889FDC0086A83C /* AlipaySDK.bundle */; };
+		8B9837791F889FDC0086A83C /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9837771F889FDC0086A83C /* AlipaySDK.framework */; };
 		8B9B84F41F43ECC3009AE5EE /* MyInvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B84F31F43ECC3009AE5EE /* MyInvitationViewController.m */; };
 		8B9B84F71F43F761009AE5EE /* AddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B84F61F43F761009AE5EE /* AddressViewController.m */; };
 		8B9B84FA1F441829009AE5EE /* AddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B84F91F441829009AE5EE /* AddressTableViewCell.m */; };
@@ -280,8 +280,6 @@
 		8B193AB51F74ACCD003DE858 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8B193AB71F74ACD6003DE858 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		8B193AB91F74ACE3003DE858 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		8B193ABB1F74B4D5003DE858 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
-		8B193ABC1F74B4D5003DE858 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		8B193ABF1F74E2B0003DE858 /* PayResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayResultView.h; sourceTree = "<group>"; };
 		8B193AC01F74E2B0003DE858 /* PayResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayResultView.m; sourceTree = "<group>"; };
 		8B193AC61F74FB7E003DE858 /* ShoppingChartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingChartCell.h; sourceTree = "<group>"; };
@@ -384,6 +382,8 @@
 		8B9837711F8876930086A83C /* WechatShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatShareView.h; sourceTree = "<group>"; };
 		8B9837721F8876930086A83C /* WechatShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WechatShareView.m; sourceTree = "<group>"; };
 		8B9837741F8876A00086A83C /* WechatShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WechatShareView.xib; sourceTree = "<group>"; };
+		8B9837761F889FDC0086A83C /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		8B9837771F889FDC0086A83C /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		8B9B84F21F43ECC3009AE5EE /* MyInvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInvitationViewController.h; sourceTree = "<group>"; };
 		8B9B84F31F43ECC3009AE5EE /* MyInvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInvitationViewController.m; sourceTree = "<group>"; };
 		8B9B84F51F43F761009AE5EE /* AddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressViewController.h; sourceTree = "<group>"; };
@@ -413,6 +413,7 @@
 		8BB4E5D21F00B126006851CF /* OrderCreateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderCreateController.m; sourceTree = "<group>"; };
 		8BD193731F0F363B00A39605 /* HeaderCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCycleScrollView.h; sourceTree = "<group>"; };
 		8BD193741F0F363B00A39605 /* HeaderCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderCycleScrollView.m; sourceTree = "<group>"; };
+		8BDF2D1B1F88D3AB0007C68B /* Outsourcing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Outsourcing.entitlements; sourceTree = "<group>"; };
 		8BE025BF1F3862D800B63F5C /* naviBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = naviBack.png; sourceTree = "<group>"; };
 		8BE025C01F3862D800B63F5C /* naviBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "naviBack@2x.png"; sourceTree = "<group>"; };
 		8BE025C11F3862D800B63F5C /* naviBack@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "naviBack@3x.png"; sourceTree = "<group>"; };
@@ -613,7 +614,7 @@
 				8B193AAC1F74AC76003DE858 /* CoreTelephony.framework in Frameworks */,
 				8B193AAA1F74AC62003DE858 /* SystemConfiguration.framework in Frameworks */,
 				8B193AA81F74AC58003DE858 /* libz.tbd in Frameworks */,
-				8B193ABE1F74B4D5003DE858 /* AlipaySDK.framework in Frameworks */,
+				8B9837791F889FDC0086A83C /* AlipaySDK.framework in Frameworks */,
 				8B193AA61F74AC4E003DE858 /* libc++.tbd in Frameworks */,
 				D531F341D718CD82617539FD /* libPods-Outsourcing.a in Frameworks */,
 			);
@@ -639,8 +640,8 @@
 		4043D5030A6FB7E57E5EFC06 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8B193ABB1F74B4D5003DE858 /* AlipaySDK.bundle */,
-				8B193ABC1F74B4D5003DE858 /* AlipaySDK.framework */,
+				8B9837761F889FDC0086A83C /* AlipaySDK.bundle */,
+				8B9837771F889FDC0086A83C /* AlipaySDK.framework */,
 				8B193AB91F74ACE3003DE858 /* CoreMotion.framework */,
 				8B193AB71F74ACD6003DE858 /* CFNetwork.framework */,
 				8B193AB51F74ACCD003DE858 /* Foundation.framework */,
@@ -823,6 +824,7 @@
 		8BFB15631EEFC3A200725244 /* Outsourcing */ = {
 			isa = PBXGroup;
 			children = (
+				8BDF2D1B1F88D3AB0007C68B /* Outsourcing.entitlements */,
 				8BFB159B1EEFEB9D00725244 /* AppDelegate */,
 				8BFB15CF1EF0DF6E00725244 /* Resource */,
 				8BFB159C1EEFEBEA00725244 /* Base */,
@@ -1315,7 +1317,12 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = JXDJ88EMLK;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					8BFB15791EEFC3A300725244 = {
 						CreatedOnToolsVersion = 8.3.2;
@@ -1382,6 +1389,7 @@
 				8BFB167D1EF0DF6E00725244 /* payStatus_no@3x.png in Resources */,
 				8BFB16A61EF0DF6E00725244 /* time_icon@2x.png in Resources */,
 				8B2028851F135577007F39AD /* ticket@2x.png in Resources */,
+				8B9837781F889FDC0086A83C /* AlipaySDK.bundle in Resources */,
 				8BE026241F3C905D00B63F5C /* ali_icon@3x.png in Resources */,
 				8B3588811F7CEF9C00A73635 /* EmploeeDetailHeaderView.xib in Resources */,
 				8BFB169A1EF0DF6E00725244 /* setting_myMessage@2x.png in Resources */,
@@ -1437,7 +1445,6 @@
 				8B193AD11F74FF18003DE858 /* icon_unchecked_checkbox.png in Resources */,
 				8B2822161F5953FA0015D2DC /* cart@2x.png in Resources */,
 				8BFB16A71EF0DF6E00725244 /* time_icon@3x.png in Resources */,
-				8B193ABD1F74B4D5003DE858 /* AlipaySDK.bundle in Resources */,
 				8BFB167B1EF0DF6E00725244 /* payStatus_no.png in Resources */,
 				8BFB16461EF0DF6E00725244 /* back@3x.png in Resources */,
 				8B28220A1F58051C0015D2DC /* icon_myorder@2x.png in Resources */,
@@ -1787,6 +1794,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Outsourcing/Outsourcing.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Hebei ZhiLong High-tech Electronic Technology Co., Ltd (JXDJ88EMLK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = JXDJ88EMLK;
@@ -1801,8 +1809,8 @@
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.outsourcing.zhilonggk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "0c642a6d-e527-439d-9e2b-40f44b4dd045";
+				PROVISIONING_PROFILE_SPECIFIER = iosDevelopment_provisioning;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
@@ -1817,8 +1825,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Outsourcing/Outsourcing.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Hebei ZhiLong High-tech Electronic Technology Co., Ltd (JXDJ88EMLK)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = JXDJ88EMLK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1831,8 +1840,8 @@
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.outsourcing.zhilonggk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "c8f8b77d-c720-4571-8d0c-cdbabd885b76";
+				PROVISIONING_PROFILE_SPECIFIER = iosDistribution_ahoc_provisioning;
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 			};

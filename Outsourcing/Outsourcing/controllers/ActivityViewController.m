@@ -95,8 +95,8 @@
         WXMediaMessage *message = [WXMediaMessage message];
         message.title = [self.infoDict objectForKey:@"title"];
         message.description = [self.infoDict objectForKey:@"strRemarks"];
-        [message setThumbImage:[UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@/common/getImg/%@/%@",URLHOST,@"1",self.infoDict[@"lId"]]]];
-        
+        NSData *data = [self imageWithImage:kGetImageUrl(URLHOST, @"1", self.infoDict[@"lId"]) scaledToSize:CGSizeMake(100, 100)];
+        [message setThumbImage:[UIImage imageWithData:data]];
         WXWebpageObject *webpageObject = [WXWebpageObject object];
         webpageObject.webpageUrl = self.infoDict[@"strUrl"];
         message.mediaObject = webpageObject;
@@ -108,6 +108,16 @@
     return _req;
 }
 
+// 压缩图片尺寸
+- (NSData *)imageWithImage:(NSURL*)imageUrl scaledToSize:(CGSize)newSize;
+{
+    UIGraphicsBeginImageContext(newSize);
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageUrl]];
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return UIImageJPEGRepresentation(newImage, 0.5);
+}
 
 - (void)useRules{
     

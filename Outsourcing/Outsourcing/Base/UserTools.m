@@ -7,6 +7,9 @@
 //
 
 #import "UserTools.h"
+#import <CloudPushSDK/CloudPushSDK.h>
+
+
 
 @implementation UserTools
 
@@ -160,5 +163,28 @@
     return [rule boolValue];
     
 }
+
+
+
++ (void) bindAccount
+{
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    
+    NSString *userId = [userDefault objectForKey:@"clientId"] ? [userDefault objectForKey:@"clientId"] : [userDefault objectForKey:@"employeeId"];
+    
+    if (!userId || userId.length == 0) return;
+    //
+    [CloudPushSDK bindAccount:userId withCallback:^(CloudPushCallbackResult *res) {
+        
+    }];
+}
+
++ (void) unbindAccount
+{
+    [CloudPushSDK unbindAccount:^(CloudPushCallbackResult *res) {
+        
+    }];
+}
+
 
 @end

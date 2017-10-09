@@ -91,6 +91,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     parameters[@"strMobile"] = params[@"strMobile"];
     parameters[@"strPassword"] = params[@"strPassword"];
+    parameters[@"nDeviceType"] = @"0";
     
     [AFNetWorkManagerConfig POST:@"buyer/login" baseURL:URLHOST params:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         

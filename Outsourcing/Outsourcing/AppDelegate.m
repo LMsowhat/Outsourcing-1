@@ -12,13 +12,16 @@
 #import "NavigationViewController.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "WXApi.h"
+#import <CloudPushSDK/CloudPushSDK.h>
+#import <UserNotifications/UserNotifications.h>
+#import "AFNetWorkManagerConfig.h"
 
 
 #import "WaterTicketViewController.h"
 #import "ShoppingCartController.h"
+#import "MyMessageViewController.h"
 
-
-@interface AppDelegate ()<UITabBarControllerDelegate,WXApiDelegate>
+@interface AppDelegate ()<UITabBarControllerDelegate,WXApiDelegate,UNUserNotificationCenterDelegate>
 
 @end
 
@@ -37,11 +40,39 @@
     //register Weixin app
     [WXApi registerApp:@"wx32196df1f871cc29"];
     
+    /**
+     register AliPush
+     ***/
+    [self registerAPNS:application];
+    [self initCloudPush];
+    [CloudPushSDK sendNotificationAck:launchOptions];
+    application.applicationIconBadgeNumber = 0;
+    // ios >10
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    center.delegate = self;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) {
+        center = [UNUserNotificationCenter currentNotificationCenter];
+        
+        [center requestAuthorizationWithOptions:UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            if (granted) {
+
+                NSLog(@"User authored notification.");
+
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [application registerForRemoteNotifications];
+                });
+            } else {
+               // not granted
+               NSLog(@"User denied notification.");
+            }
+            
+        }];
+    }
+    
     self.window.rootViewController = root;
     
     [self.window makeKeyAndVisible];
-
-//    [self checkLogin];
 
     return YES;
 }
@@ -146,6 +177,171 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark - CloudPushSDK-iOS < 10
+
+/*
+ *  苹果推送注册成功回调，将苹果返回的deviceToken上传到CloudPush服务器
+ */
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [CloudPushSDK registerDevice:deviceToken withCallback:^(CloudPushCallbackResult *res) {
+        if (res.success) {
+            //
+            NSLog(@"Register deviceToken success.%@",deviceToken);
+            
+            [UserTools bindAccount];
+        } else {
+            NSLog(@"Register deviceToken failed, error: %@", res.error);
+        }
+    }];
+}
+/*
+ *  苹果推送注册失败回调
+ */
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"didFailToRegisterForRemoteNotificationsWithError %@", error);
+}
+
+//iOS < 10 下打开通知监听
+- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo {
+    NSLog(@"Receive one notification.");
+    // 取得APNS通知内容
+    NSDictionary *aps = [userInfo valueForKey:@"aps"];
+    // 内容
+    NSString *content = [aps valueForKey:@"alert"];
+    // badge数量
+    NSInteger badge = [[aps valueForKey:@"badge"] integerValue];
+    // 播放声音
+    NSString *sound = [aps valueForKey:@"sound"];
+    // 取得Extras字段内容
+    NSString *Extras = [userInfo valueForKey:@"Extras"]; //服务端中Extras字段，key是自己定义的
+    NSLog(@"content = [%@], badge = [%ld], sound = [%@], Extras = [%@]", content, (long)badge, sound, Extras);
+    // iOS badge 清0
+    application.applicationIconBadgeNumber = 0;
+    // 通知打开回执上报
+    [CloudPushSDK sendNotificationAck:userInfo];
+    //
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CCPDidReceiveMessageNotification" object:nil userInfo:userInfo];
+}
+
+#pragma mark - CloudPushSDK-iOS > 10
+/**
+ *  处理iOS 10通知(iOS 10+)
+ */
+- (void)handleiOS10Notification:(UNNotification *)notification {
+    UNNotificationRequest *request = notification.request;
+    UNNotificationContent *content = request.content;
+    NSDictionary *userInfo = content.userInfo;
+    // 通知时间
+    NSDate *noticeDate = notification.date;
+    // 标题
+    NSString *title = content.title;
+    // 副标题
+    NSString *subtitle = content.subtitle;
+    // 内容
+    NSString *body = content.body;
+    // 角标
+    int badge = [content.badge intValue];
+    // 取得通知自定义字段内容，例：获取key为"Extras"的内容
+    NSString *extras = [userInfo valueForKey:@"Extras"];
+    // 通知打开回执上报
+    [CloudPushSDK sendNotificationAck:userInfo];
+    NSLog(@"Notification, date: %@, title: %@, subtitle: %@, body: %@, badge: %d, extras: %@.", noticeDate, title, subtitle, body, badge, extras);
+}
+
+/**
+ *  App处于前台时收到通知(iOS 10+)
+ */
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    NSLog(@"Receive a notification in foregound.");
+    // 处理iOS 10通知相关字段信息
+    [self handleiOS10Notification:notification];
+    // 通知不弹出
+    //completionHandler(UNNotificationPresentationOptionNone);
+    // 通知弹出，且带有声音、内容和角标（App处于前台时不建议弹出通知）
+    completionHandler(UNNotificationPresentationOptionSound | UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge);
+}
+/**
+ *  触发通知动作时回调，比如点击、删除通知和点击自定义action(iOS 10+)
+ */
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+    NSString *userAction = response.actionIdentifier;
+    // 点击通知打开
+    if ([userAction isEqualToString:UNNotificationDefaultActionIdentifier]) {
+        NSLog(@"User opened the notification.");
+        // 处理iOS 10通知，并上报通知打开回执
+        [self handleiOS10Notification:response.notification];
+    }
+    // 通知dismiss，category创建时传入UNNotificationCategoryOptionCustomDismissAction才可以触发
+    if ([userAction isEqualToString:UNNotificationDismissActionIdentifier]) {
+        NSLog(@"User dismissed the notification.");
+    }
+    NSString *customAction1 = @"action1";
+    NSString *customAction2 = @"action2";
+    // 点击用户自定义Action1
+    if ([userAction isEqualToString:customAction1]) {
+        NSLog(@"User custom action1.");
+    }
+    // 点击用户自定义Action2
+    if ([userAction isEqualToString:customAction2]) {
+        NSLog(@"User custom action2.");
+    }
+    completionHandler();
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    completionHandler(UIBackgroundFetchResultNewData);
+    // 打印到日志 textView 中
+    NSLog(@"********** iOS7.0之后 background **********");
+    // 应用在前台 或者后台开启状态下，不跳转页面，让用户选择。
+    if (application.applicationState == UIApplicationStateActive || application.applicationState == UIApplicationStateBackground) {
+        NSLog(@"acitve or background");
+        UIAlertView *alertView =[[UIAlertView alloc]initWithTitle:@"提示" message:userInfo[@"aps"][@"alert"][@"body"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即查看", nil];
+        [alertView show];
+    }
+    else//杀死状态下，直接跳转到跳转页面。
+    {
+        MyMessageViewController *message = [MyMessageViewController new];
+        NavigationViewController *nav = [[NavigationViewController alloc] initWithRootViewController:message];
+//        message.enterStyle = NO;
+        [self.window.rootViewController presentViewController:nav animated:YES completion:nil];
+    }
+}
+
+
+
+
+#pragma mark - AliPush Init
+- (void)initCloudPush
+{
+    // SDK初始化
+    [CloudPushSDK asyncInit:@"24646801" appSecret:@"77775c0c6790b4defc2b403bfafa3e88" callback:^(CloudPushCallbackResult *res) {
+        if (res.success) {
+            //
+            NSLog(@"Push SDK init success, deviceId: %@.", [CloudPushSDK getDeviceId]);
+            
+        } else {
+            NSLog(@"Push SDK init failed, error: ------------------%@", res.error);
+        }
+    }];
+}
+
+/**
+ *    注册苹果推送，获取deviceToken用于推送
+ *
+ */
+- (void)registerAPNS:(UIApplication *)application {
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        // iOS 8 Notifications
+        [application registerUserNotificationSettings:
+         [UIUserNotificationSettings settingsForTypes:
+          (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge)
+                                           categories:nil]];
+        [application registerForRemoteNotifications];
+    }else{
+        NSLog(@"it's not support below ios 8");
+    }
+}
 
 #pragma mark - WXApiDelegate
 //WXApiDelegate
@@ -182,9 +378,6 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:wechatPaySuccess object:nil userInfo:@{@"resCode":[NSString stringWithFormat:@"%d",resp.errCode]}];
 
     }
-    
-    
-    
     
     //微信总是给app delegate发送消息
     

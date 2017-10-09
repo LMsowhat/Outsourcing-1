@@ -253,7 +253,7 @@
         oTotalTitle = [UILabel new];
         oTotalTitle.font = kFont(7);
         oTotalTitle.textColor = UIColorFromRGBA(0x333338, 1.0);
-        oTotalTitle.text = @"商品总价：";
+        oTotalTitle.text = @"总价：";
         
         self.oTotalPrice = [UILabel new];
         self.oTotalPrice.font = kFont(7);
@@ -280,6 +280,7 @@
             make.centerY.equalTo(_proBottomView);
             
             make.left.equalTo(self.nBucketPrice.mas_right).offset(3);
+            
         }];
         
         [self.oTotalPrice makeConstraints:^(MASConstraintMaker *make) {
@@ -292,7 +293,7 @@
         [oTotalTitle makeConstraints:^(MASConstraintMaker *make) {
             
             make.centerY.equalTo(_proBottomView);
-            
+
             make.right.equalTo(self.oTotalPrice.mas_left).offset(-2);
         }];
         

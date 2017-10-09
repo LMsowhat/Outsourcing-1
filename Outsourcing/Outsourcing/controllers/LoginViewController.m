@@ -447,14 +447,17 @@
     
     if ([[responseObject[@"nUserType"] stringValue] isEqualToString:@"0"]) {
         
-        [UserTools setUserEmployees:responseObject[@"lId"]];
+        [UserTools setUserEmployees:[responseObject[@"lId"] stringValue]];
 
         [UserTools setUserEmployeeName:responseObject[@"strUsername"]];
+        
     }else{
     
-        [UserTools setUserId:responseObject[@"lId"]];
+        [UserTools setUserId:[responseObject[@"lId"] stringValue]];
     }
     
+    [UserTools bindAccount];
+
     [UserTools setInvite:responseObject[@"strInvitecode"]];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 

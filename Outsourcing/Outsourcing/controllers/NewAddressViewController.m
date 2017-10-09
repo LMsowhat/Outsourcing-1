@@ -474,6 +474,7 @@
             self.areaPicker.hidden = YES;
         }
 
+        [self.view endEditing:YES];
         return NO;
     }
 

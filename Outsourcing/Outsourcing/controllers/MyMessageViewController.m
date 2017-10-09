@@ -42,6 +42,7 @@
     [self.navigationItem setLeftBarButtonItem:leftItem];
  
     [self sendHttpRequest];
+    [self registerMessageReceive];
 }
 
 - (void)viewDidLoad {
@@ -167,6 +168,26 @@
 
 }
 
+
+/**
+ *    注册推送消息到来监听
+ */
+- (void)registerMessageReceive
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onMessageReceived:)
+                                                 name:@"CCPDidReceiveMessageNotification"
+                                               object:nil];
+}
+/**
+ *    处理到来推送消息
+ *
+ */
+
+- (void)onMessageReceived:(NSNotification *)notification
+{
+    [self sendHttpRequest];
+}
 
 
 

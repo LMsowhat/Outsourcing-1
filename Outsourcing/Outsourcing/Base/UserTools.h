@@ -38,4 +38,9 @@
 
 + (void)logOut;
 
++ (void) bindAccount;
+
++ (void) unbindAccount;
+
+
 @end

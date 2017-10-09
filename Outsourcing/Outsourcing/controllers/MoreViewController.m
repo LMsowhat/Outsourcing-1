@@ -128,6 +128,7 @@
 
 - (void)logoutClick{
     
+    [UserTools unbindAccount];
     [UserTools logOut];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:NEEDLOGIN object:nil];
