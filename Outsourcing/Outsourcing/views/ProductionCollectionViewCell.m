@@ -104,7 +104,7 @@
 
 -(void)fitDataWith:(ProductionModel *)model{
    
-    [self.icon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/common/getImg/0/%@",URLHOST,model.lId]] placeholderImage:[UIImage imageNamed:@"5.jpg"]];
+    [self.icon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/common/getImg/0/%@",URLHOST,model.lId]] placeholderImage:[UIImage imageNamed:@"icon_outsouring_default.jpg"]];
     self.pName.text = model.strGoodsname;
     self.pStandard.text = [NSString stringWithFormat:@"规格：%@",model.strStandard];
     self.pPrice.text = [NSString stringWithFormat:@"￥%.2f",[model.nPrice floatValue]/100];//

@@ -74,7 +74,7 @@ UIGestureRecognizerDelegate
     
     [OutsourceNetWork onHttpCode:kHomePageProductionListNetWork WithParameters:parameters];
     
-    if (!self.currentPage) {
+    if (!self.currentPage || self.currentPage == 1) {
         
         [OutsourceNetWork onHttpCode:kHomePageCirclesNetWork WithParameters:parameters];
     }
@@ -132,7 +132,7 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
 
     if (!_headerSDCycle) {
         
-        _headerSDCycle = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kWidth, headerHeight) delegate:self placeholderImage:[UIImage imageNamed:@"3.jpg"]];
+        _headerSDCycle = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, kWidth, headerHeight) delegate:self placeholderImage:[UIImage imageNamed:@"icon_outsouring_default.jpg"]];
         _headerSDCycle.delegate = self;
         _headerSDCycle.autoScrollTimeInterval = 2;
         _headerSDCycle.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;

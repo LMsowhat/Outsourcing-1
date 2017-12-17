@@ -98,7 +98,7 @@
             [self addSubview:orderNumber];
             [self addSubview:orderTimeT];
             [self addSubview:orderTime];
-            [self addSubview:self.seeOrderBtn];
+//            [self addSubview:self.seeOrderBtn];
             [self addSubview:self.goBackBtn];
             
             [priceLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -158,18 +158,18 @@
                 
             }];
             
-            [self.seeOrderBtn makeConstraints:^(MASConstraintMaker *make) {
-                
-                make.size.equalTo(CGSizeMake(100, 30));
-                make.centerX.equalTo(self).offset(-kWidth/4);
-                make.top.equalTo(orderTimeT.mas_bottom).offset(60);
-                
-            }];
+//            [self.seeOrderBtn makeConstraints:^(MASConstraintMaker *make) {
+//                
+//                make.size.equalTo(CGSizeMake(100, 30));
+//                make.centerX.equalTo(self).offset(-kWidth/4);
+//                make.top.equalTo(orderTimeT.mas_bottom).offset(60);
+//                
+//            }];
             
             [self.goBackBtn makeConstraints:^(MASConstraintMaker *make) {
                 
                 make.size.equalTo(CGSizeMake(100, 30));
-                make.centerX.equalTo(self).offset(kWidth/4);
+                make.centerX.equalTo(self);
                 make.top.equalTo(orderTimeT.mas_bottom).offset(60);
                 
             }];

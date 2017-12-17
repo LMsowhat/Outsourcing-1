@@ -70,6 +70,7 @@
 		8B35887F1F7CEF8700A73635 /* EmploeeDetailFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B35887E1F7CEF8700A73635 /* EmploeeDetailFooterView.m */; };
 		8B3588811F7CEF9C00A73635 /* EmploeeDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B3588801F7CEF9C00A73635 /* EmploeeDetailHeaderView.xib */; };
 		8B3588831F7CEFA800A73635 /* EmploeeDetailFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B3588821F7CEFA800A73635 /* EmploeeDetailFooterView.xib */; };
+		8B8012EF1F8F931300CC24D2 /* icon_outsouring_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8B8012EE1F8F931300CC24D2 /* icon_outsouring_default.jpg */; };
 		8B8533F41F00F41C00D061E4 /* OrderDetailListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8533F31F00F41C00D061E4 /* OrderDetailListCell.m */; };
 		8B8533FD1F0359BE00D061E4 /* ProductionShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8533FC1F0359BE00D061E4 /* ProductionShowView.m */; };
 		8B8534001F03A20B00D061E4 /* OrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8533FF1F03A20B00D061E4 /* OrderListTableViewCell.m */; };
@@ -354,6 +355,7 @@
 		8B35887E1F7CEF8700A73635 /* EmploeeDetailFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmploeeDetailFooterView.m; sourceTree = "<group>"; };
 		8B3588801F7CEF9C00A73635 /* EmploeeDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmploeeDetailHeaderView.xib; sourceTree = "<group>"; };
 		8B3588821F7CEFA800A73635 /* EmploeeDetailFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmploeeDetailFooterView.xib; sourceTree = "<group>"; };
+		8B8012EE1F8F931300CC24D2 /* icon_outsouring_default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon_outsouring_default.jpg; sourceTree = "<group>"; };
 		8B8533F21F00F41C00D061E4 /* OrderDetailListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailListCell.h; sourceTree = "<group>"; };
 		8B8533F31F00F41C00D061E4 /* OrderDetailListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailListCell.m; sourceTree = "<group>"; };
 		8B8533FB1F0359BE00D061E4 /* ProductionShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductionShowView.h; sourceTree = "<group>"; };
@@ -977,6 +979,7 @@
 		8BFB15CF1EF0DF6E00725244 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				8B8012EE1F8F931300CC24D2 /* icon_outsouring_default.jpg */,
 				8B98376D1F8876590086A83C /* icon_wechat_friends.png */,
 				8B98376E1F8876590086A83C /* icon_wechat_moments.png */,
 				8B193ACB1F74FF18003DE858 /* icon_checked_checkbox.png */,
@@ -1317,7 +1320,7 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = JXDJ88EMLK;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -1483,6 +1486,7 @@
 				8BFB16D61EF0E21A00725244 /* home_selected.png in Resources */,
 				8BFB167C1EF0DF6E00725244 /* payStatus_no@2x.png in Resources */,
 				8BFB16A01EF0DF6E00725244 /* setting_mySetting@2x.png in Resources */,
+				8B8012EF1F8F931300CC24D2 /* icon_outsouring_default.jpg in Resources */,
 				8BE025DE1F39B2E100B63F5C /* more@2x.png in Resources */,
 				8BFB16E11EF0E21A00725244 /* setting@3x.png in Resources */,
 				8BE026141F3C070B00B63F5C /* coupons@2x.png in Resources */,
@@ -1797,7 +1801,7 @@
 				CODE_SIGN_ENTITLEMENTS = Outsourcing/Outsourcing.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Hebei ZhiLong High-tech Electronic Technology Co., Ltd (JXDJ88EMLK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = JXDJ88EMLK;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1809,8 +1813,8 @@
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.outsourcing.zhilonggk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0c642a6d-e527-439d-9e2b-40f44b4dd045";
-				PROVISIONING_PROFILE_SPECIFIER = iosDevelopment_provisioning;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
@@ -1827,8 +1831,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Outsourcing/Outsourcing.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Hebei ZhiLong High-tech Electronic Technology Co., Ltd (JXDJ88EMLK)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = JXDJ88EMLK;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1840,8 +1844,8 @@
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.outsourcing.zhilonggk;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c8f8b77d-c720-4571-8d0c-cdbabd885b76";
-				PROVISIONING_PROFILE_SPECIFIER = iosDistribution_ahoc_provisioning;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
 			};

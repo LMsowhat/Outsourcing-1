@@ -461,15 +461,6 @@
     [UserTools setInvite:responseObject[@"strInvitecode"]];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 
-//    for (UIViewController *controller in self.navigationController.viewControllers) {
-//        if ([controller isKindOfClass:[MainTabBarController class]]) {
-//            
-//            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-//            return;
-//        }
-//    }
-//    [self.navigationController popViewControllerAnimated:YES];
-    
 }
 
 

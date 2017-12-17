@@ -19,6 +19,9 @@
     if (model.nState == 3) {
 
         self.oStatus.text = @"已支付";
+    }else if (model.nState == 4){
+        
+        self.oStatus.text = @"超时关闭";
     }else{
     
         self.oStatus.text = @"未支付";

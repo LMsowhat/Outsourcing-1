@@ -341,7 +341,7 @@
 - (void)loadProductionData:(NSDictionary *)pDict{
 
     
-    [self.pIcon sd_setImageWithURL:kGetImageUrl(URLHOST,@"0", self.pModel.lId) placeholderImage:[UIImage imageNamed:@"3.jpg"]];
+    [self.pIcon sd_setImageWithURL:kGetImageUrl(URLHOST,@"0", self.pModel.lId) placeholderImage:[UIImage imageNamed:@"icon_outsouring_default.jpg"]];
     
     self.pTitle.text = self.pModel.strGoodsname;
     
@@ -360,7 +360,7 @@
         self.imageV = [UIImageView new];
     }
     
-    [self.imageV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/common/getImg/2/%@",URLHOST,self.pModel.lId]] placeholderImage:[UIImage imageNamed:@"3.jpg"]];
+    [self.imageV sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/common/getImg/2/%@",URLHOST,self.pModel.lId]] placeholderImage:[UIImage imageNamed:@"icon_outsouring_default.jpg"]];
     
     CGFloat iHeight = self.imageV.image.size.height * (kWidth - 40)/self.imageV.image.size.width;
     

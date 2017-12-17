@@ -21,6 +21,10 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 
+@property (weak, nonatomic) IBOutlet UIButton *followOrder;
+
+
+
 
 - (void)fitDataWithModel:(OrderModel *)model;
 

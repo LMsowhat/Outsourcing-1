@@ -66,8 +66,8 @@
 
 /****网络API****/
 
-#define URLHOST @"http://59.110.235.32:8080/api/app"
-//#define URLHOST @"http://dapeng.dev.zhijin.com/api"
+//#define URLHOST @"http://39.106.40.182/api/app"
+#define URLHOST @"http://gk.fuzhents.com/api/app"
 
 
 /***常用****/

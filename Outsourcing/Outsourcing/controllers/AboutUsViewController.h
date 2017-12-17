@@ -10,7 +10,6 @@
 
 @interface AboutUsViewController : BaseViewController
 
-
-- (void)getMoreAboutUs:(id)responseObject;
+@property (nonatomic,copy) NSString *        orderId;
 
 @end

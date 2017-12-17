@@ -338,29 +338,20 @@
  @param result 结果回调
  */
 - (void)requestHomeProducitonListRequest:(NSDictionary *)params result:(void (^)(id responseObject))result{
-
-    NSString *urlString = [NSString stringWithFormat:@"%@/goods/list",URLHOST];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    parameters[@"nPage"] = @"1";
-    parameters[@"nMaxNum"] = @"6";
+    parameters[@"nPage"] = params[@"nPage"];
+    parameters[@"nMaxNum"] = params[@"nMaxNum"];
     
-    [AFNetWorkManagerConfig POST:urlString params:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
+    [AFNetWorkManagerConfig POST:@"goods/list" baseURL:URLHOST params:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         
         result(responseObject);
-//        if (responseObject[@"resCode"]) {
-//            
-//            result(responseObject[@"result"][@"dataList"]);
-//        }else{
-//        
-//            NSLog(@"%@",responseObject);
-//        }
         
     } fail:^(NSURLSessionDataTask *task, NSError *error) {
         
         NSLog(@"%@",error);
+        
     }];
-
 }
 
 /**

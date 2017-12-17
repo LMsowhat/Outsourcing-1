@@ -20,7 +20,7 @@
     if (self) {
     
         self.pIcon = [UIImageView new];
-        [self.pIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/common/getImg/0/%@",URLHOST,model.lGoodsid]] placeholderImage:[UIImage imageNamed:@"2.jpg"]];
+        [self.pIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/common/getImg/0/%@",URLHOST,model.lGoodsid]] placeholderImage:[UIImage imageNamed:@"icon_outsouring_default.jpg"]];
         //[UIImage imageNamed:[NSString stringWithFormat:@"%@/common/getImg/0/%@",URLHOST,model.lGoodsid]];
         
         self.pPrice = [UILabel new];

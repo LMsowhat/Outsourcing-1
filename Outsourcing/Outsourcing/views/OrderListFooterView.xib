@@ -73,6 +73,20 @@
                         <constraint firstAttribute="height" constant="10" id="hSY-aK-C1l"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCv-qb-6g5">
+                    <rect key="frame" x="353" y="29" width="80" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="订单追踪">
+                        <color key="titleColor" red="0.98039215686274506" green="0.40000000000000002" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorWithUIColor">
+                            <color key="value" red="0.98039215690000003" green="0.40000000000000002" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="2"/>
+                    </userDefinedRuntimeAttributes>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -80,10 +94,13 @@
                 <constraint firstAttribute="trailing" secondItem="vSc-yR-ZCy" secondAttribute="trailing" constant="20" id="32m-fn-3bh"/>
                 <constraint firstItem="wq8-3f-oHJ" firstAttribute="top" secondItem="Kai-Ya-D08" secondAttribute="bottom" constant="5" id="6NF-Vq-h2h"/>
                 <constraint firstItem="435-Kr-tbU" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Avf-jY-jsb"/>
+                <constraint firstAttribute="trailing" secondItem="lCv-qb-6g5" secondAttribute="trailing" constant="20" id="Ctx-7q-l1q"/>
                 <constraint firstAttribute="bottom" secondItem="435-Kr-tbU" secondAttribute="bottom" id="FQL-1z-RBh"/>
                 <constraint firstItem="vSc-yR-ZCy" firstAttribute="leading" secondItem="iTU-p8-Rlw" secondAttribute="trailing" constant="10" id="Fdc-lO-9tW"/>
                 <constraint firstItem="vSc-yR-ZCy" firstAttribute="centerY" secondItem="iTU-p8-Rlw" secondAttribute="centerY" id="H70-a1-eFP"/>
                 <constraint firstAttribute="trailing" secondItem="435-Kr-tbU" secondAttribute="trailing" id="HgF-Gh-c3O"/>
+                <constraint firstItem="vSc-yR-ZCy" firstAttribute="centerY" secondItem="lCv-qb-6g5" secondAttribute="centerY" id="Kie-7T-i4w"/>
+                <constraint firstItem="vSc-yR-ZCy" firstAttribute="height" secondItem="lCv-qb-6g5" secondAttribute="height" id="Pge-lC-cNT"/>
                 <constraint firstItem="wq8-3f-oHJ" firstAttribute="leading" secondItem="Kai-Ya-D08" secondAttribute="leading" id="RNu-kz-zpY"/>
                 <constraint firstItem="vSc-yR-ZCy" firstAttribute="centerY" secondItem="wq8-3f-oHJ" secondAttribute="centerY" id="RUQ-kT-Eqr"/>
                 <constraint firstItem="iYh-Ww-Mur" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Rpf-Bv-DgG"/>
@@ -92,6 +109,7 @@
                 <constraint firstItem="Kai-Ya-D08" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="ctk-0b-eiC"/>
                 <constraint firstItem="iYh-Ww-Mur" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="gvB-dw-32P"/>
                 <constraint firstItem="vSc-yR-ZCy" firstAttribute="width" secondItem="iTU-p8-Rlw" secondAttribute="width" id="lhi-1q-U5H"/>
+                <constraint firstItem="vSc-yR-ZCy" firstAttribute="width" secondItem="lCv-qb-6g5" secondAttribute="width" id="s3R-1C-mZl"/>
                 <constraint firstItem="iYh-Ww-Mur" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="zOl-y3-V6k"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -99,6 +117,7 @@
             <connections>
                 <outlet property="bPrice" destination="Kai-Ya-D08" id="iaG-D7-NOh"/>
                 <outlet property="deleteButton" destination="iTU-p8-Rlw" id="lLT-7l-XZ0"/>
+                <outlet property="followOrder" destination="lCv-qb-6g5" id="oyQ-Rs-vdo"/>
                 <outlet property="oTotalPrice" destination="wq8-3f-oHJ" id="Mgo-mN-Ybk"/>
                 <outlet property="payButton" destination="vSc-yR-ZCy" id="ocR-Cj-dzL"/>
             </connections>

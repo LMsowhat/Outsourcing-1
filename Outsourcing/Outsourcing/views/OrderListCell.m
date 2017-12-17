@@ -26,7 +26,7 @@
 
 - (void)fitConfigWithModel:(ProductionModel *)model{
 
-    [self.pIcon sd_setImageWithURL:kGetImageUrl(URLHOST, @"0", model.lGoodsid) placeholderImage:[UIImage imageNamed:@"2.jpg"]];
+    [self.pIcon sd_setImageWithURL:kGetImageUrl(URLHOST, @"0", model.lGoodsid) placeholderImage:[UIImage imageNamed:@"icon_outsouring_default.jpg"]];
 
     self.pName.text = model.strGoodsname;
  

@@ -25,7 +25,7 @@
     
     self.navigationController.navigationBarHidden = NO;
     
-    self.navigationItem.title = @"关于我们";
+    self.navigationItem.title = @"订单跟踪";
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, 0, 22, 17);
@@ -35,33 +35,17 @@
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     [self.navigationItem setLeftBarButtonItem:leftItem];
     
-    
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.webView.scalesPageToFit = YES;
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]]];
-
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/order/statusDetail/%@",URLHOST,self.orderId]]];
+    
+    [self.webView loadRequest:request];
     // Do any additional setup after loading the view.
-}
-
-- (void)sendHttpRequest{
-    
-    NSMutableDictionary *parameters = [NSMutableDictionary new];
-    parameters[kCurrentController] = self;
-    parameters[@"nType"] = @"0";
-    
-    [OutsourceNetWork onHttpCode:kUserFeedbackNetWork WithParameters:parameters];
-
-}
-
-- (void)getMoreAboutUs:(id)responseObject{
-
-
-    NSLog(@"%@",responseObject);
 }
 
 

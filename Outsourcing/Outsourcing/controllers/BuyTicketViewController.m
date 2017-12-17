@@ -80,7 +80,7 @@
     header.backgroundColor = UIColorFromRGBA(0xF7F7F7, 1.0);
     
     UIImageView *productionIcon = [UIImageView new];
-    [productionIcon sd_setImageWithURL:kGetImageUrl(URLHOST, @"0", self.tModel.lId) placeholderImage:[UIImage imageNamed:@"2.jpg"]];
+    [productionIcon sd_setImageWithURL:kGetImageUrl(URLHOST, @"0", self.tModel.lGoodsid) placeholderImage:[UIImage imageNamed:@"icon_outsouring_default.jpg"]];
     
     UIView *titleView = [UIView new];
     titleView.backgroundColor = UIColorFromRGBA(0xFFFFFF, 1.0);

@@ -327,7 +327,7 @@
         //使用水票情况
         self.oWTicket.text = [NSString stringWithFormat:@"本次使用水票%ld张",ticketNum];
         //桶押金
-        self.nBucketPrice.text = [NSString stringWithFormat:@"桶押金 ￥%ld (x %ld)",[self.dataSource[@"nBucketnum"] integerValue] * nBucketmoney/100,[self.dataSource[@"nBucketnum"] integerValue]];
+        self.nBucketPrice.text = [NSString stringWithFormat:@"桶押金 ￥%.2f (x %ld)",[self.dataSource[@"nBucketnum"] floatValue] * nBucketmoney/100,[self.dataSource[@"nBucketnum"] integerValue]];
         //订单总价
         self.oTotalPrice.text = [NSString stringWithFormat:@"￥%.2f",[self.dataSource[@"nTotalprice"] floatValue]/100];
         

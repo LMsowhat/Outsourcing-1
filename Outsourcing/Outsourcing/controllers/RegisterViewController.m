@@ -440,15 +440,12 @@
     
     if ([data[@"resCode"] isEqualToString:@"0"]) {
         
-        [self loginSuccess:data[@"result"]];
-
         [self foreAction];
         
     }else{
         
         [MBProgressHUDManager showTextHUDAddedTo:self.view WithText:data[@"result"] afterDelay:1.0f];
     }
-    
     
 }
 

@@ -22,6 +22,7 @@
 #import "NoResultView.h"
 #import "PaymentViewController.h"
 #import "OrderCreateController.h"
+#import "AboutUsViewController.h"
 
 
 @interface OrdersViewController ()<UIScrollViewDelegate,UITableViewDelegate ,UITableViewDataSource>
@@ -419,6 +420,17 @@
     
 }
 
+- (void)followOrderClick:(UIButton *)sender{
+
+    NSDictionary *dict = self.finishedArr[sender.tag];
+
+    AboutUsViewController *orderFollow = [AboutUsViewController new];
+    orderFollow.orderId = dict[@"lId"];
+    
+    [self.navigationController pushViewController:orderFollow animated:YES];
+}
+
+
 
 - (void)checkOutLabel:(UITapGestureRecognizer *)sender{
 
@@ -544,6 +556,9 @@
     if (tableView == self.finishedTableView) {
         
         dict = [NSMutableDictionary dictionaryWithDictionary:self.finishedArr[section]];
+        
+        footer.followOrder.tag = section;
+        [footer.followOrder addTarget:self action:@selector(followOrderClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     if (tableView == self.unfinishedTableView) {
         

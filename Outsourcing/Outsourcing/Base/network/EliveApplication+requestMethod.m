@@ -322,7 +322,7 @@
     
     UIViewController *controller = [parm objectForKey:kCurrentController];
     
-    [api requestHomeProducitonListRequest:nil result:^(id responseObject) {
+    [api requestHomeProducitonListRequest:parm result:^(id responseObject) {
         
         if ([controller isKindOfClass:[HomeViewController class]]) {
             

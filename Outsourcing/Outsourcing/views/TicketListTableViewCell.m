@@ -177,7 +177,7 @@
 
 - (void)buyTicketFitData:(TicketModel *)model{
 
-    [self.pIcon sd_setImageWithURL:kGetImageUrl(URLHOST, @"0", model.lGoodsid) placeholderImage:[UIImage imageNamed:@"2.jpg"]];
+    [self.pIcon sd_setImageWithURL:kGetImageUrl(URLHOST, @"0", model.lGoodsid) placeholderImage:[UIImage imageNamed:@"icon_outsouring_default.jpg"]];
     self.pName.text = model.strGoodsName;
     self.pSales.text = [NSString stringWithFormat:@"月销%@",model.nMonthCount];
     self.pActivity.text = model.strRemarks;
@@ -195,7 +195,7 @@
 
 - (void)myTicketFitData:(TicketModel *)model{
     
-    [self.pIcon sd_setImageWithURL:kGetImageUrl(URLHOST, @"0", model.lGoodsid) placeholderImage:[UIImage imageNamed:@"2.jpg"]];
+    [self.pIcon sd_setImageWithURL:kGetImageUrl(URLHOST, @"0", model.lGoodsid) placeholderImage:[UIImage imageNamed:@"icon_outsouring_default.jpg"]];
     self.pName.text = model.strTicketName;
     self.payTime.text = model.strExpire;
     self.tNumber.text = [NSString stringWithFormat:@"%@张",model.nRemainingCount];

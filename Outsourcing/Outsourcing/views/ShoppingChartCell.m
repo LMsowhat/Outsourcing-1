@@ -26,7 +26,7 @@
 
 - (void)fitDataWithModel:(ShoppingChartModel *)model{
 
-    [self.pIcon sd_setImageWithURL:kGetImageUrl(URLHOST, @"0", model.lGoodsId) placeholderImage:[UIImage imageNamed:@"3.jpg"]];
+    [self.pIcon sd_setImageWithURL:kGetImageUrl(URLHOST, @"0", model.lGoodsId) placeholderImage:[UIImage imageNamed:@"icon_outsouring_default.jpg"]];
     
     self.pName.text = model.strGoodsname;
 

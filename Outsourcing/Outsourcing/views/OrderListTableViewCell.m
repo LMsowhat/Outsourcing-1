@@ -230,7 +230,7 @@
 
 - (void)fitDataWithModel:(OrderModel *)model{
     //
-    self.oIcon.image = [UIImage imageNamed:@"2.jpg"];
+    self.oIcon.image = [UIImage imageNamed:@"icon_outsouring_default.jpg"];
     //
     NSString *timeString = [NSString stringWithFormat:@"下单时间：%@",[CommonTools getTimeFromString:model.dtCreatetime]];
     self.createTime.text = timeString;

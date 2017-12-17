@@ -23,6 +23,8 @@
         
         self.payButton.hidden = YES;
         
+        self.followOrder.hidden = YES;
+        
         if (model.nSendState != 1) {
             
             self.sendButton.hidden = NO;
@@ -40,19 +42,25 @@
             self.deleteButton.hidden = YES;
             
             self.payButton.hidden = YES;
-        }else if (model.nState == 0){
             
-            [self.payButton setTitle:@"去结算" forState:UIControlStateNormal];
-            
-            self.deleteButton.hidden = NO;
-            
-            self.payButton.hidden = NO;
         }else{
-            [self.payButton setTitle:@"立即支付" forState:UIControlStateNormal];
-            
+        
+            self.followOrder.hidden = YES;
             self.deleteButton.hidden = NO;
-            
             self.payButton.hidden = NO;
+            if (model.nState == 4){
+                
+                self.payButton.hidden = YES;
+            }else {
+            
+                if (model.nState == 1 || model.nState == 2){
+                    
+                    [self.payButton setTitle:@"立即支付" forState:UIControlStateNormal];
+                }else if (model.nState == 0){
+                    
+                    [self.payButton setTitle:@"去结算" forState:UIControlStateNormal];
+                }
+            }
         }
     }
     
