@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B0ECC7C1FE94BE000AFA846 /* GetCouponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B0ECC7B1FE94BE000AFA846 /* GetCouponViewController.m */; };
 		8B193AA61F74AC4E003DE858 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193AA51F74AC4E003DE858 /* libc++.tbd */; };
 		8B193AA81F74AC58003DE858 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193AA71F74AC58003DE858 /* libz.tbd */; };
 		8B193AAA1F74AC62003DE858 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B193AA91F74AC62003DE858 /* SystemConfiguration.framework */; };
@@ -270,6 +271,8 @@
 
 /* Begin PBXFileReference section */
 		048B0B41E714DF07C522C264 /* Pods-Outsourcing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outsourcing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Outsourcing/Pods-Outsourcing.debug.xcconfig"; sourceTree = "<group>"; };
+		8B0ECC7A1FE94BE000AFA846 /* GetCouponViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetCouponViewController.h; sourceTree = "<group>"; };
+		8B0ECC7B1FE94BE000AFA846 /* GetCouponViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetCouponViewController.m; sourceTree = "<group>"; };
 		8B193AA51F74AC4E003DE858 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		8B193AA71F74AC58003DE858 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		8B193AA91F74AC62003DE858 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -749,6 +752,8 @@
 				8BEC49881F6D4F9500CE19C5 /* RetrieveViewController.h */,
 				8BEC49891F6D4F9500CE19C5 /* RetrieveViewController.m */,
 				8BEC49961F6D633400CE19C5 /* RetrieveViewController.xib */,
+				8B0ECC7A1FE94BE000AFA846 /* GetCouponViewController.h */,
+				8B0ECC7B1FE94BE000AFA846 /* GetCouponViewController.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -1603,6 +1608,7 @@
 				8B98376C1F879DCE0086A83C /* ActivityViewController.m in Sources */,
 				8B193ADD1F75EBF8003DE858 /* OrderHeaderView.m in Sources */,
 				8BEC49871F6D4F2700CE19C5 /* AboutUsViewController.m in Sources */,
+				8B0ECC7C1FE94BE000AFA846 /* GetCouponViewController.m in Sources */,
 				8B9B85061F457707009AE5EE /* MoreViewController.m in Sources */,
 				8B9B84F41F43ECC3009AE5EE /* MyInvitationViewController.m in Sources */,
 				8B9B85091F4AAE7B009AE5EE /* NewAddressViewController.m in Sources */,

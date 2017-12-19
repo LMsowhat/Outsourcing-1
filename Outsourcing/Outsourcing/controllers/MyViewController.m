@@ -20,7 +20,7 @@
 #import "OrdersViewController.h"
 #import "EmployeeViewController.h"
 #import "MyMessageViewController.h"
-
+#import "GetCouponViewController.h"
 
 @interface MyViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -169,6 +169,8 @@
     EmployeeViewController *employee = [EmployeeViewController new];
     //订单
     OrdersViewController *order = [OrdersViewController new];
+    //领券中心
+    GetCouponViewController *getCoupon = [GetCouponViewController new];
     //我的邀请
     MyInvitationViewController *invitate = [MyInvitationViewController new];
     //我的地址
@@ -182,13 +184,13 @@
     
     if ([UserTools userEmployeesId]) {
         
-        self.dataSource = [[NSMutableArray alloc] initWithObjects:@[@[@"icon_coupon",@"我的优惠券"],@[@"icon_myorder",@"我的配送单"],@[@"icon_myorder",@"我的订单"],@[@"icon_invite",@"我要邀请"],@[@"icon_address",@"我的地址"]],@[@[@"icon_bucket",@"我的水桶"],@[@"icon_ticket",@"我的水票"],@[@"icon_more",@"更多"]], nil];
+        self.dataSource = [[NSMutableArray alloc] initWithObjects:@[@[@"icon_coupon",@"我的优惠券"],@[@"icon_myorder",@"我的配送单"],@[@"icon_myorder",@"我的订单"],@[@"icon_myorder",@"我领券中心"],@[@"icon_invite",@"我要邀请"],@[@"icon_address",@"我的地址"]],@[@[@"icon_bucket",@"我的水桶"],@[@"icon_ticket",@"我的水票"],@[@"icon_more",@"更多"]], nil];
 
-        self.childControllers = @[@[coupon,employee,order,invitate,address],@[barrel,ticket,more]];
+        self.childControllers = @[@[coupon,employee,order,getCoupon,invitate,address],@[barrel,ticket,more]];
     }else{
-        self.dataSource = [[NSMutableArray alloc] initWithObjects:@[@[@"icon_coupon",@"我的优惠券"],@[@"icon_myorder",@"我的订单"],@[@"icon_invite",@"我要邀请"],@[@"icon_address",@"我的地址"]],@[@[@"icon_bucket",@"我的水桶"],@[@"icon_ticket",@"我的水票"],@[@"icon_more",@"更多"]], nil];
+        self.dataSource = [[NSMutableArray alloc] initWithObjects:@[@[@"icon_coupon",@"我的优惠券"],@[@"icon_myorder",@"我的订单"],@[@"icon_myorder",@"领券中心"],@[@"icon_invite",@"我要邀请"],@[@"icon_address",@"我的地址"]],@[@[@"icon_bucket",@"我的水桶"],@[@"icon_ticket",@"我的水票"],@[@"icon_more",@"更多"]], nil];
         
-        self.childControllers = @[@[coupon,order,invitate,address],@[barrel,ticket,more]];
+        self.childControllers = @[@[coupon,order,getCoupon,invitate,address],@[barrel,ticket,more]];
     }
 }
 
@@ -351,7 +353,7 @@
     
     if (!isLogin) {
         
-        if (indexPath.section == 2 && indexPath.row == 2){
+        if (indexPath.row == 2){
             
             UIViewController *detail = self.childControllers[indexPath.section - 1][indexPath.row];
             
