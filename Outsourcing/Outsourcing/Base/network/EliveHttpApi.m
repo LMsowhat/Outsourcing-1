@@ -65,7 +65,8 @@
     parameters[@"strMobile"] = params[@"strMobile"];
     parameters[@"strPassword"] = params[@"strPassword"];
     parameters[@"strUserSmsCode"] = params[@"strUserSmsCode"];
-    
+    parameters[@"strInvitecode"] = params[@"strInvitecode"];
+
     [AFNetWorkManagerConfig POST:@"buyer/register" baseURL:URLHOST params:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         
         result(responseObject);
@@ -554,7 +555,8 @@
     parameters[@"nMaxNum"] = params[@"nMaxNum"];
     parameters[@"lUserId"] = params[@"lUserId"];
     parameters[@"nFullPrice"] = params[@"nFullPrice"];
- 
+    parameters[@"type"] = params[@"type"];
+
     [AFNetWorkManagerConfig POST:@"coupon/list" baseURL:URLHOST params:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         
         result(responseObject);

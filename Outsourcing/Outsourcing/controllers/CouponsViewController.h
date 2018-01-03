@@ -12,6 +12,7 @@
 
 @property (nonatomic,assign) BOOL          isSelectedCoupons;
 @property (nonatomic,copy)NSString *       nFullPrice;
+@property (nonatomic,strong) NSString *        type;
 @property (nonatomic,copy) void(^passCoupons)(NSDictionary *couponDict);
 
 - (void)getMyCouponsData:(id)responseObj;

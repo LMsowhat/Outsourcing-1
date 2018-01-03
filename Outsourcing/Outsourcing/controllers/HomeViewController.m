@@ -319,7 +319,8 @@ static NSString *kheaderIdentifier = @"headerIdentifier";
 //定义每个UICollectionViewCell 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake((kWidth - 50)/2, 250);
+    NSLog(@"kScale is %d",kScale == 2 ? 0 : 30);
+    return CGSizeMake((kWidth - 50)/2, 250 + (kScale == 2 ? 0 : 40));
 }
 //定义每个Section 的 margin
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section

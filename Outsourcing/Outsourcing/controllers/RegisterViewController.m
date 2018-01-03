@@ -245,7 +245,8 @@
         parameters[@"strMobile"] = self.userNameTextField.text;
         parameters[@"strPassword"] = self.psdTextField.text;
         parameters[@"strUserSmsCode"] = self.messageCodeTextField.text;
-        
+        parameters[@"strInvitecode"] = self.aPsdTextField.text;
+
         [OutsourceNetWork onHttpCode:kUserRegisterNetWork WithParameters:parameters];
     }
 

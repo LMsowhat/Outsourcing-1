@@ -353,7 +353,7 @@
     
     if (!isLogin) {
         
-        if (indexPath.row == 2){
+        if (indexPath.section == 2 && indexPath.row == 2){
             
             UIViewController *detail = self.childControllers[indexPath.section - 1][indexPath.row];
             

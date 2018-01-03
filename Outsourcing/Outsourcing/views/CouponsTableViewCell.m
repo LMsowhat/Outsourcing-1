@@ -45,7 +45,7 @@
         money.textColor = UIColorFromRGBA(0x333338, 1.0);
         
         self.couponValue = [UILabel new];
-        self.couponValue.font = kFont(15);
+        self.couponValue.font = kFont(9);
         self.couponValue.textColor = UIColorFromRGBA(0x15151A, 1.0);
         
         [self addSubview:bgView];
@@ -56,8 +56,8 @@
  
         [bgView makeConstraints:^(MASConstraintMaker *make) {
             
-            make.height.equalTo(@(42 *kScale));
-            make.width.equalTo(self).offset(-20);
+            make.height.equalTo(@(40 *kScale));
+            make.width.equalTo(self).offset(-10 *kScale);
             make.center.equalTo(self);
             
         }];
@@ -82,15 +82,16 @@
             
             make.centerY.equalTo(self);
             
-            make.right.equalTo(self).offset(-24*kScale);
+            make.right.equalTo(self).offset(-10*kScale);
             
+//            make.width.equalTo(@100);
         }];
         
         [money makeConstraints:^(MASConstraintMaker *make) {
             
             make.centerY.equalTo(self);
             
-            make.right.equalTo(self.couponValue.mas_left).offset(-1*kScale);
+            make.right.equalTo(self.couponValue.mas_left);
             
         }];
     }

@@ -179,11 +179,12 @@
         
         parameters[@"nFullPrice"] = self.nFullPrice;
     }
-    
+    if ([self.type isEqualToString:@"1"]) {
+        parameters[@"type"] = self.type;
+    }
     [OutsourceNetWork onHttpCode:kUserGetCouponsNetWork WithParameters:parameters];
     
 }
-
 
 - (void)getMyCouponsData:(id)responseObj{
     

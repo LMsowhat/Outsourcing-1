@@ -233,7 +233,7 @@
     sender.selected = !sender.selected;
 
     //处理选中记录
-    if (self.selectTagButton && self.settlementBtn.selected == YES) {
+    if (self.selectTagButton && self.selectTagButton.selected == YES) {
         
         self.selectTagButton.selected = NO;
     }

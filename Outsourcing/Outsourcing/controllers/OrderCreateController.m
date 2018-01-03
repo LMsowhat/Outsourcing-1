@@ -560,10 +560,15 @@
         CouponsViewController *coupon = [CouponsViewController new];
         NSInteger fullPrice = [self.dataSource[@"nFactPrice"] integerValue] - [self.dataSource[@"nBucketmoney"] integerValue];
         coupon.nFullPrice = [NSString stringWithFormat:@"%ld",fullPrice];
+        //判断是不是水桶
+        NSInteger type = [[self.dataSource[@"orderGoods"] firstObject][@"nGoodsType"] integerValue];
+        
+        if (type == 1) {
+            coupon.type = @"1";
+        }
         coupon.isSelectedCoupons = YES;
         WeakSelf(weakSelf);
         coupon.passCoupons = ^(NSDictionary *couponDict) {
-            
             weakSelf.couponDict = [NSMutableDictionary dictionaryWithDictionary:couponDict];
             
             NSInteger orderTotal = [self.submitPrice integerValue] - [self.couponDict[@"nPrice"] integerValue];
@@ -576,20 +581,16 @@
         
         [self.navigationController pushViewController:coupon animated:YES];
     }
-    
     if (indexPath.row == nCount + 3) {
         
         self.inputType = 1;
         [self editInputContentTiTle:@"请输入发票信息"];
     }
     if (indexPath.row == nCount + 4) {
-        
         self.inputType = 2;
         
         [self editInputContentTiTle:@"请输入备注"];
     }
-    
-    
     NSLog(@"%ld",indexPath.row);
 }
 

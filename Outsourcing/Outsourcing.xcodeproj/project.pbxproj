@@ -1807,7 +1807,8 @@
 				CODE_SIGN_ENTITLEMENTS = Outsourcing/Outsourcing.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Hebei ZhiLong High-tech Electronic Technology Co., Ltd (JXDJ88EMLK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JXDJ88EMLK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1838,7 +1839,8 @@
 				CODE_SIGN_ENTITLEMENTS = Outsourcing/Outsourcing.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Hebei ZhiLong High-tech Electronic Technology Co., Ltd (JXDJ88EMLK)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = JXDJ88EMLK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
