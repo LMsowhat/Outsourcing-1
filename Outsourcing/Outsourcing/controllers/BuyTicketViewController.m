@@ -229,22 +229,26 @@
 }
 
 - (void)selectClik:(UIButton *)sender{
-
+    //总价
+    NSInteger total = [self.totalPrice integerValue];
     sender.selected = !sender.selected;
-
-    //处理选中记录
+    
+    //处理之前选中的button
     if (self.selectTagButton && self.selectTagButton.selected == YES) {
         
         self.selectTagButton.selected = NO;
+        NSInteger bSelect = [self.dataSource[self.selectTagButton.tag][@"nPrice"] integerValue];
+        
+        total -= bSelect;
     }
+    
+    //处理当前选中记录以及价格
     self.selectTagButton = sender;
     
-    //处理UI
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
     
     TicketContentsCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
     
-
     if (sender.selected) {
         
         cell.cPrice.textColor = UIColorFromRGBA(0xFA6650, 1.0);
@@ -252,14 +256,10 @@
 
         cell.cPrice.textColor = UIColorFromRGBA(0x333338, 1.0);
     }
-
     //处理数据
-    
     NSInteger selectPrice = [self.dataSource[sender.tag][@"nPrice"] integerValue];
     
-    NSInteger total = [self.totalPrice integerValue];
-    
-    self.totalPrice = [NSString stringWithFormat:@"%ld",sender.selected ? (total + selectPrice) : (total - selectPrice)];
+    self.totalPrice = [NSString stringWithFormat:@"%ld",sender.selected ? (total + selectPrice) : total];
     
     NSString *testStr1 = [NSString stringWithFormat:@"共：¥%.2f",self.totalPrice ? [self.totalPrice floatValue]/100 : 0];
     NSMutableAttributedString *str1 = [[NSMutableAttributedString alloc] initWithString:testStr1];
